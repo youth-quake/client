@@ -11,7 +11,7 @@ const Wrapper = styled.div`
   justify-content: center;
 `
 
-export const Login = (props => {
+const Login = (props => {
   const {
     data
   } = props
@@ -25,3 +25,5 @@ export const Login = (props => {
     </Wrapper>
   )
 })
+
+export default Login
