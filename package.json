@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "afrodite": "^0.1.8",
+    "create-react-app": "^2.1.8",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
     "react-scripts": "2.1.5",
