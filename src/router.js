@@ -10,19 +10,5 @@ export const routes = [
 	{
 		path: "/cadastro",
 		component: Register
-	},
-	{
-		path: "/dashboard",
-		component: Dashboard,
-		routes: [
-			{
-				path: "/dashboard/cadastrar-objetivo",
-				component: RegisterTarget
-			},
-			{
-				path: "/dashboard/ver-objetivos",
-				component: Targets
-			}
-		]
 	}
 ]

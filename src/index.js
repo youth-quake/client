@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { routes } from 'router'
+import { routes } from './router'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 
 const RouteWithSubRoutes = route => {
