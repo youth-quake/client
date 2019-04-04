@@ -1,6 +1,7 @@
 import React from 'react'
 import { Theme, Button, Input, Anchor, Password } from 'afrodite'
 import styled from 'styled-components'
+import {Link } from "react-router-dom";
 
 
 const Body = styled.body`
@@ -54,8 +55,8 @@ const Register = (props => {
         <Input color={Theme.base_color} data={data} placeholder={'Digite seu telefone'} />
         <Password color={Theme.base_color} placeholder={'Digite sua senha'} />
         <Password color={Theme.base_color} placeholder={'Repita sua senha'} />
-        <Button style={{color: Theme.base_color}} color={Theme.secondary_color}>Register</Button>
-        <p>Já possui uma conta? <Anchor>Entre agora mesmo</Anchor></p>
+        <Button color={Theme.base_color}>Register</Button>
+        <p>Já possui uma conta? <Link to="/login"><Anchor>Entre agora mesmo</Anchor></Link></p>
       </Wrapper>
     </Right>
     </Body>

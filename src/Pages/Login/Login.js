@@ -1,7 +1,7 @@
 import React from 'react'
 import { Theme, Button, Input, Anchor, Password } from 'afrodite'
 import styled from 'styled-components'
-
+import { Link } from "react-router-dom";
 
 const Body = styled.body`
   padding: 0px;
@@ -52,7 +52,7 @@ const Login = (props => {
         <Input color={Theme.base_color} data={data} placeholder={'Digite seu login'} />
         <Password color={Theme.base_color} placeholder={'Digite sua senha'} />
         <Button style={{color: Theme.base_color}} color={Theme.secondary_color}>Sign-in</Button>
-        <p>Não tem sua conta ainda? <Anchor>Cadastre-se</Anchor></p>
+        <p>Não tem sua conta ainda? <Link to="/register"><Anchor>Cadastre-se</Anchor></Link></p>
       </Wrapper>
     </Right>
     </Body>
