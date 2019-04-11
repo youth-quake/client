@@ -3,14 +3,15 @@
   "version": "0.1.1",
   "private": true,
   "dependencies": {
+    "afrodite": "^0.1.11",
     "create-react-app": "^2.1.8",
     "npm-audit-resolver": "^1.5.0",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
+    "react-router-dom": "^5.0.0",
     "react-scripts": "^2.1.8",
     "recompose": "^0.30.0",
-    "styled-components": "^4.1.3",
-    "afrodite": "^0.1.9"
+    "styled-components": "^4.1.3"
   },
   "scripts": {
     "start": "react-scripts start",
