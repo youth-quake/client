@@ -1,14 +1,19 @@
+import React from 'react'
+import { Route } from 'react-router-dom'
 import Login from './Pages/Login'
 import Register from './Pages/Register'
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
-export const routes = [
-	{
-		path: "/login",
-		component: Login
-	},
-	{
-		path: "/cadastro",
-		component: Register
-	}
+const routes = [
+  {
+    id: 0,
+    path: "/login",
+    component: Login
+  },
+  {
+    id: 1,
+    path: "/cadastro",
+    component: Register
+  }
 ]
+
+export default routes

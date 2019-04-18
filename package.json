@@ -3,7 +3,7 @@
   "version": "0.1.1",
   "private": true,
   "dependencies": {
-    "afrodite": "^0.1.11",
+    "afrodite": "^0.1.8",
     "create-react-app": "^2.1.8",
     "npm-audit-resolver": "^1.5.0",
     "react": "^16.8.3",

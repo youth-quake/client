@@ -1,38 +1,17 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { routes } from './router'
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import routes from './router'
 
-const RouteWithSubRoutes = route => {
-	return (
-		<Route
-			path={route.path}
-			render={props => (
-				<route.component {...props} routes={route.routes} />
-			)}
-		/>
-	)
-}
+const App = () => (
+  <BrowserRouter>
+    <Switch>
+      {routes.map(route => (
+        <Route path={route.path} exact={true} component={route.component} />
+      )
+      )}
+    </Switch>
+  </ BrowserRouter>
+)
 
-const RouteConfigExample = () => {
-  return (
-    <Router>
-      <div>
-        <ul>
-          <li>
-            <Link to="/login">Login</Link>
-          </li>
-          <li>
-            <Link to="/cadastro">cadastro</Link>
-          </li>
-        </ul>
-
-        {routes.map((route, i) => (
-          <RouteWithSubRoutes key={i} {...route} />
-        ))}
-      </div>
-    </Router>
-  )
-}
-
-ReactDOM.render(<RouteConfigExample />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));
