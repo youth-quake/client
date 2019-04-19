@@ -1,5 +1,5 @@
 import React from 'react'
-import { Theme, Button, Input, Anchor, Password } from 'afrodite'
+import { Theme, Button, Input, Anchor, Password } from '../../components'
 import styled from 'styled-components'
 import {Link } from "react-router-dom";
 
