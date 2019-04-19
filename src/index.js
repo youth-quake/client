@@ -1,5 +1,17 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Login from './Pages/Login'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import routes from './router'
 
-ReactDOM.render(<Login />, document.getElementById('root'));
+const App = () => (
+  <BrowserRouter>
+    <Switch>
+      {routes.map(route => (
+        <Route path={route.path} exact={true} component={route.component} />
+      )
+      )}
+    </Switch>
+  </ BrowserRouter>
+)
+
+ReactDOM.render(<App />, document.getElementById('root'));
