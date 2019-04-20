@@ -10,9 +10,9 @@ export const Button = styled.button`
   cursor: pointer;
   border: none;
   background: ${props => props.color};
-  color: ${props => props.theme.base_color};
+  color: ${props => props.theme.text_color};
   font-weight: bold;
-  font-family: comic sans;
+  font-family: sans-serif;
   font-size: ${props => props.theme.font_size};
   margin: 10px 0;
   ${props => props.disabled && 'cursor: not-allowed;'}

@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 
+
 export const Body = styled.body`
   padding: 0px;
   margin: 0px;
@@ -15,30 +16,21 @@ export const Wrapper = styled.div`
   justify-content: center;
 `
 
-export const Right = styled.div`
+export const Left = styled.div`
   height: 610px;
   width: 40%;
+  float: left;
+  display: flex;
+`
+export const Right = styled.div`
+  margin-top: 70px;
+  height: 500px;
+  width: 55%;
   float: right;
+  color: white;
   display: flex;
-`
-
-export const FieldsetForm = styled.fieldset`
-  width: 300px;
-  height: 450px;
-  border-radius: 10px;
-  border: 2px solid rgba(235, 235, 235, 1);
-  margin-right: 30%;
-  display: flex;
-  align-items: center;
-  justify-content: center; 
-`
-
-export const NameYQ = styled.h1`
-font-size: 23px;
-text-align: center;
-font-weight: bold;
-margin: 10px 0;
-font-family: sans-serif;
+  justify-content: center;
+  border-left: solid 1px rgba(235, 235, 235, 1);
 `
 
 export const TextP = styled.p`

@@ -1,7 +1,10 @@
 import React from 'react'
 import { Theme, Button, Input, Anchor, Password } from '../../components'
 import { Link } from 'react-router-dom'
-import { Body, Left, Right, Wrapper } from './Login.style'
+import { Body, FieldsetForm, NameYQ, TextP, Right, Wrapper } from './Login.style'
+import LogoIcon from '../../images/daindia.png'
+import UserIcon from '../../images/avatar.png'
+import tempBack from '../../images/temp_back.png'
 
 const Login = (props => {
   const {
@@ -10,14 +13,17 @@ const Login = (props => {
 
   return (
     <Body>
-      <Left />
       <Right>
         <Wrapper>
-          <h3>Youthquake</h3>
-          <Input color={Theme.base_color} data={data} placeholder={'Digite seu login'} />
-          <Password color={Theme.base_color} placeholder={'Digite sua senha'} />
-          <Button color={Theme.secondary_color}>Sign-in</Button>
-          <p>Não tem sua conta ainda? <Link to="/register"><Anchor>Cadastre-se</Anchor></Link></p>
+          <FieldsetForm>
+          <legend align={'center'}><img src={LogoIcon} width={'100px'} height={'100px'} /></legend>
+          <NameYQ>Youthquake</NameYQ>
+          <Input color={Theme.base_color} data={data} placeholder={'E-mail ou username'} />
+          <Password color={Theme.base_color} placeholder={'Senha'} type={'password'} />
+          <Button color={Theme.secondary_color} style={{color: 'white'}}>Sign-in</Button>
+          <TextP color={Theme.primary_color}>Não possui uma conta?<Link to="/cadastro" style={{textDecoration: 'none'}}>
+          <Anchor color={Theme.primary_color}>Registre-se!</Anchor></Link></TextP>
+          </FieldsetForm>
         </Wrapper>
       </Right>
     </Body>

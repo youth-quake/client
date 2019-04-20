@@ -7,6 +7,7 @@ export const Anchor = styled.a`
   border-radius: ${props => props.theme.border_radius};
   outline: none;
   border: none;
+  text-decoration: underline;
   color: ${props => props.color};
   font-weight: bold;
   font-size: ${props => props.theme.font_size};

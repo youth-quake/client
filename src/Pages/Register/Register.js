@@ -1,43 +1,9 @@
 import React from 'react'
 import { Theme, Button, Input, Anchor, Password } from '../../components'
-import styled from 'styled-components'
+import { Body, Wrapper, Right, Left, TextP } from './Register.style'
 import {Link } from "react-router-dom";
-
-
-const Body = styled.body`
-  padding: 0px;
-  margin: 0px;
-  height: 100%;
-  width: 100%;
-`
-
-const Wrapper = styled.div`
-  width: 300px;
-  margin: 15% auto;
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
-`
-
-const Right = styled.div`
-  height: 610px;
-  width: 40%;
-  float: right;
-  display: flex;
-`
-const Left = styled.div`
-  height: 630px;
-  width: 60%;
-  float: left;
-  background-color: #472F91;
-  color: white;
-  background: #472f91;
-	background: -moz-linear-gradient(top, #472f91 1%, #2989d8 91%, #0079c2 100%);
-	background: -webkit-linear-gradient(top, #472f91 1%, #2989d8 91%, #0079c2 100%);
-	background: linear-gradient(to bottom, #472f91 1%, #2989d8 91%, #0079c2 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#472f91',
-	endColorstr='#0079c2', GradientType=0);
-`
+import Logo from '../../images/porkinYQ1.png'
+import Girl from '../../images/girl_money1.png'
 
 const Register = (props => {
   const {
@@ -46,19 +12,22 @@ const Register = (props => {
 
   return (
     <Body>
-      <Left/>
-    <Right>
-      <Wrapper>
-        <h3>Registre-se</h3>
-        <Input color={Theme.base_color} data={data} placeholder={'Digite seu username'} />
-        <Input color={Theme.base_color} data={data} placeholder={'Digite seu e-mail'} />
-        <Input color={Theme.base_color} data={data} placeholder={'Digite seu telefone'} />
-        <Password color={Theme.base_color} placeholder={'Digite sua senha'} />
-        <Password color={Theme.base_color} placeholder={'Repita sua senha'} />
-        <Button color={Theme.base_color}>Register</Button>
-        <p>Já possui uma conta? <Link to="/login"><Anchor>Entre agora mesmo</Anchor></Link></p>
-      </Wrapper>
-    </Right>
+      <Right>
+          <img src={Girl} width={'220px'} height={'400px'} style={{position:'relative', top:'18%'}}/>
+      </Right>
+      <Left>
+        <Wrapper>
+          <img src={Logo} style={{marginBottom: '10px'}}></img>
+          <Input color={Theme.base_color} data={data} placeholder={'Nome completo'} />
+          <Input color={Theme.base_color} data={data} placeholder={'Nome de usuário (apelido)'} />
+          <Input color={Theme.base_color} data={data} placeholder={'E-mail'} />
+          <Input color={Theme.base_color} placeholder={'Confirme seu e-mail'} />
+          <Password color={Theme.base_color} placeholder={'Senha'} type={'password'} />
+          <Button color={Theme.secondary_color} style={{color: 'white'}}>Cadastrar</Button>
+          <TextP color={Theme.primary_color}>Já possui uma conta?<Link to="/login" style={{textDecoration: 'none'}}>
+          <Anchor color={Theme.primary_color}>Entre agora mesmo</Anchor></Link></TextP>
+        </Wrapper>
+      </Left>
     </Body>
   )
 })

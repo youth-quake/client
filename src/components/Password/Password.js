@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const Password = styled.input`
   position: relative;
   padding: 15px;
-  width: 100%;
+  width: 90%;
   background: ${props => props.color};
   border: none;
   font-size: 14px;
