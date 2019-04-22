@@ -8,4 +8,9 @@ const enhance = compose(
     withHandlers()
 )
 
+withHandlers({ showConsoleLog: () => () => {
+    console.log('Teste'); 
+    },
+});
+
 export default enhance

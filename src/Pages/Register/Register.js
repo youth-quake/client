@@ -5,10 +5,31 @@ import {Link } from "react-router-dom";
 import Logo from '../../images/porkinYQ1.png'
 import Girl from '../../images/girl_money1.png'
 
+
 const Register = (props => {
   const {
-    data
+    data,
+    showConsoleLog
   } = props
+
+  // function includeUser(){
+  // fetch("http://localhost:8080/Api/IncludeUser/Include" , {
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     },
+  //     method: "POST",
+  //     body: JSON.stringify({
+  //       // login: txtname,
+  //       // password: txtSenha,
+  //       // telephone: txtTelefone,
+  //       // email: txtEmail        
+  //     })
+  //   });
+  // }
+
+ function aaa(){
+    console.log("aaa");
+  }
 
   return (
     <Body>
@@ -23,7 +44,7 @@ const Register = (props => {
           <Input color={Theme.base_color} data={data} placeholder={'E-mail'} />
           <Input color={Theme.base_color} placeholder={'Confirme seu e-mail'} />
           <Password color={Theme.base_color} placeholder={'Senha'} type={'password'} />
-          <Button color={Theme.secondary_color} style={{color: 'white'}}>Cadastrar</Button>
+          <Button onClick={showConsoleLog} color={Theme.secondary_color} style={{color: 'white'}}>Cadastrar</Button>
           <TextP color={Theme.primary_color}>Já possui uma conta?<Link to="/login" style={{textDecoration: 'none'}}>
           <Anchor color={Theme.primary_color}>Entre agora mesmo</Anchor></Link></TextP>
         </Wrapper>
