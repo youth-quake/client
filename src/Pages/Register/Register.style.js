@@ -11,9 +11,4 @@ export const Wrapper = styled.div`
 export const Form = styled.div`
   width: 40%;
   display: flex;
-  padding: 5% 0;
-`
-
-export const WrapperRequirements = styled.div`
-  position: relative;
 `

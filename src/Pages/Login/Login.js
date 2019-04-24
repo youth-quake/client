@@ -1,27 +1,53 @@
 import React from 'react'
-import { Theme, Button, Input, Anchor, Password } from '../../components'
-import { Link } from 'react-router-dom'
-import { Body, Left, Right, Wrapper } from './Login.style'
+import { Title, Button, Input, Anchor, Password, Requirements } from '../../components'
+import { Form, Wrapper, WrapperRequirements } from './Login.style'
 
-const Login = (props => {
-  const {
-    data
-  } = props
+const requirements = [
+  { key: 1, validation: value => (/^.{6,}$/).test(value), text: '6 ou mais caracteres' },
+  { key: 2, validation: value => (/[a-zà-û]{1,}/).test(value), text: 'um caracter especial (@*!%;:.)' },
+  { key: 3, validation: value => (/[A-ZÀ-Û]{1,}/).test(value), text: 'uma letra maiúscula' },
+  { key: 4, validation: value => (/[a-zà-û]{1,}/).test(value), text: 'uma letra minúscula' }
+]
 
-  return (
-    <Body>
-      <Left />
-      <Right>
-        <Wrapper>
-          <h3>Youthquake</h3>
-          <Input color={Theme.base_color} data={data} placeholder={'Digite seu login'} />
-          <Password color={Theme.base_color} placeholder={'Digite sua senha'} />
-          <Button color={Theme.secondary_color}>Sign-in</Button>
-          <p>Não tem sua conta ainda? <Link to="/register"><Anchor>Cadastre-se</Anchor></Link></p>
-        </Wrapper>
-      </Right>
-    </Body>
-  )
-})
+
+
+const Login = ({
+  value, 
+  isVisible, 
+  handleChange,
+  setIsVisible,
+  handleRequirements,
+  isDisable
+}) => (
+  <Form>
+    <Wrapper>
+      <Title>Youthquake</Title>
+      <Input placeholder='Login' />
+      <Password 
+        placeholder='Senha' 
+        onChange={e => handleChange(e.target.value, requirements)}
+          onFocus={() => setIsVisible(true)}
+          onBlur={() => setIsVisible(false)}
+      />
+      <WrapperRequirements>
+        <Requirements
+          value={value}
+          title={'Sua senha deve ter:'}
+          warning={'Evite senhas utilizadas em outros sites, ou que sejam fáceis de descobrir.'}
+          visible={isVisible}
+          requirements={requirements}
+          onChange={handleRequirements}
+        />
+      </WrapperRequirements>
+      <Button disable={isDisable}>Login</Button>
+      <Anchor 
+        text='Não tem sua conta ainda?'
+        description='Cadastre-se'
+        to='/cadastro'
+      />
+    </Wrapper>
+  </Form>
+)
+
 
 export default Login
