@@ -1,19 +1,19 @@
 import styled from 'styled-components'
+import { Theme } from '../Theme'
 
 export const Button = styled.button`
-  width: 100%;
+  width: 330px;
   position: relative;
   padding: 10px;
   margin: 10px;
-  border-radius: ${props => props.theme.border_radius};
   outline: none;
   cursor: pointer;
   border: none;
-  background: ${props => props.color};
-  color: ${props => props.theme.base_color};
+  background: ${Theme.colors.secondary_color};
+  color: ${Theme.colors.base_color};
   font-weight: bold;
-  font-family: comic sans;
-  font-size: ${props => props.theme.font_size};
+  font-size: ${Theme.font.font_size};
+  font-family: ${Theme.font.font_family};
   margin: 10px 0;
   ${props => props.disabled && 'cursor: not-allowed;'}
 `

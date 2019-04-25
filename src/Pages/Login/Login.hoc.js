@@ -1,11 +1,13 @@
-import React from 'react'
 import { compose, withState, withHandlers } from 'recompose'
 
-
 const enhance = compose(
-    withState('', '', false),
-    withState('', '', false),
-    withHandlers()
+  withState('value', 'setValue', ''),
+  withState('isVisible', 'setIsVisible', false),
+  withState('isValid', 'setIsValid', false),
+  withState('isDisable', 'setIsDisabled', true),
+  withHandlers({
+    
+  })
 )
 
 export default enhance

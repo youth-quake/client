@@ -1,27 +1,28 @@
 import React from 'react'
-import { Theme, Button, Input, Anchor, Password } from '../../components'
-import { Link } from 'react-router-dom'
-import { Body, Left, Right, Wrapper } from './Login.style'
+import { Title, Button, Input, Anchor } from '../../components'
+import { Form, Wrapper } from './Login.style'
 
-const Login = (props => {
-  const {
-    data
-  } = props
-
-  return (
-    <Body>
-      <Left />
-      <Right>
-        <Wrapper>
-          <h3>Youthquake</h3>
-          <Input color={Theme.base_color} data={data} placeholder={'Digite seu login'} />
-          <Password color={Theme.base_color} placeholder={'Digite sua senha'} />
-          <Button color={Theme.secondary_color}>Sign-in</Button>
-          <p>Não tem sua conta ainda? <Link to="/register"><Anchor>Cadastre-se</Anchor></Link></p>
-        </Wrapper>
-      </Right>
-    </Body>
-  )
-})
+const Login = ({
+  value, 
+  isVisible, 
+  handleChange,
+  setIsVisible,
+  handleRequirements,
+  isDisable
+}) => (
+  <Form>
+    <Wrapper>
+      <Title>Youthquake</Title>
+      <Input placeholder='Login' />
+      <Input type='password'placeholder='Senha' />
+      <Button disable={isDisable}>Login</Button>
+      <Anchor 
+        text='Não tem sua conta ainda?'
+        description='Cadastre-se'
+        to='/cadastro'
+      />
+    </Wrapper>
+  </Form>
+)
 
 export default Login
