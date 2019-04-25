@@ -10,7 +10,7 @@ const Link = styled(LinkRouter)`
   border-radius: ${Theme.border_radius};
   outline: none;
   border: none;
-  color: ${Theme.colors.secondary_color};
+  color: ${Theme.colors.primary_color};
   font-weight: bold;
   font-size: ${Theme.font.font_size};
   font-family: ${Theme.font.font_family};
@@ -24,6 +24,10 @@ const Text = styled.span`
   cursor: default;
 `
 
+const Wrapper = styled.div`
+  margin: 20px 0;
+`
+
 export const Anchor = (props) => {
   const {
     text, 
@@ -32,11 +36,11 @@ export const Anchor = (props) => {
   } = props
 
   return(
-    <div>
+    <Wrapper>
       <Text>{text}</Text>
       <Link to={to}>
         {description}
       </Link>
-    </div>
+    </Wrapper>
   )
 }

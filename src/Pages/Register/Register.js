@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button, Input, Anchor, Requirements } from '../../components'
-import { Form, Wrapper, Logo } from './Register.style'
+import { Container, Title, Form, Logo, ContentImage, Content, Text } from './Register.style'
 import requirements from '../../utils/requirements'
 import youthquake from '../../assets/img/youthquake.png'
 import girl from '../../assets/img/girl.png'
@@ -13,8 +13,8 @@ const Register = ({
   handleRequirements,
   isDisable
 }) => (
-  <Form>
-    <Wrapper>
+  <Container>
+    <Form>
       <Logo src={youthquake} />
       <Input placeholder='Apelido' />
       <Input placeholder='E-mail' />
@@ -39,9 +39,15 @@ const Register = ({
         description='Entre agora mesmo'
         to='/login'
       />
-    </Wrapper>
-    <Logo src={girl} />
-  </Form>
+    </Form>
+    <Content>
+      <div>
+        <Title>Para um jovem retardado como você</Title>
+        <Text>Lorem ITextsum is simTextly dummy text of the Textrinting and tyTextesetting industry. Lorem ITextsum has been the</Text>
+      </div>
+      <ContentImage src={girl} />
+    </Content>
+  </Container>
 )
 
 
