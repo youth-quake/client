@@ -4,11 +4,13 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import styled from 'styled-components'
 import routes from './router'
 
-const Body = styled.body`
+const Body = styled.div`
+ body{
   padding: 0px;
   margin: 0px;
   height: 100%;
   width: 100%;
+ }
 `
 
 const App = () => (

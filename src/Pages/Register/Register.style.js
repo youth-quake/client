@@ -1,14 +1,25 @@
 import styled from 'styled-components'
 
+export const Logo = styled.img`
+  width: 150px;
+  height: 150px;
+  margin: 0 auto;
+`
+
 export const Wrapper = styled.div`
   width: 300px;
-  margin: 15% auto;
+  margin: 12% auto;
   display: flex;
   flex-flow: column;
   justify-content: center;
 `
 
 export const Form = styled.div`
-  width: 40%;
-  display: flex;
+  width: 50%;
+  position: fixed;
+`
+
+export const Password = styled.div`
+  display: flex;  
+  align-items: baseline;
 `
