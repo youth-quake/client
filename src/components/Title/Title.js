@@ -1,13 +1,11 @@
 import styled from 'styled-components'
+import { Theme } from '../Theme'
 
-export const Password = styled.input`
+export const Title = styled.h3`
   position: relative;
-  padding: 15px;
   width: 100%;
-  background: ${props => props.color};
   border: none;
-  font-size: 14px;
-  color: #080808;
   margin: 10px 0;
+  font-family: ${Theme.font.font_family};
   ${props => props.disabled && 'cursor: not-allowed;'}
 `

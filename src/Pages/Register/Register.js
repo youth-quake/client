@@ -1,66 +1,54 @@
 import React from 'react'
-import { Theme, Button, Input, Anchor, Password } from '../../components'
-import styled from 'styled-components'
-import {Link } from "react-router-dom";
+import { Button, Input, Anchor, Requirements } from '../../components'
+import { Container, Title, Form, Logo, ContentImage, Content, Text } from './Register.style'
+import requirements from '../../utils/requirements'
+import youthquake from '../../assets/img/youthquake.png'
+import girl from '../../assets/img/girl.png'
 
+const Register = ({
+  value,
+  isVisible,
+  handleChange,
+  setIsVisible,
+  handleRequirements,
+  isDisable
+}) => (
+  <Container>
+    <Form>
+      <Logo src={youthquake} />
+      <Input placeholder='Apelido' />
+      <Input placeholder='E-mail' />
+      <Input
+        type='password'
+        placeholder='Senha'
+        onChange={e => handleChange(e.target.value, requirements)}
+        onFocus={() => setIsVisible(true)}
+        onBlur={() => setIsVisible(false)}
+      />
+      <Requirements
+        value={value}
+        title={'Sua senha deve ter:'}
+        warning={'Evite senhas utilizadas em outros sites, ou que sejam fáceis de descobrir.'}
+        visible={isVisible}
+        requirements={requirements}
+        onChange={handleRequirements}
+      />
+      <Button>Register</Button>
+      <Anchor
+        text='Já possui uma conta?'
+        description='Entre agora mesmo'
+        to='/login'
+      />
+    </Form>
+    <Content>
+      <div>
+        <Title>Para um jovem retardado como você</Title>
+        <Text>Lorem ITextsum is simTextly dummy text of the Textrinting and tyTextesetting industry. Lorem ITextsum has been the</Text>
+      </div>
+      <ContentImage src={girl} />
+    </Content>
+  </Container>
+)
 
-const Body = styled.body`
-  padding: 0px;
-  margin: 0px;
-  height: 100%;
-  width: 100%;
-`
-
-const Wrapper = styled.div`
-  width: 300px;
-  margin: 15% auto;
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
-`
-
-const Right = styled.div`
-  height: 610px;
-  width: 40%;
-  float: right;
-  display: flex;
-`
-const Left = styled.div`
-  height: 630px;
-  width: 60%;
-  float: left;
-  background-color: #472F91;
-  color: white;
-  background: #472f91;
-	background: -moz-linear-gradient(top, #472f91 1%, #2989d8 91%, #0079c2 100%);
-	background: -webkit-linear-gradient(top, #472f91 1%, #2989d8 91%, #0079c2 100%);
-	background: linear-gradient(to bottom, #472f91 1%, #2989d8 91%, #0079c2 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#472f91',
-	endColorstr='#0079c2', GradientType=0);
-`
-
-const Register = (props => {
-  const {
-    data
-  } = props
-
-  return (
-    <Body>
-      <Left/>
-    <Right>
-      <Wrapper>
-        <h3>Registre-se</h3>
-        <Input color={Theme.base_color} data={data} placeholder={'Digite seu username'} />
-        <Input color={Theme.base_color} data={data} placeholder={'Digite seu e-mail'} />
-        <Input color={Theme.base_color} data={data} placeholder={'Digite seu telefone'} />
-        <Password color={Theme.base_color} placeholder={'Digite sua senha'} />
-        <Password color={Theme.base_color} placeholder={'Repita sua senha'} />
-        <Button color={Theme.base_color}>Register</Button>
-        <p>Já possui uma conta? <Link to="/login"><Anchor>Entre agora mesmo</Anchor></Link></p>
-      </Wrapper>
-    </Right>
-    </Body>
-  )
-})
 
 export default Register
