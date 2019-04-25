@@ -12,24 +12,6 @@ const Register = (props => {
     showConsoleLog
   } = props
 
-  // function includeUser(){
-  // fetch("http://localhost:8080/Api/IncludeUser/Include" , {
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     },
-  //     method: "POST",
-  //     body: JSON.stringify({
-  //       // login: txtname,
-  //       // password: txtSenha,
-  //       // telephone: txtTelefone,
-  //       // email: txtEmail        
-  //     })
-  //   });
-  // }
-
- function aaa(){
-    console.log("aaa");
-  }
 
   return (
     <Body>

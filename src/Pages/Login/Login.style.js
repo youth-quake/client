@@ -47,3 +47,9 @@ font-family: sans-serif;
 text-align: center;
 color: ${props => props.color};
 `
+
+export const BackBlue = styled.div`
+  width: 150px;
+  height: 100px;
+  background-color: #472F91;
+`
