@@ -1,12 +1,13 @@
 import React from 'react'
 import { Button, Input, Anchor, Requirements } from '../../components'
-import { Form, Wrapper, Logo, Password } from './Register.style'
+import { Form, Wrapper, Logo } from './Register.style'
 import requirements from '../../utils/requirements'
 import youthquake from '../../assets/img/youthquake.png'
+import girl from '../../assets/img/girl.png'
 
 const Register = ({
-  value, 
-  isVisible, 
+  value,
+  isVisible,
   handleChange,
   setIsVisible,
   handleRequirements,
@@ -14,33 +15,32 @@ const Register = ({
 }) => (
   <Form>
     <Wrapper>
-      <Logo src={youthquake}/> 
+      <Logo src={youthquake} />
       <Input placeholder='Apelido' />
       <Input placeholder='E-mail' />
-      <Password>
-        <Input 
-          type='password'
-          placeholder='Senha' 
-          onChange={e => handleChange(e.target.value, requirements)}
-          onFocus={() => setIsVisible(true)}
-          onBlur={() => setIsVisible(false)}
-        />
-        <Requirements
-          value={value}
-          title={'Sua senha deve ter:'}
-          warning={'Evite senhas utilizadas em outros sites, ou que sejam fáceis de descobrir.'}
-          visible={isVisible}
-          requirements={requirements}
-          onChange={handleRequirements}
-        />
-      </Password>
+      <Input
+        type='password'
+        placeholder='Senha'
+        onChange={e => handleChange(e.target.value, requirements)}
+        onFocus={() => setIsVisible(true)}
+        onBlur={() => setIsVisible(false)}
+      />
+      <Requirements
+        value={value}
+        title={'Sua senha deve ter:'}
+        warning={'Evite senhas utilizadas em outros sites, ou que sejam fáceis de descobrir.'}
+        visible={isVisible}
+        requirements={requirements}
+        onChange={handleRequirements}
+      />
       <Button>Register</Button>
-      <Anchor 
+      <Anchor
         text='Já possui uma conta?'
         description='Entre agora mesmo'
         to='/login'
       />
     </Wrapper>
+    <Logo src={girl} />
   </Form>
 )
 

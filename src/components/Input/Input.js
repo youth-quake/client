@@ -5,6 +5,7 @@ export const Input = styled.input`
   position: relative;
   padding: 12px;
   width: 100%;
+  flex-basis: auto;
   background: ${Theme.colors.base_color};
   border: none;
   font-size: 14px;

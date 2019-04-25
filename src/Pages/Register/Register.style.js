@@ -16,10 +16,4 @@ export const Wrapper = styled.div`
 
 export const Form = styled.div`
   width: 50%;
-  position: fixed;
-`
-
-export const Password = styled.div`
-  display: flex;  
-  align-items: baseline;
 `
