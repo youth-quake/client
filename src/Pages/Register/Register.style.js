@@ -1,41 +1,52 @@
 import styled from 'styled-components'
+import { Title as TitleComponent, Theme} from '../../components'
 
-
-export const Body = styled.body`
-  padding: 0px;
-  margin: 0px;
-  height: 100%;
-  width: 100%;
+export const Container = styled.div`
+  display: flex;
+  margin: 2% auto;
+  position: fixed;
 `
 
-export const Wrapper = styled.div`
+export const Form = styled.div`
   width: 300px;
-  margin: 15% auto;
   display: flex;
   flex-flow: column;
-  justify-content: center;
+  align-items: center;
+  padding: 50px;
+  margin: 0 10%;
 `
 
-export const Left = styled.div`
-  height: 610px;
-  width: 40%;
-  float: left;
-  display: flex;
-`
-export const Right = styled.div`
-  margin-top: 70px;
-  height: 500px;
-  width: 55%;
-  float: right;
-  color: white;
-  display: flex;
-  justify-content: center;
-  border-left: solid 1px rgba(235, 235, 235, 1);
+export const Logo = styled.img`
+  width: 150px;
+  height: 150px;
+  margin: 0 auto;
 `
 
-export const TextP = styled.p`
-font-size: 14px;
-font-family: sans-serif;
-text-align: center;
-color: ${props => props.color};
+export const Content = styled.div`
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  border-left: solid 1px ${Theme.colors.font_color};
+  padding: 0 35px;
+`
+
+export const ContentImage = styled.img`
+  width: auto;
+  height: 400px;
+  box-sizing: border-box;
+  margin: 5% 0;
+  box-sizing: border-box;
+`
+
+export const Title = styled(TitleComponent)`
+  text-align: center;
+  box-sizing: border-box;
+  font-family: ${Theme.font.font_family};
+`
+export const Text = styled.p`
+  text-align: center;
+  padding: 12px;
+  box-sizing: border-box;
+  font-family: ${Theme.font.font_family};
+  color: ${Theme.colors.font_color};
 `

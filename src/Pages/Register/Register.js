@@ -1,38 +1,53 @@
 import React from 'react'
-import { Theme, Button, Input, Anchor, Password } from '../../components'
-import { Body, Wrapper, Right, Left, TextP } from './Register.style'
-import {Link } from "react-router-dom";
-import Logo from '../../images/porkinYQ1.png'
-import Girl from '../../images/girl_money1.png'
+import { Button, Input, Anchor, Requirements } from '../../components'
+import { Container, Title, Form, Logo, ContentImage, Content, Text } from './Register.style'
+import requirements from '../../utils/requirements'
+import youthquake from '../../assets/img/youthquake.png'
+import girl from '../../assets/img/girl.png'
 
-
-const Register = (props => {
-  const {
-    data,
-    showConsoleLog
-  } = props
-
-
-  return (
-    <Body>
-      <Right>
-          <img src={Girl} width={'220px'} height={'400px'} style={{position:'relative', top:'18%'}}/>
-      </Right>
-      <Left>
-        <Wrapper>
-          <img src={Logo} style={{marginBottom: '10px'}}></img>
-          <Input color={Theme.base_color} data={data} placeholder={'Nome completo'} />
-          <Input color={Theme.base_color} data={data} placeholder={'Nome de usuário (apelido)'} />
-          <Input color={Theme.base_color} data={data} placeholder={'E-mail'} />
-          <Input color={Theme.base_color} placeholder={'Confirme seu e-mail'} />
-          <Password color={Theme.base_color} placeholder={'Senha'} type={'password'} />
-          <Button onClick={showConsoleLog} color={Theme.secondary_color} style={{color: 'white'}}>Cadastrar</Button>
-          <TextP color={Theme.primary_color}>Já possui uma conta?<Link to="/login" style={{textDecoration: 'none'}}>
-          <Anchor color={Theme.primary_color}>Entre agora mesmo</Anchor></Link></TextP>
-        </Wrapper>
-      </Left>
-    </Body>
-  )
-})
+const Register = ({
+  value,
+  isVisible,
+  handleChange,
+  setIsVisible,
+  handleRequirements,
+  isDisable
+}) => (
+  <Container>
+    <Form>
+      <Logo src={youthquake} />
+      <Input placeholder='Apelido' />
+      <Input placeholder='E-mail' />
+      <Input
+        type='password'
+        placeholder='Senha'
+        onChange={e => handleChange(e.target.value, requirements)}
+        onFocus={() => setIsVisible(true)}
+        onBlur={() => setIsVisible(false)}
+      />
+      <Requirements
+        value={value}
+        title={'Sua senha deve ter:'}
+        warning={'Evite senhas utilizadas em outros sites, ou que sejam fáceis de descobrir.'}
+        visible={isVisible}
+        requirements={requirements}
+        onChange={handleRequirements}
+      />
+      <Button>Register</Button>
+      <Anchor
+        text='Já possui uma conta?'
+        description='Entre agora mesmo'
+        to='/login'
+      />
+    </Form>
+    <Content>
+      <div>
+        <Title>Para um jovem retardado como você</Title>
+        <Text>Lorem ITextsum is simTextly dummy text of the Textrinting and tyTextesetting industry. Lorem ITextsum has been the</Text>
+      </div>
+      <ContentImage src={girl} />
+    </Content>
+  </Container>
+)
 
 export default Register
