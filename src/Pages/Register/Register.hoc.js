@@ -1,4 +1,6 @@
-import { compose, withState, withHandlers } from 'recompose'
+import { compose, withState, withHandlers, lifecycle } from 'recompose'
+
+const PATH = '/'
 
 const valid = (value, requirements) => {
   requirements.reduce((isValid, { validation }) => {
@@ -14,27 +16,44 @@ const enhance = compose(
   withState('value', 'setValue', ''),
   withState('isVisible', 'setIsVisible', false),
   withState('isDisable', 'setIsDisabled', true),
-  withState('values', 'setValues', [{}]),
+  withState('initialValues', 'setInitialValues', {}),
   withHandlers({
     handleChange: ({
       setIsVisible,
       setValue,
       isDisabled,
       setIsValid,
-      setIsDisabled
+      setIsDisabled,
+      initialValues
     }) => (value, requirements) => {
       setIsVisible(true)
       setValue(value)
       setIsDisabled(valid(value, requirements))
+      console.log(initialValues)
     },
-    handleSubmit: ({ values }) => () => {
-      fetch('/', {
+    handleSubmit: () => (values) => {
+      fetch(PATH, {
         method: 'post',
         headers: {'Content-Type':'application/json'},
         body: {
           values
         }
-       });
+       })
+    }
+  }),
+  lifecycle({
+    componentDidMount() {
+      const { setInitialValues } = this.props
+      
+      setInitialValues({
+        register: {
+          name: 'Gabriela Garcia Delfino',
+          username: 'gabrieladelfino',
+          email: 'email@exemplo.com',
+          confirmEmail: 'email@exemplo.com',
+          password: 'ZAQ!2wsx'
+        }
+      })
     }
   })
 )
