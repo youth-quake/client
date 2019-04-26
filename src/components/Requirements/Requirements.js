@@ -11,7 +11,8 @@ const Container = styled.div`
   font-family: ${Theme.font.font_family};
   visibility: ${props => props.visible ? css`visible` : css`hidden`};
   z-index: 100;
-  left: 30;
+  left: 170px;
+  top: -105px;
   position: absolute;
   padding: 20px;
   background: #FFFFFF;

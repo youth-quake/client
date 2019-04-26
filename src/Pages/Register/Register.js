@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, Input, Anchor, Requirements } from '../../components'
 import { Container, Title, Form, Logo, ContentImage, Content, Text } from './Register.style'
 import requirements from '../../utils/requirements'
-import youthquake from '../../assets/img/youthquake.png'
+import youthquake from '../../assets/img/porkinYQ1.png'
 import girl from '../../assets/img/girl.png'
 
 const Register = ({
@@ -17,7 +17,9 @@ const Register = ({
     <Form>
       <Logo src={youthquake} />
       <Input placeholder='Apelido' />
-      <Input placeholder='E-mail' />
+      <Input placeholder='Nome' />
+      <Input placeholder='E-mail' type='email' required/>
+      <Input placeholder='Confirme o E-mail' type='email' required />
       <Input
         type='password'
         placeholder='Senha'
@@ -33,7 +35,7 @@ const Register = ({
         requirements={requirements}
         onChange={handleRequirements}
       />
-      <Button>Register</Button>
+      <Button disabled={isDisable}>Cadastrar</Button>
       <Anchor
         text='Já possui uma conta?'
         description='Entre agora mesmo'

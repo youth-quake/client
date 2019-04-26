@@ -25,13 +25,11 @@ const enhance = compose(
       setIsVisible(true)
       setValue(value)
       setIsValid(valid(value, requirements))
+    },
+    showText:() => () => {
+      console.log("AAAA");
     }
   })
 )
-
-withHandlers({ showConsoleLog: () => () => {
-    console.log('Teste'); 
-    },
-});
 
 export default enhance

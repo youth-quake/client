@@ -17,9 +17,10 @@ export const Form = styled.div`
 `
 
 export const Logo = styled.img`
-  width: 150px;
-  height: 150px;
+  width: 310px;
+  height: 100px;
   margin: 0 auto;
+  margin-bottom: 10px;
 `
 
 export const Content = styled.div`
