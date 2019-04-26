@@ -1,9 +1,9 @@
 import styled from 'styled-components'
-import { Title as TitleComponent, Theme} from '../../components'
+import { Title as TitleComponent, Theme } from '../../components'
 
 export const Container = styled.div`
   display: flex;
-  margin: 2% auto;
+  margin: 5% auto;
   position: fixed;
 `
 
@@ -33,7 +33,7 @@ export const Content = styled.div`
 
 export const ContentImage = styled.img`
   width: auto;
-  height: 400px;
+  height: 500px;
   box-sizing: border-box;
   margin: 5% 0;
   box-sizing: border-box;

@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, {css} from 'styled-components'
 import { Theme } from '../Theme'
 
 export const Button = styled.button`
@@ -15,5 +15,9 @@ export const Button = styled.button`
   font-size: ${Theme.font.font_size};
   font-family: ${Theme.font.font_family};
   margin: 10px 0;
-  ${props => props.disabled && 'cursor: not-allowed;'}
+  ${props => props.disabled && (
+    css`
+    cursor: not-allowed;
+    background: ${Theme.colors.font_color};` 
+  )}   
 `

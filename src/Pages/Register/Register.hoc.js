@@ -13,21 +13,28 @@ const valid = (value, requirements) => {
 const enhance = compose(
   withState('value', 'setValue', ''),
   withState('isVisible', 'setIsVisible', false),
-  withState('isValid', 'setIsValid', false),
   withState('isDisable', 'setIsDisabled', true),
+  withState('values', 'setValues', [{}]),
   withHandlers({
-    handleChange: ({ 
-      setIsVisible, 
-      setValue, 
-      isDisabled, 
-      setIsValid 
+    handleChange: ({
+      setIsVisible,
+      setValue,
+      isDisabled,
+      setIsValid,
+      setIsDisabled
     }) => (value, requirements) => {
       setIsVisible(true)
       setValue(value)
-      setIsValid(valid(value, requirements))
+      setIsDisabled(valid(value, requirements))
     },
-    showText:() => () => {
-      console.log("AAAA");
+    handleSubmit: ({ values }) => () => {
+      fetch('/', {
+        method: 'post',
+        headers: {'Content-Type':'application/json'},
+        body: {
+          values
+        }
+       });
     }
   })
 )
