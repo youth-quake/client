@@ -1,8 +1,11 @@
 import React from 'react'
 import { Button, Input, Anchor } from '../../components'
-import { Logo, Form, Container, Content, ContentImage, Title, Text } from './Login.style'
+import { Logo, Form, Container, Content, ContentImage, Title, Text, LoginAlternative
+, LogoAlternativeLogin, TextAccess, TextDecision, ScratchesLeft, ScratchesRight, DivDecision } from './Login.style'
 import youthquake from '../../assets/img/porkinYQ1.png'
 import girl from '../../assets/img/girl.png'
+import google from '../../assets/img/google.png'
+import facebook from '../../assets/img/facebook.png' 
 
 const Login = ({
   value, 
@@ -15,7 +18,18 @@ const Login = ({
   <Container>
     <Form>
     <Logo src={youthquake} />
-      <Input placeholder='Login' />
+      <LoginAlternative>
+        <LogoAlternativeLogin src={google}/>
+        <TextAccess>Iniciar a sessão com o Google</TextAccess>
+      </LoginAlternative>
+      <LoginAlternative>
+        <LogoAlternativeLogin src={facebook}/>
+        <TextAccess>Iniciar a sessão com o Facebook</TextAccess>
+      </LoginAlternative>
+      <DivDecision>
+        <TextDecision><ScratchesLeft/>OU<ScratchesRight/></TextDecision>
+      </DivDecision>
+      <Input placeholder='Login'/>
       <Input type='password'placeholder='Senha' />
       <Button disable={isDisable}>Entrar</Button>
       <Anchor 
@@ -27,7 +41,9 @@ const Login = ({
   <Content>
       <div>
         <Title>Seja bem vindo ao Youthquake</Title>
-        <Text>Lorem ITextsum is simTextly dummy text of the Textrinting and tyTextesetting industry. Lorem ITextsum has been the</Text>
+        <Text>A solução para o gerenciamento de suas finanças e controle de gastos está aqui!
+           Crie sua conta agora mesmo e comece a construção de seu futuro financeiro.  
+        </Text>
       </div>
       <ContentImage src={girl} />
     </Content>
