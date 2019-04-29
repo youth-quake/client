@@ -3,9 +3,9 @@ import { Theme } from '../Theme'
 
 export const Input = styled.input`
   position: relative;
-  padding: 12px;
-  width: 330px;
-  height: 35px;
+  padding: 7px;
+  width: 320px;
+  height: 30px;
   margin: 5px;
   flex-basis: auto;
   background: ${Theme.colors.base_color};
