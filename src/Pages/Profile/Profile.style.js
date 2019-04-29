@@ -85,5 +85,72 @@ export const InfoAboutUser = styled.p`
   font-size: 18px;
   font-family: ${Theme.font.font_family};
   color: ${Theme.colors.base_color};
-  
+`
+
+export const MessageUser = styled.div`
+  width: 650px;
+  height: 100px;
+  border-radius: 5px;
+  margin-left: 400px;
+  margin-top: 20px;
+  background: ${Theme.colors.base_color};
+  &:after{
+  content: '';
+	position: absolute;
+	left: 24.8%;
+  top: 68%;
+	width: 80px;
+	height: 0px;
+	border: 30px solid transparent;
+	border-right-color: ${Theme.colors.base_color};
+	border-left: 0;
+	margin-top: -7px;
+	margin-left: -5px; 
+  }
+`
+
+export const TitleMessage = styled.p`
+  position: relative;
+  top: 10px;
+  font-size: 18px;
+  margin: 30px;
+  margin-top: 30px;
+  font-weight: bold;
+  font-family: ${Theme.font.font_family};
+  color: ${Theme.colors.font_color};
+`
+
+export const MessageAboutUser = styled.p`
+  position: relative;
+  bottom: 10px;
+  font-size: 15px;
+  margin: 30px;
+  font-family: ${Theme.font.font_family};
+  color: ${Theme.colors.font_color};
+`
+
+export const Achievements = styled.div`
+  width: 100%;
+  height: 400px;
+  margin-top: 10px;
+`
+
+export const Navegator = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 30%;
+  height: 100%;
+`
+
+export const Ul = styled.ul`
+  list-style: none;
+`
+
+export const Li = styled.li`
+  cursor: pointer;
+  font-family: ${Theme.font.font_family};
+  color: ${Theme.colors.font_color};
+  &:hover{
+    font-weight: bold;
+  }
 `
