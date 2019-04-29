@@ -29,9 +29,10 @@ const enhance = compose(
       setIsVisible(true)
       setValue(value)
       setIsDisabled(valid(value, requirements))
+      console.log('aaaaaaaaaa')
 
     },
-    handleSubmit: ({ initialValues }) => () => {
+    handleSubmit: ({ initialValues, setSubmitting }) => () => {
       fetch(PATH, {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
@@ -40,12 +41,12 @@ const enhance = compose(
         }
       })
 
-      console.log('>>>', initialValues)
+      setSubmitting(false)
     }
   }),
   lifecycle({
     componentDidMount() {
-      const { setInitialValues } = this.props
+      const { setInitialValues, setIsDisabled } = this.props
 
       setInitialValues({
         register: {
@@ -56,6 +57,8 @@ const enhance = compose(
           password: 'ZAQ!2wsx'
         }
       })
+
+      setIsDisabled(true)
     }
   })
 )

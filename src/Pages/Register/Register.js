@@ -1,18 +1,18 @@
 import React from 'react'
-import { 
-  Button, 
-  Input, 
-  Anchor, 
-  Requirements 
+import {
+  Button,
+  Input,
+  Anchor,
+  Requirements
 } from '../../components'
-import { 
-  Container, 
-  Title, 
-  Form, 
-  Logo, 
-  ContentImage, 
-  Content, 
-  Text 
+import {
+  Container,
+  Title,
+  Form,
+  Logo,
+  ContentImage,
+  Content,
+  Text
 } from './Register.style'
 import requirements from '../../utils/requirements'
 import youthquake from '../../assets/img/porkinYQ1.png'
@@ -42,7 +42,6 @@ const Register = ({
           errors,
           values,
           setFieldValue,
-          handleSubmit,
           form
         }) => (
             <Form>
@@ -109,12 +108,11 @@ const Register = ({
               />
             </Form>
           )}
-      >
-      </Formik>
+      />
     )}
     <Content>
       <div>
-        <Title>Para um jovem retardado como você</Title>
+        <Title>Lorem ITextsum is simTextly dummy text of</Title>
         <Text>Lorem ITextsum is simTextly dummy text of the Textrinting and tyTextesetting industry. Lorem ITextsum has been the</Text>
       </div>
       <ContentImage src={girl} />
