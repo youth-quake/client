@@ -28,20 +28,22 @@ const Register = ({
   setIsVisible,
   handleRequirements,
   isDisable,
-  handleSubmit,
   validation,
-  initialValues
+  initialValues,
+  handleSubmit
 }) => (
   <Container>
     {initialValues && (
       <Formik
         initialValues={initialValues}
         validate={validation}
-        onSubmit={values => handleSubmit(values)}
+        onSubmit={handleSubmit}
         render={({
           errors,
           values,
-          setFieldValue
+          setFieldValue,
+          handleSubmit,
+          form
         }) => (
             <Form>
               <Logo src={youthquake} />
@@ -73,7 +75,7 @@ const Register = ({
                 render={({ field }) => (
                   <Input
                     {...field}
-                    placeholder='Confirmar E-mail'
+                    placeholder='Confirmar e-mail'
                     type='email'
                     required
                   />

@@ -111,7 +111,7 @@ export const Requirements = ({
     <Container visible={visible}>
       <Title>{title}</Title>
       {requirements.map(item => (
-        <Requirement>
+        <Requirement key={item.key}>
           <Bullet truth={item.validation(value)} />
           <Text>{item.text}</Text>
         </Requirement>

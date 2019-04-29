@@ -7,7 +7,7 @@ export const Container = styled.div`
   position: fixed;
 `
 
-export const Form = styled.div`
+export const Form = styled.form`
   width: 300px;
   display: flex;
   flex-flow: column;

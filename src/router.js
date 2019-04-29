@@ -4,14 +4,17 @@ import Register from './Pages/Register'
 
 const routes = [
   {
+    key: 1,
     path: "/",
     component: Home
   },
   {
+    key: 2,
     path: "/login",
     component: Login
   },
   {
+    key: 3,
     path: "/cadastro",
     component: Register
   }

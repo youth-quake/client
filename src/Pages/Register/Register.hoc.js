@@ -29,22 +29,24 @@ const enhance = compose(
       setIsVisible(true)
       setValue(value)
       setIsDisabled(valid(value, requirements))
-      console.log(initialValues)
+
     },
-    handleSubmit: () => (values) => {
+    handleSubmit: ({ initialValues }) => () => {
       fetch(PATH, {
         method: 'post',
-        headers: {'Content-Type':'application/json'},
+        headers: { 'Content-Type': 'application/json' },
         body: {
-          values
+          initialValues
         }
-       })
+      })
+
+      console.log('>>>', initialValues)
     }
   }),
   lifecycle({
     componentDidMount() {
       const { setInitialValues } = this.props
-      
+
       setInitialValues({
         register: {
           name: 'Gabriela Garcia Delfino',
