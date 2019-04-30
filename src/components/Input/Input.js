@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, {css} from 'styled-components'
 import { Theme } from '../Theme'
 
 export const Input = styled.input`
@@ -18,5 +18,12 @@ export const Input = styled.input`
   font-size: ${Theme.font.font_size};
   font-family: ${Theme.font.font_family};
   ${props => props.disabled && 'cursor: not-allowed;'}
+
+  ${props => props.editable && css`
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 18px;
+  `}
 `
 

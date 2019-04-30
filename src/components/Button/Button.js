@@ -9,7 +9,7 @@ export const Button = styled.button`
   outline: none;
   cursor: pointer;
   border: none;
-  background: ${Theme.colors.secondary_color};
+  background: ${props => props.backgroundColor};
   color: ${Theme.colors.base_color};
   font-weight: bold;
   font-size: ${Theme.font.font_size};
