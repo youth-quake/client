@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 import { Title as TitleComponent, Theme} from '../../components'
-import ProfileImage from '../../assets/img/girl big.png'
 
 export const Logo = styled.img`
   width: 310px;
@@ -36,10 +35,12 @@ export const ImgProfile = styled.img`
 `
 
 export const BackgroundProfile = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 300px;
   background: ${Theme.colors.secondary_color};
-  margin-top: -21px;
 `
 
 export const WrapperPicture = styled.div`
@@ -50,16 +51,16 @@ export const WrapperPicture = styled.div`
   height: 200px;
   border-radius: 50%;
   background: ${Theme.colors.base_color};
-  margin-left: 140px;
-  top: 100px;
+  margin-left: 200px;
+  top: 185px;
   position: relative;
 `
 
 export const Information = styled.div`
-  width: 300px;
-  height: 100px;
-  position: relative;
-  background: red;
+  width: 335px;
+  height: auto;
+  margin-top: 170px;
+  margin-left: 15px; 
 `
 
 export const PictureProfile = styled.img`
@@ -76,21 +77,34 @@ export const NameUser = styled.p`
   font-weight: bold;
 `
 
-export const InfoAboutUser = styled.p`
+export const LevelUser = styled.p`
   display: inline;
-  text-align:center;
-  padding: 20px;
   font-size: 18px;
+  height: 30px;
+  margin-top: 10px; 
+  padding: 10px;
   font-family: ${Theme.font.font_family};
   color: ${Theme.colors.base_color};
+`
+
+export const GridLeft = styled.div`
+  display: inline;
+  float: left;
+  height: 100%;
+  width: 30%;
+`
+
+export const GridRight = styled.div`
+  display: inline;
+  float: left;
+  height: 100%;
+  width: 70%;
 `
 
 export const MessageUser = styled.div`
   width: 650px;
   height: 100px;
   border-radius: 5px;
-  margin-left: 400px;
-  margin-top: 20px;
   background: ${Theme.colors.base_color};
 `
 
@@ -138,6 +152,8 @@ export const Trophys = styled.div`
 
 export const Ul = styled.ul`
   list-style: none;
+  margin-left: 100px;
+  margin-top: 50px;
 `
 
 export const Li = styled.li`

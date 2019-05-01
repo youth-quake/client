@@ -9,11 +9,12 @@ import {
   WrapperPicture,
   PictureProfile,
   Information,
-  NameUser,
-  InfoAboutUser,
+  LevelUser,
   MessageUser,
   TitleMessage,
   MessageAboutUser,
+  GridLeft,
+  GridRight,
   Achievements,
   Navegator,
   Ul,
@@ -43,6 +44,12 @@ const Profile = ({
         <ImgProfile src={iconProfileMini} />
       </Navbar>
       <BackgroundProfile>
+        <GridLeft>
+        <WrapperPicture>
+          <PictureProfile src={ProfileImage}></PictureProfile>
+        </WrapperPicture> 
+        </GridLeft>
+        <GridRight>
         <Information>
           <Formik
             render={({
@@ -69,10 +76,45 @@ const Profile = ({
                       {...field}
                       placeholder='Username'
                       editable
+                      disabled
+                      style={{width: '200px'}}
                     />
                   )}
                 />
-                 <Field
+                </Fragment>
+              )}
+          />
+        <LevelUser>Nível 1</LevelUser>
+        </Information>
+        </GridRight>
+      </BackgroundProfile>
+      <GridLeft
+       style={{
+       height: '100px',
+       width: '30%',
+       display: 'flex',
+       justifyContent: 'center',
+       alignItems: 'center'
+       }}>
+       <Button 
+       backgroundColor={Theme.colors.constrast_color}
+       style={{
+         width: 'auto',
+         marginTop: '135px',
+         marginLeft: '150px',
+         borderRadius: '5px',
+        }}>
+       Editar</Button>
+      </GridLeft>
+      <GridRight style={{height: 'auto', width: '70%'}}>
+      <Formik
+            render={({
+              errors,
+              values,
+              setFieldValue
+            }) => (
+            <Fragment>
+            <Field
                   name="register.username"
                   render={({ field }) => (
                     <MessageUser {...field}>
@@ -81,16 +123,11 @@ const Profile = ({
                   </MessageUser>
                   )}
                 />
-                </Fragment>
+            </Fragment>
               )}
           />
-          <InfoAboutUser>Nível 100</InfoAboutUser>
-          <Button backgroundColor={Theme.colors.primary_color}>Editar</Button>
-        </Information>
-        <WrapperPicture>
-          <PictureProfile src={ProfileImage}></PictureProfile>
-        </WrapperPicture>
-      </BackgroundProfile>
+      </GridRight>
+
       <Achievements>
         <Navegator>
           <Ul>
@@ -102,7 +139,6 @@ const Profile = ({
           <TitleTrophys>Minhas conquistas</TitleTrophys>
         </Trophys>
         <AllTrophys>
-          <ImgTrophys src={Trofeu} />
           <ImgTrophys src={Trofeu} />
         </AllTrophys>
       </Achievements>
