@@ -1,6 +1,5 @@
 import { compose, withState, withHandlers, lifecycle } from 'recompose'
-
-const PATH = '/'
+import { login } from '../../services'
 
 const enhance = compose(
   withState('isDisable', 'setIsDisabled', true),
@@ -11,29 +10,24 @@ const enhance = compose(
     }) => () => {
       setIsDisabled(false)
     },
-    handleSubmit: ({ initialValues, setSubmitting }) => () => {
-      fetch(PATH, {
+    handleSubmit: ({ setSubmitting }) => async (data) => {
+      fetch(login, {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
         body: {
-          initialValues
+          register: {
+            login: data.login,
+            password: data.password
+          }
         }
       })
-
+      
       setSubmitting(false)
     }
   }),
   lifecycle({
     componentDidMount() {
-      const { setInitialValues, setIsDisabled } = this.props
-
-      setInitialValues({
-        register: {
-          username: 'gabrieladelfino',
-          password: 'ZAQ!2wsx'
-        }
-      })
-
+      const { setIsDisabled } = this.props
       setIsDisabled(true)
     }
   })

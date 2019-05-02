@@ -112,8 +112,8 @@ const Register = ({
     )}
     <Content>
       <div>
-        <Title>Lorem ITextsum is simTextly dummy text of</Title>
-        <Text>Lorem ITextsum is simTextly dummy text of the Textrinting and tyTextesetting industry. Lorem ITextsum has been the</Text>
+        <Title>Feito para jovens como você!</Title>
+        <Text>Acredite na mudança e nas coisas boas que podemos fazer juntos</Text>
       </div>
       <ContentImage src={girl} />
     </Content>

@@ -20,33 +20,26 @@ import girl from '../../assets/img/girl.png'
 import google from '../../assets/img/google.png'
 import facebook from '../../assets/img/facebook.png'
 
-import { bool } from 'prop-types'
+import { bool, shape } from 'prop-types'
 import { Formik, Field } from 'formik'
 
 const Login = ({
-  value,
-  isVisible,
-  handleChange,
-  setIsVisible,
-  handleRequirements,
   isDisable,
   initialValues,
   validation,
-  handleSubmit
+  handleSubmit,
+  handleChange
 }) => (
-    <Container>
+  <Container>
       {initialValues && (
         <Formik
           initialValues={initialValues}
           validate={validation}
           onSubmit={handleSubmit}
           render={({
-            errors,
-            values,
-            setFieldValue,
-            form
+            errors
           }) => (
-              <Form>
+              <Form onChange={handleChange}>
                 <Logo src={youthquake} />
                 <Option>
                   <Img src={google} />
@@ -62,15 +55,24 @@ const Login = ({
                   <Scratches />
                 </Separator>
                 <Field
-                  name="register.username"
+                  name="register.login"
                   render={({ field }) => (
-                    <Input {...field} placeholder='Login' />
+                    <Input 
+                      {...field} 
+                      placeholder='Login'
+                      errors={errors} 
+                    />
                   )}
                 />
                 <Field
                   name="register.password"
                   render={({ field }) => (
-                    <Input type='password' placeholder='Senha' />
+                    <Input 
+                      {...field} 
+                      type='password' 
+                      placeholder='Senha' 
+                      errors={errors} 
+                    />
                   )}
                 />
                 <Button type="submit" disabled={isDisable}>Entrar</Button>
@@ -85,9 +87,9 @@ const Login = ({
       )}
       <Content>
         <div>
-          <Title>Seja bem vindo ao Youthquake</Title>
-          <Text>A solução para o gerenciamento de suas finanças e controle de gastos está aqui!
-              Crie sua conta agora mesmo e comece a construção de seu futuro financeiro.
+          <Title>Bem vindo de volta!</Title>
+          <Text>A solução para o gerenciamento de suas finanças e controle de gastos está aqui,
+              Não perca tempo na hora de construir um futuro inovador.
           </Text>
         </div>
         <ContentImage src={girl} />
@@ -96,11 +98,13 @@ const Login = ({
   )
 
 Login.propTypes = {
-  isDisable: bool
+  isDisable: bool,
+  initialValues: shape({})
 }
 
 Login.defaultProps = {
-  isDisable: true
+  isDisable: true,
+  initialValues: {}
 }
 
 export default Login
