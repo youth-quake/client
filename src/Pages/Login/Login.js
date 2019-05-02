@@ -78,12 +78,12 @@ const Login = ({
                 />
                 <Button type="submit" disabled={isDisable} backgroundColor={Theme.colors.secondary_color}>
                   <To to='/perfil' disabled={isDisable}>
-                    Cadastrar
-                </To>
+                    Entrar
+                  </To>
                 </Button>
                 <Anchor
-                  text='Não tem sua conta ainda?'
-                  description='Cadastre-se'
+                  text='Não tem uma conta ainda?'
+                  description='Crie agora mesmo'
                   to='/cadastro'
                 />
               </Form>

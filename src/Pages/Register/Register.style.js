@@ -42,7 +42,7 @@ export const Content = styled.div`
 
 export const ContentImage = styled.img`
   width: auto;
-  height: 500px;
+  height: 450px;
   box-sizing: border-box;
   margin: 5% 0;
   box-sizing: border-box;
@@ -52,6 +52,7 @@ export const Title = styled(TitleComponent)`
   text-align: center;
   box-sizing: border-box;
   font-family: ${Theme.font.font_family};
+  color: ${Theme.colors.font_color};
 `
 
 export const Text = styled.p`

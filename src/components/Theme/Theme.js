@@ -14,6 +14,7 @@ export const Theme = {
       secondary_color: '#472F91',
       secondary_constrast_color: '#0079C2',
       text_color: '#000000',
-      title_color: '#F36523'
+      title_color: '#F36523',
+      secondary_base_color: '#E4E4E4'
     }
 }

@@ -35,6 +35,7 @@ const achievements = [
   { title: 'Apostador', description: 'Criou 10 novas apostas' },
   { title: 'Visionário', description: 'Previu 5 categorias' },
   { title: 'Ganhador', description: 'Ganhou 10 apostas' },
+  { title: 'Triste', description: 'Chorou por 10 horas' },
   { title: 'Popular', description: 'Adicionou 15 amigos' },
   { title: 'Economista', description: 'Guardou R$ 500,00' },
   { title: 'Pensador', description: 'Leu mais de 13 livros' }
@@ -49,8 +50,8 @@ const Profile = ({
 }) => (
     <Container>
       <Navbar>
-        <NavbarImage src={youthquake} />
-        <NavbarImage src={iconProfileMini} />
+        <NavbarImage src={youthquake} title="Ir para a página inicial"/>
+        <NavbarImage src={iconProfileMini} title="Visualizar opções"/>
       </Navbar>
       {initialValues && (
         <Formik
@@ -63,7 +64,7 @@ const Profile = ({
                   <WrapperGrid>
                     <GridLeft>
                       <Picture>
-                        <ImageProfile src={ProfileImage} />
+                        <ImageProfile src={ProfileImage} title="Foto de perfil" />
                       </Picture>
                       <Button
                         backgroundColor={Theme.colors.constrast_color}

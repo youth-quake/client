@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled  from 'styled-components'
 import { Theme } from '../../components'
 
 export const Container = styled.body`
@@ -71,7 +71,7 @@ export const MessageWrapper = styled.div`
   top: 330px;
   position: absolute;
   padding: 20px;
-  background: ${Theme.colors.base_color};
+  background: ${Theme.colors.secondary_base_color};
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
   border-radius: 6px;
@@ -83,7 +83,7 @@ export const MessageWrapper = styled.div`
     position: absolute;
     border-style: solid;
     border-width: 12px 21px 12px 0;
-    border-color: transparent ${Theme.colors.base_color};
+    border-color: transparent ${Theme.colors.secondary_base_color};
     display: block;
     width: 0;
     z-index: 1;

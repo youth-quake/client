@@ -23,7 +23,7 @@ export const showInformation = withFormik({
   mapPropsToValues: () => ({
     register: {
       name: 'Gabriela Garcia Delfino',
-      username: 'gabrieladelfino',
+      username: '@gabrieladelfino',
       email: 'gabriela.delfino@outlook.com.br',
       message: `Procurando novos desafios para sair da zona de conforto e entrar de vez no mundo dos investimentos. Adoro apostas, jogos e livros.`,
       level: 'Nível 55'

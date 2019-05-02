@@ -20,11 +20,12 @@ export const Input = styled.input`
   width: 320px;
   height: 30px;
   flex-basis: auto;
-  background: ${Theme.colors.base_color};
+  background: ${Theme.colors.secondary_base_color};
   border: none;
   font-size: 14px;
   font-family: sans-serif;
   color: #080808;
+  border-radius: 3px;
   margin: 10px 0;
   outline: none;
   font-size: ${Theme.font.font_size};
