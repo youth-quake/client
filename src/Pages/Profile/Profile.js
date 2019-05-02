@@ -1,157 +1,167 @@
-import React, {Fragment} from 'react'
-import { Button, Input, Anchor } from '../../components'
+import React, { Fragment } from 'react'
+import { Button, InputEditable as Input } from '../../components'
 import {
-  Body,
+  Container,
   Navbar,
-  ImgLogo,
-  ImgProfile,
+  NavbarImage,
   BackgroundProfile,
-  WrapperPicture,
-  PictureProfile,
+  Picture,
+  ImageProfile,
   Information,
-  LevelUser,
-  MessageUser,
+  Wrapper,
+  MessageWrapper,
   TitleMessage,
-  MessageAboutUser,
+  About,
+  WrapperGrid,
   GridLeft,
   GridRight,
-  Achievements,
-  Navegator,
-  Ul,
-  Li,
-  DivTitle,
-  Title,
   Content,
-  AllTrophys,
-  ImgTrophys,
-  Objective,
-  ListObjectives,
-  DescriptionObjective,
-  TitleCategory
+  Achievements,
+  Title,
+  Badge,
+  WrapperContent,
+  Menu,
+  Item,
+  Image
 } from './Profile.style'
 import youthquake from '../../assets/img/porkinYQ1.png'
 import iconProfileMini from '../../assets/img/girl mini.png'
 import ProfileImage from '../../assets/img/girl big.png'
-import Trofeu from '../../assets/img/trofeu.png'
 import { Theme } from '../../components'
 import { Formik, Field } from 'formik'
-const Profile = ({
-  value,
-  isVisible,
-  handleChange,
-  setIsVisible,
-  handleRequirements,
-  showObjetives,
-  showAchievements,
-  isDisable
-}) => (
-    <Body>
-      <Navbar>
-        <ImgLogo src={youthquake} />
-        <ImgProfile src={iconProfileMini} />
-      </Navbar>
-      <BackgroundProfile>
-        <GridLeft>
-        <WrapperPicture>
-          <PictureProfile src={ProfileImage}></PictureProfile>
-        </WrapperPicture> 
-        </GridLeft>
-        <GridRight>
-        <Information>
-          <Formik
-            render={({
-              errors,
-              values,
-              setFieldValue
-            }) => (
-              <Fragment>
-                <Field
-                  name="register.name"
-                  render={({ field }) => (
-                    <Input
-                      {...field}
-                      placeholder='Nome completo'
-                      editable
-                      disabled
-                    />
-                  )}
-                />
-                <Field
-                  name="register.username"
-                  render={({ field }) => (
-                    <Input
-                      {...field}
-                      placeholder='Username'
-                      editable
-                      disabled
-                      style={{width: '200px'}}
-                    />
-                  )}
-                />
-                </Fragment>
-              )}
-          />
-        <LevelUser>Nível 1</LevelUser>
-        </Information>
-        </GridRight>
-      </BackgroundProfile>
-      <GridLeft
-       style={{
-       height: '100px',
-       width: '30%',
-       display: 'flex',
-       justifyContent: 'center',
-       alignItems: 'center'
-       }}>
-       <Button 
-       backgroundColor={Theme.colors.constrast_color}
-       style={{
-         width: 'auto',
-         marginTop: '135px',
-         marginLeft: '150px',
-         borderRadius: '5px',
-        }}>
-       Editar</Button>
-      </GridLeft>
-      <GridRight style={{height: 'auto', width: '70%'}}>
-      <Formik
-            render={({
-              errors,
-              values,
-              setFieldValue
-            }) => (
-            <Fragment>
-            <Field
-                  name="register.username"
-                  render={({ field }) => (
-                    <MessageUser {...field}>
-                    <TitleMessage>Sobre mim</TitleMessage>
-                    <MessageAboutUser>Mensagem de status do usuário</MessageAboutUser>
-                  </MessageUser>
-                  )}
-                />
-            </Fragment>
-              )}
-          />
-      </GridRight>
-      <Content>
-        <Navegator>
-          <Ul>
-            <Li title="Visualizar minhas conquistas" onclick={showAchievements}>Conquistas</Li>
-            <Li title="Visualizar meus objetivos pessoais" onclick={showObjetives}>Objetivos</Li>
-          </Ul>
-        </Navegator>
-        <Achievements id="conquistas">
-         <DivTitle>
-          <Title>Minhas conquistas</Title>
-        </DivTitle>
-        <AllTrophys>
-          <ImgTrophys src={Trofeu} />
-        </AllTrophys> 
-        </Achievements> 
+import Trofeu from '../../assets/img/trofeu.png'
 
-        {/* Objetivos [display none como padrao] */}
-        {/* <Objective id="objetivos">
+const Profile = ({
+  initialValues,
+  showAchievements,
+  showObjetives,
+  setEditable,
+  editable
+}) => (
+    <Container>
+      <Navbar>
+        <NavbarImage src={youthquake} />
+        <NavbarImage src={iconProfileMini} />
+      </Navbar>
+      {initialValues && (
+        <Formik
+          initialValues={initialValues}
+          render={({
+            errors
+          }) => (
+              <Fragment>
+                <BackgroundProfile>
+                  <WrapperGrid>
+                    <GridLeft>
+                      <Picture>
+                        <ImageProfile src={ProfileImage} />
+                      </Picture>
+                      <Button
+                        backgroundColor={Theme.colors.constrast_color}
+                        onClick={() => setEditable(!editable)}
+                      >
+                        Editar
+                    </Button>
+                      <MessageWrapper>
+                        <TitleMessage>Sobre mim</TitleMessage>
+                        <Field
+                          name="register.message"
+                          render={({ field }) => (
+                            <About
+                              {...field}
+                              placeholder='Nome completo'
+                              editable={editable}
+                              disabled={editable}
+                              errors={errors}
+                              rows="4"
+                              cols="80"
+                            />
+                          )}
+                        />
+                      </MessageWrapper>
+                    </GridLeft>
+                    <GridRight>
+                      <Information>
+                        <Field
+                          name="register.name"
+                          render={({ field }) => (
+                            <Input
+                              {...field}
+                              backgroundColor='transparent'
+                              placeholder='Nome completo'
+                              editable={editable}
+                              disabled={editable}
+                              errors={errors}
+                            />
+                          )}
+                        />
+                        <Wrapper>
+                          <Field
+                            name="register.username"
+                            render={({ field }) => (
+                              <Input
+                                {...field}
+                                backgroundColor='transparent'
+                                placeholder='Username'
+                                editable={editable}
+                                disabled={editable}
+                                errors={errors}
+                              />
+                            )}
+                          />
+                          <Field
+                            name="register.level"
+                            render={({ field }) => (
+                              <Input
+                                {...field}
+                                backgroundColor='transparent'
+                                placeholder='Nivel 1'
+                                editable={editable}
+                                disabled={editable}
+                                errors={errors}
+                              />
+                            )}
+                          />
+                        </Wrapper>
+                      </Information>
+                    </GridRight>
+                  </WrapperGrid>
+                </BackgroundProfile>
+                <WrapperContent>
+                  <Menu>
+                    <Item title="Visualizar minhas conquistas" onclick={showAchievements}>Conquistas</Item>
+                    <Item title="Visualizar meus objetivos pessoais" onclick={showObjetives}>Objetivos</Item>
+                  </Menu>
+                  <Content>
+                    <Title>Minhas conquistas</Title>
+                    <Achievements id="conquistas">
+                      <Badge>
+                        <Image src={Trofeu} />
+                        <p>Apostador</p>
+                      </Badge>
+                      <Badge>
+                        <Image src={Trofeu} />
+                        <p>Visionário</p>
+                      </Badge>
+                      <Badge>
+                        <Image src={Trofeu} />
+                        <p>Popular</p>
+                      </Badge>
+                    </Achievements>
+                  </Content>
+                </WrapperContent>
+              </Fragment>
+            )}
+        />
+      )}
+    </Container>
+  )
+
+export default Profile
+
+
+{/* Objetivos [display none como padrao] */ }
+{/* <Objective id="objetivos">
         <DivTitle>
           <Title>Meus objetivos</Title>
         </DivTitle>
@@ -169,8 +179,3 @@ const Profile = ({
                 </DescriptionObjective>
             </ListObjectives>
         </Objective> */}
-      </Content>
-    </Body>
-  )
-
-export default Profile
