@@ -19,10 +19,15 @@ import {
   Navegator,
   Ul,
   Li,
-  Trophys,
-  TitleTrophys,
+  DivTitle,
+  Title,
+  Content,
   AllTrophys,
-  ImgTrophys
+  ImgTrophys,
+  Objective,
+  ListObjectives,
+  DescriptionObjective,
+  TitleCategory
 } from './Profile.style'
 import youthquake from '../../assets/img/porkinYQ1.png'
 import iconProfileMini from '../../assets/img/girl mini.png'
@@ -36,6 +41,8 @@ const Profile = ({
   handleChange,
   setIsVisible,
   handleRequirements,
+  showObjetives,
+  showAchievements,
   isDisable
 }) => (
     <Body>
@@ -127,21 +134,42 @@ const Profile = ({
               )}
           />
       </GridRight>
-
-      <Achievements>
+      <Content>
         <Navegator>
           <Ul>
-            <Li title="Visualizar minhas conquistas">Conquistas</Li>
-            <Li title="Visualizar meus objetivos pessoais">Objetivos</Li>
+            <Li title="Visualizar minhas conquistas" onclick={showAchievements}>Conquistas</Li>
+            <Li title="Visualizar meus objetivos pessoais" onclick={showObjetives}>Objetivos</Li>
           </Ul>
         </Navegator>
-        <Trophys>
-          <TitleTrophys>Minhas conquistas</TitleTrophys>
-        </Trophys>
+        <Achievements id="conquistas">
+         <DivTitle>
+          <Title>Minhas conquistas</Title>
+        </DivTitle>
         <AllTrophys>
           <ImgTrophys src={Trofeu} />
-        </AllTrophys>
-      </Achievements>
+        </AllTrophys> 
+        </Achievements> 
+
+        {/* Objetivos [display none como padrao] */}
+        {/* <Objective id="objetivos">
+        <DivTitle>
+          <Title>Meus objetivos</Title>
+        </DivTitle>
+            <ListObjectives>
+                <TitleCategory backgroundColor={Theme.colors.secondary_color}>
+                <p>Comprar um carro</p>
+                </TitleCategory>
+                <DescriptionObjective>
+                  Descrição do objetivo.
+                  <div style={{marginTop: '20px'}}>
+                      <p style={{display: 'inline'}}>Data inicio: </p>
+                      <p style={{display: 'inline', margin: '70px'}} >Data Fim:</p>
+                      <p>Preço:</p>  
+                  </div> 
+                </DescriptionObjective>
+            </ListObjectives>
+        </Objective> */}
+      </Content>
     </Body>
   )
 

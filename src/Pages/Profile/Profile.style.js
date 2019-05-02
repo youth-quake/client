@@ -128,10 +128,16 @@ export const MessageAboutUser = styled.p`
   color: ${Theme.colors.font_color};
 `
 
-export const Achievements = styled.div`
+export const Content = styled.div` 
   width: 100%;
-  height: 400px;
-  margin-top: 10px;
+  height: 500px; 
+`
+
+export const Achievements = styled.div`
+  display: inline;
+  float: left;
+  width: 70%;
+  height: 100%;
 `
 
 export const Navegator = styled.div`
@@ -142,11 +148,9 @@ export const Navegator = styled.div`
   text-align: center;
 `
 
-export const Trophys = styled.div`
-  display: inline;
+export const DivTitle = styled.div`
   justify-content: center;
-  float: left;
-  width: 70%;
+  width: 100%;
   height: 15%;
 `
 
@@ -165,9 +169,10 @@ export const Li = styled.li`
   }
 `
 
-export const TitleTrophys = styled.p`
+export const Title = styled.p`
   font-size: 21px;
   margin: 20px;
+  
   font-family: ${Theme.font.font_family};
   color: ${Theme.colors.font_color};
   font-weight: bold;
@@ -183,4 +188,41 @@ export const ImgTrophys = styled.img`
   padding: 10px;
   height: 130px;
   width: 130px;
+`
+
+export const Objective = styled.div`
+  display: none;
+  float: left;
+  width: 70%;
+  height: 100%;
+`
+
+export const ListObjectives = styled.div`
+  width: 650px;
+  border-radius: 5px;
+  height: 200px;
+  margin-bottom: 10px;
+  border: 1px solid ${Theme.colors.text_color}
+`
+
+export const TitleCategory = styled.div`
+  width: 140px;
+  background: ${props => props.backgroundColor};
+  color: white;
+  text-align: center;
+  padding: 1px;
+  font-weight: bold;
+  font-size: ${Theme.font.font_size};
+  font-family: ${Theme.font.font_family};
+`
+
+export const DescriptionObjective = styled.div`
+  margin: 10px;
+  padding: 10px;
+  width: 450px;
+  height: 120px;
+  overflow-wrap: break-word;
+  color: ${Theme.colors.font_color};
+  font-size: ${Theme.font.font_size};
+  font-family: ${Theme.font.font_family};
 `
