@@ -2,6 +2,7 @@ import { compose, withState, withHandlers, lifecycle } from 'recompose'
 import { withFormik } from 'formik'
 import { getProfile } from '../../services'
 
+
 const request = new Request(getProfile, {
   method: 'GET',
   headers: new Headers(),

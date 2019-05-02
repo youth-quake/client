@@ -18,6 +18,7 @@ export const Button = styled.button`
   ${props => props.disabled && (
     css`
     cursor: not-allowed;
-    background: ${Theme.colors.font_color};` 
-  )}   
+    background-color: ${Theme.colors.font_color}; 
+    color: ${Theme.colors.base_color};
+  `)}   
 `

@@ -31,6 +31,15 @@ import { Theme } from '../../components'
 import { Formik, Field } from 'formik'
 import Trofeu from '../../assets/img/trofeu.png'
 
+const achievements = [
+  { title: 'Apostador', description: 'Criou 10 novas apostas' },
+  { title: 'Visionário', description: 'Previu 5 categorias' },
+  { title: 'Ganhador', description: 'Ganhou 10 apostas' },
+  { title: 'Popular', description: 'Adicionou 15 amigos' },
+  { title: 'Economista', description: 'Guardou R$ 500,00' },
+  { title: 'Pensador', description: 'Leu mais de 13 livros' }
+]
+
 const Profile = ({
   initialValues,
   showAchievements,
@@ -135,18 +144,14 @@ const Profile = ({
                   <Content>
                     <Title>Minhas conquistas</Title>
                     <Achievements id="conquistas">
-                      <Badge>
-                        <Image src={Trofeu} />
-                        <p>Apostador</p>
-                      </Badge>
-                      <Badge>
-                        <Image src={Trofeu} />
-                        <p>Visionário</p>
-                      </Badge>
-                      <Badge>
-                        <Image src={Trofeu} />
-                        <p>Popular</p>
-                      </Badge>
+                      {achievements.map(item => (
+                        <Badge>
+                          <Image src={Trofeu} />
+                          <span>{item.title}</span>
+                          <p>{item.description}</p>
+                        </Badge>
+                      )
+                    )}
                     </Achievements>
                   </Content>
                 </WrapperContent>
@@ -159,23 +164,3 @@ const Profile = ({
 
 export default Profile
 
-
-{/* Objetivos [display none como padrao] */ }
-{/* <Objective id="objetivos">
-        <DivTitle>
-          <Title>Meus objetivos</Title>
-        </DivTitle>
-            <ListObjectives>
-                <TitleCategory backgroundColor={Theme.colors.secondary_color}>
-                <p>Comprar um carro</p>
-                </TitleCategory>
-                <DescriptionObjective>
-                  Descrição do objetivo.
-                  <div style={{marginTop: '20px'}}>
-                      <p style={{display: 'inline'}}>Data inicio: </p>
-                      <p style={{display: 'inline', margin: '70px'}} >Data Fim:</p>
-                      <p>Preço:</p>  
-                  </div> 
-                </DescriptionObjective>
-            </ListObjectives>
-        </Objective> */}

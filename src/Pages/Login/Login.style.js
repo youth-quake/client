@@ -1,10 +1,19 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { Title as TitleComponent, Theme } from '../../components'
+import { Link } from 'react-router-dom'
+
+export const To = styled(Link)`
+  text-decoration: none;
+  color: ${Theme.colors.base_color};
+  ${props => props.disabled && (
+    css`
+    cursor: not-allowed;
+  `)} 
+`
 
 export const Container = styled.div`
   display: flex;
-  margin: 5% auto;
-  position: fixed;
+  margin: 2% auto;
 `
 
 export const Form = styled.form`

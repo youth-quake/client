@@ -139,7 +139,7 @@ export const Information = styled.div`
   width: 300px;
 
   & > input {
-    font-size: 22px;
+    font-size: 24px;
     font-weight: bold;
     color: ${Theme.colors.base_color};
   }
@@ -149,8 +149,11 @@ export const Wrapper = styled.p`
   display: flex;
 
   & > input {
-    padding: 15px;
+    padding: 15px 0;
+    font-size: 18px;
+    margin: 0 10px 0 0;
     width: 150px;
+    text-align: left;
     color: ${Theme.colors.base_color};
     box-sizing: border-box;
   }
@@ -178,6 +181,7 @@ export const Content = styled.div`
 
 export const Achievements = styled.div`
   display: flex;
+  flex-flow: row wrap;
 
   & img > {
     margin: 10px;
@@ -227,10 +231,21 @@ export const Badge = styled.div`
   padding: 10px;
   height: 150px;
   width: 150px;
+  margin: 20px 10px; 
 
-  & > p {
+  & > span {
+    cursor: default;
+    font-weight: bold;
     box-sizing: border-box;
     font-family: ${Theme.font.font_family};
+    color: ${Theme.colors.secondary_color};
+  }
+
+  & > p {
+    cursor: default;
+    box-sizing: border-box;
+    font-family: ${Theme.font.font_family};
+    font-size: 14px;
     color: ${Theme.colors.secondary_color};
   }
 `
