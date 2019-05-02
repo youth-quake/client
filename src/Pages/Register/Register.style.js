@@ -1,13 +1,13 @@
 import styled from 'styled-components'
-import { Title as TitleComponent, Theme} from '../../components'
+import { Title as TitleComponent, Theme } from '../../components'
 
 export const Container = styled.div`
   display: flex;
-  margin: 2% auto;
+  margin: 5% auto;
   position: fixed;
 `
 
-export const Form = styled.div`
+export const Form = styled.form`
   width: 300px;
   display: flex;
   flex-flow: column;
@@ -17,9 +17,10 @@ export const Form = styled.div`
 `
 
 export const Logo = styled.img`
-  width: 150px;
-  height: 150px;
+  width: 310px;
+  height: 100px;
   margin: 0 auto;
+  margin-bottom: 10px;
 `
 
 export const Content = styled.div`
@@ -32,7 +33,7 @@ export const Content = styled.div`
 
 export const ContentImage = styled.img`
   width: auto;
-  height: 400px;
+  height: 500px;
   box-sizing: border-box;
   margin: 5% 0;
   box-sizing: border-box;

@@ -11,7 +11,8 @@ const Container = styled.div`
   font-family: ${Theme.font.font_family};
   visibility: ${props => props.visible ? css`visible` : css`hidden`};
   z-index: 100;
-  left: 30;
+  left: 170px;
+  top: -105px;
   position: absolute;
   padding: 20px;
   background: #FFFFFF;
@@ -110,7 +111,7 @@ export const Requirements = ({
     <Container visible={visible}>
       <Title>{title}</Title>
       {requirements.map(item => (
-        <Requirement>
+        <Requirement key={item.key}>
           <Bullet truth={item.validation(value)} />
           <Text>{item.text}</Text>
         </Requirement>

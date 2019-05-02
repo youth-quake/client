@@ -1,4 +1,5 @@
-import { compose, withState, withHandlers } from 'recompose'
+import { compose, withState, withHandlers, lifecycle } from 'recompose'
+import { register } from '../../services'
 
 const valid = (value, requirements) => {
   requirements.reduce((isValid, { validation }) => {
@@ -13,18 +14,40 @@ const valid = (value, requirements) => {
 const enhance = compose(
   withState('value', 'setValue', ''),
   withState('isVisible', 'setIsVisible', false),
-  withState('isValid', 'setIsValid', false),
   withState('isDisable', 'setIsDisabled', true),
+  withState('initialValues', 'setInitialValues', {}),
   withHandlers({
-    handleChange: ({ 
-      setIsVisible, 
-      setValue, 
-      isDisabled, 
-      setIsValid 
+    handleChange: ({
+      setIsVisible,
+      setValue,
+      setIsDisabled,
     }) => (value, requirements) => {
       setIsVisible(true)
       setValue(value)
-      setIsValid(valid(value, requirements))
+      setIsDisabled(valid(value, requirements))
+    },
+    handleSubmit: ({ setSubmitting }) => data => {
+      fetch(register, {
+        method: 'post',
+        headers: { 'Content-Type': 'application/json' },
+        body: {
+          register: {
+            name: data.name,
+            username: data.username,
+            email: data.email,
+            confirmEmail: data.confirmEmail,
+            password: data.password
+          }
+        }
+      })
+
+      setSubmitting(false)
+    }
+  }),
+  lifecycle({
+    componentDidMount() {
+      const { setIsDisabled } = this.props
+      setIsDisabled(true)
     }
   })
 )
