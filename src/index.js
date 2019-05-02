@@ -1,29 +1,30 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { createGlobalStyle } from 'styled-components'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
-import styled from 'styled-components'
 import routes from './router'
 
-const Body = styled.div`
+export const Body = createGlobalStyle`
  body{
   padding: 0px;
   margin: 0px;
   height: 100%;
   width: 100%;
+  padding: 10px;
  }
 `
-
 const App = () => (
-  <Body>
+  <div>
+    <Body />
     <BrowserRouter>
       <Switch>
         {routes.map(route => (
-          <Route path={route.path} exact={true} component={route.component} />
+          <Route key={route.key} path={route.path} exact={true} component={route.component} />
         )
         )}
       </Switch>
     </ BrowserRouter>
-  </Body>
+  </div>
 )
 
 ReactDOM.render(<App />, document.getElementById('root'));
