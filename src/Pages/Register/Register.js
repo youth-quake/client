@@ -1,18 +1,18 @@
 import React from 'react'
-import { 
-  Button, 
-  Input, 
-  Anchor, 
-  Requirements 
+import {
+  Button,
+  Input,
+  Anchor,
+  Requirements
 } from '../../components'
-import { 
-  Container, 
-  Title, 
-  Form, 
-  Logo, 
-  ContentImage, 
-  Content, 
-  Text 
+import {
+  Container,
+  Title,
+  Form,
+  Logo,
+  ContentImage,
+  Content,
+  Text
 } from './Register.style'
 import requirements from '../../utils/requirements'
 import youthquake from '../../assets/img/porkinYQ1.png'
@@ -28,20 +28,21 @@ const Register = ({
   setIsVisible,
   handleRequirements,
   isDisable,
-  handleSubmit,
   validation,
-  initialValues
+  initialValues,
+  handleSubmit
 }) => (
   <Container>
     {initialValues && (
       <Formik
         initialValues={initialValues}
         validate={validation}
-        onSubmit={values => handleSubmit(values)}
+        onSubmit={handleSubmit}
         render={({
           errors,
           values,
-          setFieldValue
+          setFieldValue,
+          form
         }) => (
             <Form>
               <Logo src={youthquake} />
@@ -73,7 +74,7 @@ const Register = ({
                 render={({ field }) => (
                   <Input
                     {...field}
-                    placeholder='Confirmar E-mail'
+                    placeholder='Confirmar e-mail'
                     type='email'
                     required
                   />
@@ -107,13 +108,12 @@ const Register = ({
               />
             </Form>
           )}
-      >
-      </Formik>
+      />
     )}
     <Content>
       <div>
-        <Title>Para um jovem retardado como você</Title>
-        <Text>Lorem ITextsum is simTextly dummy text of the Textrinting and tyTextesetting industry. Lorem ITextsum has been the</Text>
+        <Title>Feito para jovens como você!</Title>
+        <Text>Acredite na mudança e nas coisas boas que podemos fazer juntos</Text>
       </div>
       <ContentImage src={girl} />
     </Content>
