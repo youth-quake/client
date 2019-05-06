@@ -19,10 +19,11 @@ import {
 import requirements from '../../utils/requirements'
 import youthquake from '../../assets/img/porkinYQ1.png'
 import girl from '../../assets/img/girl.png'
-import { Formik, Field } from 'formik'
+import { Formik, ErrorMessage, Field } from 'formik'
 import {
   shape
 } from 'prop-types'
+import enhance, { validationSchema } from './Register.hoc'
 
 const Register = ({
   isVisible,
@@ -30,15 +31,15 @@ const Register = ({
   setIsVisible,
   handleRequirements,
   isDisable,
-  validation,
   initialValues,
   handleSubmit
 }) => (
-    <Container>
+  <Container>
+  {console.log(validationSchema)}
       {initialValues && (
         <Formik
           initialValues={initialValues}
-          validate={validation}
+          validationSchema={validationSchema}
           onSubmit={handleSubmit}
           render={({
             errors,
@@ -54,12 +55,14 @@ const Register = ({
                     <Input {...field} placeholder='Nome Completo' />
                   )}
                 />
+                <ErrorMessage name="register.name" />
                 <Field
                   name="register.username"
                   render={({ field }) => (
                     <Input {...field} placeholder='Apelido' />
                   )}
                 />
+                <ErrorMessage name="register.username" />
                 <Field
                   name="register.email"
                   render={({ field }) => (
@@ -71,6 +74,7 @@ const Register = ({
                     />
                   )}
                 />
+                <ErrorMessage name="register.email" />
                 <Field
                   name="register.confirmEmail"
                   render={({ field }) => (
@@ -82,6 +86,7 @@ const Register = ({
                     />
                   )}
                 />
+                <ErrorMessage name="register.confirmEmail" />
                 <Field
                   name="register.password"
                   render={({ field }) => (
@@ -102,10 +107,12 @@ const Register = ({
                   requirements={requirements}
                   onChange={handleRequirements}
                 />
-                <Button type="submit" disabled={isDisable} backgroundColor={Theme.colors.secondary_color}>
-                  <To to='/perfil' disabled={isDisable}>
-                    Cadastrar
-                </To>
+                <Button 
+                  type="submit" 
+                  disabled={isDisable}
+                  backgroundColor={Theme.colors.secondary_color}
+                >
+                Cadastrar
                 </Button>
                 <Anchor
                   text='Já possui uma conta?'
@@ -119,7 +126,7 @@ const Register = ({
       <Content>
         <div>
           <Title>Feito para jovens como você!</Title>
-          <Text>Acredite na mudança e nas coisas boas que podemos construir juntos.
+          <Text>A solução para o gerenciamento de suas finanças e controle de gastos está aqui,
               Não perca tempo na hora de construir um futuro inovador.
           </Text>
         </div>
@@ -136,4 +143,4 @@ Register.defaultProps = {
   initialValues: {}
 }
 
-export default Register
+export default enhance(Register)

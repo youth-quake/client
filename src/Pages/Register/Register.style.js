@@ -13,7 +13,8 @@ export const To = styled(Link)`
 
 export const Container = styled.div`
   display: flex;
-  margin: 2% auto;
+  margin: 0 auto;
+  padding: 15px;
 `
 
 export const Form = styled.form`
@@ -21,7 +22,6 @@ export const Form = styled.form`
   display: flex;
   flex-flow: column;
   align-items: center;
-  padding: 50px;
   margin: 0 10%;
 `
 
@@ -43,8 +43,11 @@ export const Content = styled.div`
 export const ContentImage = styled.img`
   width: auto;
   height: 450px;
+<<<<<<< HEAD
   box-sizing: border-box;
   margin: 5% 0;
+=======
+>>>>>>> 4d3e3b89c7f7094266462178fc8dc2720d79b011
   box-sizing: border-box;
 `
 

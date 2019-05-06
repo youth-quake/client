@@ -1,6 +1,11 @@
 import React from 'react'
 
-import { Button, Input, Anchor, Theme } from '../../components'
+import { 
+  Button, 
+  Input, 
+  Anchor, 
+  Theme 
+} from '../../components'
 import {
   Logo,
   Form,
@@ -76,10 +81,12 @@ const Login = ({
                     />
                   )}
                 />
-                <Button type="submit" disabled={isDisable} backgroundColor={Theme.colors.secondary_color}>
-                  <To to='/perfil' disabled={isDisable}>
-                    Entrar
-                  </To>
+                <Button 
+                  type="submit" 
+                  disabled={isDisable}
+                  backgroundColor={Theme.colors.secondary_color}
+                >
+                Entrar
                 </Button>
                 <Anchor
                   text='Não tem uma conta ainda?'
