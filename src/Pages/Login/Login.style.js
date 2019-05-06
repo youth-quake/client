@@ -3,8 +3,8 @@ import { Title as TitleComponent, Theme } from '../../components'
 
 export const Container = styled.div`
   display: flex;
-  margin: 5% auto;
-  position: fixed;
+  margin: 0 auto;
+  padding: 15px;
 `
 
 export const Form = styled.form`
@@ -12,7 +12,6 @@ export const Form = styled.form`
   display: flex;
   flex-flow: column;
   align-items: center;
-  padding: 50px;
   margin: 0 10%;
 `
 
@@ -33,9 +32,7 @@ export const Content = styled.div`
 
 export const ContentImage = styled.img`
   width: auto;
-  height: 500px;
-  box-sizing: border-box;
-  margin: 5% 0;
+  height: 450px;
   box-sizing: border-box;
 `
 

@@ -273,3 +273,39 @@ export const DescriptionObjective = styled.div`
   font-size: ${Theme.font.font_size};
   font-family: ${Theme.font.font_family};
 `
+
+export const Footer = styled.div`
+  width: 100%;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: ${Theme.colors.secondary_color};
+  font-family: ${Theme.font.font_family};
+  color: ${Theme.colors.base_color};
+  font-size: 16px;
+
+  & > span {
+    margin: 10px;
+    padding: 10px;
+  }
+
+  & > p {
+    font-weight: bold;
+    margin: 10px;
+    padding: 10px;
+  }
+`
+
+export const Social = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  
+  & > img {
+    height: 60px;
+    width: 60px;
+    margin: 0 10px;
+    box-sizing: border-box;
+  }
+`

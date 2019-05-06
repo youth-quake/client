@@ -18,6 +18,9 @@ export const Button = styled.button`
   ${props => props.disabled && (
     css`
     cursor: not-allowed;
-    background: ${Theme.colors.font_color};` 
+    background: transparent;
+    color: ${Theme.colors.secondary_color};
+    border: solid 1px ${Theme.colors.secondary_color};
+  `
   )}   
 `

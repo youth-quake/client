@@ -22,7 +22,9 @@ import {
   WrapperContent,
   Menu,
   Item,
-  Image
+  Image,
+  Footer,
+  Social
 } from './Profile.style'
 import youthquake from '../../assets/img/porkinYQ1.png'
 import iconProfileMini from '../../assets/img/girl mini.png'
@@ -150,10 +152,20 @@ const Profile = ({
                     </Achievements>
                   </Content>
                 </WrapperContent>
+                <Footer>
+                  <span>&copy; Todos os direitos reservados</span>
+                  <p>Contate-nos&nbsp;&nbsp;&nbsp;&nbsp;F.A.Q</p>
+                  <Social>
+                    <img src={Trofeu} title={'Facebook'}/>
+                    <img src={Trofeu} title={'Facebook'}/>
+                    <img src={Trofeu} title={'Facebook'}/>
+                  </Social>
+                </Footer>
               </Fragment>
             )}
         />
       )}
+
     </Container>
   )
 
