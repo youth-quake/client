@@ -1,7 +1,6 @@
 import { compose, withState, withHandlers, lifecycle } from 'recompose'
 import { register } from '../../services'
 import * as Yup from 'yup'
-import { withFormik } from 'formik'
 
 const valid = (value, requirements) => {
   requirements.reduce((isValid, { validation }) => {

@@ -13,16 +13,13 @@ import {
   Logo,
   ContentImage,
   Content,
-  Text,
-  To
+  Text
 } from './Register.style'
 import requirements from '../../utils/requirements'
 import youthquake from '../../assets/img/porkinYQ1.png'
 import girl from '../../assets/img/girl.png'
 import { Formik, ErrorMessage, Field } from 'formik'
-import {
-  shape
-} from 'prop-types'
+import { shape } from 'prop-types'
 import enhance, { validationSchema } from './Register.hoc'
 
 const Register = ({

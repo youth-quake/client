@@ -17,8 +17,7 @@ import {
   Img,
   Option,
   Scratches,
-  Separator,
-  To
+  Separator
 } from './Login.style'
 
 import youthquake from '../../assets/img/porkinYQ1.png'

@@ -1,9 +1,7 @@
 import React, { Fragment } from 'react'
-import { Button, InputEditable as Input, Theme} from '../../components'
+import { Button, InputEditable as Input, Theme, Target, Footer, NavBar, Achievements } from '../../components'
 import {
   Container,
-  Navbar,
-  NavbarImage,
   BackgroundProfile,
   Picture,
   ImageProfile,
@@ -16,33 +14,12 @@ import {
   GridLeft,
   GridRight,
   Content,
-  Achievements,
-  Title,
-  Badge,
   WrapperContent,
   Menu,
-  Item,
-  Image,
-  Footer,
-  Social,
-  Targets,
-  TargetDescription,
-  TargetContainer,
-  TargetTitle,
-  WrapperInformation,
-  Percent,
-  Description
+  Item
 } from './Profile.style'
-import youthquake from '../../assets/img/porkinYQ1.png'
-import iconProfileMini from '../../assets/img/girl mini.png'
 import ProfileImage from '../../assets/img/girl big.png'
 import { Formik, Field } from 'formik'
-import Trofeu from '../../assets/img/trofeu.png'
-import linkedin from '../../assets/img/linkedin.png'
-import instagram from '../../assets/img/instagram.png'
-import facebook from '../../assets/img/facebook-logo-button.png'
-import twitter from '../../assets/img/twitter.png'
-import DonutChart from 'react-donut-chart'
 
 const Profile = ({
   initialValues,
@@ -52,14 +29,12 @@ const Profile = ({
   editable,
   showComponent,
   achievements,
-  targets
+  targets,
+  titleButton,
+  handleChange
 }) => (
     <Container>
-
-      <Navbar>
-        <NavbarImage src={youthquake} title="Ir para a página inicial" />
-        <NavbarImage src={iconProfileMini} title="Visualizar opções" />
-      </Navbar>
+      <NavBar />
       {initialValues && (
         <Formik
           initialValues={initialValues}
@@ -75,9 +50,9 @@ const Profile = ({
                       </Picture>
                       <Button
                         backgroundColor={Theme.colors.constrast_color}
-                        onClick={() => setEditable(!editable)}
+                        onClick={() => handleChange()}
                       >
-                        Editar
+                        {titleButton}
                     </Button>
                       <MessageWrapper>
                         <TitleMessage>Sobre mim</TitleMessage>
@@ -87,7 +62,6 @@ const Profile = ({
                             <About
                               {...field}
                               placeholder='Nome completo'
-                              editable={editable}
                               disabled={editable}
                               errors={errors}
                               rows="4"
@@ -161,74 +135,16 @@ const Profile = ({
                   </Menu>
                   {isAchievements && (
                     <Content>
-                      <Title>Minhas conquistas</Title>
-                      <Achievements>
-                        {achievements.map(item => (
-                          <Badge>
-                            <Image src={Trofeu} />
-                            <span>{item.title}</span>
-                            <p>{item.description}</p>
-                          </Badge>
-                        )
-                        )}
-                      </Achievements>
+                      <Achievements achievements={achievements} />
                     </Content>
                   )}
                   {isTarget && (
                     <Content>
-                      <Title>Meus objetivos</Title>
-                      <Targets>
-                        {targets.map(item => (
-                          <TargetContainer>
-                            <TargetTitle>{item.title}</TargetTitle>
-                            <TargetDescription>
-                              <Description>{item.description}</Description>
-                              <Percent>
-                                <DonutChart
-                                  data={[
-                                    { value: item.percent},
-                                    { value: 100 - item.percent}
-                                  ]}
-                                  colors={[
-                                    '#FFF',
-                                    Theme.colors.primary_color
-                                  ]}
-                                  width={200}
-                                  height={200}
-                                  legend={false}
-                                />
-                              </Percent>
-                            </TargetDescription>
-                            <WrapperInformation>
-                              <div>
-                                <span>Data de início:</span>
-                                <text>{item.start}</text>
-                                <br />
-                                <span>Data de fim:</span>
-                                <text>{item.end}</text>
-                              </div>
-                              <div>
-                                <span>Renda:</span>
-                                <text>R$ {item.amount}</text>
-                              </div>
-                            </WrapperInformation>
-                          </TargetContainer>
-                        )
-                        )}
-                      </Targets>
+                      <Target targets={targets} />
                     </Content>
                   )}
                 </WrapperContent>
-                <Footer>
-                  <span>&copy; Todos os direitos reservados</span>
-                  <p>Contate-nos&nbsp;&nbsp;&nbsp;&nbsp;F.A.Q</p>
-                  <Social>
-                    <img src={linkedin} title={'LinkedIn'} />
-                    <img src={facebook} title={'Facebook'} />
-                    <img src={instagram} title={'Instagram'} />
-                    <img src={twitter} title={'Twitter'} />
-                  </Social>
-                </Footer>
+                <Footer />
               </Fragment>
             )}
         />

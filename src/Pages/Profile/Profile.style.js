@@ -1,21 +1,9 @@
 import styled  from 'styled-components'
 import { Theme } from '../../components'
 
-export const Container = styled.body`
+export const Container = styled.div`
   margin: 0 auto;
   padding: 0px;
-`
-
-export const Navbar = styled.div`
-  width: 100%;
-  height: 70px;
-  display: flex;
-  justify-content: space-between;
-`
-
-export const NavbarImage = styled.img`
-  margin: 10px;
-  height: 50px;
 `
 
 export const BackgroundProfile = styled.div`
@@ -168,7 +156,6 @@ export const WrapperContent = styled.div`
   }
 `
 
-
 export const Content = styled.div` 
   display: flex;
   flex-flow: column;
@@ -179,16 +166,6 @@ export const Content = styled.div`
     margin: 0 20px;
   }
 `
-
-export const Achievements = styled.div`
-  display: flex;
-  flex-flow: row wrap;
-
-  & img > {
-    margin: 10px;
-  }
-`
-
 
 export const Menu = styled.ul`
   display: flex;
@@ -217,148 +194,3 @@ export const Item = styled.li`
   }
 `
 
-export const Title = styled.p`
-  font-size: 28px;  
-  font-family: ${Theme.font.font_family};
-  font-weight: bold;
-  padding: 10px 20px;
-`
-
-export const Badge = styled.div`
-  display: flex;
-  flex-flow: column;
-  justify-content: baseline;
-  align-items: center;
-  padding: 10px;
-  height: 150px;
-  width: 150px;
-  margin: 20px 10px; 
-
-  & > span {
-    cursor: default;
-    font-weight: bold;
-    box-sizing: border-box;
-    font-family: ${Theme.font.font_family};
-    color: ${Theme.colors.secondary_color};
-  }
-
-  & > p {
-    cursor: default;
-    box-sizing: border-box;
-    font-family: ${Theme.font.font_family};
-    font-size: 14px;
-    color: ${Theme.colors.secondary_color};
-  }
-`
-
-export const Image = styled.img`
-  height: 120px;
-  width: 120px;
-`
-
-export const Targets = styled.div`
-  display: flex;
-  flex-flow: row wrap;
-
-  & img > {
-    margin: 10px;
-  }
-`
-
-export const TargetContainer = styled.div`
-  width: 100%;
-  background: #FFF;
-  display: flex;
-  flex-flow: column;
-  margin: 10px;
-  border-radius: 3px;
-  font-family: ${Theme.font.font_family};
-  border: solid 1px ${Theme.colors.border_color};
-`
-
-export const TargetTitle = styled.h2`
-  margin: 0;
-  padding: 10px;
-  width: 20%;
-  font-size: 16px;
-  text-align: center;
-  border-radius: 2px;
-  color: ${Theme.colors.base_color};
-  background-color: ${Theme.colors.primary_color};
-  border: solid 1px ${Theme.colors.border_color};
-`
-
-export const TargetDescription = styled.div`
-  padding: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`
-
-export const Description = styled.div`
-  display: flex;
-  align-items: center;
-  margin: 0 20px;
-  color: ${Theme.colors.font_color};
-  height: 100px;
-  width: 500px;
-  padding: 10px 0;
-`
-
-export const Percent = styled.div`
-  font-size: 30px;
-  padding: 30px;
-  text-aligin: center;
-  margin: 10px;
-`
-
-export const WrapperInformation = styled.div`
-  padding: 10px;
-  display: flex;
-
-  & > div {
-    margin: 0 20px;
-    padding: 10px 0;
-  }
-
-  & > div > span {
-    margin: 20px 10px;
-    font-weight: bold;
-  }
-`
-
-export const Footer = styled.div`
-  width: 100%;
-  height: 70px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: ${Theme.colors.secondary_color};
-  font-family: ${Theme.font.font_family};
-  color: ${Theme.colors.base_color};
-  font-size: 16px;
-
-  & > span {
-    margin: 10px;
-    padding: 10px;
-  }
-
-  & > p {
-    font-weight: bold;
-    margin: 10px;
-    padding: 10px;
-  }
-`
-
-export const Social = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  
-  & > img {
-    height: 35px;
-    width: 35px;
-    margin: 0 10px;
-    box-sizing: border-box;
-  }
-`

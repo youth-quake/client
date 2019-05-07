@@ -20,6 +20,7 @@ const routes = [
     component: Register
   },
   {
+    key: 4,
     path: "/perfil",
     component: Profile
   }
