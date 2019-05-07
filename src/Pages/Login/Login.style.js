@@ -43,11 +43,6 @@ export const Content = styled.div`
 export const ContentImage = styled.img`
   width: auto;
   height: 450px;
-<<<<<<< HEAD
-  box-sizing: border-box;
-  margin: 5% 0;
-=======
->>>>>>> 4d3e3b89c7f7094266462178fc8dc2720d79b011
   box-sizing: border-box;
 `
 
@@ -76,7 +71,7 @@ export const Option = styled.div`
   margin: 10px 0;
   cursor: pointer;
   border-radius: 3px;
-  box-shadow: 7px 2px 16px -11px rgba(0,0,0,0.75);
+  // box-shadow: 7px 2px 16px -11px rgba(0,0,0,0.75);
 `
 
 export const Img = styled.img`

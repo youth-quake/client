@@ -1,6 +1,16 @@
 import { compose, withState, withHandlers, lifecycle } from 'recompose'
 import { withFormik } from 'formik'
 import { getProfile } from '../../services'
+import iconProfileMini from '../../assets/img/girl mini.png'
+
+const friends = [
+  { key: 11, name: 'Maria', nickname: '@maria', img: iconProfileMini },
+  { key: 12, name: 'Maria', nickname: '@maria', img: iconProfileMini },
+  { key: 13, name: 'Maria', nickname: '@maria', img: iconProfileMini },
+  { key: 14, name: 'Maria', nickname: '@maria', img: iconProfileMini },
+  { key: 15, name: 'Maria', nickname: '@maria', img: iconProfileMini },
+  { key: 16, name: 'Maria', nickname: '@maria', img: iconProfileMini }
+]
 
 
 const achievements = [
@@ -27,10 +37,10 @@ const targets = [
     key: 32,
     title: 'Titulo do objetivo',
     description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tempor, est at pharetra sollicitudin, eros nulla ultricies sapien, eget placerat magna enim at urna. In hac habitasse platea dictumst.`,
-    percent: 17.8,
+    percent: 11.2,
     start: '06/05/2019',
     end: '21/03/2020',
-    amount: '1.000,95'
+    amount: '2.000,95'
   }
 ]
 
@@ -70,28 +80,33 @@ const enhance = compose(
   withState('isValid', 'setIsValid', false),
   withState('isDisable', 'setIsDisabled', true),
   withState('editable', 'setEditable', true),
-  withState('isTarget', 'setIsTarget', false),
-  withState('isAchievements', 'setIsAchievements', true),
+  withState('isTarget', 'setIsTarget', true),
+  withState('isAchievements', 'setIsAchievements', false),
   withState('titleButton', 'setTitleButton', 'Editar'),
+  withState('friends', 'setFriends', friends),
+  withState('visible', 'setVisible', false),
   withHandlers({
-    showComponent: ({ 
-      setIsTarget, 
-      setIsAchievements, 
-      isTarget, 
+    showComponent: ({
+      setIsTarget,
+      setIsAchievements,
+      isTarget,
       isAchievements
     }) => () => {
       setIsTarget(!isTarget)
       setIsAchievements(!isAchievements)
     },
-    handleChange: ({ 
-      setEditable, 
-      setTitleButton, 
-      editable, 
-      titleButton 
+    handleChange: ({
+      setEditable,
+      setTitleButton,
+      editable,
+      titleButton
     }) => () => {
       setTitleButton(titleButton === 'Salvar' ? 'Editar' : 'Salvar')
       setEditable(!editable)
       console.log(editable)
+    },
+    toggleVisible: ({visible, setVisible}) => () => {
+      setVisible(!visible)
     }
   }),
   lifecycle({

@@ -1,5 +1,16 @@
 import React, { Fragment } from 'react'
-import { Button, InputEditable as Input, Theme, Target, Footer, NavBar, Achievements } from '../../components'
+
+import {
+  Button,
+  InputEditable as Input,
+  Theme,
+  Target,
+  Footer,
+  NavBar,
+  Achievements,
+  Friends
+} from '../../components'
+
 import {
   Container,
   BackgroundProfile,
@@ -16,8 +27,9 @@ import {
   Content,
   WrapperContent,
   Menu,
-  Item
+  Item,
 } from './Profile.style'
+
 import ProfileImage from '../../assets/img/girl big.png'
 import { Formik, Field } from 'formik'
 
@@ -31,9 +43,17 @@ const Profile = ({
   achievements,
   targets,
   titleButton,
-  handleChange
+  handleChange,
+  friends,
+  visible,
+  toggleVisible
 }) => (
     <Container>
+      <Friends 
+        friends={friends} 
+        visible={visible}
+        toggleVisible={toggleVisible}  
+      />
       <NavBar />
       {initialValues && (
         <Formik
@@ -53,7 +73,7 @@ const Profile = ({
                         onClick={() => handleChange()}
                       >
                         {titleButton}
-                    </Button>
+                      </Button>
                       <MessageWrapper>
                         <TitleMessage>Sobre mim</TitleMessage>
                         <Field
@@ -151,6 +171,7 @@ const Profile = ({
       )}
 
     </Container>
+
   )
 
 export default Profile

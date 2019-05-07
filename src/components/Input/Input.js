@@ -20,7 +20,7 @@ export const Input = styled.input`
   width: 320px;
   height: 30px;
   flex-basis: auto;
-  background: ${Theme.colors.secondary_base_color};
+  background: ${Theme.colors.base_color};
   border: none;
   font-size: 14px;
   font-family: sans-serif;

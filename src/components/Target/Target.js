@@ -21,6 +21,7 @@ const Targets = styled.div`
 
 const Column = styled.div`
   display: flex;
+  justify-content: space-between;
 `
 
 const Container = styled.div`
@@ -32,7 +33,7 @@ const Container = styled.div`
   margin: 10px;
   border-radius: 3px;
   font-family: ${Theme.font.font_family};
-  border: solid 1px ${Theme.colors.border_color};
+  border: solid 1px ${Theme.colors.secondary_base_color};
 
 `
 
@@ -44,20 +45,19 @@ const Name = styled.h2`
   text-align: center;
   border-radius: 2px;
   color: ${Theme.colors.base_color};
-  background-color: ${Theme.colors.primary_color};
-  border: solid 1px ${Theme.colors.border_color};
+  background-color: ${Theme.colors.constrast_color};
 `
 
 const Description = styled.div`
   display: flex;
   align-items: center;
-  margin: 50px 40px 0;
+  margin: 30px 50px 10px;
   color: ${Theme.colors.font_color};
   height: 100px;
-  width: 500px;
+  width: 450px;
 
   & > textarea {
-    font-size: 16.5px;
+    font-size: 15px;
     text-align: justify;
     font-family: ${Theme.font.font_family};
     color: ${Theme.colors.font_color};
@@ -84,17 +84,33 @@ const Progress = styled.div`
 `
 
 const Information = styled.div`
-  padding: 10px;
-  display: flex;
+  width: 220px;
+  margin: 0 50px;
 
   & > div {
-    margin: 0 20px;
-    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+
+    & > span {
+      font-weight: bold;
+    }
+
+    & > span+span {
+      font-weight: normal;
+    }
   }
 
-  & > div > span {
-    margin: 0 10px;
-    font-weight: bold;
+  & > h3 {
+    margin: 20px 0;
+
+    & > span {
+      font-weight: bold;
+      margin: 0 10px 0 0;
+    }
+
+    & > span+span {
+      font-weight: normal;
+    }
   }
 `
 
@@ -108,20 +124,20 @@ export const Target = ({ targets }) => (
           <Column>
             <div>
               <Description>
-                <textarea value={item.description} onChange={() => null}/>
+                <textarea value={item.description} onChange={() => null} />
               </Description>
               <Information>
                 <div>
                   <span>Data de início:</span>
-                  <p>{item.start}</p>
-                  <br />
-                  <span>Data de fim:</span>
-                  <p>{item.end}</p>
+                  <span>{item.start}</span>
                 </div>
                 <div>
-                  <span>Renda:</span>
-                  <p>R$ {item.amount}</p>
+                  <span>Data de fim:</span>
+                  <span>{item.end}</span>
                 </div>
+                <h3>
+                  <span>R$</span><span>{item.amount}</span>
+                </h3>
               </Information>
             </div>
             <Progress>
@@ -137,6 +153,8 @@ export const Target = ({ targets }) => (
                 width={180}
                 height={180}
                 legend={false}
+                strokeColor={'transparent'}
+                clickToggle={false}
               />
             </Progress>
           </Column>

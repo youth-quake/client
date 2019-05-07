@@ -63,7 +63,7 @@ export const MessageWrapper = styled.div`
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
   border-radius: 6px;
-  border: rgba(255,255,255,0.75) solid 1px;
+  border: ${Theme.colors.secondary_base_color} solid 1px;
   box-shadow: 7px 2px 16px -11px rgba(0,0,0,0.75);
 
   &:after{
