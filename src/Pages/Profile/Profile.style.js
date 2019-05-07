@@ -173,7 +173,8 @@ export const Content = styled.div`
   display: flex;
   flex-flow: column;
   width: 100%;
-  
+  padding: 0 0 30px;
+
   & > div {
     margin: 0 20px;
   }
@@ -255,38 +256,75 @@ export const Image = styled.img`
   width: 120px;
 `
 
-export const Objective = styled.div`
-  display: none;
-  float: left;
-  width: 70%;
-  height: 100%;
+export const Targets = styled.div`
+  display: flex;
+  flex-flow: row wrap;
+
+  & img > {
+    margin: 10px;
+  }
 `
 
-export const ListObjectives = styled.div`
-  width: 650px;
-  border-radius: 5px;
-  height: 200px;
-  border: 1px solid ${Theme.colors.text_color}
+export const TargetContainer = styled.div`
+  width: 100%;
+  background: #FFF;
+  display: flex;
+  flex-flow: column;
+  margin: 10px;
+  border-radius: 3px;
+  font-family: ${Theme.font.font_family};
+  border: solid 1px ${Theme.colors.border_color};
 `
 
-export const TitleCategory = styled.div`
-  width: 140px;
-  background: ${props => props.backgroundColor};
-  color: white;
+export const TargetTitle = styled.h2`
+  margin: 0;
+  padding: 10px;
+  width: 20%;
+  font-size: 16px;
   text-align: center;
-  padding: 1px;
-  font-weight: bold;
-  font-size: ${Theme.font.font_size};
-  font-family: ${Theme.font.font_family};
+  border-radius: 2px;
+  color: ${Theme.colors.base_color};
+  background-color: ${Theme.colors.primary_color};
+  border: solid 1px ${Theme.colors.border_color};
 `
 
-export const DescriptionObjective = styled.div`
-  width: 450px;
-  height: 120px;
-  overflow-wrap: break-word;
+export const TargetDescription = styled.div`
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`
+
+export const Description = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 0 20px;
   color: ${Theme.colors.font_color};
-  font-size: ${Theme.font.font_size};
-  font-family: ${Theme.font.font_family};
+  height: 100px;
+  width: 500px;
+  padding: 10px 0;
+`
+
+export const Percent = styled.div`
+  font-size: 30px;
+  padding: 30px;
+  text-aligin: center;
+  margin: 10px;
+`
+
+export const WrapperInformation = styled.div`
+  padding: 10px;
+  display: flex;
+
+  & > div {
+    margin: 0 20px;
+    padding: 10px 0;
+  }
+
+  & > div > span {
+    margin: 20px 10px;
+    font-weight: bold;
+  }
 `
 
 export const Footer = styled.div`
@@ -318,8 +356,8 @@ export const Social = styled.div`
   justify-content: space-between;
   
   & > img {
-    height: 60px;
-    width: 60px;
+    height: 35px;
+    width: 35px;
     margin: 0 10px;
     box-sizing: border-box;
   }

@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { Button, InputEditable as Input } from '../../components'
+import { Button, InputEditable as Input, Theme} from '../../components'
 import {
   Container,
   Navbar,
@@ -24,36 +24,41 @@ import {
   Item,
   Image,
   Footer,
-  Social
+  Social,
+  Targets,
+  TargetDescription,
+  TargetContainer,
+  TargetTitle,
+  WrapperInformation,
+  Percent,
+  Description
 } from './Profile.style'
 import youthquake from '../../assets/img/porkinYQ1.png'
 import iconProfileMini from '../../assets/img/girl mini.png'
 import ProfileImage from '../../assets/img/girl big.png'
-import { Theme } from '../../components'
 import { Formik, Field } from 'formik'
 import Trofeu from '../../assets/img/trofeu.png'
-
-const achievements = [
-  { title: 'Apostador', description: 'Criou 10 novas apostas' },
-  { title: 'Visionário', description: 'Previu 5 categorias' },
-  { title: 'Ganhador', description: 'Ganhou 10 apostas' },
-  { title: 'Triste', description: 'Chorou por 10 horas' },
-  { title: 'Popular', description: 'Adicionou 15 amigos' },
-  { title: 'Economista', description: 'Guardou R$ 500,00' },
-  { title: 'Pensador', description: 'Leu mais de 13 livros' }
-]
+import linkedin from '../../assets/img/linkedin.png'
+import instagram from '../../assets/img/instagram.png'
+import facebook from '../../assets/img/facebook-logo-button.png'
+import twitter from '../../assets/img/twitter.png'
+import DonutChart from 'react-donut-chart'
 
 const Profile = ({
   initialValues,
-  showAchievements,
-  showObjetives,
+  isAchievements,
+  isTarget,
   setEditable,
-  editable
+  editable,
+  showComponent,
+  achievements,
+  targets
 }) => (
     <Container>
+
       <Navbar>
-        <NavbarImage src={youthquake} title="Ir para a página inicial"/>
-        <NavbarImage src={iconProfileMini} title="Visualizar opções"/>
+        <NavbarImage src={youthquake} title="Ir para a página inicial" />
+        <NavbarImage src={iconProfileMini} title="Visualizar opções" />
       </Navbar>
       {initialValues && (
         <Formik
@@ -141,30 +146,87 @@ const Profile = ({
                 </BackgroundProfile>
                 <WrapperContent>
                   <Menu>
-                    <Item title="Visualizar minhas conquistas" onclick={showAchievements}>Conquistas</Item>
-                    <Item title="Visualizar meus objetivos pessoais" onclick={showObjetives}>Objetivos</Item>
+                    <Item
+                      title="Visualizar minhas conquistas"
+                      onClick={() => showComponent()}
+                    >
+                      Conquistas
+                    </Item>
+                    <Item
+                      title="Visualizar meus objetivos pessoais"
+                      onClick={() => showComponent()}
+                    >
+                      Objetivos
+                    </Item>
                   </Menu>
-                  <Content>
-                    <Title>Minhas conquistas</Title>
-                    <Achievements id="conquistas">
-                      {achievements.map(item => (
-                        <Badge>
-                          <Image src={Trofeu} />
-                          <span>{item.title}</span>
-                          <p>{item.description}</p>
-                        </Badge>
-                      )
-                    )}
-                    </Achievements>
-                  </Content>
+                  {isAchievements && (
+                    <Content>
+                      <Title>Minhas conquistas</Title>
+                      <Achievements>
+                        {achievements.map(item => (
+                          <Badge>
+                            <Image src={Trofeu} />
+                            <span>{item.title}</span>
+                            <p>{item.description}</p>
+                          </Badge>
+                        )
+                        )}
+                      </Achievements>
+                    </Content>
+                  )}
+                  {isTarget && (
+                    <Content>
+                      <Title>Meus objetivos</Title>
+                      <Targets>
+                        {targets.map(item => (
+                          <TargetContainer>
+                            <TargetTitle>{item.title}</TargetTitle>
+                            <TargetDescription>
+                              <Description>{item.description}</Description>
+                              <Percent>
+                                <DonutChart
+                                  data={[
+                                    { value: item.percent},
+                                    { value: 100 - item.percent}
+                                  ]}
+                                  colors={[
+                                    '#FFF',
+                                    Theme.colors.primary_color
+                                  ]}
+                                  width={200}
+                                  height={200}
+                                  legend={false}
+                                />
+                              </Percent>
+                            </TargetDescription>
+                            <WrapperInformation>
+                              <div>
+                                <span>Data de início:</span>
+                                <text>{item.start}</text>
+                                <br />
+                                <span>Data de fim:</span>
+                                <text>{item.end}</text>
+                              </div>
+                              <div>
+                                <span>Renda:</span>
+                                <text>R$ {item.amount}</text>
+                              </div>
+                            </WrapperInformation>
+                          </TargetContainer>
+                        )
+                        )}
+                      </Targets>
+                    </Content>
+                  )}
                 </WrapperContent>
                 <Footer>
                   <span>&copy; Todos os direitos reservados</span>
                   <p>Contate-nos&nbsp;&nbsp;&nbsp;&nbsp;F.A.Q</p>
                   <Social>
-                    <img src={Trofeu} title={'Facebook'}/>
-                    <img src={Trofeu} title={'Facebook'}/>
-                    <img src={Trofeu} title={'Facebook'}/>
+                    <img src={linkedin} title={'LinkedIn'} />
+                    <img src={facebook} title={'Facebook'} />
+                    <img src={instagram} title={'Instagram'} />
+                    <img src={twitter} title={'Twitter'} />
                   </Social>
                 </Footer>
               </Fragment>

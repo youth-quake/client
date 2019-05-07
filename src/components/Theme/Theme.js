@@ -9,6 +9,7 @@ export const Theme = {
     colors: {    
       base_color: '#F4F4F4',
       font_color: '#808080',
+      border_color: '#707070',
       primary_color: '#F36523',
       constrast_color: '#FBA919',
       secondary_color: '#472F91',
