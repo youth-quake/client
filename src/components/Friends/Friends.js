@@ -89,11 +89,13 @@ const Friend = styled.div`
   & > div {
     display: flex;
     flex-flow: column;
+    width: 100%;
   }
 
   & > div > span {
     cursor: default;
     font-size: 14px;
+    width: 90%;
   }
 
   & > div > p {
@@ -132,7 +134,7 @@ export const Friends = ({ friends, ...props }) => {
   return (
     <div>
       <Wrapper visible={visible}>
-        <Title>Seus contatos ({friends.length})</Title>
+        <Title title="Seus contatos">Seus contatos ({friends.length})</Title>
         <Scroll onClick={() => document.getElementById('container-friends').scrollTop -= 35}>
           <Icon icon={faChevronUp} />
         </Scroll>
@@ -142,7 +144,7 @@ export const Friends = ({ friends, ...props }) => {
               <Image src={item.img} />
               <div>
                 <span>{item.name}</span>
-                <p>{item.nickname}</p>
+                <span>{item.nickname}</span>
               </div>
               <button>apostar</button>
             </Friend>
@@ -153,7 +155,7 @@ export const Friends = ({ friends, ...props }) => {
           <Icon icon={faChevronDown} />
         </Scroll>
       </Wrapper>
-      <Tag visible={visible} onClick={() => toggleVisible()}>
+      <Tag title="Amigos" visible={visible} onClick={() => toggleVisible()}>
         Amigos
       </Tag>
     </div>

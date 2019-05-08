@@ -10,7 +10,7 @@ export const InputEditable = styled.input`
   color: #080808;
   font-size: ${Theme.font.font_size};
   font-family: ${Theme.font.font_family};
-  ${props => props.disabled && 'cursor: not-allowed;'}
+  ${props => props.disabled && 'cursor: default;'}
   ${props => !props.editable && 'border-bottom: solid 1px;'}
 `
 
