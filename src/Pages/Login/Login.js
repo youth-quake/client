@@ -60,7 +60,7 @@ const Login = ({
                 <Option>
                   <Img src={google} />
                   <GoogleLogin
-                    clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
+                    clientId=""
                     buttonText="Iniciar sessão com o Google"
                     onSuccess={responseGoogle}
                     onFailure={responseGoogle}
@@ -71,7 +71,7 @@ const Login = ({
                 <Option>
                   <Img src={facebook} />
                   <FacebookLogin
-                    appId="1088597931155576"
+                    appId=""
                     autoLoad={true}
                     fields="name,email,picture"
                     callback={responseFacebook}
