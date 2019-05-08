@@ -71,10 +71,11 @@ const Profile = ({
                       <Button
                         backgroundColor={Theme.colors.constrast_color}
                         onClick={() => handleChange()}
+                        title="Editar"
                       >
                         {titleButton}
                       </Button>
-                      <MessageWrapper>
+                      <MessageWrapper title="Sobre mim">
                         <TitleMessage>Sobre mim</TitleMessage>
                         <Field
                           name="register.message"
@@ -92,7 +93,7 @@ const Profile = ({
                       </MessageWrapper>
                     </GridLeft>
                     <GridRight>
-                      <Information>
+                      <Information title="Informações gerais">
                         <Field
                           name="register.name"
                           render={({ field }) => (

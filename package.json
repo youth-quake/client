@@ -13,8 +13,11 @@
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
     "react-donut-chart": "^1.1.8",
+    "react-facebook-login": "^4.1.1",
+    "react-google-login": "^5.0.4",
     "react-router-dom": "^5.0.0",
     "react-scripts": "^2.1.8",
+    "react-social-login": "^3.4.4",
     "recompose": "^0.30.0",
     "styled-components": "^4.2.0",
     "yup": "^0.27.0"

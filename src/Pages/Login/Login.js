@@ -1,10 +1,10 @@
 import React from 'react'
 
-import { 
-  Button, 
-  Input, 
-  Anchor, 
-  Theme 
+import {
+  Button,
+  Input,
+  Anchor,
+  Theme
 } from '../../components'
 import {
   Logo,
@@ -28,6 +28,17 @@ import facebook from '../../assets/img/facebook.png'
 import { bool, shape } from 'prop-types'
 import { Formik, Field } from 'formik'
 
+import FacebookLogin from 'react-facebook-login'
+import GoogleLogin from 'react-google-login'
+
+const responseFacebook = (response) => {
+  console.log(response);
+}
+
+const responseGoogle = (response) => {
+  console.log(response);
+}
+
 const Login = ({
   isDisable,
   initialValues,
@@ -39,7 +50,7 @@ const Login = ({
       {initialValues && (
         <Formik
           initialValues={initialValues}
-          validate={validation}
+          validationSchema={validation}
           onSubmit={handleSubmit}
           render={({
             errors
@@ -48,11 +59,26 @@ const Login = ({
                 <Logo src={youthquake} />
                 <Option>
                   <Img src={google} />
-                  <Text>Iniciar a sessão com o Google</Text>
+                  <GoogleLogin
+                    clientId=""
+                    buttonText="Iniciar sessão com o Google"
+                    onSuccess={responseGoogle}
+                    onFailure={responseGoogle}
+                    cookiePolicy={'single_host_origin'}
+                    icon={false}
+                  />
                 </Option>
                 <Option>
                   <Img src={facebook} />
-                  <Text>Iniciar a sessão com o Facebook</Text>
+                  <FacebookLogin
+                    appId=""
+                    autoLoad={true}
+                    fields="name,email,picture"
+                    callback={responseFacebook}
+                    textButton="Iniciar sessão com o Facebook"
+                    language="pt_BR"
+                    cssClass=""
+                  />
                 </Option>
                 <Separator>
                   <Scratches />
@@ -80,12 +106,12 @@ const Login = ({
                     />
                   )}
                 />
-                <Button 
-                  type="submit" 
+                <Button
+                  type="submit"
                   disabled={isDisable}
                   backgroundColor={Theme.colors.secondary_color}
                 >
-                Entrar
+                  Entrar
                 </Button>
                 <Anchor
                   text='Não tem uma conta ainda?'
