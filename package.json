@@ -3,16 +3,21 @@
   "version": "0.1.1",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.18",
+    "@fortawesome/free-solid-svg-icons": "^5.8.2",
+    "@fortawesome/react-fontawesome": "^0.1.4",
     "create-react-app": "^2.1.8",
     "eslint-config-airbnb-base": "^13.1.0",
     "formik": "^1.5.3",
     "npm-audit-resolver": "^1.5.0",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
+    "react-donut-chart": "^1.1.8",
     "react-router-dom": "^5.0.0",
     "react-scripts": "^2.1.8",
     "recompose": "^0.30.0",
-    "styled-components": "^4.2.0"
+    "styled-components": "^4.2.0",
+    "yup": "^0.27.0"
   },
   "scripts": {
     "start": "react-scripts start",

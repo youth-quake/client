@@ -9,11 +9,13 @@ export const Theme = {
     colors: {    
       base_color: '#F4F4F4',
       font_color: '#808080',
+      border_color: '#707070',
       primary_color: '#F36523',
       constrast_color: '#FBA919',
       secondary_color: '#472F91',
       secondary_constrast_color: '#0079C2',
       text_color: '#000000',
-      title_color: '#F36523'
+      title_color: '#F36523',
+      secondary_base_color: '#E4E4E4'
     }
 }

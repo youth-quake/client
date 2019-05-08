@@ -1,6 +1,7 @@
 import Home from './Pages/Home'
 import Login from './Pages/Login'
 import Register from './Pages/Register'
+import Profile from './Pages/Profile'
 
 const routes = [
   {
@@ -17,6 +18,11 @@ const routes = [
     key: 3,
     path: "/cadastro",
     component: Register
+  },
+  {
+    key: 4,
+    path: "/perfil",
+    component: Profile
   }
 ]
 

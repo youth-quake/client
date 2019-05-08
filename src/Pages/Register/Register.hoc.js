@@ -1,5 +1,6 @@
 import { compose, withState, withHandlers, lifecycle } from 'recompose'
 import { register } from '../../services'
+import * as Yup from 'yup'
 
 const valid = (value, requirements) => {
   requirements.reduce((isValid, { validation }) => {
@@ -10,6 +11,16 @@ const valid = (value, requirements) => {
     return isValid
   }, true)
 }
+
+export const validationSchema = Yup.object().shape({
+  name: Yup.string()
+    .required('Campo obrigatório')
+    .min(5, 'O nome deve conter no minimo 5 letras')
+    .max(100, 'O nome deve conter no maximo 100 letras'),
+  email: Yup.string()
+    .required('Campo obrigatório')
+    .email('Formato de email invalido')
+})
 
 const enhance = compose(
   withState('value', 'setValue', ''),
