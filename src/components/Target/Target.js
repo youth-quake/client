@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { Theme } from '../../components'
 
 export const Title = styled.p`
-  font-size: 28px;  
+  font-size: 22px;  
   font-family: ${Theme.font.font_family};
   font-weight: bold;
   padding: 10px 20px;
@@ -34,14 +34,13 @@ const Container = styled.div`
   border-radius: 3px;
   font-family: ${Theme.font.font_family};
   border: solid 1px ${Theme.colors.secondary_base_color};
-
 `
 
 const Name = styled.h2`
   margin: 0;
   padding: 10px;
   width: 30%;
-  font-size: 18px;
+  font-size: 17px;
   text-align: center;
   border-radius: 2px;
   color: ${Theme.colors.base_color};
@@ -86,6 +85,7 @@ const Progress = styled.div`
 const Information = styled.div`
   width: 220px;
   margin: 0 50px;
+  font-size: 16px;
 
   & > div {
     display: flex;
@@ -102,10 +102,11 @@ const Information = styled.div`
 
   & > h3 {
     margin: 20px 0;
+    display: flex;
+    justify-content: space-between;
 
     & > span {
       font-weight: bold;
-      margin: 0 10px 0 0;
     }
 
     & > span+span {
@@ -128,23 +129,24 @@ export const Target = ({ targets }) => (
               </Description>
               <Information>
                 <div>
-                  <span>Data de início:</span>
+                  <span>Data inicial:</span>
                   <span>{item.start}</span>
                 </div>
                 <div>
-                  <span>Data de fim:</span>
+                  <span>Data final:</span>
                   <span>{item.end}</span>
                 </div>
                 <h3>
-                  <span>R$</span><span>{item.amount}</span>
+                  <span>Renda:</span>
+                  <span>R$ {item.amount}</span>
                 </h3>
               </Information>
             </div>
             <Progress>
               <DonutChart
                 data={[
-                  { value: item.percent, isEmpty: true, label: '' },
-                  { value: 100 - item.percent, label: '' }
+                  { value: item.percent, label: ''},
+                  { value: item.percent, label: ''}
                 ]}
                 colors={[
                   '#FFF',

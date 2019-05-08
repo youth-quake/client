@@ -5,11 +5,13 @@ import iconProfileMini from '../../assets/img/girl mini.png'
 
 const friends = [
   { key: 11, name: 'Maria', nickname: '@maria', img: iconProfileMini },
-  { key: 12, name: 'Maria', nickname: '@maria', img: iconProfileMini },
-  { key: 13, name: 'Maria', nickname: '@maria', img: iconProfileMini },
-  { key: 14, name: 'Maria', nickname: '@maria', img: iconProfileMini },
-  { key: 15, name: 'Maria', nickname: '@maria', img: iconProfileMini },
-  { key: 16, name: 'Maria', nickname: '@maria', img: iconProfileMini }
+  { key: 12, name: 'Giuliana', nickname: '@maria', img: iconProfileMini },
+  { key: 13, name: 'Livia', nickname: '@maria', img: iconProfileMini },
+  { key: 14, name: 'Gabi', nickname: '@maria', img: iconProfileMini },
+  { key: 15, name: 'Alessandra', nickname: '@maria', img: iconProfileMini },
+  { key: 16, name: 'Ricardo', nickname: '@maria', img: iconProfileMini },
+  { key: 17, name: 'José', nickname: '@maria', img: iconProfileMini },
+  { key: 18, name: 'João', nickname: '@maria', img: iconProfileMini }
 ]
 
 

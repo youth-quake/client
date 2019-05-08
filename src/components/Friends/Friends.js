@@ -1,14 +1,16 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 import { Theme } from '../../components'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons'
 
 const Tag = styled.div`
   width: 100px;
   height: 50px;
   background: ${Theme.colors.constrast_color};
   position:fixed;
-  right: 280px;
-  top: 250px;
+  right: 279px;
+  top: 280px;
   z-index: 100;
   border-radius: 2px;
   transform: rotate(-90deg);
@@ -18,7 +20,7 @@ const Tag = styled.div`
   font-size: 15px;
   color: ${Theme.colors.base_color};
   font-weight: bold;
-  
+
   ${props => !props.visible && css`
     right: -30px;
   `}
@@ -27,26 +29,28 @@ const Tag = styled.div`
 const Wrapper = styled.div`
   background: ${Theme.colors.base_color};
   width: 305px;
-  height: 500px;
+  height: 545px;
+  padding: 10px 0;
   z-index: 100;
   position: fixed;
-  top: 50px;
+  top: 40px;
   right: 0;
   text-align: center;
   border-radius: 3px;
-  visibility: ${props => props.visible ? css`visible` : css`hidden` };
+  visibility: ${props => props.visible ? css`visible` : css`hidden`};
+  box-shadow: -8px 6px 17px -15px rgba(0,0,0,0.75);
 `
 
 const Container = styled.div`
   display: flex;
   flex-flow: column;
   max-height: 370px;
-  overflow-y: auto;
+  overflow-y: hidden;
   overflow-x: hidden;
 `
 
 const Title = styled.p`
-  font-size: 22px;  
+  font-size: 18px;  
   font-family: ${Theme.font.font_family};
   font-weight: bold;
   padding: 10px 20px;
@@ -96,8 +100,6 @@ const Friend = styled.div`
     cursor: default;
     font-size: 12px;
   }
-
-  
 `
 
 const Image = styled.img`
@@ -105,8 +107,23 @@ const Image = styled.img`
   width: 50px;
 `
 
-export const Friends = ({ friends, ...props }) => {
+const Scroll = styled.button`
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  margin: 10px 0;
+`
 
+const Icon = styled(FontAwesomeIcon)`
+  font-size: 22px;
+
+  &:hover {
+    opacity: 0.5;
+  }
+`
+
+export const Friends = ({ friends, ...props }) => {
   const {
     visible,
     toggleVisible
@@ -114,24 +131,31 @@ export const Friends = ({ friends, ...props }) => {
 
   return (
     <div>
-    <Wrapper visible={visible}> 
-      <Title>Seus contatos</Title>
-      <Container>
-        {friends.map(item => (
-          <Friend key={item.key}>
-            <Image src={item.img} />
-            <div>
-              <span>{item.name}</span>
-              <p>{item.nickname}</p>
-            </div>
-            <button>apostar</button>
-          </Friend>
-        )
-        )}
-      </Container>
-    </Wrapper>
-    <Tag visible={visible} onClick={() => toggleVisible()}>
-    Amigos</Tag>
-  </div>
+      <Wrapper visible={visible}>
+        <Title>Seus contatos ({friends.length})</Title>
+        <Scroll onClick={() => document.getElementById('container-friends').scrollTop -= 35}>
+          <Icon icon={faChevronUp} />
+        </Scroll>
+        <Container id="container-friends">
+          {friends.map(item => (
+            <Friend key={item.key}>
+              <Image src={item.img} />
+              <div>
+                <span>{item.name}</span>
+                <p>{item.nickname}</p>
+              </div>
+              <button>apostar</button>
+            </Friend>
+          )
+          )}
+        </Container>
+        <Scroll onClick={() => document.getElementById('container-friends').scrollTop += 35}>
+          <Icon icon={faChevronDown} />
+        </Scroll>
+      </Wrapper>
+      <Tag visible={visible} onClick={() => toggleVisible()}>
+        Amigos
+      </Tag>
+    </div>
   )
 }

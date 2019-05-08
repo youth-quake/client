@@ -94,7 +94,7 @@ export const MessageWrapper = styled.div`
 `
 
 export const TitleMessage = styled.p`
-  font-size: 20px;
+  font-size: 16px;
   font-weight: bold;
   font-family: ${Theme.font.font_family};
   color: ${Theme.colors.font_color};
