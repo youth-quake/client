@@ -1,6 +1,11 @@
 import React from 'react'
 
-import { Button, Input, Anchor } from '../../components'
+import { 
+  Button, 
+  Input, 
+  Anchor, 
+  Theme 
+} from '../../components'
 import {
   Logo,
   Form,
@@ -30,7 +35,7 @@ const Login = ({
   handleSubmit,
   handleChange
 }) => (
-  <Container>
+    <Container>
       {initialValues && (
         <Formik
           initialValues={initialValues}
@@ -57,28 +62,34 @@ const Login = ({
                 <Field
                   name="register.login"
                   render={({ field }) => (
-                    <Input 
-                      {...field} 
+                    <Input
+                      {...field}
                       placeholder='Login'
-                      errors={errors} 
+                      errors={errors}
                     />
                   )}
                 />
                 <Field
                   name="register.password"
                   render={({ field }) => (
-                    <Input 
-                      {...field} 
-                      type='password' 
-                      placeholder='Senha' 
-                      errors={errors} 
+                    <Input
+                      {...field}
+                      type='password'
+                      placeholder='Senha'
+                      errors={errors}
                     />
                   )}
                 />
-                <Button type="submit" disabled={isDisable}>Entrar</Button>
+                <Button 
+                  type="submit" 
+                  disabled={isDisable}
+                  backgroundColor={Theme.colors.secondary_color}
+                >
+                Entrar
+                </Button>
                 <Anchor
-                  text='Não tem sua conta ainda?'
-                  description='Cadastre-se'
+                  text='Não tem uma conta ainda?'
+                  description='Crie agora mesmo'
                   to='/cadastro'
                 />
               </Form>
