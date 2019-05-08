@@ -49,10 +49,10 @@ const Profile = ({
   toggleVisible
 }) => (
     <Container>
-      <Friends 
-        friends={friends} 
+      <Friends
+        friends={friends}
         visible={visible}
-        toggleVisible={toggleVisible}  
+        toggleVisible={toggleVisible}
       />
       <NavBar />
       {initialValues && (

@@ -7,7 +7,6 @@
     "@fortawesome/free-solid-svg-icons": "^5.8.2",
     "@fortawesome/react-fontawesome": "^0.1.4",
     "create-react-app": "^2.1.8",
-    "eslint-config-airbnb-base": "^13.1.0",
     "formik": "^1.5.3",
     "npm-audit-resolver": "^1.5.0",
     "react": "^16.8.3",
@@ -17,7 +16,6 @@
     "react-google-login": "^5.0.4",
     "react-router-dom": "^5.0.0",
     "react-scripts": "^2.1.8",
-    "react-social-login": "^3.4.4",
     "recompose": "^0.30.0",
     "styled-components": "^4.2.0",
     "yup": "^0.27.0"

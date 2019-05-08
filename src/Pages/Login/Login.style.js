@@ -14,7 +14,7 @@ export const To = styled(Link)`
 export const Container = styled.div`
   display: flex;
   margin: 0 auto;
-  padding: 15px;
+  padding: 30px 10px;
 `
 
 export const Form = styled.form`
@@ -42,13 +42,29 @@ export const Content = styled.div`
 
 export const ContentImage = styled.img`
   width: auto;
-  height: 450px;
+  height: 390px;
   box-sizing: border-box;
+  margin: 5% 0;
+  box-sizing: border-box;
+  position: relative;
+  animation: float 4s ease-in-out infinite;
+
+  @keyframes float {
+    0% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+    100% {
+      transform: translateY(0px);
+    }
+  }
 `
 
 export const Title = styled(TitleComponent)`
   text-align: center;
-  box-sizing: border-box;
+  font-weight: bold;
   font-family: ${Theme.font.font_family};
   color: ${Theme.colors.font_color};
 `
@@ -56,7 +72,6 @@ export const Title = styled(TitleComponent)`
 export const Text = styled.p`
   text-align: center;
   padding: 12px;
-  box-sizing: border-box;
   font-family: ${Theme.font.font_family};
   color: ${Theme.colors.font_color};  
 `
@@ -136,5 +151,3 @@ export const Scratches = styled.div`
   border: solid 1px ${Theme.colors.font_color};
   width: 42%;
 `
-
-
