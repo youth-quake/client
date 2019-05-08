@@ -121,32 +121,39 @@ export const Target = ({ targets }) => (
     <Targets>
       {targets.map(item => (
         <Container key={item.key}>
-          <Name>{item.title}</Name>
+          <Name title="Titulo do objetivo">{item.title}</Name>
           <Column>
             <div>
               <Description>
-                <textarea value={item.description} onChange={() => null} />
+                <textarea
+                  maxLength={200}
+                  title="Descrição do objetivo"
+                >
+                  {item.description}
+                </textarea>
               </Description>
               <Information>
                 <div>
-                  <span>Data inicial:</span>
+                  <span title="Data inicial">Data inicial:</span>
                   <span>{item.start}</span>
                 </div>
                 <div>
-                  <span>Data final:</span>
+                  <span title="Data final">Data final:</span>
                   <span>{item.end}</span>
                 </div>
                 <h3>
-                  <span>Renda:</span>
+                  <span title="Renda acumulada">Renda:</span>
                   <span>R$ {item.amount}</span>
                 </h3>
               </Information>
             </div>
-            <Progress>
+            <Progress
+              title="Progresso do objetivo"
+            >
               <DonutChart
                 data={[
-                  { value: item.percent, label: ''},
-                  { value: item.percent, label: ''}
+                  { value: item.percent,  isEmpty: true },
+                  { value: (100-item.percent), label: '', }
                 ]}
                 colors={[
                   '#FFF',
@@ -157,6 +164,7 @@ export const Target = ({ targets }) => (
                 legend={false}
                 strokeColor={'transparent'}
                 clickToggle={false}
+                emptyColor={Theme.colors.secondary_base_color}
               />
             </Progress>
           </Column>

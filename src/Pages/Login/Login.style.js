@@ -58,7 +58,7 @@ export const Text = styled.p`
   padding: 12px;
   box-sizing: border-box;
   font-family: ${Theme.font.font_family};
-  color: ${Theme.colors.font_color};
+  color: ${Theme.colors.font_color};  
 `
 
 export const Option = styled.div`
@@ -67,11 +67,53 @@ export const Option = styled.div`
   width: 320px;
   height: 30px;
   border: solid 1px ${Theme.colors.base_color};
-  padding: 7px;
+  padding: 7px 10px;
   margin: 10px 0;
   cursor: pointer;
   border-radius: 3px;
-  // box-shadow: 7px 2px 16px -11px rgba(0,0,0,0.75);
+
+  & > span > button {
+    background: transparent;
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    text-align: center;
+    padding: 12px;
+    font-family: ${Theme.font.font_family};
+    color: ${Theme.colors.font_color};
+    font-size: 16px;
+    cursor: pointer;
+
+    &:hover{
+      opacity: 0.5;
+    }
+  }
+
+  & > button {
+    box-shadow: unset !important;
+    outline: none;
+    font-weigth: normal;
+    background: transparent;
+  }
+
+  & > button > span {
+    background: transparent;
+    width: 100%;
+    height: 100%;
+    border: none;
+    text-align: center;
+    font-family: ${Theme.font.font_family};
+    color: ${Theme.colors.font_color};
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: normal !important;
+
+    &:hover{
+      opacity: 0.5;
+    }
+  }
+  
 `
 
 export const Img = styled.img`
