@@ -1,6 +1,13 @@
 import styled  from 'styled-components'
 import { Theme } from '../../components'
 
+export const Title = styled.p`
+  font-size: 22px;  
+  font-family: ${Theme.font.font_family};
+  font-weight: bold;
+  padding: 10px 20px;
+`
+
 export const Container = styled.div`
   margin: 0 auto;
   padding: 0px;

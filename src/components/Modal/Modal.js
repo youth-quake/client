@@ -9,7 +9,7 @@ const Container = styled.div`
   top: 0;
   z-index: 999;
   background-color: rgba(0,0,0,0.4);
-  display: ${props => props.showModal ? css`block` : css`hidden`};
+  display: ${props => props.showModal ? css`block` : css`none`};
 `
 
 export const Content = styled.div`
@@ -56,16 +56,17 @@ export const Modal = ({
    showModal,
    title,
    text,
-   toggleModal
+   toggleModal,
+   Form
   } = props
 
-  console.log(toggleModal)
-
+  
   return (
     <Container showModal={showModal}>
       <Content>
         <h1>{title}</h1>
         <p>{text}</p>
+        <Form editable={false} />
         <Button 
           backgroundColor={Theme.colors.secondary_color}
           onClick={() => toggleModal()}

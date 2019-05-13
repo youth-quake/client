@@ -43,6 +43,15 @@ const targets = [
     start: '06/05/2019',
     end: '21/03/2020',
     amount: '2.000,95'
+  },
+  {
+    key: 32,
+    title: 'Titulo do objetivo',
+    description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tempor, est at pharetra sollicitudin, eros nulla ultricies sapien, eget placerat magna enim at urna. In hac habitasse platea dictumst.`,
+    percent: 11.2,
+    start: '06/05/2019',
+    end: '21/03/2020',
+    amount: '2.000,95'
   }
 ]
 
@@ -56,7 +65,6 @@ const request = new Request(getProfile, {
 const getProfileInformation = () => {
   fetch(request).then(response => {
     return response.json().then(json => {
-      console.log(json)
       return json
     })
   })
@@ -87,7 +95,7 @@ const enhance = compose(
   withState('titleButton', 'setTitleButton', 'Editar'),
   withState('friends', 'setFriends', friends),
   withState('visible', 'setVisible', false),
-  withState('showModal', 'setShowModal', false),
+  withState('showModal', 'setShowModal', true),
   withHandlers({
     showComponent: ({
       setIsTarget,
@@ -106,7 +114,6 @@ const enhance = compose(
     }) => () => {
       setTitleButton(titleButton === 'Salvar' ? 'Editar' : 'Salvar')
       setEditable(!editable)
-      console.log(editable)
     },
     toggleVisible: ({visible, setVisible}) => () => {
       setVisible(!visible)

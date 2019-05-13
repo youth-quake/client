@@ -9,7 +9,8 @@ import {
   NavBar,
   Achievements,
   Friends,
-  Modal
+  Modal,
+  PatrimonialSituation
 } from '../../components'
 
 import {
@@ -29,6 +30,7 @@ import {
   WrapperContent,
   Menu,
   Item,
+  Title
 } from './Profile.style'
 
 import ProfileImage from '../../assets/img/girl big.png'
@@ -55,10 +57,10 @@ const Profile = ({
       <Modal 
         showModal={showModal} 
         toggleModal={toggleModal}
-        title="Lorem ipsum dolor sit amet"
-        text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis consequat et massa efficitur auctor. Aenean molestie efficitur vulputate. 
-              Quisque justo neque, ultrices eget ultrices ac, commodo at turpis. Curabitur eu interdum orci, ac commodo eros. 
-              Ut quis augue accumsan, semper metus et, rutrum lacus. Ut eget pulvinar dui."
+        title="Bem vindo(a)"
+        text="Como é sua primeira vez aqui precisamos de algumas informações.
+        Então conta um pouco sobre sua experiencia de pobreza nos campos abaixo"
+        Form={PatrimonialSituation}
       />
       <Friends
         friends={friends}
@@ -93,7 +95,6 @@ const Profile = ({
                           render={({ field }) => (
                             <About
                               {...field}
-                              placeholder='Nome completo'
                               disabled={editable}
                               errors={errors}
                               rows="4"
@@ -172,7 +173,10 @@ const Profile = ({
                   )}
                   {isTarget && (
                     <Content>
-                      <Target targets={targets} />
+                      <Title>Meus objetivos</Title>
+                      {targets.map(() => (
+                        <Target />
+                      ))}
                     </Content>
                   )}
                 </WrapperContent>

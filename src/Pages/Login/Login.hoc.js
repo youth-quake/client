@@ -14,12 +14,10 @@ const enhance = compose(
       fetch(login, {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
-        body: {
-          register: {
-            login: data.register.login,
-            password: data.register.password
-          }
-        }
+        body: JSON.stringify({
+          "login": data.register.login,
+          "password": data.register.password
+        })
       })
     }
   }),
