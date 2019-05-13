@@ -8,7 +8,8 @@ import {
   Footer,
   NavBar,
   Achievements,
-  Friends
+  Friends,
+  Modal
 } from '../../components'
 
 import {
@@ -46,9 +47,19 @@ const Profile = ({
   handleChange,
   friends,
   visible,
-  toggleVisible
+  toggleVisible,
+  toggleModal,
+  showModal
 }) => (
     <Container>
+      <Modal 
+        showModal={showModal} 
+        toggleModal={toggleModal}
+        title="Lorem ipsum dolor sit amet"
+        text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis consequat et massa efficitur auctor. Aenean molestie efficitur vulputate. 
+              Quisque justo neque, ultrices eget ultrices ac, commodo at turpis. Curabitur eu interdum orci, ac commodo eros. 
+              Ut quis augue accumsan, semper metus et, rutrum lacus. Ut eget pulvinar dui."
+      />
       <Friends
         friends={friends}
         visible={visible}

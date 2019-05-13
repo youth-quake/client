@@ -87,6 +87,7 @@ const enhance = compose(
   withState('titleButton', 'setTitleButton', 'Editar'),
   withState('friends', 'setFriends', friends),
   withState('visible', 'setVisible', false),
+  withState('showModal', 'setShowModal', false),
   withHandlers({
     showComponent: ({
       setIsTarget,
@@ -109,6 +110,9 @@ const enhance = compose(
     },
     toggleVisible: ({visible, setVisible}) => () => {
       setVisible(!visible)
+    },
+    toggleModal: ({ showModal, setShowModal }) => () => {
+      setShowModal(!showModal)
     }
   }),
   lifecycle({
