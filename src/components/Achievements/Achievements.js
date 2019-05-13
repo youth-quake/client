@@ -45,6 +45,7 @@ const Badge = styled.div`
     font-family: ${Theme.font.font_family};
     font-size: 14px;
     color: ${Theme.colors.secondary_color};
+    margin: 10px 0;
   }
 `
 
