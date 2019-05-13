@@ -52,6 +52,7 @@ const Login = ({
           initialValues={initialValues}
           validationSchema={validation}
           onSubmit={handleSubmit}
+          data-testid="login-form"
           render={({
             errors
           }) => (
