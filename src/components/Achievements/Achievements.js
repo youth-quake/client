@@ -18,7 +18,7 @@ const Title = styled.p`
   font-size: 28px;  
   font-family: ${Theme.font.font_family};
   font-weight: bold;
-  padding: 10px 20px;
+  padding: 20px;
 `
 
 const Badge = styled.div`
@@ -45,6 +45,7 @@ const Badge = styled.div`
     font-family: ${Theme.font.font_family};
     font-size: 14px;
     color: ${Theme.colors.secondary_color};
+    margin: 10px 0;
   }
 `
 

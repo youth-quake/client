@@ -8,7 +8,9 @@ import {
   Footer,
   NavBar,
   Achievements,
-  Friends
+  Friends,
+  Modal,
+  PatrimonialSituation
 } from '../../components'
 
 import {
@@ -28,6 +30,7 @@ import {
   WrapperContent,
   Menu,
   Item,
+  Title
 } from './Profile.style'
 
 import ProfileImage from '../../assets/img/girl big.png'
@@ -37,7 +40,6 @@ const Profile = ({
   initialValues,
   isAchievements,
   isTarget,
-  setEditable,
   editable,
   showComponent,
   achievements,
@@ -46,13 +48,23 @@ const Profile = ({
   handleChange,
   friends,
   visible,
-  toggleVisible
+  toggleVisible,
+  toggleModal,
+  showModal
 }) => (
     <Container>
-      <Friends 
-        friends={friends} 
+      <Modal 
+        showModal={showModal} 
+        toggleModal={toggleModal}
+        title="Bem vindo(a)"
+        text="Como é sua primeira vez aqui precisamos de algumas informações.
+        Então conta um pouco sobre sua experiencia de pobreza nos campos abaixo"
+        Form={PatrimonialSituation}
+      />
+      <Friends
+        friends={friends}
         visible={visible}
-        toggleVisible={toggleVisible}  
+        toggleVisible={toggleVisible}
       />
       <NavBar />
       {initialValues && (
@@ -82,7 +94,6 @@ const Profile = ({
                           render={({ field }) => (
                             <About
                               {...field}
-                              placeholder='Nome completo'
                               disabled={editable}
                               errors={errors}
                               rows="4"
@@ -161,7 +172,10 @@ const Profile = ({
                   )}
                   {isTarget && (
                     <Content>
-                      <Target targets={targets} />
+                      <Title>Meus objetivos</Title>
+                      {targets.map(index => (
+                        <Target key={index.key}/>
+                      ))}
                     </Content>
                   )}
                 </WrapperContent>

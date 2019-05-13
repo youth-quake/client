@@ -37,22 +37,18 @@ const enhance = compose(
       setValue(value)
       setIsDisabled(valid(value, requirements))
     },
-    handleSubmit: ({ setSubmitting }) => data => {
+    handleSubmit: () => async data => {
       fetch(register, {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
-        body: {
-          register: {
-            name: data.name,
-            username: data.username,
-            email: data.email,
-            confirmEmail: data.confirmEmail,
-            password: data.password
-          }
-        }
+        body: JSON.stringify({
+          "name": data.register.name,
+          "username": data.register.username,
+          "email": data.register.email,
+          "confirmEmail": data.register.confirmEmail,
+          "password": data.register.password
+        })
       })
-
-      setSubmitting(false)
     }
   }),
   lifecycle({

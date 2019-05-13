@@ -19,7 +19,7 @@ const Container = styled.div`
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
   border-radius: 6px;
-  border: #7F7F7F solid 1px;
+  border: ${Theme.colors.base_color} solid 1px;
   box-shadow: 7px 2px 16px -11px rgba(0,0,0,0.75);
 
   &:after{
@@ -40,7 +40,7 @@ const Container = styled.div`
     position: absolute;
     border-style: solid;
     border-width: 12px 21px 12px 0;
-    border-color: transparent #7F7F7F;
+    border-color: transparent ${Theme.colors.base_color};
     display: block;
     width: 0;
     z-index: 0;

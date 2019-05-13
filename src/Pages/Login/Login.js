@@ -32,11 +32,11 @@ import FacebookLogin from 'react-facebook-login'
 import GoogleLogin from 'react-google-login'
 
 const responseFacebook = (response) => {
-  console.log(response);
+  
 }
 
 const responseGoogle = (response) => {
-  console.log(response);
+  
 }
 
 const Login = ({
@@ -52,8 +52,10 @@ const Login = ({
           initialValues={initialValues}
           validationSchema={validation}
           onSubmit={handleSubmit}
+          data-testid="login-form"
           render={({
-            errors
+            errors,
+            values
           }) => (
               <Form onChange={handleChange}>
                 <Logo src={youthquake} />
@@ -109,6 +111,7 @@ const Login = ({
                 <Button
                   type="submit"
                   disabled={isDisable}
+                  onClick={() => handleSubmit(values)}
                   backgroundColor={Theme.colors.secondary_color}
                 >
                   Entrar

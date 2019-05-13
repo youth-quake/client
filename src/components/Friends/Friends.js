@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components'
 import { Theme } from '../../components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons'
+import { compose, withHandlers, withState } from 'recompose'
 
 const Tag = styled.div`
   width: 100px;
@@ -125,7 +126,21 @@ const Icon = styled(FontAwesomeIcon)`
   }
 `
 
-export const Friends = ({ friends, ...props }) => {
+export const enhance = compose(
+  withState('showModal', 'setShowModal', false),
+  withHandlers({
+    handleClick: ({ showModal, setShowModal }) => () => {
+      setShowModal(!showModal)
+    }
+  })
+)
+
+export const Friends = ({ 
+  friends, 
+  handleClick, 
+  ...props 
+}) => {
+
   const {
     visible,
     toggleVisible
@@ -146,7 +161,7 @@ export const Friends = ({ friends, ...props }) => {
                 <span>{item.name}</span>
                 <span>{item.nickname}</span>
               </div>
-              <button>apostar</button>
+              <button onClick={handleClick}>apostar</button>
             </Friend>
           )
           )}
