@@ -1,4 +1,4 @@
-const BASE = 'localhost:8080'
+const BASE = 'http://localhost:8080'
 
 export const register = `${BASE}/include`
 export const login = `${BASE}/login`

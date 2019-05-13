@@ -31,20 +31,18 @@ const Register = ({
   initialValues,
   handleSubmit
 }) => (
-  <Container>
-  {console.log(validationSchema)}
+    <Container>
       {initialValues && (
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
-          onSubmit={handleSubmit}
           render={({
             errors,
             values,
             setFieldValue,
             form
           }) => (
-              <Form>
+              <Form onChange={handleChange}>
                 <Logo src={youthquake} />
                 <Field
                   name="register.name"
@@ -104,12 +102,13 @@ const Register = ({
                   requirements={requirements}
                   onChange={handleRequirements}
                 />
-                <Button 
-                  type="submit" 
+                <Button
+                  type="submit"
+                  onClick={() => handleSubmit(values)}
                   disabled={isDisable}
                   backgroundColor={Theme.colors.secondary_color}
                 >
-                Cadastrar
+                  Cadastrar
                 </Button>
                 <Anchor
                   text='Já possui uma conta?'

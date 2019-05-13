@@ -17,7 +17,7 @@ export const Container = styled.div`
   padding: 30px 10px;
 `
 
-export const Form = styled.form`
+export const Form = styled.div`
   width: 300px;
   display: flex;
   flex-flow: column;

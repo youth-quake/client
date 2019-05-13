@@ -54,7 +54,8 @@ const Login = ({
           onSubmit={handleSubmit}
           data-testid="login-form"
           render={({
-            errors
+            errors,
+            values
           }) => (
               <Form onChange={handleChange}>
                 <Logo src={youthquake} />
@@ -110,6 +111,7 @@ const Login = ({
                 <Button
                   type="submit"
                   disabled={isDisable}
+                  onClick={() => handleSubmit(values)}
                   backgroundColor={Theme.colors.secondary_color}
                 >
                   Entrar
