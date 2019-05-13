@@ -135,7 +135,7 @@ export const showInformation = withFormik({
   })
 })
 
-const Component = ({ initialValues }) => (
+const Component = ({ initialValues, disabled }) => (
   <div>
     <Formik
       initialValues={initialValues}
@@ -148,7 +148,7 @@ const Component = ({ initialValues }) => (
                 <Name
                   {...field}
                   title="Titulo do objetivo"
-                  disabled
+                  disabled={disabled}
                 />
               )}
             />
@@ -162,7 +162,7 @@ const Component = ({ initialValues }) => (
                         {...field}
                         maxLength={200}
                         title="Descrição do objetivo"
-                        onChange={e => setFieldValue(e.target.value)}
+                        disabled={disabled}
                       />
                     )}
                   />
@@ -175,8 +175,7 @@ const Component = ({ initialValues }) => (
                       render={({ field }) => (
                         <Input
                           {...field}
-                          backgroundColor='transparent'
-                          onChange={e => setFieldValue(e.target.value)}
+                          disabled={disabled}
                         />
                       )}
                     />
@@ -188,8 +187,7 @@ const Component = ({ initialValues }) => (
                       render={({ field }) => (
                         <Input
                           {...field}
-                          backgroundColor='transparent'
-                          onChange={e => setFieldValue(e.target.value)}
+                          disabled={disabled}
                         />
                       )}
                     />
@@ -201,8 +199,7 @@ const Component = ({ initialValues }) => (
                       render={({ field }) => (
                         <Input
                           {...field}
-                          backgroundColor='transparent'
-                          onChange={e => setFieldValue(e.target.value)}
+                          disabled={disabled}
                         />
                       )}
                     />

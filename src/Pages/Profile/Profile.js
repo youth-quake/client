@@ -40,7 +40,6 @@ const Profile = ({
   initialValues,
   isAchievements,
   isTarget,
-  setEditable,
   editable,
   showComponent,
   achievements,
@@ -174,8 +173,8 @@ const Profile = ({
                   {isTarget && (
                     <Content>
                       <Title>Meus objetivos</Title>
-                      {targets.map(() => (
-                        <Target />
+                      {targets.map(index => (
+                        <Target key={index.key}/>
                       ))}
                     </Content>
                   )}

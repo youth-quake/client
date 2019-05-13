@@ -45,7 +45,7 @@ const targets = [
     amount: '2.000,95'
   },
   {
-    key: 32,
+    key: 33,
     title: 'Titulo do objetivo',
     description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tempor, est at pharetra sollicitudin, eros nulla ultricies sapien, eget placerat magna enim at urna. In hac habitasse platea dictumst.`,
     percent: 11.2,
@@ -54,21 +54,6 @@ const targets = [
     amount: '2.000,95'
   }
 ]
-
-const request = new Request(getProfile, {
-  method: 'GET',
-  headers: new Headers(),
-  mode: 'cors',
-  cache: 'default'
-});
-
-const getProfileInformation = () => {
-  fetch(request).then(response => {
-    return response.json().then(json => {
-      return json
-    })
-  })
-}
 
 export const showInformation = withFormik({
   mapPropsToValues: () => ({
@@ -112,6 +97,7 @@ const enhance = compose(
       editable,
       titleButton
     }) => () => {
+      console.log('function')
       setTitleButton(titleButton === 'Salvar' ? 'Editar' : 'Salvar')
       setEditable(!editable)
     },
