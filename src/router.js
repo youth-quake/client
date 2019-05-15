@@ -1,4 +1,8 @@
-import { Home, Login, Register, Profile, Dashboard } from './Pages'
+import Home from './Pages/Home'
+import Login from './Pages/Login'
+import Register from './Pages/Register'
+import Profile from './Pages/Profile'
+import Dashboard from './Pages/Dashboard'
 
 const routes = [
   {

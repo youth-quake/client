@@ -1,4 +1,4 @@
-import Dashboard from './Profile'
-import enhance from './Profile.hoc'
+import Dashboard from './Dashboard'
+import enhance from './Dashboard.hoc'
 
 export default enhance(Dashboard)

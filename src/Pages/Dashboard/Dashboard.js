@@ -1,5 +1,5 @@
 import React from 'react'
 
-const Dashboard = ({ }) => (<div> </div>)
+const Dashboard = () => (<div> aaaaaaaaa </div>)
 
 export default Dashboard
