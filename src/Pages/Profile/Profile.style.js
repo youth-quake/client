@@ -49,6 +49,7 @@ export const GridLeft = styled.div`
     width: 200px;
   }
 `
+
 export const Picture = styled.div`
   display: flex;
   align-items: center;

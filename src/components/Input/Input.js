@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 import { Theme } from '../Theme'
 
-
 export const InputEditable = styled.input`
   position: relative;
   background: transparent;
@@ -32,4 +31,3 @@ export const Input = styled.input`
   font-family: ${Theme.font.font_family};
   ${props => props.disabled && 'cursor: not-allowed;'}
 `
-
