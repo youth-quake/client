@@ -145,7 +145,6 @@ const Form = (initialValues) => (
     initialValues={initialValues}
     render={({ setFieldValue, values }) => (
       <Targets>
-      {console.log(values)}
         <Container>
           <Field
             name="initialValues.title"
