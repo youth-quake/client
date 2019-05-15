@@ -1,7 +1,4 @@
-import Home from './Pages/Home'
-import Login from './Pages/Login'
-import Register from './Pages/Register'
-import Profile from './Pages/Profile'
+import { Home, Login, Register, Profile, Dashboard } from './Pages'
 
 const routes = [
   {
@@ -23,6 +20,11 @@ const routes = [
     key: 4,
     path: "/perfil",
     component: Profile
+  },
+  {
+    key: 4,
+    path: "/dashboard",
+    component: Dashboard
   }
 ]
 
