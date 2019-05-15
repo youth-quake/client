@@ -121,6 +121,25 @@ const Input = styled.input`
   margin: 0;
 `
 
+const Amount = styled.div`
+  width: 88%;
+  margin: 0 auto;
+  padding: 5px 10px;
+  display: flex;
+  justify-content: space-between;
+
+
+  & > span {
+    width: 170px;
+    padding: 10px;
+    font-weight: bold;
+  }
+
+  & > * {
+    background: transparent;
+  }
+`
+
 const Form = (initialValues) => (
   <Formik
     initialValues={initialValues}
@@ -174,17 +193,6 @@ const Form = (initialValues) => (
                     )}
                   />
                 </div>
-                <div>
-                  <span title="Renda acumulada">Renda:</span>
-                  <Field
-                    name="initialValues.amount"
-                    render={({ field }) => (
-                      <Input
-                        {...field}
-                      />
-                    )}
-                  />
-                </div>
               </Information>
             </div>
             <Progress title="Progresso do objetivo">
@@ -212,6 +220,17 @@ const Form = (initialValues) => (
               />
             </Progress>
           </Column>
+          <Amount>
+            <span title="Renda acumulada">Total acumulado:</span>
+            <Field
+              name="initialValues.amount"
+              render={({ field }) => (
+                <Input
+                  {...field}
+                />
+              )}
+            />
+          </Amount>
         </Container>
       </Targets>
     )}

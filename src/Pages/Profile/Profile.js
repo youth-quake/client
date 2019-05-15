@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 
 import {
   Button,
-  InputEditable as Input,
+  InputEditable as Editable,
   Theme,
   Target,
   Footer,
@@ -30,7 +30,8 @@ import {
   WrapperContent,
   Menu,
   Item,
-  Title
+  Title,
+  Level
 } from './Profile.style'
 
 import ProfileImage from '../../assets/img/girl big.png'
@@ -113,9 +114,8 @@ const Profile = ({
                         <Field
                           name="register.name"
                           render={({ field }) => (
-                            <Input
+                            <Editable
                               {...field}
-                              backgroundColor='transparent'
                               placeholder='Nome completo'
                               editable={editable}
                               disabled={editable}
@@ -127,9 +127,8 @@ const Profile = ({
                           <Field
                             name="register.username"
                             render={({ field }) => (
-                              <Input
+                              <Editable
                                 {...field}
-                                backgroundColor='transparent'
                                 placeholder='Username'
                                 editable={editable}
                                 disabled={editable}
@@ -140,12 +139,10 @@ const Profile = ({
                           <Field
                             name="register.level"
                             render={({ field }) => (
-                              <Input
+                              <Level
                                 {...field}
-                                backgroundColor='transparent'
                                 placeholder='Nivel 1'
-                                editable={editable}
-                                disabled={editable}
+                                disabled
                                 errors={errors}
                               />
                             )}
