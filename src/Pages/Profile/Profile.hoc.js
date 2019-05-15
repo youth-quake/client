@@ -13,7 +13,6 @@ const friends = [
   { key: 18, name: 'João', nickname: '@joao', img: iconProfileMini }
 ]
 
-
 const achievements = [
   { key: 11, title: 'Apostador', description: 'Criou 10 novas apostas' },
   { key: 22, title: 'Visionário', description: 'Previu 5 categorias' },
@@ -48,7 +47,6 @@ const targets = [
     }
   }
 ]
-
 
 export const showInformation = withFormik({
   mapPropsToValues: () => ({
@@ -85,16 +83,6 @@ const enhance = compose(
     }) => () => {
       setIsTarget(!isTarget)
       setIsAchievements(!isAchievements)
-    },
-    handleChange: ({
-      setEditable,
-      setTitleButton,
-      editable,
-      titleButton
-    }) => () => {
-      console.log('function')
-      setTitleButton(titleButton === 'Salvar' ? 'Editar' : 'Salvar')
-      setEditable(!editable)
     },
     toggleVisible: ({ visible, setVisible }) => () => {
       setVisible(!visible)

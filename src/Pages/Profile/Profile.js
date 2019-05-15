@@ -50,7 +50,9 @@ const Profile = ({
   visible,
   toggleVisible,
   toggleModal,
-  showModal
+  showModal,
+  setEditable,
+  setTitleButton
 }) => (
     <Container>
       <Modal 
@@ -82,8 +84,11 @@ const Profile = ({
                       </Picture>
                       <Button
                         backgroundColor={Theme.colors.constrast_color}
-                        onClick={() => handleChange()}
-                        title="Editar"
+                        onClick={() => {
+                          setTitleButton(titleButton === 'Salvar' ? 'Editar' : 'Salvar')
+                          setEditable(!editable)
+                        }}
+                        title={titleButton}
                       >
                         {titleButton}
                       </Button>
