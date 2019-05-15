@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 
 import {
   Button,
-  InputEditable as Input,
+  InputEditable as Editable,
   Theme,
   Target,
   Footer,
@@ -30,7 +30,8 @@ import {
   WrapperContent,
   Menu,
   Item,
-  Title
+  Title,
+  Level
 } from './Profile.style'
 
 import ProfileImage from '../../assets/img/girl big.png'
@@ -50,7 +51,9 @@ const Profile = ({
   visible,
   toggleVisible,
   toggleModal,
-  showModal
+  showModal,
+  setEditable,
+  setTitleButton
 }) => (
     <Container>
       <Modal 
@@ -82,8 +85,11 @@ const Profile = ({
                       </Picture>
                       <Button
                         backgroundColor={Theme.colors.constrast_color}
-                        onClick={() => handleChange()}
-                        title="Editar"
+                        onClick={() => {
+                          setTitleButton(titleButton === 'Salvar' ? 'Editar' : 'Salvar')
+                          setEditable(!editable)
+                        }}
+                        title={titleButton}
                       >
                         {titleButton}
                       </Button>
@@ -108,9 +114,8 @@ const Profile = ({
                         <Field
                           name="register.name"
                           render={({ field }) => (
-                            <Input
+                            <Editable
                               {...field}
-                              backgroundColor='transparent'
                               placeholder='Nome completo'
                               editable={editable}
                               disabled={editable}
@@ -122,9 +127,8 @@ const Profile = ({
                           <Field
                             name="register.username"
                             render={({ field }) => (
-                              <Input
+                              <Editable
                                 {...field}
-                                backgroundColor='transparent'
                                 placeholder='Username'
                                 editable={editable}
                                 disabled={editable}
@@ -135,12 +139,10 @@ const Profile = ({
                           <Field
                             name="register.level"
                             render={({ field }) => (
-                              <Input
+                              <Level
                                 {...field}
-                                backgroundColor='transparent'
                                 placeholder='Nivel 1'
-                                editable={editable}
-                                disabled={editable}
+                                disabled
                                 errors={errors}
                               />
                             )}
@@ -173,9 +175,7 @@ const Profile = ({
                   {isTarget && (
                     <Content>
                       <Title>Meus objetivos</Title>
-                      {targets.map(index => (
-                        <Target key={index.key}/>
-                      ))}
+                        <Target targets={targets} />
                     </Content>
                   )}
                 </WrapperContent>
@@ -184,7 +184,6 @@ const Profile = ({
             )}
         />
       )}
-
     </Container>
 
   )

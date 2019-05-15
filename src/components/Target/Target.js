@@ -3,7 +3,6 @@ import DonutChart from 'react-donut-chart'
 import styled from 'styled-components'
 import { Theme } from '../../components'
 import { Formik, Field } from 'formik'
-import { withFormik } from 'formik'
 
 const Targets = styled.div`
   display: flex;
@@ -122,120 +121,129 @@ const Input = styled.input`
   margin: 0;
 `
 
-export const showInformation = withFormik({
-  mapPropsToValues: () => ({
-    target: {
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam sit amet consectetur dui. Sed venenatis at purus vel suscipit. Aenean luctus tellus vehicula quam luctus rhoncus. Praesent venenatis sem nunc, laoreet euismod risus luctus ut. ',
-      dateEnd: '10/09/2020',
-      dateStart: '11/09/2020',
-      percent: 10.2,
-      amount: 'R$ 10000',
-      title: 'Nome do objetivo'
-    }
-  })
-})
+const Amount = styled.div`
+  width: 88%;
+  margin: 0 auto;
+  padding: 5px 10px;
+  display: flex;
+  justify-content: space-between;
 
-const Component = ({ initialValues, disabled }) => (
-  <div>
-    <Formik
-      initialValues={initialValues}
-      render={({ setFieldValue }) => (
-        <Targets>
-          <Container>
-            <Field
-              name="target.title"
-              render={({ field }) => (
-                <Name
-                  {...field}
-                  title="Titulo do objetivo"
-                  disabled={disabled}
-                />
-              )}
-            />
-            <Column>
-              <div>
-                <Description>
-                  <Field
-                    name="target.description"
-                    render={({ field }) => (
-                      <textarea
-                        {...field}
-                        maxLength={200}
-                        title="Descrição do objetivo"
-                        disabled={disabled}
-                      />
-                    )}
-                  />
-                </Description>
-                <Information>
-                  <div>
-                    <span title="Data inicial">Data inicial:</span>
-                    <Field
-                      name="target.dateStart"
-                      render={({ field }) => (
-                        <Input
-                          {...field}
-                          disabled={disabled}
-                        />
-                      )}
-                    />
-                  </div>
-                  <div>
-                    <span title="Data final">Data final:</span>
-                    <Field
-                      name="target.dateEnd"
-                      render={({ field }) => (
-                        <Input
-                          {...field}
-                          disabled={disabled}
-                        />
-                      )}
-                    />
-                  </div>
-                  <div>
-                    <span title="Renda acumulada">Renda:</span>
-                    <Field
-                      name="target.amount"
-                      render={({ field }) => (
-                        <Input
-                          {...field}
-                          disabled={disabled}
-                        />
-                      )}
-                    />
-                  </div>
-                </Information>
-              </div>
-              <Progress title="Progresso do objetivo">
+
+  & > span {
+    width: 170px;
+    padding: 10px;
+    font-weight: bold;
+  }
+
+  & > * {
+    background: transparent;
+  }
+`
+
+const Form = (initialValues) => (
+  <Formik
+    initialValues={initialValues}
+    render={({ setFieldValue, values }) => (
+      <Targets>
+      {console.log(values)}
+        <Container>
+          <Field
+            name="initialValues.title"
+            render={({ field }) => (
+              <Name
+                {...field}
+                title="Titulo do objetivo"
+              />
+            )}
+          />
+          <Column>
+            <div>
+              <Description>
                 <Field
-                  name="target.values.percent"
-                  render={({ field, values }) => (
-                    <DonutChart
+                  name="initialValues.description"
+                  render={({ field }) => (
+                    <textarea
                       {...field}
-                      data={[
-                        { value: 10.2, isEmpty: true, label: '' },
-                        { value: (100 - 10.2), label: '', }
-                      ]}
-                      colors={[
-                        '#FFF',
-                        Theme.colors.primary_color
-                      ]}
-                      width={180}
-                      height={180}
-                      legend={false}
-                      strokeColor={'transparent'}
-                      clickToggle={false}
-                      emptyColor={Theme.colors.secondary_base_color}
+                      maxLength={200}
+                      title="Descrição do objetivo"
                     />
                   )}
                 />
-              </Progress>
-            </Column>
-          </Container>
-        </Targets>
-      )}
-    />
+              </Description>
+              <Information>
+                <div>
+                  <span title="Data inicial">Data inicial:</span>
+                  <Field
+                    name="initialValues.dateStart"
+                    render={({ field }) => (
+                      <Input
+                        {...field}
+                      />
+                    )}
+                  />
+                </div>
+                <div>
+                  <span title="Data final">Data final:</span>
+                  <Field
+                    name="initialValues.dateEnd"
+                    render={({ field }) => (
+                      <Input
+                        {...field}
+                      />
+                    )}
+                  />
+                </div>
+              </Information>
+            </div>
+            <Progress title="Progresso do objetivo">
+              <Field
+                name="initialValues.percent"
+                render={({ field }) => (
+                  <DonutChart
+                    {...field}
+                    data={[
+                      { value: values.initialValues.percent, label: '' },
+                      { value: (100 - values.initialValues.percent),  isEmpty: true, label: '', }
+                    ]}
+                    colors={[
+                      Theme.colors.primary_color,
+                      '#000',
+                    ]}
+                    width={180}
+                    height={180}
+                    legend={false}
+                    strokeColor={'transparent'}
+                    clickToggle={false}
+                    emptyColor={Theme.colors.secondary_base_color}
+                  />
+                )}
+              />
+            </Progress>
+          </Column>
+          <Amount>
+            <span title="Renda acumulada">Total acumulado:</span>
+            <Field
+              name="initialValues.amount"
+              render={({ field }) => (
+                <Input
+                  {...field}
+                />
+              )}
+            />
+          </Amount>
+        </Container>
+      </Targets>
+    )}
+  />
+)
+
+export const Target = ({
+  targets,
+  initialValues
+}) => (
+  <div>
+    {targets.map(item => (<Form initialValues={item.initialValues}/>))} 
   </div>
 )
 
-export const Target = showInformation(Component)
+

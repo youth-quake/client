@@ -1,5 +1,11 @@
 import styled  from 'styled-components'
-import { Theme } from '../../components'
+import { Theme, InputEditable as Input } from '../../components'
+
+export const Level = styled(Input)`
+  border: none;
+  outline: none;
+  ${props => props.disabled && 'cursor: default;'}
+`
 
 export const Title = styled.p`
   font-size: 28px;  
@@ -134,23 +140,28 @@ export const Information = styled.div`
   width: 300px;
 
   & > input {
+    width: 320px;
     font-size: 24px;
     font-weight: bold;
     color: ${Theme.colors.base_color};
   }
 `
 
-export const Wrapper = styled.p`
+export const Wrapper = styled.div`
   display: flex;
+  justify-content: space-between;
+  width: 320px;
 
   & > input {
+    width: 170px;
     padding: 15px 0;
     font-size: 18px;
-    margin: 0 10px 0 0;
-    width: 150px;
     text-align: left;
     color: ${Theme.colors.base_color};
-    box-sizing: border-box;
+  }
+
+  & > input+input {
+    width: 100px;
   }
 `
 

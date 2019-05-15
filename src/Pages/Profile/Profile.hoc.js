@@ -1,6 +1,5 @@
 import { compose, withState, withHandlers, lifecycle } from 'recompose'
 import { withFormik } from 'formik'
-import { getProfile } from '../../services'
 import iconProfileMini from '../../assets/img/girl mini.png'
 
 const friends = [
@@ -14,7 +13,6 @@ const friends = [
   { key: 18, name: 'João', nickname: '@joao', img: iconProfileMini }
 ]
 
-
 const achievements = [
   { key: 11, title: 'Apostador', description: 'Criou 10 novas apostas' },
   { key: 22, title: 'Visionário', description: 'Previu 5 categorias' },
@@ -27,31 +25,26 @@ const achievements = [
 
 const targets = [
   {
-    key: 31,
-    title: 'Titulo do objetivo',
-    description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tempor, est at pharetra sollicitudin, eros nulla ultricies sapien, eget placerat magna enim at urna. In hac habitasse platea dictumst.`,
-    percent: 10.5,
-    start: '06/05/2019',
-    end: '21/03/2020',
-    amount: '100.000,95'
-  },
-  {
     key: 32,
-    title: 'Titulo do objetivo',
-    description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tempor, est at pharetra sollicitudin, eros nulla ultricies sapien, eget placerat magna enim at urna. In hac habitasse platea dictumst.`,
-    percent: 11.2,
-    start: '06/05/2019',
-    end: '21/03/2020',
-    amount: '2.000,95'
+    initialValues: {
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam sit amet consectetur dui. Sed venenatis at purus vel suscipit. Aenean luctus tellus vehicula quam luctus rhoncus. Praesent venenatis sem nunc, laoreet euismod risus luctus ut. ',
+      dateEnd: '10/09/2020',
+      dateStart: '11/09/2020',
+      percent: 10.2,
+      amount: 'R$ 10.000,00',
+      title: 'Comprar uma casa'
+    }
   },
   {
-    key: 33,
-    title: 'Titulo do objetivo',
-    description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tempor, est at pharetra sollicitudin, eros nulla ultricies sapien, eget placerat magna enim at urna. In hac habitasse platea dictumst.`,
-    percent: 11.2,
-    start: '06/05/2019',
-    end: '21/03/2020',
-    amount: '2.000,95'
+    key: 31,
+    initialValues: {
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam sit amet consectetur dui. Sed venenatis at purus vel suscipit. Aenean luctus tellus vehicula quam luctus rhoncus. Praesent venenatis sem nunc, laoreet euismod risus luctus ut. ',
+      dateEnd: '15/05/2020',
+      dateStart: '21/10/2020',
+      percent: 99.2,
+      amount: 'R$ 100.000,00',
+      title: 'Comprar um carro'
+    }
   }
 ]
 
@@ -91,17 +84,7 @@ const enhance = compose(
       setIsTarget(!isTarget)
       setIsAchievements(!isAchievements)
     },
-    handleChange: ({
-      setEditable,
-      setTitleButton,
-      editable,
-      titleButton
-    }) => () => {
-      console.log('function')
-      setTitleButton(titleButton === 'Salvar' ? 'Editar' : 'Salvar')
-      setEditable(!editable)
-    },
-    toggleVisible: ({visible, setVisible}) => () => {
+    toggleVisible: ({ visible, setVisible }) => () => {
       setVisible(!visible)
     },
     toggleModal: ({ showModal, setShowModal }) => () => {

@@ -10,7 +10,7 @@ const Tag = styled.div`
   height: 50px;
   background: ${Theme.colors.constrast_color};
   position:fixed;
-  right: 279px;
+  right: 278px;
   top: 280px;
   z-index: 100;
   border-radius: 2px;
@@ -34,7 +34,7 @@ const Wrapper = styled.div`
   padding: 10px 0;
   z-index: 100;
   position: fixed;
-  top: 40px;
+  top: 25px;
   right: 0;
   text-align: center;
   border-radius: 3px;
