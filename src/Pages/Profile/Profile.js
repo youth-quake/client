@@ -173,9 +173,7 @@ const Profile = ({
                   {isTarget && (
                     <Content>
                       <Title>Meus objetivos</Title>
-                      {targets.map(index => (
-                        <Target key={index.key}/>
-                      ))}
+                        <Target targets={targets} />
                     </Content>
                   )}
                 </WrapperContent>
@@ -184,7 +182,6 @@ const Profile = ({
             )}
         />
       )}
-
     </Container>
 
   )

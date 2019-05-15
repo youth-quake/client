@@ -1,26 +1,13 @@
 import { compose, withState, withHandlers, lifecycle } from 'recompose'
 import { register } from '../../services'
-import * as Yup from 'yup'
 
-const valid = (value, requirements) => {
+const isValid = (value, requirements) => { 
   requirements.reduce((isValid, { validation }) => {
-    if (isValid) {
-      return validation(value)
-    }
+    if (isValid) return validation(value)
 
     return isValid
   }, true)
 }
-
-export const validationSchema = Yup.object().shape({
-  name: Yup.string()
-    .required('Campo obrigatório')
-    .min(5, 'O nome deve conter no minimo 5 letras')
-    .max(100, 'O nome deve conter no maximo 100 letras'),
-  email: Yup.string()
-    .required('Campo obrigatório')
-    .email('Formato de email invalido')
-})
 
 const enhance = compose(
   withState('value', 'setValue', ''),
@@ -32,10 +19,11 @@ const enhance = compose(
       setIsVisible,
       setValue,
       setIsDisabled,
-    }) => (value, requirements) => {
+      value
+    }) => requirements => {
       setIsVisible(true)
       setValue(value)
-      setIsDisabled(valid(value, requirements))
+      setIsDisabled(isValid(value, requirements))
     },
     handleSubmit: () => async data => {
       fetch(register, {

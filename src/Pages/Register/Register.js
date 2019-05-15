@@ -20,7 +20,8 @@ import youthquake from '../../assets/img/porkinYQ1.png'
 import girl from '../../assets/img/girl.png'
 import { Formik, ErrorMessage, Field } from 'formik'
 import { shape } from 'prop-types'
-import enhance, { validationSchema } from './Register.hoc'
+import enhance from './Register.hoc'
+import { validationSchema } from './Register.validation'
 
 const Register = ({
   isVisible,
