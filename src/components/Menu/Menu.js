@@ -2,6 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import youthquake from '../../assets/img/porkinYQ1.png'
 import iconProfileMini from '../../assets/img/girl mini.png'
+import { Modal } from '../../components'
+import { compose, withHandlers, withState } from 'recompose'
 
 const Container = styled.div`s
   width: 100%;
@@ -13,11 +15,38 @@ const Container = styled.div`s
 const NavbarImage = styled.img`
   margin: 10px;
   height: 50px;
+
+  &:hover{
+    cursor: pointer;
+  }
 `
 
-export const NavBar = () => (
+const enhance = compose(
+  withState('showModal', 'setShowModal', false),
+  withHandlers({
+    toggleModal: ({ showModal, setShowModal }) => () => {
+      setShowModal(!showModal)
+    }
+  })
+)
+
+
+export const Component = ({ showModal, toggleModal }) => (
   <Container>
-    <NavbarImage src={youthquake} title="Ir para a página inicial" />
+    <Modal
+      showModal={showModal}
+      toggleModal={() => toggleModal()}
+      title="Configurações"
+      text=""
+      Form={() => (<div></div>)}
+    />
+    <NavbarImage
+      src={youthquake}
+      title="Ir para a página inicial"
+    />
     <NavbarImage src={iconProfileMini} title="Visualizar opções" />
   </Container>
 )
+
+
+export const NavBar = enhance(Component)

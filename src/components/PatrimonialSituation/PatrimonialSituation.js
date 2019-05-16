@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { Theme, Input } from '../../components'
+import { Theme, Input, Select } from '../../components'
 import { Formik, Field } from 'formik'
 
 export const PatrimonialSituation = ({
@@ -7,7 +7,8 @@ export const PatrimonialSituation = ({
 }) => {
 
   const {
-    editable
+    editable,
+    options
   } = props
 
   return (
@@ -17,16 +18,33 @@ export const PatrimonialSituation = ({
         values
       }) => (
           <Fragment>
+            <h3>Meu primeiro objetivo</h3>
             <Field
               name="register.name"
               render={({ field }) => (
                 <Input
                   {...field}
                   backgroundColor={Theme.colors.base_color}
-                  placeholder='Nome completo'
+                  placeholder='Renda total'
                   disabled={editable}
                   errors={errors}
                 />
+              )}
+            />
+            <Field
+              name="register.categoria"
+              render={({ field }) => (
+                <Select
+                  {...field}
+                  backgroundColor={Theme.colors.base_color}
+                  placeholder='Renda total'
+                  disabled={editable}
+                  errors={errors}
+                >
+                 {options.map(item => (
+                   <option>{item.description}</option>
+                 ))} 
+                </Select>
               )}
             />
           </Fragment>

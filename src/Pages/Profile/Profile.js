@@ -37,6 +37,12 @@ import {
 import ProfileImage from '../../assets/img/girl big.png'
 import { Formik, Field } from 'formik'
 
+const options = [
+  {description: 'Desespesas fixas'},
+  {description: 'Desespesas variaveis'},
+  {description: 'Objetivos'}
+]
+
 const Profile = ({
   initialValues,
   isAchievements,
@@ -56,13 +62,12 @@ const Profile = ({
   setTitleButton
 }) => (
     <Container>
-      <Modal 
-        showModal={showModal} 
+      <Modal
+        showModal={showModal}
         toggleModal={toggleModal}
         title="Bem vindo(a)"
-        text="Como é sua primeira vez aqui precisamos de algumas informações.
-        Então conta um pouco sobre sua experiencia de pobreza nos campos abaixo"
-        Form={PatrimonialSituation}
+        text="Como é sua primeira vez aqui precisamos de algumas informações:"
+        Form={() => (<PatrimonialSituation options={options} />)}
       />
       <Friends
         friends={friends}
@@ -159,13 +164,13 @@ const Profile = ({
                       onClick={() => showComponent()}
                     >
                       Conquistas
-                    </Item>
+                  </Item>
                     <Item
                       title="Visualizar meus objetivos pessoais"
                       onClick={() => showComponent()}
                     >
                       Objetivos
-                    </Item>
+                  </Item>
                   </Menu>
                   {isAchievements && (
                     <Content>
@@ -175,7 +180,7 @@ const Profile = ({
                   {isTarget && (
                     <Content>
                       <Title>Meus objetivos</Title>
-                        <Target targets={targets} />
+                      <Target targets={targets} />
                     </Content>
                   )}
                 </WrapperContent>
@@ -185,7 +190,6 @@ const Profile = ({
         />
       )}
     </Container>
-
   )
 
 export default Profile

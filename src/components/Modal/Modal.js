@@ -14,18 +14,18 @@ const Container = styled.div`
 
 export const Content = styled.div`
   width: 600px;
-  height: 300px;
   background #fff;
-  margin: 10% auto;
+  margin: 2% auto;
   border-radius: 3px;
-  padding: 20px;
+  padding: 20px 20px 100px;
   display: flex;
   align-items: center;
   flex-flow: column;
   position: relative;
-
+  overflow-y: auto;
+  
   & > * {
-    padding: 12px;
+    padding: 10px;
     margin: 10px auto;
     font-family: ${Theme.font.font_family}
   }
@@ -41,7 +41,7 @@ export const Content = styled.div`
   }
 
   & > button {
-    bottom: 40px;
+    bottom: 20px;
     position: absolute;
     width: 100px;
   }

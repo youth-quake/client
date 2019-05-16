@@ -151,10 +151,10 @@ export const Information = styled.div`
 export const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 320px;
+  width: 200px;
 
   & > input {
-    width: 170px;
+    width: 150px;
     padding: 15px 0;
     font-size: 18px;
     text-align: left;

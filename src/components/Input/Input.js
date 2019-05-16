@@ -18,7 +18,6 @@ export const Input = styled.input`
   padding: 7px;
   width: 320px;
   height: 30px;
-  flex-basis: auto;
   background: ${Theme.colors.base_color};
   border: none;
   font-size: 14px;
