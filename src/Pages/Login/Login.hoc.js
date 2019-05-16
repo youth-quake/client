@@ -1,30 +1,24 @@
-import { compose, withState, withHandlers, lifecycle } from 'recompose'
+import { compose, withState, withHandlers } from 'recompose'
 import { login } from '../../services'
 
 const enhance = compose(
   withState('isDisable', 'setIsDisabled', true),
-  withState('initialValues', 'setInitialValues', {}),
   withHandlers({
     handleChange: ({
       setIsDisabled
     }) => () => {
       setIsDisabled(false)
     },
-    handleSubmit: () => async data => {
-      fetch(login, {
-        method: 'post',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          "login": data.register.login,
-          "password": data.register.password
-        })
+    handleSubmit: ({ setIsDisabled }) => async data => {
+      fetch(`${login}/${data.register.login}+${data.register.password}`)
+      .then(response => {
+        if(response.ok) { 
+          return response.json() 
+        } 
+
+        return response.error
       })
-    }
-  }),
-  lifecycle({
-    componentDidMount() {
-      const { setIsDisabled } = this.props
-      setIsDisabled(true)
+      .catch(error => { setIsDisabled(true) })
     }
   })
 )

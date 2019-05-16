@@ -1,6 +1,6 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
-import { Theme } from '../../components'
+import { Theme, Modal, Bet } from '../../components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons'
 import { compose, withHandlers, withState } from 'recompose'
@@ -126,19 +126,22 @@ const Icon = styled(FontAwesomeIcon)`
   }
 `
 
-export const enhance = compose(
+const enhance = compose(
   withState('showModal', 'setShowModal', false),
   withHandlers({
     handleClick: ({ showModal, setShowModal }) => () => {
       setShowModal(!showModal)
+      console.log('function')
     }
   })
 )
 
-export const Friends = ({ 
-  friends, 
-  handleClick, 
-  ...props 
+const Component = ({
+  friends,
+  handleClick,
+  showModal,
+  toggleModal,
+  ...props
 }) => {
 
   const {
@@ -148,6 +151,13 @@ export const Friends = ({
 
   return (
     <div>
+      <Modal
+        showModal={showModal}
+        toggleModal={handleClick}
+        title="Nova aposta"
+        text={`Você vai iniciar uma aposta com @mariazinha para isso precisamos de algumas informações:`}
+        Form={Bet}
+      />
       <Wrapper visible={visible}>
         <Title title="Seus contatos">Seus contatos ({friends.length})</Title>
         <Scroll onClick={() => document.getElementById('container-friends').scrollTop -= 35}>
@@ -176,3 +186,5 @@ export const Friends = ({
     </div>
   )
 }
+
+export const Friends = enhance(Component)

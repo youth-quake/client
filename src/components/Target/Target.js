@@ -241,7 +241,7 @@ export const Target = ({
   initialValues
 }) => (
   <div>
-    {targets.map(item => (<Form initialValues={item.initialValues}/>))} 
+    {targets.map(item => (<Form key={item.key} initialValues={item.initialValues}/>))} 
   </div>
 )
 

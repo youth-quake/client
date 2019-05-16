@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import {
   Button,
@@ -20,6 +20,8 @@ import {
   Separator
 } from './Login.style'
 
+import { login } from '../../services'
+
 import youthquake from '../../assets/img/porkinYQ1.png'
 import girl from '../../assets/img/girl.png'
 import google from '../../assets/img/google.png'
@@ -32,99 +34,102 @@ import FacebookLogin from 'react-facebook-login'
 import GoogleLogin from 'react-google-login'
 
 const responseFacebook = (response) => {
-  
+
 }
 
 const responseGoogle = (response) => {
-  
+
 }
 
-const Login = ({
-  isDisable,
-  initialValues,
-  validation,
-  handleSubmit,
-  handleChange
-}) => (
+const Login = () => {
+
+  const [isDisabled, setIsDisabled] = useState(true)
+
+  return (
     <Container>
-      {initialValues && (
-        <Formik
-          initialValues={initialValues}
-          validationSchema={validation}
-          onSubmit={handleSubmit}
-          data-testid="login-form"
-          render={({
-            errors,
-            values
-          }) => (
-              <Form onChange={handleChange}>
-                <Logo src={youthquake} />
-                <Option>
-                  <Img src={google} />
-                  <GoogleLogin
-                    clientId=""
-                    buttonText="Iniciar sessão com o Google"
-                    onSuccess={responseGoogle}
-                    onFailure={responseGoogle}
-                    cookiePolicy={'single_host_origin'}
-                    icon={false}
-                  />
-                </Option>
-                <Option>
-                  <Img src={facebook} />
-                  <FacebookLogin
-                    appId=""
-                    autoLoad={true}
-                    fields="name,email,picture"
-                    callback={responseFacebook}
-                    textButton="Iniciar sessão com o Facebook"
-                    language="pt_BR"
-                    cssClass=""
-                  />
-                </Option>
-                <Separator>
-                  <Scratches />
-                  <Text>OU</Text>
-                  <Scratches />
-                </Separator>
-                <Field
-                  name="register.login"
-                  render={({ field }) => (
-                    <Input
-                      {...field}
-                      placeholder='Login'
-                      errors={errors}
-                    />
-                  )}
+      <Formik
+        data-testid="login-form"
+        render={({
+          errors,
+          values
+        }) => (
+            <Form onChange={() => { setIsDisabled(false) }}>
+              <Logo src={youthquake} />
+              <Option>
+                <Img src={google} />
+                <GoogleLogin
+                  clientId=""
+                  buttonText="Iniciar sessão com o Google"
+                  onSuccess={responseGoogle}
+                  onFailure={responseGoogle}
+                  cookiePolicy={'single_host_origin'}
+                  icon={false}
                 />
-                <Field
-                  name="register.password"
-                  render={({ field }) => (
-                    <Input
-                      {...field}
-                      type='password'
-                      placeholder='Senha'
-                      errors={errors}
-                    />
-                  )}
+              </Option>
+              <Option>
+                <Img src={facebook} />
+                <FacebookLogin
+                  appId=""
+                  autoLoad={true}
+                  fields="name,email,picture"
+                  callback={responseFacebook}
+                  textButton="Iniciar sessão com o Facebook"
+                  language="pt_BR"
+                  cssClass=""
                 />
-                <Button
-                  type="submit"
-                  disabled={isDisable}
-                  onClick={() => handleSubmit(values)}
-                  backgroundColor={Theme.colors.secondary_color}
-                >
-                  Entrar
+              </Option>
+              <Separator>
+                <Scratches />
+                <Text>OU</Text>
+                <Scratches />
+              </Separator>
+              <Field
+                name="register.login"
+                render={({ field }) => (
+                  <Input
+                    {...field}
+                    placeholder='Login'
+                    errors={errors}
+                  />
+                )}
+              />
+              <Field
+                name="register.password"
+                render={({ field }) => (
+                  <Input
+                    {...field}
+                    type='password'
+                    placeholder='Senha'
+                    errors={errors}
+                  />
+                )}
+              />
+              <Button
+                type="submit"
+                disabled={isDisabled}
+                onClick={() => {
+                  fetch(`${login}/${values.register.login}+${values.register.password}`)
+                    .then(response => {
+                      if (response.ok) {
+                        return response.json()
+                      }
+
+                      return response.error
+                    })
+                    .catch(error => { setIsDisabled(true) })
+                }}
+                backgroundColor={Theme.colors.secondary_color}
+              >
+                Entrar
                 </Button>
-                <Anchor
-                  text='Não tem uma conta ainda?'
-                  description='Crie agora mesmo'
-                  to='/cadastro'
-                />
-              </Form>
-            )}
-        />
-      )}
+              <Anchor
+                text='Não tem uma conta ainda?'
+                description='Crie agora mesmo'
+                to='/cadastro'
+              />
+            </Form>
+          )}
+      />
       <Content>
         <div>
           <Title>Bem vindo de volta!</Title>
@@ -136,6 +141,7 @@ const Login = ({
       </Content>
     </Container>
   )
+}
 
 Login.propTypes = {
   isDisable: bool,
