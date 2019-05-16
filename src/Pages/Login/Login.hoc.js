@@ -1,9 +1,8 @@
-import { compose, withState, withHandlers, lifecycle } from 'recompose'
+import { compose, withState, withHandlers } from 'recompose'
 import { login } from '../../services'
 
 const enhance = compose(
   withState('isDisable', 'setIsDisabled', true),
-  withState('initialValues', 'setInitialValues', {}),
   withHandlers({
     handleChange: ({
       setIsDisabled
@@ -20,12 +19,6 @@ const enhance = compose(
         return response.error
       })
       .catch(error => { setIsDisabled(true) })
-    }
-  }),
-  lifecycle({
-    componentDidMount() {
-      const { setIsDisabled } = this.props
-      setIsDisabled(true)
     }
   })
 )
