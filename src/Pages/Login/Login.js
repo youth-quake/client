@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import {
   Button,
@@ -20,6 +20,8 @@ import {
   Separator
 } from './Login.style'
 
+import { login } from '../../services'
+
 import youthquake from '../../assets/img/porkinYQ1.png'
 import girl from '../../assets/img/girl.png'
 import google from '../../assets/img/google.png'
@@ -39,11 +41,11 @@ const responseGoogle = (response) => {
 
 }
 
-const Login = ({
-  isDisable,
-  handleSubmit,
-  handleChange
-}) => (
+const Login = () => {
+
+  const [isDisabled, setIsDisabled] = useState(true)
+
+  return (
     <Container>
       <Formik
         data-testid="login-form"
@@ -51,7 +53,7 @@ const Login = ({
           errors,
           values
         }) => (
-            <Form onChange={handleChange}>
+            <Form onChange={() => { setIsDisabled(false) }}>
               <Logo src={youthquake} />
               <Option>
                 <Img src={google} />
@@ -104,8 +106,18 @@ const Login = ({
               />
               <Button
                 type="submit"
-                disabled={isDisable}
-                onClick={() => handleSubmit(values)}
+                disabled={isDisabled}
+                onClick={() => {
+                  fetch(`${login}/${values.register.login}+${values.register.password}`)
+                    .then(response => {
+                      if (response.ok) {
+                        return response.json()
+                      }
+
+                      return response.error
+                    })
+                    .catch(error => { setIsDisabled(true) })
+                }}
                 backgroundColor={Theme.colors.secondary_color}
               >
                 Entrar
@@ -129,6 +141,7 @@ const Login = ({
       </Content>
     </Container>
   )
+}
 
 Login.propTypes = {
   isDisable: bool,
