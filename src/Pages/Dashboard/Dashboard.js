@@ -65,7 +65,7 @@ const Dashboard = () => (
 
                     <div>
                         <TitleWrapperExpenses>
-                            <label>Gasto total variáveis</label>
+                            <label>Gasto total despesas variáveis</label>
                         </TitleWrapperExpenses>
 
                         <DescriptionExpense>
