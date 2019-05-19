@@ -23,15 +23,16 @@ export const WrapperTitleDashboard = styled.div`
     } 
 `
 
-export const Wrapper = styled.div`
-    width: 50%;
+export const WrapperExpenses = styled.div`
+    width: 25%;
     height: auto;
     display: inline-flex;
-    justify-content: center;
+    padding: 5px;
+    float: left;
     flex-wrap: wrap;
     & > div {
     margin: 5px;
-    width: 45%;
+    width: 100%;
     border-radius: 2px;
     background: white;  
     border: solid 1px ${Theme.colors.secondary_base_color};
@@ -39,7 +40,26 @@ export const Wrapper = styled.div`
     }
 `
 
-export const TitleWrapper = styled.div`
+export const WrapperGraphic = styled.div`
+    width: 73%;
+    float: left;
+    height: 325px;
+    display: inline-flex;
+    padding: 5px;
+    flex-wrap: wrap;
+    & > div {
+    margin: 5px;
+    width: 100%;
+    border-radius: 2px;
+    background: white;  
+    border: solid 1px ${Theme.colors.secondary_base_color};
+    height: 314px;
+    }
+`
+
+
+
+export const TitleWrapperExpenses = styled.div`
     margin: 0;
     padding-top: 10px;
     padding-bottom:10px;
@@ -59,6 +79,24 @@ export const TitleWrapper = styled.div`
         margin: 10px;    
     }
 `
+export const TitleWrapperGraphic = styled.div`
+    margin: 0;
+    padding-top: 10px;
+    padding-bottom:10px;
+    width: 95%;
+    margin-left: 20px;
+    font-size: 23px;
+    font-family: ${Theme.font.font_family};
+    color: ${Theme.colors.font_color};
+    border-bottom: solid 1px ${Theme.colors.font_color};
+    outline: none;
+    cursor: default;
+
+    & > label{
+        margin: 10px;    
+    }
+`
+
 
 export const DescriptionExpense = styled.div`
     width: 100%;
@@ -69,6 +107,6 @@ export const DescriptionExpense = styled.div`
     font-size: 23px;
     font-weight: bold;
     font-family: ${Theme.font.font_family};
-    color: ${Theme.colors.font_color};
+    color: ${Theme.colors.secondary_color};
 `
 

@@ -14,10 +14,12 @@ import {
 
 import {
     Container,
-    Wrapper,
-    TitleWrapper,
     WrapperTitleDashboard,
-    DescriptionExpense
+    WrapperExpenses,
+    TitleWrapperExpenses,
+    DescriptionExpense,
+    WrapperGraphic,
+    TitleWrapperGraphic
 } from './Dashboard.style'
 
 
@@ -29,80 +31,66 @@ const Dashboard = () => (
                 <label>Renda: R$7,50</label>
             </WrapperTitleDashboard>
 
-            {/* Despesas Fixas */}
-            <Wrapper>
+            {/* Divisória da esquerda com as despesas */}
+            <WrapperExpenses>
                     <div>
-                        <TitleWrapper>
+                        <TitleWrapperExpenses>
                             <label>Despesas fixas</label>
-                        </TitleWrapper>
+                        </TitleWrapperExpenses>
 
                         <DescriptionExpense>
-                                
+                                60%
                         </DescriptionExpense>
                     </div>
-                    <div>
-                        <TitleWrapper>
-                            <label>Mercado</label>
-                        </TitleWrapper>
-                        <DescriptionExpense>
-                                R$ 100,00
-                        </DescriptionExpense>
-                    </div>
-                    <div>
-                        <TitleWrapper>
-                            <label>Contas para pagar</label>
-                        </TitleWrapper>
-                        <DescriptionExpense>
-                                R$ 432,00
-                        </DescriptionExpense>
-                    </div>
-                    <div>
-                        <TitleWrapper>
-                            <label>Alimentação</label>
-                        </TitleWrapper>
-                        <DescriptionExpense>
-                                R$ 120,00
-                        </DescriptionExpense>
-                    </div>
-            </Wrapper>
 
-            {/* Despesas Variaveis */}
-            <Wrapper>
                     <div>
-                        <TitleWrapper>
+                        <TitleWrapperExpenses>
+                            <label>Gasto total despesas fixas</label>
+                        </TitleWrapperExpenses>
+
+                        <DescriptionExpense>
+                                R$ 1.000,00
+                        </DescriptionExpense>
+                    </div>
+
+                    <div>
+                        <TitleWrapperExpenses>
                             <label>Despesas variáveis</label>
-                        </TitleWrapper>
+                        </TitleWrapperExpenses>
+
                         <DescriptionExpense>
+                                40%
                         </DescriptionExpense>
                     </div>
 
                     <div>
-                        <TitleWrapper>
-                            <label>Medicamentos</label>
-                        </TitleWrapper>
+                        <TitleWrapperExpenses>
+                            <label>Gasto total variáveis</label>
+                        </TitleWrapperExpenses>
+
                         <DescriptionExpense>
-                                R$ 373,30
+                                R$ 2.500,00
                         </DescriptionExpense>
+                    </div>
+            </WrapperExpenses>
+
+            {/* Divisória da direita com o grafico e tabela CSV */}
+            <WrapperGraphic>
+                    <div>
+                        <TitleWrapperGraphic>
+                            <label>Visão geral</label>
+                        </TitleWrapperGraphic>
                     </div>
 
                     <div>
-                        <TitleWrapper>
-                            <label>Entretenimento</label>
-                        </TitleWrapper>
-                        <DescriptionExpense>
-                                R$ 200,00
-                        </DescriptionExpense>
+                        <TitleWrapperGraphic>
+                            <label>Visualização em tabela</label>
+                        </TitleWrapperGraphic>
                     </div>
+            </WrapperGraphic>
 
-                    <div>
-                        <TitleWrapper>
-                            <label>Roupas</label>
-                        </TitleWrapper>
-                        <DescriptionExpense>
-                                R$ 59,00
-                        </DescriptionExpense>
-                    </div>
-            </Wrapper>
+
+
         {/* <Footer/> */}
     </Container>
 )
