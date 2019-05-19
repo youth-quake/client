@@ -1,4 +1,5 @@
 import React from 'react'
+import DonutChart from 'react-donut-chart'
 import {
     Button,
     InputEditable as Editable,
@@ -9,7 +10,8 @@ import {
     Achievements,
     Friends,
     Modal,
-    PatrimonialSituation
+    PatrimonialSituation,
+    
 } from '../../components'
 
 import {
@@ -19,7 +21,8 @@ import {
     TitleWrapperExpenses,
     DescriptionExpense,
     WrapperGraphic,
-    TitleWrapperGraphic
+    TitleWrapperGraphic,
+    Progress
 } from './Dashboard.style'
 
 
@@ -81,6 +84,28 @@ const Dashboard = () => (
                         <TitleWrapperGraphic>
                             <label>Visão geral</label>
                         </TitleWrapperGraphic>
+                        <Progress title="Progresso de sua renda mensal">
+                        <DonutChart
+                        data={[
+                            { value: 30, label: '', isEmpty: false },
+                            
+                        ]}
+                    colors={[
+                      Theme.colors.primary_color,
+                      '#000',
+                    ]}
+                    width={180}
+                    height={180}
+                    legend={false}
+                    
+                    strokeColor={'transparent'}
+                    clickToggle={true}
+                    emptyColor={Theme.colors.secondary_base_color}
+                    
+                  />
+
+
+                        </Progress>
                     </div>
 
                     <div>

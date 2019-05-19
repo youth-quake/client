@@ -111,3 +111,16 @@ export const DescriptionExpense = styled.div`
     color: ${Theme.colors.secondary_color};
 `
 
+export const Progress = styled.div`
+    display: flex;
+    align-items: center;
+    padding-top: 35px;
+    padding-right: 50px;
+    justify-content: center;
+    float: right;
+    font-size: 30px;
+    
+    &:first-child{
+    position: absolute;
+    }
+`
