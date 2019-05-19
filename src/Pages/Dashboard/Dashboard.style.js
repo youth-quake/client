@@ -4,6 +4,7 @@ import { Theme, InputEditable as Input } from '../../components'
 export const Container = styled.div`
   margin: 0 auto;
   padding: 0px;
+  background: ${Theme.colors.base_color};
 `
 
 export const WrapperTitleDashboard = styled.div`

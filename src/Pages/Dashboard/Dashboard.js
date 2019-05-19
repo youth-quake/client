@@ -24,10 +24,11 @@ import {
 
 
 const Dashboard = () => (
-    <Container>
+    <body>
         <NavBar/>
+        <Container>
             <WrapperTitleDashboard>
-                <label>Dashboard de controle de gastos</label>
+                <label></label>
                 <label>Renda: R$7,50</label>
             </WrapperTitleDashboard>
 
@@ -91,8 +92,9 @@ const Dashboard = () => (
 
 
 
-        {/* <Footer/> */}
+        <Footer/>
     </Container>
+    </body>
 )
 
 export default Dashboard
