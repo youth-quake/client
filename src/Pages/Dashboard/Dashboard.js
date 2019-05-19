@@ -15,7 +15,8 @@ import {
 import {
     Container,
     Wrapper,
-    TitleWrapper
+    TitleWrapper,
+    WrapperTitleDashboard
 
 } from './Dashboard.style'
 
@@ -23,19 +24,61 @@ import {
 const Dashboard = () => (
     <Container>
         <NavBar/>
+            <WrapperTitleDashboard>
+                <label>Dashboard de controle de gastos</label>
+            </WrapperTitleDashboard>
+
+            {/* Despesas Fixas */}
             <Wrapper>
                     <div>
                         <TitleWrapper>
-                            <label>Minhas despesas fixas mensais</label>
+                            <label>Total de despesas fixas</label>
                         </TitleWrapper>
                     </div>
                     <div>
                         <TitleWrapper>
-                            <label>Minhas despesas</label>
+                            <label>Alimentação</label>
+                        </TitleWrapper>
+                    </div>
+                    <div>
+                        <TitleWrapper>
+                            <label>Contas para pagar</label>
+                        </TitleWrapper>
+                    </div>
+                    <div>
+                        <TitleWrapper>
+                            <label>Medicamentos</label>
                         </TitleWrapper>
                     </div>
             </Wrapper>
-        <Footer/>
+
+            {/* Despesas Variaveis */}
+            <Wrapper>
+                    <div>
+                        <TitleWrapper>
+                            <label>Total de despesas variáveis</label>
+                        </TitleWrapper>
+                    </div>
+
+                    <div>
+                        <TitleWrapper>
+                            <label>Cinema</label>
+                        </TitleWrapper>
+                    </div>
+
+                    <div>
+                        <TitleWrapper>
+                            <label>Entretenimento</label>
+                        </TitleWrapper>
+                    </div>
+
+                    <div>
+                        <TitleWrapper>
+                            <label>Roupas</label>
+                        </TitleWrapper>
+                    </div>
+            </Wrapper>
+        {/* <Footer/> */}
     </Container>
 )
 
