@@ -30,20 +30,22 @@ const Register = ({
   handleRequirements,
   isDisable,
   initialValues,
-  handleSubmit
+  handleSubmit,
+  value
 }) => (
     <Container>
       {initialValues && (
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
+          data-testid="register-form"
           render={({
             errors,
             values,
             setFieldValue,
             form
           }) => (
-              <Form onChange={handleChange}>
+              <Form>
                 <Logo src={youthquake} />
                 <Field
                   name="register.name"
@@ -53,12 +55,12 @@ const Register = ({
                 />
                 <ErrorMessage name="register.name" />
                 <Field
-                  name="register.username"
+                  name="register.login"
                   render={({ field }) => (
                     <Input {...field} placeholder='Apelido' />
                   )}
                 />
-                <ErrorMessage name="register.username" />
+                <ErrorMessage name="register.login" />
                 <Field
                   name="register.email"
                   render={({ field }) => (
@@ -90,7 +92,7 @@ const Register = ({
                       {...field}
                       type='password'
                       placeholder='Senha'
-                      onChange={e => handleChange(e.target.value, requirements)}
+                      onChange={e => handleChange(e.target.value)}
                       onFocus={() => setIsVisible(true)}
                       onBlur={() => setIsVisible(false)}
                     />
@@ -101,7 +103,7 @@ const Register = ({
                   warning={'Evite senhas utilizadas em outros sites, ou que sejam fáceis de descobrir.'}
                   visible={isVisible}
                   requirements={requirements}
-                  onChange={handleRequirements}
+                  onChange={() => handleRequirements(requirements, value)}
                 />
                 <Button
                   type="submit"
