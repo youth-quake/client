@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, fireEvent, cleanup, waitForElement } from 'react-testing-library'
+import { render } from 'react-testing-library'
 import Login from './Login'
 
 const component = props => (
