@@ -18,7 +18,7 @@ const enhance = compose(
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           "name": data.register.name,
-          "username": data.register.username,
+          "login": data.register.username,
           "email": data.register.email,
           "confirmEmail": data.register.confirmEmail,
           "password": data.register.password
