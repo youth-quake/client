@@ -42,7 +42,9 @@ const responseGoogle = (response) => {
 
 }
 
-const Login = () => {
+const Login = ({
+  handleSubmit
+}) => {
 
   const [isDisabled, setIsDisabled] = useState(true)
 
@@ -85,7 +87,7 @@ const Login = () => {
                 <Scratches />
               </Separator>
               <Field
-                name="register.login"
+                name="login.login"
                 render={({ field }) => (
                   <Input
                     {...field}
@@ -95,7 +97,7 @@ const Login = () => {
                 )}
               />
               <Field
-                name="register.password"
+                name="login.password"
                 render={({ field }) => (
                   <Input
                     {...field}
@@ -108,17 +110,7 @@ const Login = () => {
               <Button
                 type="submit"
                 disabled={isDisabled}
-                onClick={() => {
-                  fetch(`${login}/${values.register.login}+${values.register.password}`)
-                    .then(response => {
-                      if (response.ok) {
-                        return response.json()
-                      }
-
-                      return response.error
-                    })
-                    .catch(error => { setIsDisabled(true) })
-                }}
+                onClick={() => handleSubmit(values)}
                 backgroundColor={Theme.colors.secondary_color}
               >
                 Entrar

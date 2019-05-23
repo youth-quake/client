@@ -6,7 +6,7 @@ const component = props => (
   <Login />
 )
 
-describe('Should test Login component', () => {
+describe('Login', () => {
   test('', () => {
     const { getByTestId } = render(component)
     const login = getByTestId('login-form')

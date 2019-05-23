@@ -1,5 +1,8 @@
 import { compose, withState, withHandlers, lifecycle } from 'recompose'
 import { register } from '../../services'
+import { createBrowserHistory } from 'history'
+
+const history = createBrowserHistory()
 
 const enhance = compose(
   withState('value', 'setValue', ''),
@@ -18,11 +21,14 @@ const enhance = compose(
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           "name": data.register.name,
-          "username": data.register.username,
+          "login": data.register.login,
           "email": data.register.email,
-          "confirmEmail": data.register.confirmEmail,
           "password": data.register.password
         })
+      }).then(response => {
+        if(response.ok) { 
+          return history.push('/perfil')
+        } 
       })
     },
     handleRequirements: ({ setIsDisabled }) => (requirements, value) => {

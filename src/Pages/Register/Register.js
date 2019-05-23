@@ -90,11 +90,9 @@ const Register = ({
                   render={({ field }) => (
                     <Input
                       {...field}
-                      type='password'
                       placeholder='Senha'
-                      onChange={e => handleChange(e.target.value)}
-                      onFocus={() => setIsVisible(true)}
-                      onBlur={() => setIsVisible(false)}
+                      type="password"
+                      required
                     />
                   )}
                 />
@@ -108,7 +106,7 @@ const Register = ({
                 <Button
                   type="submit"
                   onClick={() => handleSubmit(values)}
-                  disabled={isDisable}
+                  
                   backgroundColor={Theme.colors.secondary_color}
                 >
                   Cadastrar
