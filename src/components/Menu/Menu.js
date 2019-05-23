@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import youthquake from '../../assets/img/porkinYQ1.png'
 import iconProfileMini from '../../assets/img/girl mini.png'
 import { Modal } from '../../components'
@@ -42,6 +42,7 @@ const Menu = styled.div`
   border-radius: 3px;
   border: ${Theme.colors.base_color} solid 1px;
   box-shadow: 7px 2px 16px -11px rgba(0,0,0,0.75);
+  visibility: ${props => props.visible ? css`visible` : css`hidden`};
 
   &:after {
     content: '';
@@ -80,6 +81,7 @@ const Menu = styled.div`
 
 const enhance = compose(
   withState('showModal', 'setShowModal', false),
+  withState('visible', 'setVisible', false),
   withHandlers({
     toggleModal: ({ showModal, setShowModal }) => () => {
       setShowModal(!showModal)
@@ -87,9 +89,15 @@ const enhance = compose(
   })
 )
 
-export const Component = ({ handleChange, showModal, toggleModal }) => (
+export const Component = ({ 
+  handleChange, 
+  showModal, 
+  toggleModal, 
+  visible, 
+  setVisible 
+}) => (
   <Container>
-    <Menu>
+    <Menu visible={visible}>
       <div>
         <Link to='/perfil'>Perfil</Link>
         <Link to='/dashboard'>Dashboard</Link>
@@ -108,7 +116,7 @@ export const Component = ({ handleChange, showModal, toggleModal }) => (
       src={youthquake}
       title="Ir para a página inicial"
     />
-    <NavbarImage src={iconProfileMini} title="Visualizar opções" />
+    <NavbarImage onClick={() => setVisible(!visible)} src={iconProfileMini} title="Visualizar opções" />
   </Container>
 )
 
