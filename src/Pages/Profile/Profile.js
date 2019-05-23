@@ -63,7 +63,7 @@ const Profile = ({
 }) => (
     <Container>
       <Modal
-        showModal={showModal}
+        showModal={false}
         toggleModal={toggleModal}
         title="Bem vindo(a)"
         text="Como é sua primeira vez aqui precisamos de algumas informações:"
