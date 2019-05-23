@@ -38,9 +38,9 @@ import ProfileImage from '../../assets/img/girl big.png'
 import { Formik, Field } from 'formik'
 
 const options = [
-  {description: 'Desespesas fixas'},
-  {description: 'Desespesas variaveis'},
-  {description: 'Objetivos'}
+  { description: 'Desespesas fixas' },
+  { description: 'Desespesas variaveis' },
+  { description: 'Objetivos' }
 ]
 
 const Profile = ({
@@ -70,7 +70,6 @@ const Profile = ({
         Form={() => (<PatrimonialSituation options={options} />)}
       />
       <Friends
-        friends={friends}
         visible={visible}
         toggleVisible={toggleVisible}
       />

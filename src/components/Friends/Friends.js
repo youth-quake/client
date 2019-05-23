@@ -4,6 +4,7 @@ import { Theme, Modal, Bet } from '../../components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons'
 import { compose, withHandlers, withState } from 'recompose'
+import iconProfileMini from '../../assets/img/girl mini.png'
 
 const Tag = styled.div`
   width: 100px;
@@ -126,6 +127,18 @@ const Icon = styled(FontAwesomeIcon)`
   }
 `
 
+const friends = [
+  { key: 11, name: 'Maria', nickname: '@maria', img: iconProfileMini },
+  { key: 12, name: 'Giuliana', nickname: '@giuliana', img: iconProfileMini },
+  { key: 13, name: 'Livia', nickname: '@livia', img: iconProfileMini },
+  { key: 14, name: 'Gabi', nickname: '@gabi', img: iconProfileMini },
+  { key: 15, name: 'Alessandra', nickname: '@alessandra', img: iconProfileMini },
+  { key: 16, name: 'Ricardo', nickname: '@ricardo', img: iconProfileMini },
+  { key: 17, name: 'José', nickname: '@jose', img: iconProfileMini },
+  { key: 18, name: 'João', nickname: '@joao', img: iconProfileMini }
+]
+
+
 const enhance = compose(
   withState('showModal', 'setShowModal', false),
   withHandlers({
@@ -137,7 +150,6 @@ const enhance = compose(
 )
 
 const Component = ({
-  friends,
   handleClick,
   showModal,
   toggleModal,

@@ -30,8 +30,7 @@ const enhance = compose(
   })
 )
 
-
-export const Component = ({ showModal, toggleModal }) => (
+export const Component = ({ handleChange, showModal, toggleModal }) => (
   <Container>
     <Modal
       showModal={showModal}
@@ -44,7 +43,7 @@ export const Component = ({ showModal, toggleModal }) => (
       src={youthquake}
       title="Ir para a página inicial"
     />
-    <NavbarImage src={iconProfileMini} title="Visualizar opções" />
+    <NavbarImage onClick={() => handleChange()}src={iconProfileMini} title="Visualizar opções" />
   </Container>
 )
 
