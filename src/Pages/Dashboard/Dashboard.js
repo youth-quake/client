@@ -1,21 +1,14 @@
 import React from 'react'
 import DonutChart from 'react-donut-chart'
 import {
-	Button,
-	InputEditable as Editable,
 	Theme,
-	Target,
 	Footer,
 	NavBar,
-	Achievements,
-	Friends,
-	Modal,
-	PatrimonialSituation,
+	Friends
 } from '../../components'
 
 import {
 	Container,
-	AmountValue,
 	Wrapper,
 	Title,
 	Description,
@@ -64,6 +57,10 @@ const percentValues = [
 
 const Dashboard = () => (
 	<div>
+		<Friends
+			visible={false}
+			toggleVisible={() => {}}
+		/>
 		<NavBar />
 		<Container>
 			<Wrapper>
@@ -110,7 +107,7 @@ const Dashboard = () => (
 					</div>
 				</Card>
 				<Card>
-					<img src={ProfileImage}/>
+					<img src={ProfileImage} />
 					<Title>Visualização em tabela</Title>
 					<Table>
 						<Line>

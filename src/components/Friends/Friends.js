@@ -138,7 +138,6 @@ const friends = [
   { key: 18, name: 'João', nickname: '@joao', img: iconProfileMini }
 ]
 
-
 const enhance = compose(
   withState('showModal', 'setShowModal', false),
   withHandlers({
