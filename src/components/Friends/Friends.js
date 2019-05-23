@@ -143,7 +143,6 @@ const enhance = compose(
   withHandlers({
     handleClick: ({ showModal, setShowModal }) => () => {
       setShowModal(!showModal)
-      console.log('function')
     }
   })
 )
