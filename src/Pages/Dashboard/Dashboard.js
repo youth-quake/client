@@ -107,7 +107,7 @@ const Dashboard = () => (
 					</div>
 				</Card>
 				<Card>
-					<img src={ProfileImage} />
+					<img src={ProfileImage} alt="Faça o download da tabela"/>
 					<Title>Visualização em tabela</Title>
 					<Table>
 						<Line>
