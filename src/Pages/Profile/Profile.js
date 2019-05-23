@@ -63,14 +63,13 @@ const Profile = ({
 }) => (
     <Container>
       <Modal
-        showModal={showModal}
+        showModal={false}
         toggleModal={toggleModal}
         title="Bem vindo(a)"
         text="Como é sua primeira vez aqui precisamos de algumas informações:"
         Form={() => (<PatrimonialSituation options={options} />)}
       />
       <Friends
-        friends={friends}
         visible={visible}
         toggleVisible={toggleVisible}
       />
