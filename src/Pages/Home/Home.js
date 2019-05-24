@@ -1,25 +1,26 @@
 import React from 'react'
 import { Theme } from '../../components'
-import { Wrapper, Menu, Youthquake, WrapperOptions, Option, Container, Team } from './Home.style'
+import { Menu, WrapperOptions, Option, Container } from './Home.style'
 
 const Home = props => (
-  <Wrapper>
-    <Menu color={Theme.base_color}>
-      <Youthquake color={Theme.primary_color}>
-        <Option to='/'>Youthquake</Option>
-      </Youthquake>
-      <WrapperOptions color='transparent'>
-        <Option to='/nosso-time' color={Theme.primary_color}>Nosso time</Option>
-        <Option to='/sobre-nos' color={Theme.primary_color}>Sobre nós</Option>
-        <Option to='/login' color={Theme.primary_color}>Login</Option>
-      </WrapperOptions>
-    </Menu>
-    <Team>
-      <Container>
+  <div>
+    <Container>
+      <Menu color={Theme.base_color}>
+        <Option color={Theme.primary_color}>Youthquake</Option>
+        <WrapperOptions>
+          <Option to='#nosso-time'>Nosso time</Option>
+          <Option to='#sobre-nos'>Sobre nós</Option>
+          <Option to='#login'>Login</Option>
+        </WrapperOptions>
+      </Menu>
+    </Container>
+    <Container>
 
-      </Container>
-    </Team>
-  </Wrapper>
+    </Container>
+  </div>
 )
 
 export default Home
+
+
+/* calcular o valor por mês e confirmar se ele se compromete com o valor */
