@@ -1,57 +1,8 @@
 import { compose, withState, withHandlers, lifecycle } from 'recompose'
-import { withFormik } from 'formik'
-
-const achievements = [
-  { key: 11, title: 'Apostador', description: 'Criou 10 novas apostas' },
-  { key: 22, title: 'Visionário', description: 'Previu 5 categorias' },
-  { key: 33, title: 'Ganhador', description: 'Ganhou 10 apostas' },
-  { key: 44, title: 'Triste', description: 'Chorou por 10 horas' },
-  { key: 55, title: 'Popular', description: 'Adicionou 15 amigos' },
-  { key: 66, title: 'Economista', description: 'Guardou R$ 500,00' },
-  { key: 77, title: 'Pensador', description: 'Leu mais de 13 livros' }
-]
-
-const targets = [
-  {
-    key: 32,
-    initialValues: {
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam sit amet consectetur dui. Sed venenatis at purus vel suscipit. Aenean luctus tellus vehicula quam luctus rhoncus. Praesent venenatis sem nunc, laoreet euismod risus luctus ut. ',
-      dateEnd: '10/09/2020',
-      dateStart: '11/09/2020',
-      percent: 10.2,
-      amount: 'R$ 10.000,00',
-      title: 'Comprar uma casa'
-    }
-  },
-  {
-    key: 31,
-    initialValues: {
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam sit amet consectetur dui. Sed venenatis at purus vel suscipit. Aenean luctus tellus vehicula quam luctus rhoncus. Praesent venenatis sem nunc, laoreet euismod risus luctus ut. ',
-      dateEnd: '15/05/2020',
-      dateStart: '21/10/2020',
-      percent: 99.2,
-      amount: 'R$ 100.000,00',
-      title: 'Comprar um carro'
-    }
-  }
-]
-
-export const showInformation = withFormik({
-  mapPropsToValues: () => ({
-    register: {
-      name: 'Maria da Silva',
-      username: '@mariazinha',
-      email: 'mariao@outlook.com.br',
-      message: `Procurando novos desafios para sair da zona de conforto e entrar de vez no mundo dos investimentos. Adoro apostas, jogos e livros.`,
-      level: 'Nível 75'
-    }
-  })
-})
 
 const enhance = compose(
+  withState('initialValues', 'setInitialValues', {}),
   withState('value', 'setValue', ''),
-  withState('targets', 'setTargets', targets),
-  withState('achievements', 'setAchievements', achievements),
   withState('isVisible', 'setIsVisible', false),
   withState('isValid', 'setIsValid', false),
   withState('isDisable', 'setIsDisabled', true),
@@ -76,12 +27,44 @@ const enhance = compose(
     },
     toggleModal: ({ showModal, setShowModal }) => () => {
       setShowModal(!showModal)
+    },
+    handleSetInitialValues: ({ setInitialValues }) => () => {
+      fetch('http://demo2803150.mockable.io/profile')
+        .then(response => response.json())
+        .then(data => {
+          const register = {
+            name: data.name,
+            username: data.nickname,
+            email: data.email,
+            message: data.about,
+            level: data,
+            achievements: data.achievements,
+            targets: data.targets.map(item => {
+              const target = {
+                key: item.key,
+                initialValues: {
+                  description: item.description,
+                  dateEnd: item.dateEnd,
+                  dateStart: item.dateStart,
+                  percent: item.percent,
+                  amount: item.amount,
+                  title: item.title
+                }
+              }
+
+              return target
+            })
+          }
+
+          return setInitialValues(register)
+        }).catch(error => console.log(error))
+
     }
   }),
   lifecycle({
     componentDidMount() {
-      const { setIsDisabled } = this.props
-      setIsDisabled(true)
+      const { handleSetInitialValues } = this.props
+      handleSetInitialValues()
     }
   })
 )
