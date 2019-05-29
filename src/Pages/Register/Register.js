@@ -4,8 +4,7 @@ import {
   Input,
   Anchor,
   Requirements,
-  Theme,
-  ComponentField
+  Theme
 } from '../../components'
 import {
   Container,

@@ -1,8 +1,7 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 import { Theme } from '../Theme'
-import { compose, withState, withHandlers } from 'recompose'
-import { setNestedObjectValues } from 'formik';
+import { compose, withState } from 'recompose'
 
 export const InputEditable = styled.input`
   position: relative;

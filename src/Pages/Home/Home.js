@@ -10,7 +10,7 @@ const Home = props => (
         <WrapperOptions>
           <Option to='#nosso-time'>Nosso time</Option>
           <Option to='#sobre-nos'>Sobre nós</Option>
-          <Option to='#login'>Login</Option>
+          <Option to='login'>Login</Option>
         </WrapperOptions>
       </Menu>
     </Container>
@@ -21,6 +21,5 @@ const Home = props => (
 )
 
 export default Home
-
 
 /* calcular o valor por mês e confirmar se ele se compromete com o valor */

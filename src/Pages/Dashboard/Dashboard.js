@@ -20,7 +20,8 @@ import {
 	Line,
 	Header,
 	Card,
-	Data
+	Data,
+	Label
 } from './Dashboard.style'
 
 import ProfileImage from '../../assets/img/girl big.png'
@@ -55,41 +56,43 @@ const percentValues = [
 	{ key: 13, value: 70 }
 ]
 
-const Dashboard = () => (
+const Dashboard = ({ initialValues }) => (
 	<div>
 		<Friends
 			visible={false}
-			toggleVisible={() => {}}
+			toggleVisible={() => { }}
 		/>
 		<NavBar />
 		<Container>
 			<Wrapper>
-				{data.map(item => (
-					<div>
-						<Description color>{item.percent}</Description>
-						<Tag color>{item.description}</Tag>
-					</div>
-				))}
+				{initialValues.category !== undefined && (
+					initialValues.category.map(item => (
+						<div>
+							<Description color="true">{item.value}</Description>
+							<Tag color="true">{item.title}</Tag>
+						</div>
+					))
+				)}
 			</Wrapper>
 			<Information>
 				<Card>
 					<Title>Visão geral</Title>
 					<div>
 						<Data>
-							<textarea placeholder="Descrição" value="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam sit amet consectetur dui. Sed venenatis at purus vel suscipit. Aenean luctus tellus vehicula quam luctus rhoncus. Praesent venenatis sem nunc, laoreet euismod risus luctus ut. " />
+							<textarea placeholder="Descrição" value={initialValues.description} />
 							<div>
-								<labeL>1° Objetivo criado:</labeL>
-								<label>sdsd</label>
+								<Label>1° Objetivo criado:</Label>
+								<Label>{initialValues.firstTarget}</Label>
 							</div>
 							<div>
-								<labeL>1° Objetivo criado:</labeL>
-								<label>sdsd</label>
+								<Label>Objetivo mais recente:</Label>
+								<Label>{initialValues.lastTarget}</Label>
 							</div>
 						</Data>
 						<Progress title="Progresso de sua renda mensal">
 							<DonutChart
 								data={[
-									{ value: 30, label: '', isEmpty: false },
+									{ value: initialValues.progress, label: '', isEmpty: false },
 								]}
 								colors={[
 									Theme.colors.primary_color,
@@ -107,24 +110,24 @@ const Dashboard = () => (
 					</div>
 				</Card>
 				<Card>
-					<img src={ProfileImage} alt="Faça o download da tabela"/>
+					<img src={ProfileImage} alt="Faça o download da tabela" />
 					<Title>Visualização em tabela</Title>
-					<Table>
-						<Line>
-							<Header>Valor</Header>
-							<Header>Valor</Header>
-							<Header>Valor</Header>
-							<Header>Valor</Header>
-						</Line>
-						{percentValues.map(item => (
+					{initialValues.moviment !== undefined && (
+						<Table>
+							{initialValues.moviment.map(item => (
+								<Header>
+									<Line>{item.title}</Line>
+								</Header>
+							))}
 							<Line>
-								<Column>{item.value}</Column>
-								<Column>{item.value}</Column>
-								<Column>{item.value}</Column>
-								<Column>{item.value}</Column>
+								{initialValues.moviment.map(item => (
+									<Column>
+										<Line>{item.value}</Line>
+									</Column>
+								))}
 							</Line>
-						))}
-					</Table>
+						</Table>
+					)}
 				</Card>
 			</Information>
 		</Container>

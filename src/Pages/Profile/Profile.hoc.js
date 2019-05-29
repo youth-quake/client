@@ -58,7 +58,6 @@ const enhance = compose(
 
           return setInitialValues(register)
         }).catch(error => console.log(error))
-
     }
   }),
   lifecycle({
