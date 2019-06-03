@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { Theme } from '../../components'
 
 export const Container = styled.div`
@@ -68,7 +68,7 @@ export const Tag = styled.div`
 	font-weight: bold;
 	font-family: ${Theme.font.font_family};
 	color: ${Theme.colors.base_color};
-	background-color: ${props => props.color ? Theme.colors.secondary_color : Theme.colors.constrast_color};
+	background-color: ${props => props.color ? css`${Theme.colors.secondary_color}` : css`${Theme.colors.constrast_color}`};
 	position: absolute;
 	bottom: 0;
 
@@ -85,7 +85,7 @@ export const Description = styled.div`
 	font-family: ${Theme.font.font_family};
 	height: 100%;
 	line-height: 5;
-	color: ${props => props.color ? Theme.colors.secondary_color : Theme.colors.constrast_color};
+	color: ${props => props.color ? css`${Theme.colors.secondary_color}` : css`${Theme.colors.constrast_color}`};
 `
 
 
@@ -191,3 +191,5 @@ export const Column = styled.td`
 export const Line = styled.tr`
 	padding: 10px;
 `
+
+export const Label = styled.label``

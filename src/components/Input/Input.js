@@ -1,5 +1,7 @@
-import styled from 'styled-components'
+import React from 'react'
+import styled, { css } from 'styled-components'
 import { Theme } from '../Theme'
+import { compose, withState } from 'recompose'
 
 export const InputEditable = styled.input`
   position: relative;
@@ -30,3 +32,51 @@ export const Input = styled.input`
   font-family: ${Theme.font.font_family};
   ${props => props.disabled && 'cursor: not-allowed;'}
 `
+
+export const Field = styled.input`
+  background: transparent;
+  border: none;
+  font-size: 14px;
+  color: #080808;
+  padding: 5px 0;
+  outline: none;
+  ${props => props.disabled && 'cursor: not-allowed;'}
+`
+
+export const Wrapper = styled.div`
+  position: relative;  
+  display: flex;
+  flex-flow: column;
+  width: 320px;
+  padding: 0;
+  background: transparent;
+  border-bottom: solid 1px ${Theme.colors.font_color};
+  
+  & > * {
+    font-size: ${Theme.font.font_size};
+    font-family: ${Theme.font.font_family};
+  }
+`
+
+export const Label = styled.label`
+  margin:  0  0 10px;
+  color: ${Theme.colors.font_color};
+  visibility: ${props => props.isKey ? css`visible` : css`hidden`};
+`
+
+const enhance = compose(
+  withState('isVisible', 'setIsVisible', false),
+  withState('value', 'setValue', ''),
+  withState('isPlaceholder', 'setIsPlaceholder', '')
+)
+
+const Component = ({
+  placeholder
+}) => (
+    <Wrapper>
+      <Label isKey>Nome completo</Label>
+      <Field placeholder={placeholder} disabled={false} />
+    </Wrapper>
+  )
+
+export const ComponentField = enhance(Component)

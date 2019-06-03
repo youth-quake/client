@@ -108,7 +108,6 @@ const Register = ({
                 <Button
                   type="submit"
                   onClick={() => handleSubmit(values)}
-                  disabled={isDisable}
                   backgroundColor={Theme.colors.secondary_color}
                 >
                   Cadastrar
