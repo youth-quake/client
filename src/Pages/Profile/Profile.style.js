@@ -1,5 +1,6 @@
 import styled  from 'styled-components'
 import { Theme, InputEditable as Input } from '../../components'
+import { Progress as ProgressLevel } from 'react-sweet-progress'
 
 export const Level = styled(Input)`
   border: none;
@@ -61,9 +62,16 @@ export const Picture = styled.div`
   position: relative;
 `
 
+export const Progress =  styled(ProgressLevel)`
+  position: relative;
+`
+
 export const ImageProfile = styled.img`
-  width: 200px;
-  height: 200px;
+  width: 92%;
+  height:92%;
+  position: absolute;
+  top: 10px;
+  left: 10px;
   border-radius: 50%;
 `
 
