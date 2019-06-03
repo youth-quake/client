@@ -36,6 +36,7 @@ import {
 
 import ProfileImage from '../../assets/img/girl big.png'
 import { Formik, Field } from 'formik'
+import { Progress } from 'react-sweet-progress'
 
 const options = [
   { key: 1, description: 'Desespesas fixas' },
@@ -81,7 +82,20 @@ const Profile = ({
                   <WrapperGrid>
                     <GridLeft>
                       <Picture>
-                        <ImageProfile src={ProfileImage} title="Foto de perfil" />
+                        <Progress
+                          type="circle"
+                          strokeWidth={3}
+                          percent={70}
+                          theme={
+                            {
+                              active: {
+                                symbol: <ImageProfile src={ProfileImage} title="Foto de perfil" />,
+                                trailColor: 'yellow',
+                                color: 'orange'
+                              }
+                            }
+                          }
+                        />
                       </Picture>
                       <Button
                         backgroundColor={Theme.colors.constrast_color}

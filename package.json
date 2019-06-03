@@ -17,6 +17,7 @@
     "react-google-login": "^5.0.4",
     "react-router-dom": "^5.0.0",
     "react-scripts": "^3.0.1",
+    "react-sweet-progress": "^1.1.2",
     "recompose": "^0.30.0",
     "styled-components": "^4.2.0",
     "yup": "^0.27.0"
