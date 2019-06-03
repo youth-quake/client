@@ -10,15 +10,16 @@ const enhance = compose(
       setIsDisabled(false)
     },
     handleSubmit: ({ setIsDisabled }) => async data => {
-      fetch(`${login}/${data.register.login}+${data.register.password}`)
+      fetch(`${login}/${data.register.login}/${data.register.password}`)
       .then(response => {
-        if(response.ok) { 
+        if(response.ok) {
+          setIsDisabled(true)
           return response.json() 
         } 
-
+ 
         return response.error
       })
-      .catch(error => { setIsDisabled(true) })
+      .catch(error => { return error })   
     }
   })
 )

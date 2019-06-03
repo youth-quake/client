@@ -23,6 +23,10 @@ const enhance = compose(
           "confirmEmail": data.register.confirmEmail,
           "password": data.register.password
         })
+      }).then(response => {
+        if(response.ok){
+          console.log(response)
+        }
       })
     },
     handleRequirements: ({ setIsDisabled }) => (requirements, value) => {
