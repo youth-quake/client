@@ -1,5 +1,5 @@
 import React from 'react'
-import { Theme, Input } from '../../components'
+import { Theme, Input, Button } from '../../components'
 import { Formik, Field } from 'formik'
 import styled from 'styled-components'
 
@@ -17,17 +17,10 @@ const Container = styled.div`
     box-sizing: border-box;
   }
 
-  & > textarea {
-    padding: 12px;
-    font-size: 15px;
-    text-align: justify;
-    font-family: ${Theme.font.font_family};
-    color: ${Theme.colors.font_color};
-    border: none;
-    outline: none;
-    resize: none;
-    border-radius: 3px;
-    background-color: ${Theme.colors.base_color};
+  & > button {
+    bottom: 20px;
+    position: absolute;
+    width: 100px;
   }
 `
 
@@ -43,7 +36,7 @@ const Wrapper = styled.div`
 const Title = styled.label`
   font-family: ${Theme.font.font_family};
   font-size: 21px;
-  margin-bottom: 20px;
+  margin-top: 20px;
   color: ${Theme.colors.font_color};
 `
 
@@ -52,6 +45,15 @@ const Line = styled.div`
   height: 1px;
   margin-top: 10px;
   background-color: ${Theme.colors.font_color};
+`
+
+const WrapperButton = styled.div`
+  & > button {
+  bottom: 20px;
+  position: absolute;
+  width: 100px;
+  left: 460px;
+}
 `
 
 
@@ -71,8 +73,10 @@ export const Config = ({
         values
       }) => (
           <Container>
+            <div>
             <Title>Configurações da conta</Title>
             <Line/>
+            </div>
               <Field
                 name="register.username"
                 render={({ field }) => (
@@ -97,9 +101,10 @@ export const Config = ({
                   />
                 )}
               />
-
+            <div style={{marginTop: '10px'}}>
             <Title>Altere sua senha</Title>
-            <Line/>  
+            <Line/>
+            </div>  
             <Field
               name="register.password"
               render={({ field }) => (
@@ -113,6 +118,7 @@ export const Config = ({
                   />
               )}
             />
+            <Wrapper>
             <Field
               name="register.newpassword"
               render={({ field }) => (
@@ -140,6 +146,20 @@ export const Config = ({
                 />
               )}
             />
+            </Wrapper>
+          <Button 
+          backgroundColor={Theme.colors.constrast_color}
+          >
+            Alterar
+          </Button>
+
+          <WrapperButton>      
+            <Button 
+            backgroundColor={Theme.colors.primary_color}
+            >
+            Excluir
+            </Button> 
+          </WrapperButton>      
           </Container>
         )}
     />
