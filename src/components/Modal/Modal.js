@@ -13,7 +13,7 @@ const Container = styled.div`
 `
 
 export const Content = styled.div`
-  width: 600px;
+  width: 700px;
   background #fff;
   margin: 2% auto;
   border-radius: 3px;
@@ -32,7 +32,7 @@ export const Content = styled.div`
 
   & > h1 {
     font-weight: bold;
-    font-size: 18px;
+    font-size: 22px;
   }
 
   & > p {
@@ -41,9 +41,11 @@ export const Content = styled.div`
   }
 
   & > button {
-    bottom: 20px;
+    top: -10px;
     position: absolute;
-    width: 100px;
+    width: 40px;
+    left: 700px;
+    border-radius: 1px;
   }
 `
 
@@ -68,10 +70,10 @@ export const Modal = ({
         <p>{text}</p>
         <Form editable={false} />
         <Button 
-          backgroundColor={Theme.colors.secondary_color}
+          backgroundColor={'red'}
           onClick={() => toggleModal()}
         >
-          Entendi
+          X
         </Button>
       </Content>
     </Container>

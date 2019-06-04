@@ -109,7 +109,7 @@ export const Component = ({
     <Modal
       showModal={showModal}
       toggleModal={() => toggleModal()}
-      title="Configurações"
+      title="Configurações da conta"
       text=""
       Form={Config}
     />

@@ -4,7 +4,7 @@ import { Formik, Field } from 'formik'
 import styled from 'styled-components'
 
 const Container = styled.div`
-  width: 80%;
+  width: 90%;
   margin: 0 auto;
   overflow-y: auto;
   
@@ -25,18 +25,40 @@ const Container = styled.div`
 `
 
 const Wrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-
-  & > input+input {
-    margin-left: 10px;
+  display: inline-flex;
+  justify-content: center;
+  & > input {
+    margin-left: 20px;
   }
+  & > div {
+    float: left;
+    margin: -5px;
+  }
+`
+
+const WrapperLabel = styled.div`
+  display: flex;
+  width: 200px;
+  justify-content: center;
+  align-items: center;
+  float: left;
+`
+
+const WrapperInput = styled.div`
+  width: 400px;
 `
 
 const Title = styled.label`
   font-family: ${Theme.font.font_family};
   font-size: 21px;
-  margin-top: 20px;
+  margin-top: 30px;
+  font-weight: bold;
+  color: ${Theme.colors.font_color};
+`
+
+const LabelInput = styled.label`
+  font-family: ${Theme.font.font_family};
+  font-size: 18px;
   color: ${Theme.colors.font_color};
 `
 
@@ -44,19 +66,33 @@ const Line = styled.div`
   width:100%;
   height: 1px;
   margin-top: 10px;
+  margin-bottom: 20px;
   background-color: ${Theme.colors.font_color};
 `
 
 const WrapperButton = styled.div`
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+
   & > button {
-  bottom: 20px;
-  position: absolute;
-  width: 100px;
-  left: 460px;
+  width: 180px;
 }
 `
 
+const WrapperButtonDelete = styled.div`
+& > button {
+  width: 120px;
+  position: absolute;
+  bottom: 60px;
+  left: 5px;
+  color: ${Theme.colors.font_color};
+} 
 
+`
 
 export const Config = ({
   ...props
@@ -74,9 +110,14 @@ export const Config = ({
       }) => (
           <Container>
             <div>
-            <Title>Configurações da conta</Title>
+            <Title>Usuário e E-mail</Title>
             <Line/>
             </div>
+              <Wrapper>
+              <WrapperLabel>
+                  <LabelInput>Nome de usuário:</LabelInput>  
+              </WrapperLabel>
+              <WrapperInput>
               <Field
                 name="register.username"
                 render={({ field }) => (
@@ -89,6 +130,13 @@ export const Config = ({
                   />
                 )}
               />
+              </WrapperInput>
+              </Wrapper>
+              <Wrapper>
+              <WrapperLabel>
+              <LabelInput>Email:</LabelInput>
+              </WrapperLabel>
+              <WrapperInput>   
               <Field
                 name="register.email"
                 render={({ field }) => (
@@ -101,10 +149,17 @@ export const Config = ({
                   />
                 )}
               />
-            <div style={{marginTop: '10px'}}>
+              </WrapperInput>
+              </Wrapper>
+            <div>
             <Title>Altere sua senha</Title>
             <Line/>
-            </div>  
+            </div>
+            <Wrapper>
+            <WrapperLabel>
+            <LabelInput>Senha atual:</LabelInput>     
+            </WrapperLabel>
+            <WrapperInput>
             <Field
               name="register.password"
               render={({ field }) => (
@@ -118,7 +173,13 @@ export const Config = ({
                   />
               )}
             />
+            </WrapperInput>
+            </Wrapper>
             <Wrapper>
+            <WrapperLabel>
+            <LabelInput>Nova senha:</LabelInput>     
+            </WrapperLabel>
+            <WrapperInput>
             <Field
               name="register.newpassword"
               render={({ field }) => (
@@ -132,7 +193,14 @@ export const Config = ({
                 />
               )}
             />
+            </WrapperInput>
+            </Wrapper>
 
+            <Wrapper>
+            <WrapperLabel>
+            <LabelInput>Confirme a senha:</LabelInput>       
+            </WrapperLabel>
+            <WrapperInput>
             <Field
               name="register.repeatnewpassword"
               render={({ field }) => (
@@ -146,20 +214,22 @@ export const Config = ({
                 />
               )}
             />
+            </WrapperInput>
             </Wrapper>
+          <WrapperButton>      
           <Button 
           backgroundColor={Theme.colors.constrast_color}
           >
             Alterar
           </Button>
-
-          <WrapperButton>      
+          </WrapperButton>
+          <WrapperButtonDelete>
             <Button 
-            backgroundColor={Theme.colors.primary_color}
+            backgroundColor={'transparent'}
             >
-            Excluir
-            </Button> 
-          </WrapperButton>      
+            Excluir conta
+            </Button>
+          </WrapperButtonDelete>
           </Container>
         )}
     />
