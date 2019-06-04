@@ -2,7 +2,7 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 import youthquake from '../../assets/img/porkinYQ1.png'
 import iconProfileMini from '../../assets/img/girl mini.png'
-import { Modal } from '../../components'
+import { Modal, Config } from '../../components'
 import { compose, withHandlers, withState } from 'recompose'
 import { Theme } from '../Theme'
 import { Link } from 'react-router-dom'
@@ -101,6 +101,7 @@ export const Component = ({
       <div>
         <Link to='/perfil'>Perfil</Link>
         <Link to='/dashboard'>Dashboard</Link>
+        <Link onClick={toggleModal}>Configurações</Link>
         <Link to='/apostas'>Apostas</Link>
         <Link to='/login'>Sair</Link>
       </div>
@@ -110,7 +111,7 @@ export const Component = ({
       toggleModal={() => toggleModal()}
       title="Configurações"
       text=""
-      Form={() => (<div></div>)}
+      Form={Config}
     />
     <NavbarImage
       src={youthquake}
