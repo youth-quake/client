@@ -62,7 +62,6 @@ const Profile = ({
         showModal={showModal}
         toggleModal={toggleModal}
         title="Bem vindo(a)"
-        text="Como é sua primeira vez aqui precisamos de algumas informações:"
         Form={() => (<PatrimonialSituation options={options} />)}
       />
       <Friends
