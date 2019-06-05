@@ -34,21 +34,22 @@ const enhance = compose(
         .then(data => {
           const register = {
             name: data.name,
-            username: data.nickname,
+            username: data.login,
             email: data.email,
             message: data.about,
             level: data.level,
             achievements: data.achievements,
-            targets: data.targets.map(item => {
+            targets: data.target.map(item => {
               const target = {
-                key: item.key,
+                key: item.idTarget,
                 initialValues: {
                   description: item.description,
-                  dateEnd: item.dateEnd,
-                  dateStart: item.dateStart,
-                  percent: item.percent,
-                  amount: item.amount,
-                  title: item.title
+                  dateEnd: item.dtEnd,
+                  dateStart: item.dtStart,
+                  percent: item.percentage,
+                  amount: item.value,
+                  title: item.name,
+                  totalAmount: item.valueAccumulated
                 }
               }
 

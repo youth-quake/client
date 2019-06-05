@@ -15,7 +15,7 @@ const ContentInformation = styled.div`
   flex-wrap: wrap;
   width: 170px;
   height: 210px;
-  border: solid 1px ${Theme.colors.border_color};  
+  border: solid 1px ${Theme.colors.base_color};  
   text-align: center;
   padding: 10px;
   line-height: 20px;

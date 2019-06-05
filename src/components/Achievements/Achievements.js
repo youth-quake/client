@@ -59,7 +59,7 @@ export const Achievements = ({ achievements }) => (
     <Title>Minhas conquistas</Title>
     <Container>
       {achievements.map(item => (
-        <Badge key={item.key}>
+        <Badge key={item.idAchiviements}>
           <Image src={Trofeu} />
           <span>{item.title}</span>
           <p>{item.description}</p>

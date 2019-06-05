@@ -1,6 +1,6 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
-import { Theme, Button } from '../../components'
+import { Theme, Button as ButtonTheme} from '../../components'
 
 const Container = styled.div`
   width: 100%;
@@ -14,7 +14,7 @@ const Container = styled.div`
 
 export const Content = styled.div`
   width: 700px;
-  height: 525px;
+  height: 75%;
   background #fff;
   margin: 1.5% auto;
   border-radius: 3px;
@@ -25,29 +25,33 @@ export const Content = styled.div`
   position: relative;
   
   & > * {
-    padding: 10px;
-    margin: 5px auto;
     font-family: ${Theme.font.font_family}
   }
+`
 
-  & > h1 {
-    font-weight: bold;
-    font-size: 22px;
-  }
+const Title = styled.h1`
+  font-weight: bold;
+  font-size: 22px;
+  padding: 10px;
+`
 
-  & > p {
-    text-align: justify;
-    font-size: 14px;
-  }
+const Subtitle = styled.h3`
+  text-align: justify;
+  font-size: 14px;
+`
 
-  & > button {
-    top: -5px;
-    position: absolute;
-    width: 40px;
-    left: 700px;
-    border-radius: 1px;
-    
-  }
+const Button = styled.button`
+  position: absolute;
+  width: 40px;
+  top: 0;
+  right: 0;
+  padding: 10px;
+  outline: none;
+  border: none;
+  background: red;
+  color: white;
+  font-weigth: bold;
+  border-radius: 3px;
 `
 
 export const Modal = ({ 
@@ -67,8 +71,8 @@ export const Modal = ({
   return (
     <Container showModal={showModal}>
       <Content>
-        <h1>{title}</h1>
-        <p>{text}</p>
+        <Title>{title}</Title>
+        <Subtitle>{text}</Subtitle>
         <Form editable={false} />
         <Button 
           backgroundColor={'red'}
