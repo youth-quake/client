@@ -37,7 +37,7 @@ const enhance = compose(
             username: data.nickname,
             email: data.email,
             message: data.about,
-            level: data,
+            level: data.level,
             achievements: data.achievements,
             targets: data.targets.map(item => {
               const target = {
