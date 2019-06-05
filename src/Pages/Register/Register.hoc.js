@@ -23,9 +23,14 @@ const enhance = compose(
           "confirmEmail": data.register.confirmEmail,
           "password": data.register.password
         })
-      }).then(response => {
-        if(response.ok){
-          console.log(response)
+      })
+      .then(response => response.json())
+      .then(json => {
+        console.log(json)
+        if(json){
+          console.log('cadastrou')
+        } else {
+          console.log('erro')
         }
       })
     },

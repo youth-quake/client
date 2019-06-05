@@ -122,6 +122,7 @@ export const About = styled.textarea`
   outline: none;
   resize: none;
   background: transparent;
+  margin: 10px 0;
 `
 
 export const GridRight = styled.div`
