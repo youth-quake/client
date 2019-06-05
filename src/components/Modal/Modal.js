@@ -14,15 +14,15 @@ const Container = styled.div`
 
 export const Content = styled.div`
   width: 700px;
+  height: 525px;
   background #fff;
-  margin: 2% auto;
+  margin: 1.5% auto;
   border-radius: 3px;
-  padding: 20px 20px 100px;
+  padding: 20px 20px 110px;
   display: flex;
   align-items: center;
   flex-flow: column;
   position: relative;
-  overflow-y: auto;
   
   & > * {
     padding: 10px;
@@ -41,11 +41,12 @@ export const Content = styled.div`
   }
 
   & > button {
-    top: -10px;
+    top: -5px;
     position: absolute;
     width: 40px;
     left: 700px;
     border-radius: 1px;
+    
   }
 `
 

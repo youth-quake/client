@@ -15,11 +15,11 @@ const ContentInformation = styled.div`
   flex-wrap: wrap;
   width: 170px;
   height: 210px;
-  border: solid 1px ${Theme.colors.font_color};  
+  border: solid 1px ${Theme.colors.border_color};  
   text-align: center;
   padding: 10px;
   line-height: 20px;
-  border-radius: 5px;
+  border-radius: 1px;
   float: left;
   margin: 10px;
 

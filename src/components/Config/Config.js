@@ -4,9 +4,8 @@ import { Formik, Field } from 'formik'
 import styled from 'styled-components'
 
 const Container = styled.div`
-  width: 90%;
-  margin: 0 auto;
-  overflow-y: auto;
+  width: 48%;
+  margin: 0 auto; 
   
   & > input {
     padding: 22px 10px;
@@ -27,6 +26,7 @@ const Container = styled.div`
 const Wrapper = styled.div`
   display: inline-flex;
   justify-content: center;
+  align-items: center;
   & > input {
     margin-left: 20px;
   }
@@ -36,16 +36,12 @@ const Wrapper = styled.div`
   }
 `
 
-const WrapperLabel = styled.div`
-  display: flex;
-  width: 200px;
-  justify-content: center;
-  align-items: center;
-  float: left;
-`
-
 const WrapperInput = styled.div`
-  width: 400px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 4px;
+  align-items:center;  
 `
 
 const Title = styled.label`
@@ -76,10 +72,10 @@ const WrapperButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 30px;
+  margin-top: 10px;
 
   & > button {
-  width: 180px;
+  width: 120px;
 }
 `
 
@@ -87,7 +83,7 @@ const WrapperButtonDelete = styled.div`
 & > button {
   width: 120px;
   position: absolute;
-  bottom: 60px;
+  bottom: 5px;
   left: 5px;
   font-weight: normal;
   color: ${Theme.colors.font_color};
@@ -109,15 +105,13 @@ export const Config = ({
         values
       }) => (
           <Container>
-            <div>
+            {/* <div>
             <Title>Usuário e E-mail</Title>
             <Line/>
-            </div>
+            </div> */}
               <Wrapper>
-              <WrapperLabel>
-                  <LabelInput>Nome de usuário:</LabelInput>  
-              </WrapperLabel>
               <WrapperInput>
+              <LabelInput>Nome de usuário</LabelInput>
                 <Field
                 name="register.username"
                 render={({ field }) => (
@@ -133,10 +127,8 @@ export const Config = ({
               </WrapperInput>
               </Wrapper>
               <Wrapper>
-              <WrapperLabel>
-              <LabelInput>Email:</LabelInput>
-              </WrapperLabel>
-              <WrapperInput>   
+              <WrapperInput>
+              <LabelInput>Email</LabelInput>   
               <Field
                 name="register.email"
                 render={({ field }) => (
@@ -151,15 +143,10 @@ export const Config = ({
               />
               </WrapperInput>
               </Wrapper>
-            <div>
-            <Title>Altere sua senha</Title>
-            <Line/>
-            </div>
+            
             <Wrapper>
-            <WrapperLabel>
-            <LabelInput>Senha atual:</LabelInput>     
-            </WrapperLabel>
             <WrapperInput>
+            <LabelInput>Senha atual</LabelInput>
             <Field
               name="register.password"
               render={({ field }) => (
@@ -175,11 +162,9 @@ export const Config = ({
             />
             </WrapperInput>
             </Wrapper>
-            <Wrapper>
-            <WrapperLabel>
-            <LabelInput>Nova senha:</LabelInput>     
-            </WrapperLabel>
+            <Wrapper>     
             <WrapperInput>
+            <LabelInput>Nova senha</LabelInput>
             <Field
               name="register.newpassword"
               render={({ field }) => (
@@ -197,10 +182,9 @@ export const Config = ({
             </Wrapper>
 
             <Wrapper>
-            <WrapperLabel>
-            <LabelInput>Confirme a senha:</LabelInput>       
-            </WrapperLabel>
+                   
             <WrapperInput>
+            <LabelInput>Confirme a senha</LabelInput>
             <Field
               name="register.repeatnewpassword"
               render={({ field }) => (
@@ -218,7 +202,7 @@ export const Config = ({
             </Wrapper>
           <WrapperButton>      
           <Button 
-          backgroundColor={Theme.colors.constrast_color}
+          backgroundColor={Theme.colors.secondary_color}
           >
             Alterar
           </Button>
