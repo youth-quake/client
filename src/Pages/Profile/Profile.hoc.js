@@ -1,4 +1,5 @@
 import { compose, withState, withHandlers, lifecycle } from 'recompose'
+import { profile } from '../../services'
 
 const enhance = compose(
   withState('initialValues', 'setInitialValues', {}),
@@ -29,7 +30,7 @@ const enhance = compose(
       setShowModal(!showModal)
     },
     handleSetInitialValues: ({ setInitialValues }) => () => {
-      fetch('http://demo2803150.mockable.io/profile')
+      fetch(profile)
         .then(response => response.json())
         .then(data => {
           const register = {
