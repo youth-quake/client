@@ -116,7 +116,7 @@ export const PatrimonialSituation = ({
               <TitleInfo>Defina seus objetivos</TitleInfo>
               </div>
                 <p>Para um bom controle financeiro, o primeiro passo
-                é entender seus objetivos para controlar as suas movimentações.</p>
+                é entender seus objetivos e controlar as suas movimentações.</p>
               </ContentInformation>
 
               <ContentInformation>
