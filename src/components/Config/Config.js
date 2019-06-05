@@ -89,9 +89,9 @@ const WrapperButtonDelete = styled.div`
   position: absolute;
   bottom: 60px;
   left: 5px;
+  font-weight: normal;
   color: ${Theme.colors.font_color};
 } 
-
 `
 
 export const Config = ({
@@ -118,7 +118,7 @@ export const Config = ({
                   <LabelInput>Nome de usuário:</LabelInput>  
               </WrapperLabel>
               <WrapperInput>
-              <Field
+                <Field
                 name="register.username"
                 render={({ field }) => (
                   <Input

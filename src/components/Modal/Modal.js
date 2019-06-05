@@ -26,7 +26,7 @@ export const Content = styled.div`
   
   & > * {
     padding: 10px;
-    margin: 10px auto;
+    margin: 5px auto;
     font-family: ${Theme.font.font_family}
   }
 
