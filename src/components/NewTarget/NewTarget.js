@@ -79,6 +79,7 @@ export const NewTarget = () => (
   <Wrapper>
     <Formik
       render={({
+        values,
         errors
       }) => (
           <Container>
@@ -99,7 +100,7 @@ export const NewTarget = () => (
             <WrapperInput>
               <Label>Descrição</Label>
               <Field
-                name="initialValues.username"
+                name="initialValues.description"
                 render={({ field }) => (
                   <Input
                     {...field}
@@ -127,7 +128,7 @@ export const NewTarget = () => (
             <WrapperInput>
               <Label>Valor</Label>
               <Field
-                name="initialValues.username"
+                name="initialValues.value"
                 render={({ field }) => (
                   <Input
                     {...field}
@@ -141,21 +142,21 @@ export const NewTarget = () => (
             <Button
               backgroundColor={Theme.colors.secondary_color}
               onClick={values => {
+                console.log(values)
                 fetch(target, {
                   method: 'post',
                   headers: { 'Content-Type': 'application/json' },
                   body: JSON.stringify({
-                    "name": values.register.name,
-                    "login": values.register.username,
-                    "email": values.register.email,
-                    "password": values.register.password
+                    "name": values.name,
+                    "description": values.description,
+                    "dtEnd": values.dateEnd,
+                    "value": values.value,
                   })
                 })
                   .then(response => response.json())
                   .then(json => {
-                    console.log(json)
                     if (json) {
-
+                      console.log(json)
                     } else {
 
                     }

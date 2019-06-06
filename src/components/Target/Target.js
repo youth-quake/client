@@ -242,6 +242,14 @@ const Wrapper = styled.div`
   flex-flow: column;
   justify-content: center;
   align-items: center;
+  position: relative;
+
+  & > button {
+    position: absolute;
+    right: 12px;
+    top: -60px;
+    width: 120px;
+  }
 `
 
 const enhance = compose(
@@ -260,7 +268,7 @@ export const Component = ({
   toggleModal
 }) => (
     <Wrapper>
-      <Button onClick={toggleModal} backgroundColor={Theme.colors.secondary_color}>Novo objetivo</Button>
+        <Button onClick={toggleModal} backgroundColor={Theme.colors.primary_color}>Novo objetivo</Button>
       {targets.map(item => (<Form key={item.key} initialValues={item.initialValues} />))}
       <Modal
         showModal={showModal}
