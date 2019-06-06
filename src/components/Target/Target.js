@@ -143,7 +143,7 @@ const Amount = styled.div`
 const Form = (initialValues) => (
   <Formik
     initialValues={initialValues}
-    render={({ setFieldValue, values }) => (
+    render={({ values }) => (
       <Targets>
         <Container>
           <Field
@@ -202,7 +202,7 @@ const Form = (initialValues) => (
                     {...field}
                     data={[
                       { value: values.initialValues.percent, label: '' },
-                      { value: (100 - values.initialValues.percent),  isEmpty: true, label: '', }
+                      { value: (100 - values.initialValues.percent), isEmpty: true, label: '', }
                     ]}
                     colors={[
                       Theme.colors.primary_color,
@@ -237,12 +237,11 @@ const Form = (initialValues) => (
 )
 
 export const Target = ({
-  targets,
-  initialValues
+  targets
 }) => (
-  <div>
-    {targets.map(item => (<Form key={item.key} initialValues={item.initialValues}/>))} 
-  </div>
-)
+    <div>
+      {targets.map(item => (<Form key={item.key} initialValues={item.initialValues} />))}
+    </div>
+  )
 
 

@@ -41,9 +41,9 @@ export const PatrimonialSituation = ({
                   disabled={editable}
                   errors={errors}
                 >
-                 {options.map(item => (
-                   <option>{item.description}</option>
-                 ))} 
+                  {options.map(item => (
+                    <option key={item.key}>{item.description}</option>
+                  ))}
                 </Select>
               )}
             />

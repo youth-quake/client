@@ -106,7 +106,6 @@ const Register = ({
                 <Button
                   type="submit"
                   onClick={() => handleSubmit(values)}
-                  
                   backgroundColor={Theme.colors.secondary_color}
                 >
                   Cadastrar

@@ -21,14 +21,14 @@ const enhance = compose(
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           "name": data.register.name,
-          "login": data.register.login,
+          "login": data.register.username,
           "email": data.register.email,
           "password": data.register.password
         })
       }).then(response => {
-        if(response.ok) { 
-          return history.push('/perfil')
-        } 
+        if(response.ok){
+          console.log(response)
+        }
       })
     },
     handleRequirements: ({ setIsDisabled }) => (requirements, value) => {

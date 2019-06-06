@@ -38,9 +38,9 @@ import ProfileImage from '../../assets/img/girl big.png'
 import { Formik, Field } from 'formik'
 
 const options = [
-  { description: 'Desespesas fixas' },
-  { description: 'Desespesas variaveis' },
-  { description: 'Objetivos' }
+  { key: 1, description: 'Desespesas fixas' },
+  { key: 2, description: 'Desespesas variaveis' },
+  { key: 3, description: 'Objetivos' }
 ]
 
 const Profile = ({
@@ -49,11 +49,7 @@ const Profile = ({
   isTarget,
   editable,
   showComponent,
-  achievements,
-  targets,
   titleButton,
-  handleChange,
-  friends,
   visible,
   toggleVisible,
   toggleModal,
@@ -70,12 +66,11 @@ const Profile = ({
         Form={() => (<PatrimonialSituation options={options} />)}
       />
       <Friends
-        friends={friends}
         visible={visible}
         toggleVisible={toggleVisible}
       />
       <NavBar />
-      {initialValues && (
+      {(initialValues && initialValues !== undefined) && (
         <Formik
           initialValues={initialValues}
           render={({
@@ -101,7 +96,7 @@ const Profile = ({
                       <MessageWrapper title="Sobre mim">
                         <TitleMessage>Sobre mim</TitleMessage>
                         <Field
-                          name="register.message"
+                          name="initialValues.message"
                           render={({ field }) => (
                             <About
                               {...field}
@@ -117,7 +112,7 @@ const Profile = ({
                     <GridRight>
                       <Information title="Informações gerais">
                         <Field
-                          name="register.name"
+                          name="initialValues.name"
                           render={({ field }) => (
                             <Editable
                               {...field}
@@ -130,7 +125,7 @@ const Profile = ({
                         />
                         <Wrapper>
                           <Field
-                            name="register.username"
+                            name="initialValues.username"
                             render={({ field }) => (
                               <Editable
                                 {...field}
@@ -142,7 +137,7 @@ const Profile = ({
                             )}
                           />
                           <Field
-                            name="register.level"
+                            name="initialValues.level"
                             render={({ field }) => (
                               <Level
                                 {...field}
@@ -172,15 +167,15 @@ const Profile = ({
                       Objetivos
                   </Item>
                   </Menu>
-                  {isAchievements && (
+                  {(isAchievements && initialValues.achievements !== undefined) && (
                     <Content>
-                      <Achievements achievements={achievements} />
+                      <Achievements achievements={initialValues.achievements} />
                     </Content>
                   )}
-                  {isTarget && (
+                  {(isTarget && initialValues.targets !== undefined) && (
                     <Content>
                       <Title>Meus objetivos</Title>
-                      <Target targets={targets} />
+                      <Target targets={initialValues.targets} />
                     </Content>
                   )}
                 </WrapperContent>
