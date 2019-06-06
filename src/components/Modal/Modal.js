@@ -1,50 +1,58 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
-import { Theme, Button } from '../../components'
+import { Theme } from '../../components'
 
 const Container = styled.div`
   width: 100%;
   height: 100%;
   position: fixed;
   top: 0;
+  left: 0;
   z-index: 999;
   background-color: rgba(0,0,0,0.4);
   display: ${props => props.showModal ? css`block` : css`none`};
 `
 
 export const Content = styled.div`
-  width: 600px;
+  width: 700px;
+  max-height: 75%;
   background #fff;
-  margin: 2% auto;
+  margin: 1.5% auto;
   border-radius: 3px;
-  padding: 20px 20px 100px;
+  padding: 20px 20px 110px;
   display: flex;
   align-items: center;
   flex-flow: column;
   position: relative;
-  overflow-y: auto;
   
   & > * {
-    padding: 10px;
-    margin: 10px auto;
     font-family: ${Theme.font.font_family}
   }
+`
 
-  & > h1 {
-    font-weight: bold;
-    font-size: 18px;
-  }
+const Title = styled.h1`
+  font-weight: bold;
+  font-size: 22px;
+  padding: 10px;
+`
 
-  & > p {
-    text-align: justify;
-    font-size: 14px;
-  }
+const Subtitle = styled.h3`
+  text-align: justify;
+  font-size: 14px;
+`
 
-  & > button {
-    bottom: 20px;
-    position: absolute;
-    width: 100px;
-  }
+const Button = styled.button`
+  position: absolute;
+  width: 40px;
+  top: 0;
+  right: 0;
+  padding: 10px;
+  outline: none;
+  border: none;
+  background: red;
+  color: white;
+  font-weigth: bold;
+  border-radius: 3px;
 `
 
 export const Modal = ({ 
@@ -60,18 +68,17 @@ export const Modal = ({
    Form
   } = props
 
-  
   return (
     <Container showModal={showModal}>
       <Content>
-        <h1>{title}</h1>
-        <p>{text}</p>
+        <Title>{title}</Title>
+        <Subtitle>{text}</Subtitle>
         <Form editable={false} />
         <Button 
-          backgroundColor={Theme.colors.secondary_color}
+          backgroundColor={'red'}
           onClick={() => toggleModal()}
         >
-          Entendi
+          X
         </Button>
       </Content>
     </Container>

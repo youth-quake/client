@@ -9,17 +9,20 @@ const enhance = compose(
     }) => () => {
       setIsDisabled(false)
     },
-    handleSubmit: ({ setIsDisabled }) => async data => {
-      fetch(`${login}/${data.register.login}/${data.register.password}`)
-      .then(response => {
-        if(response.ok) {
-          setIsDisabled(true)
-          return response.json() 
-        } 
- 
-        return response.error
-      })
-      .catch(error => { return error })   
+    handleSubmit: () => async (data) => {
+      fetch(`${login}/${data.login.login}/${data.login.password}`)
+        .then(response => response.json())
+        .then(profile => {
+          if (profile) {
+            localStorage.setItem('profile', JSON.stringify(profile))
+            window.location.href = '/perfil'
+          }else{
+            localStorage.setItem('profile', JSON.stringify({}))
+          }
+
+          return {}
+        })
+        .catch(error => { return error })
     }
   })
 )

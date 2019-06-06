@@ -1,9 +1,7 @@
 import React, { Fragment } from 'react'
 
 import {
-  Button,
   InputEditable as Editable,
-  Theme,
   Target,
   Footer,
   NavBar,
@@ -62,7 +60,6 @@ const Profile = ({
         showModal={showModal}
         toggleModal={toggleModal}
         title="Bem vindo(a)"
-        text="Como é sua primeira vez aqui precisamos de algumas informações:"
         Form={() => (<PatrimonialSituation options={options} />)}
       />
       <Friends
@@ -83,16 +80,6 @@ const Profile = ({
                       <Picture>
                         <ImageProfile src={ProfileImage} title="Foto de perfil" />
                       </Picture>
-                      <Button
-                        backgroundColor={Theme.colors.constrast_color}
-                        onClick={() => {
-                          setTitleButton(titleButton === 'Salvar' ? 'Editar' : 'Salvar')
-                          setEditable(!editable)
-                        }}
-                        title={titleButton}
-                      >
-                        {titleButton}
-                      </Button>
                       <MessageWrapper title="Sobre mim">
                         <TitleMessage>Sobre mim</TitleMessage>
                         <Field
@@ -100,6 +87,7 @@ const Profile = ({
                           render={({ field }) => (
                             <About
                               {...field}
+                              value={initialValues.message}
                               disabled={editable}
                               errors={errors}
                               rows="4"
@@ -117,6 +105,7 @@ const Profile = ({
                             <Editable
                               {...field}
                               placeholder='Nome completo'
+                              value={initialValues.name}
                               editable={editable}
                               disabled={editable}
                               errors={errors}
@@ -130,6 +119,7 @@ const Profile = ({
                               <Editable
                                 {...field}
                                 placeholder='Username'
+                                value={initialValues.username}
                                 editable={editable}
                                 disabled={editable}
                                 errors={errors}
@@ -142,6 +132,7 @@ const Profile = ({
                               <Level
                                 {...field}
                                 placeholder='Nivel 1'
+                                value={initialValues.level}
                                 disabled
                                 errors={errors}
                               />

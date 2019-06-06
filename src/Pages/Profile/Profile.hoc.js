@@ -29,35 +29,35 @@ const enhance = compose(
       setShowModal(!showModal)
     },
     handleSetInitialValues: ({ setInitialValues }) => () => {
-      fetch('http://demo2803150.mockable.io/profile')
-        .then(response => response.json())
-        .then(data => {
-          const register = {
-            name: data.name,
-            username: data.nickname,
-            email: data.email,
-            message: data.about,
-            level: data,
-            achievements: data.achievements,
-            targets: data.targets.map(item => {
-              const target = {
-                key: item.key,
-                initialValues: {
-                  description: item.description,
-                  dateEnd: item.dateEnd,
-                  dateStart: item.dateStart,
-                  percent: item.percent,
-                  amount: item.amount,
-                  title: item.title
-                }
-              }
-
-              return target
-            })
+      const data = JSON.parse(localStorage.getItem('profile'))
+      
+      console.log(data)
+      const register = {
+        name: data.name,
+        username: data.login,
+        email: data.email,
+        message: data.about,
+        level: data.level,
+        achievements: data.AchievementsUser,
+        targets: data.target.map(item => {
+          const target = {
+            key: item.idTarget,
+            initialValues: {
+              description: item.description,
+              dateEnd: item.dtEnd,
+              dateStart: item.dtStart,
+              percent: item.percentage,
+              amount: item.value,
+              title: item.name,
+              totalAmount: item.valueAccumulated
+            }
           }
 
-          return setInitialValues(register)
-        }).catch(error => console.log(error))
+          return target
+        })
+      }
+      
+      setInitialValues(register)
     }
   }),
   lifecycle({
