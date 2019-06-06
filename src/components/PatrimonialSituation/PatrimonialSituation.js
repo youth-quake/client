@@ -77,12 +77,6 @@ const ImageInfo = styled.img`
   margin: 10px;
 `
 
-const ImageTrophy = styled.img`
-  height: 50px;
-  width: 50px;
-  margin-bottom: 10px;
-`
-
 const WrapperButton = styled.div`
   width: 100%;
   display: flex;
@@ -112,28 +106,22 @@ export const PatrimonialSituation = ({
             <Wrapper>
               <ContentInformation>
                 <ImageInfo src={TargetImage}></ImageInfo>
-              <div> 
-              <TitleInfo>Defina seus objetivos</TitleInfo>
-              </div>
+                <TitleInfo>Defina seus objetivos</TitleInfo>
                 <p>Para um bom controle financeiro, o primeiro passo
                 é entender seus objetivos e controlar as suas movimentações.</p>
               </ContentInformation>
 
               <ContentInformation>
-              <ImageInfo src={FriendImage}></ImageInfo>
-              <div> 
-              <TitleInfo>Aposte com amigos</TitleInfo>
-              </div>
-              <p>Proponha apostas com um mesmo objetivo em comum!
+                <ImageInfo src={FriendImage}></ImageInfo>
+                <TitleInfo>Aposte com amigos</TitleInfo>
+                <p>Proponha apostas com um mesmo objetivo em comum!
               Com datas e regras definidas por vocês. Que vença o melhor!</p>
               </ContentInformation>
 
               <ContentInformation>
-              <ImageTrophy src={TrophyImage}></ImageTrophy>
-              <div> 
-              <TitleInfo>Ganhe conquistas</TitleInfo>
-              </div>
-              <p>Ao ganhar apostas e concluir objetivos,
+                <ImageInfo src={TrophyImage}></ImageInfo>
+                <TitleInfo>Ganhe conquistas</TitleInfo>
+                <p>Ao ganhar apostas e concluir objetivos,
               você ganhará conquistas e subirá de níveis!</p>
               </ContentInformation>
             </Wrapper>
@@ -170,11 +158,9 @@ export const PatrimonialSituation = ({
               )}
             />
             <WrapperButton>
-            <Button 
-            backgroundColor={Theme.colors.secondary_color}
-            >
-            Enviar
-            </Button> 
+              <Button backgroundColor={Theme.colors.secondary_color}>
+                Enviar
+              </Button>
             </WrapperButton>
           </Fragment>
         )}
