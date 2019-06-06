@@ -1,9 +1,7 @@
 import React, { Fragment } from 'react'
 
 import {
-  Button,
   InputEditable as Editable,
-  Theme,
   Target,
   Footer,
   NavBar,

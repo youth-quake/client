@@ -1,8 +1,9 @@
 import React from 'react'
 import DonutChart from 'react-donut-chart'
 import styled from 'styled-components'
-import { Theme } from '../../components'
 import { Formik, Field } from 'formik'
+import { compose, withHandlers, withState } from 'recompose'
+import { Theme, Button, Modal, NewTarget } from '../../components'
 
 const Targets = styled.div`
   display: flex;
@@ -236,12 +237,40 @@ const Form = (initialValues) => (
   />
 )
 
-export const Target = ({
-  targets
+const Wrapper = styled.div`
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+`
+
+const enhance = compose(
+  withState('showModal', 'setShowModal', false),
+  withState('visible', 'setVisible', false),
+  withHandlers({
+    toggleModal: ({ showModal, setShowModal }) => () => {
+      setShowModal(!showModal)
+    }
+  })
+)
+
+export const Component = ({
+  targets,
+  showModal,
+  toggleModal
 }) => (
-    <div>
+    <Wrapper>
+      <Button onClick={toggleModal} backgroundColor={Theme.colors.secondary_color}>Novo objetivo</Button>
       {targets.map(item => (<Form key={item.key} initialValues={item.initialValues} />))}
-    </div>
+      <Modal
+        showModal={showModal}
+        toggleModal={() => toggleModal()}
+        title="Novo objetivo"
+        text=""
+        Form={NewTarget}
+      />
+    </Wrapper>
   )
 
 
+export const Target = enhance(Component)

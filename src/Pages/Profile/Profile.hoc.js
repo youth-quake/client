@@ -1,5 +1,4 @@
 import { compose, withState, withHandlers, lifecycle } from 'recompose'
-import { profile } from '../../services'
 
 const enhance = compose(
   withState('initialValues', 'setInitialValues', {}),
@@ -30,36 +29,35 @@ const enhance = compose(
       setShowModal(!showModal)
     },
     handleSetInitialValues: ({ setInitialValues }) => () => {
-      fetch(profile)
-        .then(response => response.json())
-        .then(data => {
-          const register = {
-            name: data.name,
-            username: data.login,
-            email: data.email,
-            message: data.about,
-            level: data.level,
-            achievements: data.achievements,
-            targets: data.target.map(item => {
-              const target = {
-                key: item.idTarget,
-                initialValues: {
-                  description: item.description,
-                  dateEnd: item.dtEnd,
-                  dateStart: item.dtStart,
-                  percent: item.percentage,
-                  amount: item.value,
-                  title: item.name,
-                  totalAmount: item.valueAccumulated
-                }
-              }
-
-              return target
-            })
+      const data = JSON.parse(localStorage.getItem('profile'))
+      
+      console.log(data)
+      const register = {
+        name: data.name,
+        username: data.login,
+        email: data.email,
+        message: data.about,
+        level: data.level,
+        achievements: data.AchievementsUser,
+        targets: data.target.map(item => {
+          const target = {
+            key: item.idTarget,
+            initialValues: {
+              description: item.description,
+              dateEnd: item.dtEnd,
+              dateStart: item.dtStart,
+              percent: item.percentage,
+              amount: item.value,
+              title: item.name,
+              totalAmount: item.valueAccumulated
+            }
           }
 
-          return setInitialValues(register)
-        }).catch(error => console.log(error))
+          return target
+        })
+      }
+      
+      setInitialValues(register)
     }
   }),
   lifecycle({

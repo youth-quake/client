@@ -2,220 +2,193 @@ import React from 'react'
 import { Theme, Input, Button } from '../../components'
 import { Formik, Field } from 'formik'
 import styled from 'styled-components'
+import { compose, withState, withHandlers, lifecycle } from 'recompose'
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-flow: column;
+  margin: 2% auto;
+  width: 70%;
+`
 
 const Container = styled.div`
-  width: 48%;
+  width: 80%;
   margin: 0 auto; 
-  
-  & > input {
-    padding: 22px 10px;
-  }
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column;
+  position: relative;
 
-  & > input, textarea {
+  & > * {
+    margin: 0;
     width: 100%;
-    box-sizing: border-box;
   }
 
   & > button {
-    bottom: 20px;
-    position: absolute;
-    width: 100px;
-  }
-`
-
-const Wrapper = styled.div`
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  & > input {
-    margin-left: 20px;
-  }
-  & > div {
-    float: left;
-    margin: -5px;
+    width: 200px;
   }
 `
 
 const WrapperInput = styled.div`
   width: 100%;
-  display: flex;
-  flex-wrap: wrap;
   padding: 4px;
-  align-items:center;  
-`
-
-const Title = styled.label`
-  font-family: ${Theme.font.font_family};
-  font-size: 21px;
-  margin-top: 30px;
-  font-weight: bold;
-  color: ${Theme.colors.font_color};
-`
-
-const LabelInput = styled.label`
-  font-family: ${Theme.font.font_family};
-  font-size: 18px;
-  color: ${Theme.colors.font_color};
-`
-
-const Line = styled.div`
-  width:100%;
-  height: 1px;
-  margin-top: 10px;
-  margin-bottom: 20px;
-  background-color: ${Theme.colors.font_color};
-`
-
-const WrapperButton = styled.div`
-  width: 100%;
-  height: 50px;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 10px;
+  flex-flow: column;
+  align-items: flex-start;  
+  margin: 2px 0;
 
-  & > button {
-  width: 120px;
-}
+  & > input {
+    width: 95%;
+    box-sizign: border-box;
+  }
 `
 
-const WrapperButtonDelete = styled.div`
-& > button {
-  width: 120px;
-  position: absolute;
-  bottom: 5px;
-  left: 5px;
-  font-weight: normal;
+const Label = styled.label`
+  font-family: ${Theme.font.font_family};
+  font-size: 14px;
   color: ${Theme.colors.font_color};
-} 
 `
 
-export const Config = ({
-  ...props
-}) => {
+const Actions = styled.div`
+  display: flex;
+  justify-content: space-between;
 
-  const {
-    editable
-  } = props
+  & > button+button {
+    width: 220px;
+    margin-right: 10px;
+  }
+`
 
-  return (
-    <Formik
-      render={({
-        errors,
-        values
-      }) => (
-          <Container>
-            {/* <div>
-            <Title>Usuário e E-mail</Title>
-            <Line/>
-            </div> */}
-              <Wrapper>
+const Delete = styled(Button)`
+  width: 120px;
+  font-weight: normal;
+  color: #A8A8A8; 
+  padding: 0;
+  border: solid 1px #E8E8E8;
+
+  &:hover {
+    background: ${Theme.colors.font_color};
+    color: #FFF;
+    opacity: 0.5;
+  }
+`
+
+const enhance = compose(
+  withState('initialValues', 'setInitialValues', {}),
+  withHandlers({
+    handleSetInitialValues: ({ setInitialValues }) => () => {
+      const data = JSON.parse(localStorage.getItem('profile'))
+
+      const register = {
+        name: data.name,
+        username: data.login,
+        email: data.email,
+        password: data.password
+      }
+
+      setInitialValues(register)
+    }
+  }),
+  lifecycle({
+    componentDidMount() {
+      const { handleSetInitialValues } = this.props
+      handleSetInitialValues()
+    }
+  })
+)
+
+const Component = ({
+  initialValues
+}) => (
+    <Wrapper>
+      <Formik
+        initialValues={initialValues}
+        render={({
+          errors
+        }) => (
+            <Container>
               <WrapperInput>
-              <LabelInput>Nome de usuário</LabelInput>
+                <Label>Nome completo</Label>
                 <Field
-                name="register.username"
-                render={({ field }) => (
-                  <Input
-                    {...field}
-                    backgroundColor={Theme.colors.base_color}
-                    placeholder='Nome do usuário'
-                    disabled={editable}
-                    errors={errors}
-                  />
-                )}
-              />
+                  name="initialValues.name"
+                  render={({ field }) => (
+                    <Input
+                      {...field}
+                      backgroundColor={Theme.colors.base_color}
+                      placeholder='Nome completo'
+                      errors={errors}
+                    />
+                  )}
+                />
               </WrapperInput>
-              </Wrapper>
-              <Wrapper>
               <WrapperInput>
-              <LabelInput>Email</LabelInput>   
-              <Field
-                name="register.email"
-                render={({ field }) => (
-                  <Input
-                    {...field}
-                    backgroundColor={Theme.colors.base_color}
-                    placeholder='E-mail'
-                    disabled={editable}
-                    errors={errors}
-                  />
-                )}
-              />
+                <Label>Nome de usuário</Label>
+                <Field
+                  name="initialValues.username"
+                  render={({ field }) => (
+                    <Input
+                      {...field}
+                      backgroundColor={Theme.colors.base_color}
+                      placeholder='Nome de usuário'
+                      errors={errors}
+                    />
+                  )}
+                />
               </WrapperInput>
-              </Wrapper>
-            
-            <Wrapper>
-            <WrapperInput>
-            <LabelInput>Senha atual</LabelInput>
-            <Field
-              name="register.password"
-              render={({ field }) => (
-                <Input
-                    {...field}
-                    backgroundColor={Theme.colors.base_color}
-                    placeholder='Digite sua senha atual' 
-                    type={'password'}
-                    disabled={editable}
-                    errors={errors}
-                  />
-              )}
-            />
-            </WrapperInput>
-            </Wrapper>
-            <Wrapper>     
-            <WrapperInput>
-            <LabelInput>Nova senha</LabelInput>
-            <Field
-              name="register.newpassword"
-              render={({ field }) => (
-                <Input
-                  {...field}
-                  backgroundColor={Theme.colors.base_color}
-                  placeholder='Nova senha'
-                  type={'password'}
-                  disabled={editable}
-                  errors={errors}
+              <WrapperInput>
+                <Label>Email</Label>
+                <Field
+                  name="initialValues.email"
+                  render={({ field }) => (
+                    <Input
+                      {...field}
+                      backgroundColor={Theme.colors.base_color}
+                      placeholder='E-mail'
+                      errors={errors}
+                    />
+                  )}
                 />
-              )}
-            />
-            </WrapperInput>
-            </Wrapper>
-
-            <Wrapper>
-                   
-            <WrapperInput>
-            <LabelInput>Confirme a senha</LabelInput>
-            <Field
-              name="register.repeatnewpassword"
-              render={({ field }) => (
-                <Input
-                  {...field}
-                  backgroundColor={Theme.colors.base_color}
-                  placeholder='Repita a nova senha'
-                  type={'password'}
-                  disabled={editable}
-                  errors={errors}
+              </WrapperInput>
+              <WrapperInput>
+                <Label>Senha atual</Label>
+                <Field
+                  name="initialValues.password"
+                  render={({ field }) => (
+                    <Input
+                      {...field}
+                      backgroundColor={Theme.colors.base_color}
+                      placeholder='Digite sua senha atual'
+                      type={'password'}
+                      errors={errors}
+                    />
+                  )}
                 />
-              )}
-            />
-            </WrapperInput>
-            </Wrapper>
-          <WrapperButton>      
-          <Button 
-          backgroundColor={Theme.colors.secondary_color}
-          >
-            Alterar
-          </Button>
-          </WrapperButton>
-          <WrapperButtonDelete>
-            <Button 
-            backgroundColor={'transparent'}
-            >
-            Excluir conta
-            </Button>
-          </WrapperButtonDelete>
-          </Container>
-        )}
-    />
+              </WrapperInput>
+              <WrapperInput>
+                <Label>Nova senha</Label>
+                <Field
+                  name="initialValues.newpassword"
+                  render={({ field }) => (
+                    <Input
+                      {...field}
+                      backgroundColor={Theme.colors.base_color}
+                      placeholder='Nova senha'
+                      type={'password'}
+                      errors={errors}
+                    />
+                  )}
+                />
+              </WrapperInput>
+              <Actions>
+                <Delete backgroundColor={'transparent'}> Excluir conta </Delete>
+                <Button backgroundColor={Theme.colors.secondary_color}> Salvar alterações </Button>
+              </Actions>
+            </Container>
+          )}
+      />
+    </Wrapper>
   )
-}
+
+export const Config = enhance(Component)

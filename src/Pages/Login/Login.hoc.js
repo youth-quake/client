@@ -10,16 +10,17 @@ const enhance = compose(
       setIsDisabled(false)
     },
     handleSubmit: () => async (data) => {
-      fetch(`${login}/${data.register.login}/${data.register.password}`)
+      fetch(`${login}/${data.login.login}/${data.login.password}`)
         .then(response => response.json())
-        .then(json => {
-          if (json) {
-            console.log('logou')
+        .then(profile => {
+          if (profile) {
+            localStorage.setItem('profile', JSON.stringify(profile))
+            window.location.href = '/perfil'
           }else{
-            console.log('erro')
+            localStorage.setItem('profile', JSON.stringify({}))
           }
 
-          return json
+          return {}
         })
         .catch(error => { return error })
     }

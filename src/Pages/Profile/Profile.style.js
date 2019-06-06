@@ -1,5 +1,6 @@
 import styled  from 'styled-components'
 import { Theme, InputEditable as Input } from '../../components'
+import cover from '../../assets/img/Cover.png'
 
 export const Level = styled(Input)`
   border: none;
@@ -22,6 +23,7 @@ export const Container = styled.div`
 export const BackgroundProfile = styled.div`
   height: 250px;
   background: ${Theme.colors.secondary_color};
+  background-image: url(${cover});
   margin-bottom: 18%;
 `
 

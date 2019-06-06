@@ -26,36 +26,6 @@ import {
 
 import ProfileImage from '../../assets/img/girl big.png'
 
-const data = [
-	{
-		key: '1',
-		percent: '60%',
-		description: 'Despesas fixas'
-	},
-	{
-		key: '2',
-		percent: '70%',
-		description: 'Despesas variaveis'
-	},
-	{
-		key: '3',
-		percent: 'R$ 1.000,00',
-		description: 'Despesas variaveis'
-	},
-	{
-		key: '4',
-		percent: '15%',
-		description: 'Despesas variaveis'
-	}
-]
-
-const percentValues = [
-	{ key: 10, value: 30 },
-	{ key: 11, value: 50 },
-	{ key: 12, value: 60 },
-	{ key: 13, value: 70 }
-]
-
 const Dashboard = ({ initialValues }) => (
 	<div>
 		<Friends
