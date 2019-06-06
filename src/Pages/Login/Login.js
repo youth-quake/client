@@ -83,7 +83,7 @@ const Login = ({
                 <Scratches />
               </Separator>
               <Field
-                name="register.login"
+                name="login.login"
                 render={({ field }) => (
                   <Input
                     {...field}
@@ -93,7 +93,7 @@ const Login = ({
                 )}
               />
               <Field
-                name="register.password"
+                name="login.password"
                 render={({ field }) => (
                   <Input
                     {...field}

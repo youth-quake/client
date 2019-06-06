@@ -1,5 +1,8 @@
 import { compose, withState, withHandlers, lifecycle } from 'recompose'
 import { register } from '../../services'
+import { createBrowserHistory } from 'history'
+
+const history = createBrowserHistory()
 
 const enhance = compose(
   withState('value', 'setValue', ''),
@@ -20,7 +23,6 @@ const enhance = compose(
           "name": data.register.name,
           "login": data.register.username,
           "email": data.register.email,
-          "confirmEmail": data.register.confirmEmail,
           "password": data.register.password
         })
       })

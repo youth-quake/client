@@ -206,7 +206,7 @@ const Form = (initialValues) => (
                     ]}
                     colors={[
                       Theme.colors.primary_color,
-                      '#000',
+                      '#000'
                     ]}
                     width={180}
                     height={180}
@@ -220,7 +220,7 @@ const Form = (initialValues) => (
             </Progress>
           </Column>
           <Amount>
-            <span title="Renda acumulada">Total acumulado:</span>
+            <span title="Renda acumulada">Minha grana:</span>
             <Field
               name="initialValues.amount"
               render={({ field }) => (
