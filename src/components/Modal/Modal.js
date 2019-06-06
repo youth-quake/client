@@ -1,12 +1,13 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
-import { Theme, Button as ButtonTheme} from '../../components'
+import { Theme } from '../../components'
 
 const Container = styled.div`
   width: 100%;
   height: 100%;
   position: fixed;
   top: 0;
+  left: 0;
   z-index: 999;
   background-color: rgba(0,0,0,0.4);
   display: ${props => props.showModal ? css`block` : css`none`};
@@ -14,7 +15,7 @@ const Container = styled.div`
 
 export const Content = styled.div`
   width: 700px;
-  height: 75%;
+  max-height: 75%;
   background #fff;
   margin: 1.5% auto;
   border-radius: 3px;
@@ -67,7 +68,6 @@ export const Modal = ({
    Form
   } = props
 
-  
   return (
     <Container showModal={showModal}>
       <Content>

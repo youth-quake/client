@@ -1,8 +1,5 @@
 import { compose, withState, withHandlers, lifecycle } from 'recompose'
 import { register } from '../../services'
-import { createBrowserHistory } from 'history'
-
-const history = createBrowserHistory()
 
 const enhance = compose(
   withState('value', 'setValue', ''),
@@ -30,9 +27,9 @@ const enhance = compose(
       .then(json => {
         console.log(json)
         if(json){
-          console.log('cadastrou')
+          
         } else {
-          console.log('erro')
+          
         }
       })
     },
