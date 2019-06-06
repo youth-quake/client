@@ -9,17 +9,19 @@ const enhance = compose(
     }) => () => {
       setIsDisabled(false)
     },
-    handleSubmit: ({ setIsDisabled }) => async data => {
+    handleSubmit: () => async (data) => {
       fetch(`${login}/${data.register.login}/${data.register.password}`)
-      .then(response => {
-        if(response.ok) {
-          setIsDisabled(true)
-          return response.json() 
-        } 
- 
-        return response.error
-      })
-      .catch(error => { return error })   
+        .then(response => response.json())
+        .then(json => {
+          if (json) {
+            console.log('logou')
+          }else{
+            console.log('erro')
+          }
+
+          return json
+        })
+        .catch(error => { return error })
     }
   })
 )

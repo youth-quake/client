@@ -24,7 +24,7 @@ const enhance = compose(
             category: data.moviments.category.map(item => {
               const line = {
                 title: item.title,
-                value: item.value
+                value: `${item.value}%`
               }
 
               return line
