@@ -85,7 +85,7 @@ const Profile = ({
                         <Progress
                           type="circle"
                           strokeWidth={8}
-                          percent={70}
+                          percent={30}
                           width={230}
                           height={230}
                           theme={
