@@ -1,10 +1,12 @@
 import React from 'react'
-import { Theme, Input } from '../../components'
+import { Theme, Input, Button } from '../../components'
 import { Formik, Field } from 'formik'
 import styled from 'styled-components'
 import iconProfileMini from '../../assets/img/girl mini.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
+import { compose, withState, withHandlers } from 'recompose'
+import { bet } from '../../services'
 
 const Container = styled.div`
   width: 80%;
@@ -65,15 +67,60 @@ const Icon = styled(FontAwesomeIcon)`
   }
 `
 
-export const Bet = ({
-  ...props
-}) => {
+const Message = styled.span`
+  color: ${Theme.colors.primary_color};
+  display: ${props => props.visible ? css`block` : css`none`};
+`
 
-  const {
-    editable
-  } = props
+const enhance = compose(
+  withState('initialValues', 'setInitialValues', {}),
+  withState('visible', 'setVisible', false),
+  withState('message', 'setMessage', ''),
+  withHandlers({
+    handleSetInitialValues: ({ setInitialValues }) => () => {
+      const data = JSON.parse(localStorage.getItem('profile'))
 
-  return (
+      const register = {
+        id: data.idUser,
+        name: data.name,
+        username: data.login,
+        email: data.email,
+        password: data.password
+      }
+
+      setInitialValues(register)
+    },
+    handleSubmit: ({ initialValues, setVisible, setMessage }) => values => {
+      fetch(bet, {
+        method: 'post',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          "name": values.name,
+          "description": values.description,
+          "dtEnd": values.dateEnd,
+          "value": values.value,
+        })
+      })
+        .then(response => response.json())
+        .then(json => {
+          if (json) {
+            setMessage('Alteração realizada com sucesso')
+            setVisible(true)
+          } else {
+            setMessage('Ocurreu um erro ao atualizar o cadastro')
+            setVisible(true)
+          }
+        })
+    }
+  })
+)
+
+const Component = ({
+  editable,
+  visible,
+  message,
+  handleSubmit
+}) => (
     <Formik
       render={({
         errors,
@@ -138,8 +185,16 @@ export const Bet = ({
                 />
               )}
             />
+            <Message visible={visible}>{message}</Message>
+            <Button
+              backgroundColor={Theme.colors.secondary_color}
+              onClick={() => handleSubmit(values)}
+            >
+              Cadastrar
+              </Button>
           </Container>
         )}
     />
   )
-}
+
+export const Bet = enhance(Component)

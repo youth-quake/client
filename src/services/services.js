@@ -5,3 +5,4 @@ export const login = `${BASE}/login`
 export const profile = `${BASE}/profile`
 export const target = `${BASE}/target`
 export const alterRegister = `${BASE}/user/update`
+export const newBet = `${BASE}/bet/include`

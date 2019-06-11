@@ -81,10 +81,12 @@ const enhance = compose(
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          "idUer1": values.idUser,
+          "idUer2": values.idFriend,
           "name": values.name,
           "description": values.description,
-          "dtEnd": values.dateEnd,
-          "value": values.value,
+          "time": values.time,
+          "value": values.value
         })
       })
         .then(response => response.json())
@@ -172,7 +174,10 @@ const Component = ({
               <Message visible={visible}>{message}</Message>
               <Button
                 backgroundColor={Theme.colors.secondary_color}
-                onClick={() => handleSubmit(values)}> Cadastrar </Button>
+                onClick={() => handleSubmit(values)}
+              >
+                Nova aposta
+              </Button>
             </Container>
           )}
       />
