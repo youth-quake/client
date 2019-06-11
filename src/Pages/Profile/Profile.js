@@ -8,7 +8,8 @@ import {
   Achievements,
   Friends,
   Modal,
-  PatrimonialSituation
+  PatrimonialSituation,
+  Theme
 } from '../../components'
 
 import {
@@ -36,12 +37,6 @@ import {
 import ProfileImage from '../../assets/img/girl big.png'
 import { Formik, Field } from 'formik'
 
-const options = [
-  { key: 1, description: 'Desespesas fixas' },
-  { key: 2, description: 'Desespesas variaveis' },
-  { key: 3, description: 'Objetivos' }
-]
-
 const Profile = ({
   initialValues,
   isAchievements,
@@ -61,7 +56,7 @@ const Profile = ({
         showModal={showModal}
         toggleModal={toggleModal}
         title="Bem vindo(a)"
-        Form={() => (<PatrimonialSituation options={options} />)}
+        Form={() => (<PatrimonialSituation />)}
       />
       <Friends
         visible={visible}
@@ -90,7 +85,7 @@ const Profile = ({
                               active: {
                                 symbol: <ImageProfile src={ProfileImage} title="Foto de perfil" />,
                                 trailColor: Theme.colors.base_color,
-                                color: 'orange'
+                                color: Theme.colors.secondary_constrast_color
                               }
                             }
                           }

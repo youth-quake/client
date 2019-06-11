@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { Theme, InputEditable as Input } from '../../components'
 import cover from '../../assets/img/Cover.png'
+import { Progress as ProgressLevel } from 'react-sweet-progress'
 
 export const Container = styled.div`
   margin: 0 auto;
