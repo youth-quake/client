@@ -71,14 +71,14 @@ const Delete = styled(Button)`
 `
 
 const Message = styled.span`
-  background: red;
+  color: ${Theme.colors.primary_color};
   display: ${props => props.visible ? css`block` : css`none`};
 `
 
 const enhance = compose(
   withState('initialValues', 'setInitialValues', {}),
-  withState('visible', 'setVisible', true),
-  withState('message', 'setMessage', 'aushaus'),
+  withState('visible', 'setVisible', false),
+  withState('message', 'setMessage', ''),
   withHandlers({
     handleSetInitialValues: ({ setInitialValues }) => () => {
       const data = JSON.parse(localStorage.getItem('profile'))
