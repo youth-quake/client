@@ -1,8 +1,9 @@
 import React from 'react'
 import { Theme, Input, Button } from '../../components'
 import { Formik, Field } from 'formik'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { target } from '../../services'
+import { compose, withState, withHandlers } from 'recompose'
 
 const Wrapper = styled.div`
   display: flex;
@@ -52,95 +53,130 @@ const Label = styled.label`
   color: ${Theme.colors.font_color};
 `
 
-export const NewTarget = () => (
-  <Wrapper>
-    <Formik
-      render={({
-        values,
-        errors
-      }) => (
-          <Container>
-            <WrapperInput>
-              <Label>Titulo</Label>
-              <Field
-                name="initialValues.name"
-                render={({ field }) => (
-                  <Input
-                    {...field}
-                    backgroundColor={Theme.colors.base_color}
-                    placeholder='Titulo'
-                    errors={errors}
-                  />
-                )}
-              />
-            </WrapperInput>
-            <WrapperInput>
-              <Label>Descrição</Label>
-              <Field
-                name="initialValues.description"
-                render={({ field }) => (
-                  <Input
-                    {...field}
-                    backgroundColor={Theme.colors.base_color}
-                    placeholder='Descrição'
-                    errors={errors}
-                  />
-                )}
-              />
-            </WrapperInput>
-            <WrapperInput>
-              <Label>Data final</Label>
-              <Field
-                name="initialValues.dateEnd"
-                render={({ field }) => (
-                  <Input
-                    {...field}
-                    backgroundColor={Theme.colors.base_color}
-                    placeholder='Data final'
-                    errors={errors}
-                  />
-                )}
-              />
-            </WrapperInput>
-            <WrapperInput>
-              <Label>Valor</Label>
-              <Field
-                name="initialValues.value"
-                render={({ field }) => (
-                  <Input
-                    {...field}
-                    backgroundColor={Theme.colors.base_color}
-                    placeholder='Valor'
-                    errors={errors}
-                  />
-                )}
-              />
-            </WrapperInput>
-            <Button
-              backgroundColor={Theme.colors.secondary_color}
-              onClick={values => {
-                console.log(values)
-                fetch(target, {
-                  method: 'post',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify({
-                    "name": values.name,
-                    "description": values.description,
-                    "dtEnd": values.dateEnd,
-                    "value": values.value,
-                  })
-                })
-                  .then(response => response.json())
-                  .then(json => {
-                    if (json) {
-                      console.log(json)
-                    } else {
+const Message = styled.span`
+  color: ${Theme.colors.primary_color};
+  display: ${props => props.visible ? css`block` : css`none`};
+`
 
-                    }
-                  })
-              }}> Cadastrar </Button>
-          </Container>
-        )}
-    />
-  </Wrapper>
+const enhance = compose(
+  withState('initialValues', 'setInitialValues', {}),
+  withState('visible', 'setVisible', false),
+  withState('message', 'setMessage', ''),
+  withHandlers({
+    handleSetInitialValues: ({ setInitialValues }) => () => {
+      const data = JSON.parse(localStorage.getItem('profile'))
+
+      const register = {
+        id: data.idUser,
+        name: data.name,
+        username: data.login,
+        email: data.email,
+        password: data.password
+      }
+
+      setInitialValues(register)
+    },
+    handleSubmit: ({ initialValues, setVisible, setMessage }) => values => {
+      fetch(target, {
+        method: 'post',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          "name": values.name,
+          "description": values.description,
+          "dtEnd": values.dateEnd,
+          "value": values.value,
+        })
+      })
+        .then(response => response.json())
+        .then(json => {
+          if (json) {
+            setMessage('Alteração realizada com sucesso')
+            setVisible(true)
+          } else {
+            setMessage('Ocurreu um erro ao atualizar o cadastro')
+            setVisible(true)
+          }
+        })
+    }
+  })
 )
+
+const Component = ({
+  message,
+  visible,
+  handleSubmit
+}) => (
+    <Wrapper>
+      <Formik
+        render={({
+          values,
+          errors
+        }) => (
+            <Container>
+              <WrapperInput>
+                <Label>Titulo</Label>
+                <Field
+                  name="initialValues.name"
+                  render={({ field }) => (
+                    <Input
+                      {...field}
+                      backgroundColor={Theme.colors.base_color}
+                      placeholder='Titulo'
+                      errors={errors}
+                    />
+                  )}
+                />
+              </WrapperInput>
+              <WrapperInput>
+                <Label>Descrição</Label>
+                <Field
+                  name="initialValues.description"
+                  render={({ field }) => (
+                    <Input
+                      {...field}
+                      backgroundColor={Theme.colors.base_color}
+                      placeholder='Descrição'
+                      errors={errors}
+                    />
+                  )}
+                />
+              </WrapperInput>
+              <WrapperInput>
+                <Label>Data final</Label>
+                <Field
+                  name="initialValues.dateEnd"
+                  render={({ field }) => (
+                    <Input
+                      {...field}
+                      backgroundColor={Theme.colors.base_color}
+                      placeholder='Data final'
+                      errors={errors}
+                    />
+                  )}
+                />
+              </WrapperInput>
+              <WrapperInput>
+                <Label>Valor</Label>
+                <Field
+                  name="initialValues.value"
+                  render={({ field }) => (
+                    <Input
+                      {...field}
+                      backgroundColor={Theme.colors.base_color}
+                      placeholder='Valor'
+                      errors={errors}
+                    />
+                  )}
+                />
+              </WrapperInput>
+              <Message visible={visible}>{message}</Message>
+              <Button
+                backgroundColor={Theme.colors.secondary_color}
+                onClick={() => handleSubmit(values)}> Cadastrar </Button>
+            </Container>
+          )}
+      />
+    </Wrapper>
+  )
+
+export const NewTarget = enhance(Component)

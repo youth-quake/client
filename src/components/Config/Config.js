@@ -94,9 +94,8 @@ const enhance = compose(
       setInitialValues(register)
     },
     handleSubmit: ({ initialValues, setVisible, setMessage }) => data => {
-      console.log(initialValues)
       fetch(`${alterRegister}/${initialValues.id}`, {
-        method: 'post',
+        method: 'put',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           "name": data.name,

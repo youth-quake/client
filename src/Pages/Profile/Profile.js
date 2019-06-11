@@ -29,7 +29,8 @@ import {
   Menu,
   Item,
   Title,
-  Level
+  Level,
+  Progress
 } from './Profile.style'
 
 import ProfileImage from '../../assets/img/girl big.png'
@@ -78,7 +79,22 @@ const Profile = ({
                   <Grid>
                     <Left>
                       <Picture>
-                        <ImageProfile src={ProfileImage} title="Foto de perfil" />
+                        <Progress
+                          type="circle"
+                          strokeWidth={8}
+                          percent={30}
+                          width={230}
+                          height={230}
+                          theme={
+                            {
+                              active: {
+                                symbol: <ImageProfile src={ProfileImage} title="Foto de perfil" />,
+                                trailColor: Theme.colors.base_color,
+                                color: 'orange'
+                              }
+                            }
+                          }
+                        />
                       </Picture>
                       <MessageWrapper title="Sobre mim">
                         <TitleMessage>Sobre mim</TitleMessage>
