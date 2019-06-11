@@ -10,7 +10,6 @@ const Wrapper = styled.div`
   flex-flow: column;
   margin: 2% auto;
   width: calc(100vw - 60vw);
-  background: red;
 `
 
 const Container = styled.div`
@@ -77,15 +76,15 @@ const enhance = compose(
       setInitialValues(register)
     },
     handleSubmit: ({ initialValues, setVisible, setMessage }) => values => {
-      fetch(target, {
+      const date = new Date()
+      fetch(`${target}/${initialValues.id}`, {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          "idUer1": values.idUser,
-          "idUer2": values.idFriend,
           "name": values.name,
           "description": values.description,
-          "time": values.time,
+          "dtStart": `${date.getDay()}/${date.getMonth()}/${date.getFullYear()}`,
+          "dtEnd": values.dateEnd,
           "value": values.value
         })
       })
@@ -98,6 +97,10 @@ const enhance = compose(
             setMessage('Ocurreu um erro ao atualizar o cadastro')
             setVisible(true)
           }
+        })
+        .catch(error => {
+          setMessage('Ocurreu um erro ao atualizar o cadastro')
+          setVisible(true)
         })
     }
   })

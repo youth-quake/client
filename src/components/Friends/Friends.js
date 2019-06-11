@@ -3,8 +3,9 @@ import styled, { css } from 'styled-components'
 import { Theme, Modal, Bet } from '../../components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons'
-import { compose, withHandlers, withState } from 'recompose'
 import iconProfileMini from '../../assets/img/girl mini.png'
+import { compose, withState, withHandlers, lifecycle } from 'recompose'
+import { friend } from '../../services'
 
 const Tag = styled.div`
   width: 100px;
@@ -127,22 +128,35 @@ const Icon = styled(FontAwesomeIcon)`
   }
 `
 
-const friends = [
-  { key: 11, name: 'Maria', nickname: '@maria', img: iconProfileMini },
-  { key: 12, name: 'Giuliana', nickname: '@giuliana', img: iconProfileMini },
-  { key: 13, name: 'Livia', nickname: '@livia', img: iconProfileMini },
-  { key: 14, name: 'Gabi', nickname: '@gabi', img: iconProfileMini },
-  { key: 15, name: 'Alessandra', nickname: '@alessandra', img: iconProfileMini },
-  { key: 16, name: 'Ricardo', nickname: '@ricardo', img: iconProfileMini },
-  { key: 17, name: 'José', nickname: '@jose', img: iconProfileMini },
-  { key: 18, name: 'João', nickname: '@joao', img: iconProfileMini }
-]
-
 const enhance = compose(
+  withState('initialValues', 'setInitialValues', {}),
   withState('showModal', 'setShowModal', false),
   withHandlers({
+    handleSetInitialValues: ({ setInitialValues }) => () => {
+      const data = JSON.parse(localStorage.getItem('profile'))
+
+      fetch(`${friend}/${data.idUser}`)
+        .then(response => response.json())
+        .then(friends => {
+          if (friends) {
+            localStorage.setItem('friends', JSON.stringify(friends))
+            setInitialValues(JSON.parse(localStorage.getItem('friends')))
+          } else {
+            localStorage.setItem('profile', JSON.stringify({}))
+          }
+
+          return JSON.parse(localStorage.getItem('friends'))
+        })
+        .catch(error => { return error })
+    },
     handleClick: ({ showModal, setShowModal }) => () => {
       setShowModal(!showModal)
+    }
+  }),
+  lifecycle({
+    componentDidMount() {
+      const { handleSetInitialValues } = this.props
+      handleSetInitialValues()
     }
   })
 )
@@ -151,6 +165,7 @@ const Component = ({
   handleClick,
   showModal,
   toggleModal,
+  initialValues,
   ...props
 }) => {
 
@@ -169,23 +184,24 @@ const Component = ({
         Form={Bet}
       />
       <Wrapper visible={visible}>
-        <Title title="Seus contatos">Seus contatos ({friends.length})</Title>
+        <Title title="Seus contatos">Seus contatos ({initialValues.length})</Title>
         <Scroll onClick={() => document.getElementById('container-friends').scrollTop -= 35}>
           <Icon icon={faChevronUp} />
         </Scroll>
-        <Container id="container-friends">
-          {friends.map(item => (
-            <Friend key={item.key}>
-              <Image src={item.img} />
-              <div>
-                <span>{item.name}</span>
-                <span>{item.nickname}</span>
-              </div>
-              <button onClick={handleClick}>apostar</button>
-            </Friend>
-          )
-          )}
-        </Container>
+        {(initialValues && initialValues !== {}) && (
+          <Container>
+            {initialValues.map(item => (
+              <Friend key={item.key}>
+                <Image src={item.img} />
+                <div>
+                  <span>{item.name}</span>
+                  <span>{item.username}</span>
+                </div>
+                <button onClick={handleClick}>apostar</button>
+              </Friend>
+            ))}
+          </Container>
+        )}
         <Scroll onClick={() => document.getElementById('container-friends').scrollTop += 35}>
           <Icon icon={faChevronDown} />
         </Scroll>

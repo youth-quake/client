@@ -19,7 +19,7 @@ const Cover = styled.div`
   display: ${props => props.visible ? css`block` : css`none`};
 `
 
-const Container = styled.div`s
+const Container = styled.div`
   width: 100%;
   height: 70px;
   display: flex;
@@ -131,7 +131,10 @@ export const Component = ({
             Configurações
           </Link>
           <Link onClick={() => setVisible(false)} to='/apostas'>Apostas</Link>
-          <Link onClick={() => setVisible(false)} to='/login'>Sair</Link>
+          <Link onClick={() => {
+            setVisible(false)
+            localStorage.clear()
+          }} to='/login'>Sair</Link>
         </div>
       </Menu>
       <Modal

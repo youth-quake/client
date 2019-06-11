@@ -1,12 +1,12 @@
 import React from 'react'
 import { Theme, Input, Button } from '../../components'
 import { Formik, Field } from 'formik'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import iconProfileMini from '../../assets/img/girl mini.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import { compose, withState, withHandlers } from 'recompose'
-import { bet } from '../../services'
+import { newBet } from '../../services'
 
 const Container = styled.div`
   width: 80%;
@@ -91,14 +91,16 @@ const enhance = compose(
       setInitialValues(register)
     },
     handleSubmit: ({ initialValues, setVisible, setMessage }) => values => {
-      fetch(bet, {
+      fetch(newBet, {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          "idUser": initialValues.id,
+          "idFriend": values.idFriend,
           "name": values.name,
           "description": values.description,
-          "dtEnd": values.dateEnd,
-          "value": values.value,
+          "time": values.time,
+          "value": values.value
         })
       })
         .then(response => response.json())
@@ -110,6 +112,10 @@ const enhance = compose(
             setMessage('Ocurreu um erro ao atualizar o cadastro')
             setVisible(true)
           }
+        })
+        .catch(error => {
+          setMessage('Ocurreu um erro ao atualizar o cadastro')
+          setVisible(true)
         })
     }
   })

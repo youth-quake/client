@@ -30,13 +30,14 @@ const enhance = compose(
     },
     handleSetInitialValues: ({ setInitialValues }) => () => {
       const data = JSON.parse(localStorage.getItem('profile'))
-      
+
       const register = {
         name: data.name,
         username: data.login,
         email: data.email,
         message: 'Sou apaixonada por tecnologia e livros. Adoro palavras cruzadas e meu sonho é viajar para a Disney.',
         level: 'Nivel 81',
+        friends: [{key: 1, name: 'aushaus', username: 'ausuhash'}],
         achievements: data.AchievementUsers,
         targets: data.target.map(item => {
           const target = {
@@ -55,7 +56,7 @@ const enhance = compose(
           return target
         })
       }
-      
+
       setInitialValues(register)
     }
   }),
