@@ -90,13 +90,13 @@ const enhance = compose(
 
       setInitialValues(register)
     },
-    handleSubmit: ({ initialValues, setVisible, setMessage }) => values => {
+    handleSubmit: ({ initialValues, setVisible, setMessage }) => (values, selectedFriend) => {
       fetch(newBet, {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           "idUser": initialValues.id,
-          "idFriend": values.idFriend,
+          "idFriend": selectedFriend,
           "name": values.name,
           "description": values.description,
           "time": values.time,
@@ -125,7 +125,8 @@ const Component = ({
   editable,
   visible,
   message,
-  handleSubmit
+  handleSubmit,
+  selectedFriend
 }) => (
     <Formik
       render={({
@@ -194,7 +195,7 @@ const Component = ({
             <Message visible={visible}>{message}</Message>
             <Button
               backgroundColor={Theme.colors.secondary_color}
-              onClick={() => handleSubmit(values)}
+              onClick={() => handleSubmit(values, selectedFriend.idUser)}
             >
               Cadastrar
               </Button>

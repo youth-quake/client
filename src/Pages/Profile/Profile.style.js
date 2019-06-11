@@ -6,6 +6,7 @@ import { Progress as ProgressLevel } from 'react-sweet-progress'
 export const Container = styled.div`
   margin: 0 auto;
   padding: 0px;
+  overflow-x: hidden;
 `
 
 export const BackgroundProfile = styled.div`

@@ -129,8 +129,9 @@ const Icon = styled(FontAwesomeIcon)`
 `
 
 const enhance = compose(
-  withState('initialValues', 'setInitialValues', {}),
+  withState('initialValues', 'setInitialValues', []),
   withState('showModal', 'setShowModal', false),
+  withState('selectedFriend', 'setSelectedFriend', {}),
   withHandlers({
     handleSetInitialValues: ({ setInitialValues }) => () => {
       const data = JSON.parse(localStorage.getItem('profile'))
@@ -139,8 +140,18 @@ const enhance = compose(
         .then(response => response.json())
         .then(friends => {
           if (friends) {
-            localStorage.setItem('friends', JSON.stringify(friends))
-            setInitialValues(JSON.parse(localStorage.getItem('friends')))
+            const currentFriends = friends.map(item => {
+              const friend = {
+                id: item.user2.idUser,
+                name: item.user2.name,
+                username: item.user2.login
+              }
+
+              return friend
+            })
+
+            localStorage.setItem('friends', JSON.stringify(currentFriends))
+            setInitialValues(currentFriends)
           } else {
             localStorage.setItem('profile', JSON.stringify({}))
           }
@@ -166,6 +177,8 @@ const Component = ({
   showModal,
   toggleModal,
   initialValues,
+  selectedFriend,
+  setSelectedFriend,
   ...props
 }) => {
 
@@ -180,15 +193,12 @@ const Component = ({
         showModal={showModal}
         toggleModal={handleClick}
         title="Nova aposta"
-        text={`Você vai iniciar uma aposta com @mariazinha para isso precisamos de algumas informações:`}
-        Form={Bet}
+        text={`Você vai iniciar uma aposta com ${selectedFriend.name} para isso precisamos de algumas informações:`}
+        Form={() => (<Bet selectedFriend={selectedFriend} />)}
       />
       <Wrapper visible={visible}>
         <Title title="Seus contatos">Seus contatos ({initialValues.length})</Title>
-        <Scroll onClick={() => document.getElementById('container-friends').scrollTop -= 35}>
-          <Icon icon={faChevronUp} />
-        </Scroll>
-        {(initialValues && initialValues !== {}) && (
+        {initialValues && (
           <Container>
             {initialValues.map(item => (
               <Friend key={item.key}>
@@ -197,14 +207,18 @@ const Component = ({
                   <span>{item.name}</span>
                   <span>{item.username}</span>
                 </div>
-                <button onClick={handleClick}>apostar</button>
+                <button
+                  onClick={() => {
+                    handleClick()
+                    setSelectedFriend(item)
+                  }}
+                >
+                  apostar
+              </button>
               </Friend>
             ))}
           </Container>
         )}
-        <Scroll onClick={() => document.getElementById('container-friends').scrollTop += 35}>
-          <Icon icon={faChevronDown} />
-        </Scroll>
       </Wrapper>
       <Tag title="Amigos" visible={visible} onClick={() => toggleVisible()}>
         Amigos
