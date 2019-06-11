@@ -8,7 +8,8 @@ import { Theme, Button, Modal, NewTarget } from '../../components'
 const Targets = styled.div`
   display: flex;
   flex-flow: row wrap;
-  
+  position: relative;
+
   & img > {
     margin: 10px;
   }
@@ -29,6 +30,7 @@ const Container = styled.div`
   border-radius: 3px;
   font-family: ${Theme.font.font_family};
   border: solid 1px ${Theme.colors.secondary_base_color};
+  position: relative;
 `
 
 const Name = styled.input`
@@ -84,7 +86,7 @@ const Information = styled.div`
   width: 290px;
   margin: 0 50px;
   font-size: 16px;
-  border-sizing: border-box;
+  box-sizing: border-box;
   display: flex;
   justify-content: space-between;
   flex-flow: column;
@@ -141,12 +143,23 @@ const Amount = styled.div`
   }
 `
 
+const Blur = styled.div`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-color: rgba(0,0,0,0.5);
+  top: 0;
+  left: 0;
+  z-index: 777;
+`
+
 const Form = (initialValues) => (
   <Formik
     initialValues={initialValues}
     render={({ values }) => (
       <Targets>
         <Container>
+          <Blur><Button backgroundColor={Theme.colors.primary_color}>aaaaaaa</Button></Blur>
           <Field
             name="initialValues.title"
             render={({ field }) => (
@@ -268,7 +281,7 @@ export const Component = ({
   toggleModal
 }) => (
     <Wrapper>
-        <Button onClick={toggleModal} backgroundColor={Theme.colors.primary_color}>Novo objetivo</Button>
+      <Button onClick={toggleModal} backgroundColor={Theme.colors.primary_color}>Novo objetivo</Button>
       {targets.map(item => (<Form key={item.key} initialValues={item.initialValues} />))}
       <Modal
         showModal={showModal}

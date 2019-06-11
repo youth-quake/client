@@ -77,6 +77,7 @@ const enhance = compose(
     },
     handleSubmit: ({ setVisible, setMessage }) => values => {
       const date = new Date()
+
       fetch(target, {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
@@ -174,7 +175,11 @@ const Component = ({
                   )}
                 />
               </WrapperInput>
-              <Message visible={visible}>{message}</Message>
+              <Message
+                visible={visible}
+              >
+                {message}
+              </Message>
               <Button
                 backgroundColor={Theme.colors.secondary_color}
                 onClick={() => handleSubmit(values)}
