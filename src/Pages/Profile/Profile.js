@@ -21,9 +21,9 @@ import {
   MessageWrapper,
   TitleMessage,
   About,
-  WrapperGrid,
-  GridLeft,
-  GridRight,
+  Grid,
+  Left,
+  Right,
   Content,
   WrapperContent,
   Menu,
@@ -75,8 +75,8 @@ const Profile = ({
           }) => (
               <Fragment>
                 <BackgroundProfile>
-                  <WrapperGrid>
-                    <GridLeft>
+                  <Grid>
+                    <Left>
                       <Picture>
                         <ImageProfile src={ProfileImage} title="Foto de perfil" />
                       </Picture>
@@ -96,8 +96,8 @@ const Profile = ({
                           )}
                         />
                       </MessageWrapper>
-                    </GridLeft>
-                    <GridRight>
+                    </Left>
+                    <Right>
                       <Information title="Informações gerais">
                         <Field
                           name="initialValues.name"
@@ -140,8 +140,8 @@ const Profile = ({
                           />
                         </Wrapper>
                       </Information>
-                    </GridRight>
-                  </WrapperGrid>
+                    </Right>
+                  </Grid>
                 </BackgroundProfile>
                 <WrapperContent>
                   <Menu>

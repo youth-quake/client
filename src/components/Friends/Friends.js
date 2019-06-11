@@ -13,7 +13,7 @@ const Tag = styled.div`
   position:fixed;
   right: 278px;
   top: 280px;
-  z-index: 100;
+  z-index: 400;
   border-radius: 2px;
   transform: rotate(-90deg);
   text-align: center;

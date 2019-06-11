@@ -1,25 +1,20 @@
 import React from 'react'
 import { Theme, Input, Button } from '../../components'
 import { Formik, Field } from 'formik'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { compose, withState, withHandlers, lifecycle } from 'recompose'
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-flow: column;
-  margin: 2% auto;
-  width: 70%;
-`
+import { alterRegister } from '../../services'
 
 const Container = styled.div`
-  width: 80%;
+  width: 60%;
   margin: 0 auto; 
-  padding: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-flow: column;
   position: relative;
+  max-height: 75vh;
+  padding: 20px;
 
   & > * {
     margin: 0;
@@ -31,17 +26,17 @@ const Container = styled.div`
   }
 `
 
-const WrapperInput = styled.div`
+const Fields = styled.div`
   width: 100%;
-  padding: 4px;
+  padding: 4px 0;
   display: flex;
   flex-flow: column;
   align-items: flex-start;  
   margin: 2px 0;
-
+  
   & > input {
     width: 95%;
-    box-sizign: border-box;
+    height: 25px;
   }
 `
 
@@ -75,13 +70,21 @@ const Delete = styled(Button)`
   }
 `
 
+const Message = styled.span`
+  background: red;
+  display: ${props => props.visible ? css`block` : css`none`};
+`
+
 const enhance = compose(
   withState('initialValues', 'setInitialValues', {}),
+  withState('visible', 'setVisible', true),
+  withState('message', 'setMessage', 'aushaus'),
   withHandlers({
     handleSetInitialValues: ({ setInitialValues }) => () => {
       const data = JSON.parse(localStorage.getItem('profile'))
 
       const register = {
+        id: data.idUser,
         name: data.name,
         username: data.login,
         email: data.email,
@@ -89,6 +92,28 @@ const enhance = compose(
       }
 
       setInitialValues(register)
+    },
+    handleSubmit: ({ initialValues, setVisible, setMessage }) => data => {
+      console.log(initialValues)
+      fetch(`${alterRegister}/${initialValues.id}`, {
+        method: 'post',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          "name": data.name,
+          "login": data.username,
+          "email": data.email,
+        })
+      })
+        .then(response => response.json())
+        .then(json => {
+          if (json) {
+            setMessage('Alteração realizada com sucesso')
+            setVisible(true)
+          } else {
+            setMessage('Ocurreu um erro ao atualizar o cadastro')
+            setVisible(true)
+          }
+        })
     }
   }),
   lifecycle({
@@ -100,95 +125,104 @@ const enhance = compose(
 )
 
 const Component = ({
-  initialValues
+  initialValues,
+  visible,
+  message,
+  handleSubmit
 }) => (
-    <Wrapper>
-      <Formik
-        initialValues={initialValues}
-        render={({
-          errors
-        }) => (
-            <Container>
-              <WrapperInput>
-                <Label>Nome completo</Label>
-                <Field
-                  name="initialValues.name"
-                  render={({ field }) => (
-                    <Input
-                      {...field}
-                      backgroundColor={Theme.colors.base_color}
-                      placeholder='Nome completo'
-                      errors={errors}
-                    />
-                  )}
-                />
-              </WrapperInput>
-              <WrapperInput>
-                <Label>Nome de usuário</Label>
-                <Field
-                  name="initialValues.username"
-                  render={({ field }) => (
-                    <Input
-                      {...field}
-                      backgroundColor={Theme.colors.base_color}
-                      placeholder='Nome de usuário'
-                      errors={errors}
-                    />
-                  )}
-                />
-              </WrapperInput>
-              <WrapperInput>
-                <Label>Email</Label>
-                <Field
-                  name="initialValues.email"
-                  render={({ field }) => (
-                    <Input
-                      {...field}
-                      backgroundColor={Theme.colors.base_color}
-                      placeholder='E-mail'
-                      errors={errors}
-                    />
-                  )}
-                />
-              </WrapperInput>
-              <WrapperInput>
-                <Label>Senha atual</Label>
-                <Field
-                  name="initialValues.password"
-                  render={({ field }) => (
-                    <Input
-                      {...field}
-                      backgroundColor={Theme.colors.base_color}
-                      placeholder='Digite sua senha atual'
-                      type={'password'}
-                      errors={errors}
-                    />
-                  )}
-                />
-              </WrapperInput>
-              <WrapperInput>
-                <Label>Nova senha</Label>
-                <Field
-                  name="initialValues.newpassword"
-                  render={({ field }) => (
-                    <Input
-                      {...field}
-                      backgroundColor={Theme.colors.base_color}
-                      placeholder='Nova senha'
-                      type={'password'}
-                      errors={errors}
-                    />
-                  )}
-                />
-              </WrapperInput>
-              <Actions>
-                <Delete backgroundColor={'transparent'}> Excluir conta </Delete>
-                <Button backgroundColor={Theme.colors.secondary_color}> Salvar alterações </Button>
-              </Actions>
-            </Container>
-          )}
-      />
-    </Wrapper>
+    <Formik
+      initialValues={initialValues}
+      render={({
+        errors,
+        values
+      }) => (
+          <Container>
+            <Fields>
+              <Label>Nome completo</Label>
+              <Field
+                name="initialValues.name"
+                render={({ field }) => (
+                  <Input
+                    {...field}
+                    backgroundColor={Theme.colors.base_color}
+                    placeholder='Nome completo'
+                    errors={errors}
+                  />
+                )}
+              />
+            </Fields>
+            <Fields>
+              <Label>Nome de usuário</Label>
+              <Field
+                name="initialValues.username"
+                render={({ field }) => (
+                  <Input
+                    {...field}
+                    backgroundColor={Theme.colors.base_color}
+                    placeholder='Nome de usuário'
+                    errors={errors}
+                  />
+                )}
+              />
+            </Fields>
+            <Fields>
+              <Label>Email</Label>
+              <Field
+                name="initialValues.email"
+                render={({ field }) => (
+                  <Input
+                    {...field}
+                    backgroundColor={Theme.colors.base_color}
+                    placeholder='E-mail'
+                    errors={errors}
+                  />
+                )}
+              />
+            </Fields>
+            <Fields>
+              <Label>Senha atual</Label>
+              <Field
+                name="initialValues.password"
+                render={({ field }) => (
+                  <Input
+                    {...field}
+                    backgroundColor={Theme.colors.base_color}
+                    placeholder='Digite sua senha atual'
+                    type={'password'}
+                    errors={errors}
+                  />
+                )}
+              />
+            </Fields>
+            <Fields>
+              <Label>Nova senha</Label>
+              <Field
+                name="initialValues.newpassword"
+                render={({ field }) => (
+                  <Input
+                    {...field}
+                    backgroundColor={Theme.colors.base_color}
+                    placeholder='Nova senha'
+                    type={'password'}
+                    errors={errors}
+                  />
+                )}
+              />
+            </Fields>
+            <Message visible={visible}>{message}</Message>
+            <Actions>
+              <Delete backgroundColor={'transparent'}> Excluir conta </Delete>
+              <Button
+                onClick={() => handleSubmit(values)}
+                backgroundColor={Theme.colors.secondary_color}
+              >
+                Salvar alterações
+              </Button>
+            </Actions>
+          </Container>
+        )}
+    />
+
   )
 
 export const Config = enhance(Component)

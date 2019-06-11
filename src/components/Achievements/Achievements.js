@@ -56,9 +56,9 @@ const Image = styled.img`
 
 export const Achievements = ({ achievements }) => (
   <div>
+    {console.log(achievements)}
     <Title>Minhas conquistas</Title>
     <Container>
-      {console.log(achievements)}
       {achievements.map(item => (
         <Badge key={item.idAchievement.idAchievement}>
           <Image src={Trofeu} />

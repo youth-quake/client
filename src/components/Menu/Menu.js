@@ -1,11 +1,23 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
-import youthquake from '../../assets/img/porkinYQ1.png'
+import youthquake from '../../assets/img/daindia.png'
 import iconProfileMini from '../../assets/img/girl mini.png'
 import { Modal, Config } from '../../components'
 import { compose, withHandlers, withState } from 'recompose'
 import { Theme } from '../Theme'
 import { Link } from 'react-router-dom'
+
+
+const Cover = styled.div`
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 200;
+  background-color: rgba(210,210,210, 0.1);
+  display: ${props => props.visible ? css`block` : css`none`};
+`
 
 const Container = styled.div`s
   width: 100%;
@@ -13,6 +25,7 @@ const Container = styled.div`s
   display: flex;
   justify-content: space-between;
   position: relative;
+  padding: 0 20px 0 10px;
 
   & > img+img{
     position: absolute;
@@ -20,9 +33,14 @@ const Container = styled.div`s
   }
 `
 
-const NavbarImage = styled.img`
+const NavbarImage = styled.button`
   margin: 10px;
+  width: 5%;
   height: 50px;
+  background: url(${props => props.img}) center no-repeat;
+  background-size: 50px;
+  border: none;
+  outline: none;
 
   &:hover{
     cursor: pointer;
@@ -34,8 +52,8 @@ const Menu = styled.div`
   position: absolute;
   width: 150px;
   font-family: ${Theme.font.font_family};
-  z-index: 100;
-  right: 10px;
+  z-index: 300;
+  right: 0;
   top: 80px;
   padding: 10px;
   background: #FFFFFF;
@@ -89,37 +107,51 @@ const enhance = compose(
   })
 )
 
-export const Component = ({ 
-  handleChange, 
-  showModal, 
-  toggleModal, 
-  visible, 
-  setVisible 
+export const Component = ({
+  handleChange,
+  showModal,
+  toggleModal,
+  visible,
+  setVisible
 }) => (
-  <Container>
-    <Menu visible={visible}>
-      <div>
-        <Link to='/perfil'>Perfil</Link>
-        <Link to='/dashboard'>Dashboard</Link>
-        <Link onClick={toggleModal}>Configurações</Link>
-        <Link to='/apostas'>Apostas</Link>
-        <Link to='/login'>Sair</Link>
-      </div>
-    </Menu>
-    <Modal
-      showModal={showModal}
-      toggleModal={() => toggleModal()}
-      title="Configurações da conta"
-      text=""
-      Form={Config}
-    />
-    <NavbarImage
-      src={youthquake}
-      title="Ir para a página inicial"
-    />
-    <NavbarImage onClick={() => setVisible(!visible)} src={iconProfileMini} title="Visualizar opções" />
-  </Container>
-)
+    <Container>
+      <Cover
+        visible={visible}
+        onClick={() => setVisible(false)}
+      />
+      <Menu visible={visible}>
+        <div>
+          <Link onClick={() => setVisible(false)} to='/perfil'>Perfil</Link>
+          <Link onClick={() => setVisible(false)} to='/dashboard'>Dashboard</Link>
+          <Link
+            onClick={() => {
+              toggleModal()
+              setVisible(false)
+            }}>
+            Configurações
+          </Link>
+          <Link onClick={() => setVisible(false)} to='/apostas'>Apostas</Link>
+          <Link onClick={() => setVisible(false)} to='/login'>Sair</Link>
+        </div>
+      </Menu>
+      <Modal
+        showModal={showModal}
+        toggleModal={() => toggleModal()}
+        title="Configurações da conta"
+        text=""
+        Form={Config}
+      />
+      <NavbarImage
+        img={youthquake}
+        title="Ir para a página inicial"
+      />
+      <NavbarImage
+        onClick={() => setVisible(!visible)}
+        img={iconProfileMini}
+        title="Visualizar opções"
+      />
+    </Container>
+  )
 
 
 export const NavBar = enhance(Component)

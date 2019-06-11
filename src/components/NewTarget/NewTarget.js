@@ -8,11 +8,12 @@ const Wrapper = styled.div`
   display: flex;
   flex-flow: column;
   margin: 2% auto;
-  width: 70%;
+  width: calc(100vw - 60vw);
+  background: red;
 `
 
 const Container = styled.div`
-  width: 80%;
+  width: 100%;
   margin: 0 auto; 
   padding: 10px;
   display: flex;
@@ -49,30 +50,6 @@ const Label = styled.label`
   font-family: ${Theme.font.font_family};
   font-size: 14px;
   color: ${Theme.colors.font_color};
-`
-
-const Actions = styled.div`
-  display: flex;
-  justify-content: space-between;
-
-  & > button+button {
-    width: 220px;
-    margin-right: 10px;
-  }
-`
-
-const Delete = styled(Button)`
-  width: 120px;
-  font-weight: normal;
-  color: #A8A8A8; 
-  padding: 0;
-  border: solid 1px #E8E8E8;
-
-  &:hover {
-    background: ${Theme.colors.font_color};
-    color: #FFF;
-    opacity: 0.5;
-  }
 `
 
 export const NewTarget = () => (
