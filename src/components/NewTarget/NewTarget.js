@@ -75,9 +75,9 @@ const enhance = compose(
 
       setInitialValues(register)
     },
-    handleSubmit: ({ initialValues, setVisible, setMessage }) => values => {
+    handleSubmit: ({ setVisible, setMessage }) => values => {
       const date = new Date()
-      fetch(`${target}/${initialValues.id}`, {
+      fetch(target, {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
