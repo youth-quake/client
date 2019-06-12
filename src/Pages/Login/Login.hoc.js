@@ -14,6 +14,7 @@ const enhance = compose(
         .then(response => response.json())
         .then(profile => {
           if (profile) {
+            console.log(profile)
             localStorage.setItem('profile', JSON.stringify(profile))
             window.location.href = '/perfil'
           }else{

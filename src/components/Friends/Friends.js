@@ -3,8 +3,9 @@ import styled, { css } from 'styled-components'
 import { Theme, Modal, Bet } from '../../components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons'
-import { compose, withHandlers, withState } from 'recompose'
 import iconProfileMini from '../../assets/img/girl mini.png'
+import { compose, withState, withHandlers, lifecycle } from 'recompose'
+import { friend } from '../../services'
 
 const Tag = styled.div`
   width: 100px;
@@ -13,7 +14,7 @@ const Tag = styled.div`
   position:fixed;
   right: 278px;
   top: 280px;
-  z-index: 100;
+  z-index: 400;
   border-radius: 2px;
   transform: rotate(-90deg);
   text-align: center;
@@ -127,22 +128,46 @@ const Icon = styled(FontAwesomeIcon)`
   }
 `
 
-const friends = [
-  { key: 11, name: 'Maria', nickname: '@maria', img: iconProfileMini },
-  { key: 12, name: 'Giuliana', nickname: '@giuliana', img: iconProfileMini },
-  { key: 13, name: 'Livia', nickname: '@livia', img: iconProfileMini },
-  { key: 14, name: 'Gabi', nickname: '@gabi', img: iconProfileMini },
-  { key: 15, name: 'Alessandra', nickname: '@alessandra', img: iconProfileMini },
-  { key: 16, name: 'Ricardo', nickname: '@ricardo', img: iconProfileMini },
-  { key: 17, name: 'José', nickname: '@jose', img: iconProfileMini },
-  { key: 18, name: 'João', nickname: '@joao', img: iconProfileMini }
-]
-
 const enhance = compose(
+  withState('initialValues', 'setInitialValues', []),
   withState('showModal', 'setShowModal', false),
+  withState('selectedFriend', 'setSelectedFriend', {}),
   withHandlers({
+    handleSetInitialValues: ({ setInitialValues }) => () => {
+      const data = JSON.parse(localStorage.getItem('profile'))
+
+      fetch(`${friend}/${data.idUser}`)
+        .then(response => response.json())
+        .then(friends => {
+          if (friends) {
+            const currentFriends = friends.map(item => {
+              const friend = {
+                id: item.user2.idUser,
+                name: item.user2.name,
+                username: item.user2.login
+              }
+
+              return friend
+            })
+
+            localStorage.setItem('friends', JSON.stringify(currentFriends))
+            setInitialValues(currentFriends)
+          } else {
+            localStorage.setItem('profile', JSON.stringify({}))
+          }
+
+          return JSON.parse(localStorage.getItem('friends'))
+        })
+        .catch(error => { return error })
+    },
     handleClick: ({ showModal, setShowModal }) => () => {
       setShowModal(!showModal)
+    }
+  }),
+  lifecycle({
+    componentDidMount() {
+      const { handleSetInitialValues } = this.props
+      handleSetInitialValues()
     }
   })
 )
@@ -151,6 +176,9 @@ const Component = ({
   handleClick,
   showModal,
   toggleModal,
+  initialValues,
+  selectedFriend,
+  setSelectedFriend,
   ...props
 }) => {
 
@@ -165,30 +193,32 @@ const Component = ({
         showModal={showModal}
         toggleModal={handleClick}
         title="Nova aposta"
-        text={`Você vai iniciar uma aposta com @mariazinha para isso precisamos de algumas informações:`}
-        Form={Bet}
+        text={`Você vai iniciar uma aposta com ${selectedFriend.name} para isso precisamos de algumas informações:`}
+        Form={() => (<Bet selectedFriend={selectedFriend} />)}
       />
       <Wrapper visible={visible}>
-        <Title title="Seus contatos">Seus contatos ({friends.length})</Title>
-        <Scroll onClick={() => document.getElementById('container-friends').scrollTop -= 35}>
-          <Icon icon={faChevronUp} />
-        </Scroll>
-        <Container id="container-friends">
-          {friends.map(item => (
-            <Friend key={item.key}>
-              <Image src={item.img} />
-              <div>
-                <span>{item.name}</span>
-                <span>{item.nickname}</span>
-              </div>
-              <button onClick={handleClick}>apostar</button>
-            </Friend>
-          )
-          )}
-        </Container>
-        <Scroll onClick={() => document.getElementById('container-friends').scrollTop += 35}>
-          <Icon icon={faChevronDown} />
-        </Scroll>
+        <Title title="Seus contatos">Seus contatos ({initialValues.length})</Title>
+        {initialValues && (
+          <Container>
+            {initialValues.map(item => (
+              <Friend key={item.key}>
+                <Image src={item.img} />
+                <div>
+                  <span>{item.name}</span>
+                  <span>{item.username}</span>
+                </div>
+                <button
+                  onClick={() => {
+                    handleClick()
+                    setSelectedFriend(item)
+                  }}
+                >
+                  apostar
+              </button>
+              </Friend>
+            ))}
+          </Container>
+        )}
       </Wrapper>
       <Tag title="Amigos" visible={visible} onClick={() => toggleVisible()}>
         Amigos

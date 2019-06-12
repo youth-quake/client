@@ -14,8 +14,8 @@ const Container = styled.div`
 `
 
 export const Content = styled.div`
-  width: 700px;
-  max-height: 75%;
+  width: calc(100vw - 45vw);
+  height: calc(100vh - 28vh);
   background #fff;
   margin: 1.5% auto;
   border-radius: 3px;

@@ -1,6 +1,21 @@
-import styled  from 'styled-components'
+import styled from 'styled-components'
 import { Theme, InputEditable as Input } from '../../components'
 import cover from '../../assets/img/Cover.png'
+import { Progress as ProgressLevel } from 'react-sweet-progress'
+
+export const Container = styled.div`
+  margin: 0 auto;
+  padding: 0px;
+  overflow-x: hidden;
+`
+
+export const BackgroundProfile = styled.div`
+  height: 250px;
+  background: ${Theme.colors.secondary_color};
+  background: url(${cover}) no-repeat center;
+  background-size: 100%;
+  margin-bottom: 18%;
+`
 
 export const Level = styled(Input)`
   border: none;
@@ -15,19 +30,7 @@ export const Title = styled.p`
   padding: 20px;
 `
 
-export const Container = styled.div`
-  margin: 0 auto;
-  padding: 0px;
-`
-
-export const BackgroundProfile = styled.div`
-  height: 250px;
-  background: ${Theme.colors.secondary_color};
-  background-image: url(${cover});
-  margin-bottom: 18%;
-`
-
-export const WrapperGrid = styled.div`
+export const Grid = styled.div`
   display: flex;
   align-items: center;
   height: 300px;
@@ -38,7 +41,7 @@ export const WrapperGrid = styled.div`
   }
 `
 
-export const GridLeft = styled.div`
+export const Left = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -63,9 +66,16 @@ export const Picture = styled.div`
   position: relative;
 `
 
+export const Progress =  styled(ProgressLevel)`
+  position: relative;
+`
+
 export const ImageProfile = styled.img`
-  width: 200px;
-  height: 200px;
+  width: 92%;
+  height:92%;
+  position: absolute;
+  top: 10px;
+  left: 10px;
   border-radius: 50%;
 `
 
@@ -127,7 +137,7 @@ export const About = styled.textarea`
   margin: 10px 0;
 `
 
-export const GridRight = styled.div`
+export const Right = styled.div`
   display: flex;
   flex-flow: column;
   padding: 10px;

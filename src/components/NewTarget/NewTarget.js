@@ -1,18 +1,19 @@
 import React from 'react'
 import { Theme, Input, Button } from '../../components'
 import { Formik, Field } from 'formik'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { target } from '../../services'
+import { compose, withState, withHandlers } from 'recompose'
 
 const Wrapper = styled.div`
   display: flex;
   flex-flow: column;
   margin: 2% auto;
-  width: 70%;
+  width: calc(100vw - 60vw);
 `
 
 const Container = styled.div`
-  width: 80%;
+  width: 100%;
   margin: 0 auto; 
   padding: 10px;
   display: flex;
@@ -51,118 +52,144 @@ const Label = styled.label`
   color: ${Theme.colors.font_color};
 `
 
-const Actions = styled.div`
-  display: flex;
-  justify-content: space-between;
-
-  & > button+button {
-    width: 220px;
-    margin-right: 10px;
-  }
+const Message = styled.span`
+  color: ${Theme.colors.primary_color};
+  display: ${props => props.visible ? css`block` : css`none`};
 `
 
-const Delete = styled(Button)`
-  width: 120px;
-  font-weight: normal;
-  color: #A8A8A8; 
-  padding: 0;
-  border: solid 1px #E8E8E8;
+const enhance = compose(
+  withState('initialValues', 'setInitialValues', {}),
+  withState('visible', 'setVisible', false),
+  withState('message', 'setMessage', ''),
+  withHandlers({
+    handleSetInitialValues: ({ setInitialValues }) => () => {
+      const data = JSON.parse(localStorage.getItem('profile'))
 
-  &:hover {
-    background: ${Theme.colors.font_color};
-    color: #FFF;
-    opacity: 0.5;
-  }
-`
+      const register = {
+        id: data.idUser,
+        name: data.name,
+        username: data.login,
+        email: data.email,
+        password: data.password
+      }
 
-export const NewTarget = () => (
-  <Wrapper>
-    <Formik
-      render={({
-        errors
-      }) => (
-          <Container>
-            <WrapperInput>
-              <Label>Titulo</Label>
-              <Field
-                name="initialValues.name"
-                render={({ field }) => (
-                  <Input
-                    {...field}
-                    backgroundColor={Theme.colors.base_color}
-                    placeholder='Titulo'
-                    errors={errors}
-                  />
-                )}
-              />
-            </WrapperInput>
-            <WrapperInput>
-              <Label>Descrição</Label>
-              <Field
-                name="initialValues.username"
-                render={({ field }) => (
-                  <Input
-                    {...field}
-                    backgroundColor={Theme.colors.base_color}
-                    placeholder='Descrição'
-                    errors={errors}
-                  />
-                )}
-              />
-            </WrapperInput>
-            <WrapperInput>
-              <Label>Data final</Label>
-              <Field
-                name="initialValues.dateEnd"
-                render={({ field }) => (
-                  <Input
-                    {...field}
-                    backgroundColor={Theme.colors.base_color}
-                    placeholder='Data final'
-                    errors={errors}
-                  />
-                )}
-              />
-            </WrapperInput>
-            <WrapperInput>
-              <Label>Valor</Label>
-              <Field
-                name="initialValues.username"
-                render={({ field }) => (
-                  <Input
-                    {...field}
-                    backgroundColor={Theme.colors.base_color}
-                    placeholder='Valor'
-                    errors={errors}
-                  />
-                )}
-              />
-            </WrapperInput>
-            <Button
-              backgroundColor={Theme.colors.secondary_color}
-              onClick={values => {
-                fetch(target, {
-                  method: 'post',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify({
-                    "name": values.register.name,
-                    "login": values.register.username,
-                    "email": values.register.email,
-                    "password": values.register.password
-                  })
-                })
-                  .then(response => response.json())
-                  .then(json => {
-                    console.log(json)
-                    if (json) {
+      setInitialValues(register)
+    },
+    handleSubmit: ({ setVisible, setMessage }) => values => {
+      const date = new Date()
 
-                    } else {
-
-                    }
-                  })
-              }}> Cadastrar </Button>
-          </Container>
-        )}
-    />
-  </Wrapper>
+      fetch(target, {
+        method: 'post',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          "name": values.name,
+          "description": values.description,
+          "dtStart": `${date.getDay()}/${date.getMonth()}/${date.getFullYear()}`,
+          "dtEnd": values.dateEnd,
+          "value": values.value
+        })
+      })
+        .then(response => response.json())
+        .then(json => {
+          if (json) {
+            setMessage('Alteração realizada com sucesso')
+            setVisible(true)
+          } else {
+            setMessage('Ocurreu um erro ao atualizar o cadastro')
+            setVisible(true)
+          }
+        })
+        .catch(error => {
+          setMessage('Ocurreu um erro ao atualizar o cadastro')
+          setVisible(true)
+        })
+    }
+  })
 )
+
+const Component = ({
+  message,
+  visible,
+  handleSubmit
+}) => (
+    <Wrapper>
+      <Formik
+        render={({
+          values,
+          errors
+        }) => (
+            <Container>
+              <WrapperInput>
+                <Label>Titulo</Label>
+                <Field
+                  name="initialValues.name"
+                  render={({ field }) => (
+                    <Input
+                      {...field}
+                      backgroundColor={Theme.colors.base_color}
+                      placeholder='Titulo'
+                      errors={errors}
+                    />
+                  )}
+                />
+              </WrapperInput>
+              <WrapperInput>
+                <Label>Descrição</Label>
+                <Field
+                  name="initialValues.description"
+                  render={({ field }) => (
+                    <Input
+                      {...field}
+                      backgroundColor={Theme.colors.base_color}
+                      placeholder='Descrição'
+                      errors={errors}
+                    />
+                  )}
+                />
+              </WrapperInput>
+              <WrapperInput>
+                <Label>Data final</Label>
+                <Field
+                  name="initialValues.dateEnd"
+                  render={({ field }) => (
+                    <Input
+                      {...field}
+                      backgroundColor={Theme.colors.base_color}
+                      placeholder='Data final'
+                      errors={errors}
+                    />
+                  )}
+                />
+              </WrapperInput>
+              <WrapperInput>
+                <Label>Valor</Label>
+                <Field
+                  name="initialValues.value"
+                  render={({ field }) => (
+                    <Input
+                      {...field}
+                      backgroundColor={Theme.colors.base_color}
+                      placeholder='Valor'
+                      errors={errors}
+                    />
+                  )}
+                />
+              </WrapperInput>
+              <Message
+                visible={visible}
+              >
+                {message}
+              </Message>
+              <Button
+                backgroundColor={Theme.colors.secondary_color}
+                onClick={() => handleSubmit(values)}
+              >
+                Nova aposta
+              </Button>
+            </Container>
+          )}
+      />
+    </Wrapper>
+  )
+
+export const NewTarget = enhance(Component)

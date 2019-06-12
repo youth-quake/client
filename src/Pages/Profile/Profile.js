@@ -8,7 +8,8 @@ import {
   Achievements,
   Friends,
   Modal,
-  PatrimonialSituation
+  PatrimonialSituation,
+  Theme
 } from '../../components'
 
 import {
@@ -21,25 +22,20 @@ import {
   MessageWrapper,
   TitleMessage,
   About,
-  WrapperGrid,
-  GridLeft,
-  GridRight,
+  Grid,
+  Left,
+  Right,
   Content,
   WrapperContent,
   Menu,
   Item,
   Title,
-  Level
+  Level,
+  Progress
 } from './Profile.style'
 
 import ProfileImage from '../../assets/img/girl big.png'
 import { Formik, Field } from 'formik'
-
-const options = [
-  { key: 1, description: 'Desespesas fixas' },
-  { key: 2, description: 'Desespesas variaveis' },
-  { key: 3, description: 'Objetivos' }
-]
 
 const Profile = ({
   initialValues,
@@ -60,7 +56,7 @@ const Profile = ({
         showModal={showModal}
         toggleModal={toggleModal}
         title="Bem vindo(a)"
-        Form={() => (<PatrimonialSituation options={options} />)}
+        Form={() => (<PatrimonialSituation />)}
       />
       <Friends
         visible={visible}
@@ -75,10 +71,25 @@ const Profile = ({
           }) => (
               <Fragment>
                 <BackgroundProfile>
-                  <WrapperGrid>
-                    <GridLeft>
+                  <Grid>
+                    <Left>
                       <Picture>
-                        <ImageProfile src={ProfileImage} title="Foto de perfil" />
+                        <Progress
+                          type="circle"
+                          strokeWidth={8}
+                          percent={30}
+                          width={230}
+                          height={230}
+                          theme={
+                            {
+                              active: {
+                                symbol: <ImageProfile src={ProfileImage} title="Foto de perfil" />,
+                                trailColor: Theme.colors.base_color,
+                                color: Theme.colors.secondary_constrast_color
+                              }
+                            }
+                          }
+                        />
                       </Picture>
                       <MessageWrapper title="Sobre mim">
                         <TitleMessage>Sobre mim</TitleMessage>
@@ -96,8 +107,8 @@ const Profile = ({
                           )}
                         />
                       </MessageWrapper>
-                    </GridLeft>
-                    <GridRight>
+                    </Left>
+                    <Right>
                       <Information title="Informações gerais">
                         <Field
                           name="initialValues.name"
@@ -140,8 +151,8 @@ const Profile = ({
                           />
                         </Wrapper>
                       </Information>
-                    </GridRight>
-                  </WrapperGrid>
+                    </Right>
+                  </Grid>
                 </BackgroundProfile>
                 <WrapperContent>
                   <Menu>
