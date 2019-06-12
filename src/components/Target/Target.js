@@ -166,6 +166,29 @@ const Blur = styled.div`
   top: 0;
   left: 0;
   z-index: 777;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & > button {
+    width: 120px;
+    margin: 0 auto;
+  }
+`
+
+
+const Delete = styled(Button)`
+  width: 120px;
+  font-weight: normal;
+  color: #A8A8A8; 
+  padding: 0;
+  border: solid 1px #E8E8E8;
+
+  &:hover {
+    background: ${Theme.colors.font_color};
+    color: #FFF;
+    opacity: 0.5;
+  }
 `
 
 const enhance = compose(
@@ -184,7 +207,10 @@ const Form = (initialValues) => (
     render={({ values }) => (
       <Targets>
         <Container>
-          <Blur><Button backgroundColor={Theme.colors.primary_color}>aaaaaaa</Button></Blur>
+          <Blur>
+            <Delete backgroundColor={Theme.colors.transparent}>Excluir</Delete>
+            <Button backgroundColor={Theme.colors.primary_color}>Editar</Button>
+          </Blur>
           <Field
             name="initialValues.title"
             render={({ field }) => (
