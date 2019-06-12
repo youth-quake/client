@@ -2,12 +2,12 @@ import { compose, withState, withHandlers, lifecycle } from 'recompose'
 
 const enhance = compose(
   withState('initialValues', 'setInitialValues', {}),
+  withState('showModal', 'setShowModal', false),
   withHandlers({
     handleSetInitialValues: ({ setInitialValues }) => () => {
       fetch('http://demo2803150.mockable.io/profile')
         .then(response => response.json())
         .then(data => {
-          console.log("moviments", data)
           const moviments = {
             description: data.moviments.description,
             firstTarget: data.moviments.firstTarget,
@@ -32,7 +32,10 @@ const enhance = compose(
           }
 
           return setInitialValues(moviments)
-        }).catch(error => console.log(error))
+        }).catch(error => error)
+    },
+    toggleModal: ({ showModal, setShowModal }) => () => {
+      setShowModal(!showModal)
     }
   }),
   lifecycle({

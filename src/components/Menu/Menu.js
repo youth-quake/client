@@ -7,7 +7,6 @@ import { compose, withHandlers, withState } from 'recompose'
 import { Theme } from '../Theme'
 import { Link } from 'react-router-dom'
 
-
 const Cover = styled.div`
   width: 100%;
   height: 100%;
@@ -25,11 +24,11 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   position: relative;
-  padding: 0 20px 0 10px;
+  padding: 0;
 
-  & > img+img{
-    position: absolute;
-    right: 30px;
+  & > button+button {
+      position: absolute;
+      right: 30px;
   }
 `
 
@@ -121,20 +120,42 @@ export const Component = ({
       />
       <Menu visible={visible}>
         <div>
-          <Link onClick={() => setVisible(false)} to='/perfil'>Perfil</Link>
-          <Link onClick={() => setVisible(false)} to='/dashboard'>Dashboard</Link>
           <Link
+            onClick={() => setVisible(false)}
+            to='/perfil'
+          >
+            Perfil
+          </Link>
+          <Link
+            onClick={() => setVisible(false)}
+            to='/dashboard'
+          >
+            Dashboard
+          </Link>
+          <Link
+            to='/dashboard'
             onClick={() => {
               toggleModal()
               setVisible(false)
-            }}>
+            }}
+          >
             Configurações
           </Link>
-          <Link onClick={() => setVisible(false)} to='/apostas'>Apostas</Link>
-          <Link onClick={() => {
-            setVisible(false)
-            localStorage.clear()
-          }} to='/login'>Sair</Link>
+          <Link
+            onClick={() => setVisible(false)}
+            to='/apostas'
+          >
+            Apostas
+          </Link>
+          <Link
+            onClick={() => {
+              setVisible(false)
+              localStorage.clear()
+            }}
+            to='/login'
+          >
+            Sair
+          </Link>
         </div>
       </Menu>
       <Modal

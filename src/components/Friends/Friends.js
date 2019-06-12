@@ -1,9 +1,6 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 import { Theme, Modal, Bet } from '../../components'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons'
-import iconProfileMini from '../../assets/img/girl mini.png'
 import { compose, withState, withHandlers, lifecycle } from 'recompose'
 import { friend } from '../../services'
 
@@ -112,22 +109,6 @@ const Image = styled.img`
   width: 50px;
 `
 
-const Scroll = styled.button`
-  width: 100%;
-  border: none;
-  outline: none;
-  background: transparent;
-  margin: 10px 0;
-`
-
-const Icon = styled(FontAwesomeIcon)`
-  font-size: 22px;
-
-  &:hover {
-    opacity: 0.5;
-  }
-`
-
 const enhance = compose(
   withState('initialValues', 'setInitialValues', []),
   withState('showModal', 'setShowModal', false),
@@ -201,7 +182,7 @@ const Component = ({
         {initialValues && (
           <Container>
             {initialValues.map(item => (
-              <Friend key={item.key}>
+              <Friend key={item.name}>
                 <Image src={item.img} />
                 <div>
                   <span>{item.name}</span>
