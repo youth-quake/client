@@ -1,6 +1,6 @@
 import React from 'react'
 import DonutChart from 'react-donut-chart'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { Formik, Field } from 'formik'
 import { compose, withHandlers, withState } from 'recompose'
 import { Theme, Button, Modal, NewTarget } from '../../components'
@@ -165,10 +165,11 @@ const Blur = styled.div`
   background-color: rgba(0,0,0,0.5);
   top: 0;
   left: 0;
-  z-index: 777;
+  z-index: 444;
   display: flex;
   justify-content: center;
   align-items: center;
+  display: ${({ visible }) => visible ? css`block` : css`none`};
 
   & > button {
     width: 120px;
@@ -176,12 +177,8 @@ const Blur = styled.div`
   }
 `
 
-
 const Delete = styled(Button)`
-  width: 120px;
-  font-weight: normal;
   color: #A8A8A8; 
-  padding: 0;
   border: solid 1px #E8E8E8;
 
   &:hover {
@@ -308,7 +305,7 @@ export const Component = ({
 }) => (
     <Wrapper>
       <Button onClick={toggleModal} backgroundColor={Theme.colors.primary_color}>Novo objetivo</Button>
-      {targets.map(item => (<Form key={item.key} initialValues={item.initialValues} />))}
+      {targets.map(item => <Form key={item.key} initialValues={item.initialValues} />)}
       <Modal
         showModal={showModal}
         toggleModal={() => toggleModal()}
