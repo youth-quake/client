@@ -25,7 +25,6 @@ const enhance = compose(
       })
       .then(response => response.json())
       .then(json => {
-        console.log(json)
         if(json){
           
         } else {

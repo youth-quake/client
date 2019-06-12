@@ -5,6 +5,21 @@ import { Formik, Field } from 'formik'
 import { compose, withHandlers, withState } from 'recompose'
 import { Theme, Button, Modal, NewTarget } from '../../components'
 
+const Wrapper = styled.div`
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+
+  & > button {
+    position: absolute;
+    right: 12px;
+    top: -60px;
+    width: 120px;
+  }
+`
+
 const Targets = styled.div`
   display: flex;
   flex-flow: row wrap;
@@ -153,6 +168,16 @@ const Blur = styled.div`
   z-index: 777;
 `
 
+const enhance = compose(
+  withState('showModal', 'setShowModal', false),
+  withState('visible', 'setVisible', false),
+  withHandlers({
+    toggleModal: ({ showModal, setShowModal }) => () => {
+      setShowModal(!showModal)
+    }
+  })
+)
+
 const Form = (initialValues) => (
   <Formik
     initialValues={initialValues}
@@ -248,31 +273,6 @@ const Form = (initialValues) => (
       </Targets>
     )}
   />
-)
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-
-  & > button {
-    position: absolute;
-    right: 12px;
-    top: -60px;
-    width: 120px;
-  }
-`
-
-const enhance = compose(
-  withState('showModal', 'setShowModal', false),
-  withState('visible', 'setVisible', false),
-  withHandlers({
-    toggleModal: ({ showModal, setShowModal }) => () => {
-      setShowModal(!showModal)
-    }
-  })
 )
 
 export const Component = ({

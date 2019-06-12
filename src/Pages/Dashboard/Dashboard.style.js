@@ -72,7 +72,7 @@ export const Tag = styled.div`
 	position: absolute;
 	bottom: 0;
 
-	& > label{
+	& > label {
 		margin: 10px;    
 	}
 `
@@ -169,7 +169,7 @@ export const Data = styled.div`
 	}
 `
 
-export const Table = styled.table`
+export const Table = styled.div`
 	width: 100%;
 	padding: 10px 0;
 	text-align: center;
@@ -177,19 +177,19 @@ export const Table = styled.table`
 	margin: 20px 0 0;
 `
 
-export const Header = styled.th`
+export const Header = styled.div`
 	padding: 10px 0;
 	font-weight: 500;
 	border-bottom: solid 1px ${Theme.colors.font_color};
 `
 
-export const Column = styled.td`
+export const Column = styled.div`
 	padding: 10px 0;
 	border-bottom: solid 1px ${Theme.colors.base_color};
 `
 
-export const Line = styled.tr`
+export const Line = styled.div`
 	padding: 10px;
 `
 
-export const Label = styled.label``
+export const Text = styled.label``

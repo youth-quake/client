@@ -7,3 +7,4 @@ export const target = `${BASE}/target/include`
 export const alterRegister = `${BASE}/user/update`
 export const newBet = `${BASE}/bet/include`
 export const friend = `${BASE}/friend`
+export const movements = `${BASE}/movements/include`

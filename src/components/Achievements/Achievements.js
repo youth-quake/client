@@ -56,7 +56,6 @@ const Image = styled.img`
 
 export const Achievements = ({ achievements }) => (
   <div>
-    {console.log(achievements)}
     <Title>Minhas conquistas</Title>
     <Container>
       {achievements.map(item => (

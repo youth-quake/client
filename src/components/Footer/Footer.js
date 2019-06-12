@@ -22,6 +22,10 @@ const Container = styled.div`
     padding: 10px;
   }
 
+  & > u {
+    color: red;
+  }
+
   & > p {
     font-weight: bold;
     margin: 10px;
@@ -44,7 +48,7 @@ const Social = styled.div`
 
 export const Footer = () => (
   <Container title="Informações de contato">
-    <span>&copy; Todos os direitos reservados</span>
+    <span>Feito com ♥ por Youthquake</span>
     <p title="Acesso ao F.A.Q">Contate-nos&nbsp;&nbsp;&nbsp;&nbsp;F.A.Q</p>
     <Social>
       <img src={linkedin} title={'LinkedIn'} alt={'LinkedIn'} />
