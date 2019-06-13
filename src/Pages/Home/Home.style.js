@@ -47,6 +47,7 @@ export const Option = styled(Link)`
 
   & > button {
     width: 120px;
+    color: ${Theme.colors.secondary_color};
   }
 `
 
@@ -107,6 +108,19 @@ export const Animation = styled.img`
   padding: 0;
   width: 100%;
   height: 100%;
+  animation: float 4s ease-in-out infinite;
+
+  @keyframes float {
+    0% {
+      transform: translateX(0px);
+    }
+    50% {
+      transform: translateX(-10px);
+    }
+    100% {
+      transform: translateX(0px);
+    }
+  }
 `
 
 export const Project = styled.div`
@@ -164,5 +178,19 @@ export const Final = styled.div`
   & > img  {
     width: 300px;
     heigth: 300px;
+
+    animation: float 4s ease-in-out infinite;
+
+  @keyframes float {
+    0% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+    100% {
+      transform: translateY(0px);
+    }
+  }
   }
 `
