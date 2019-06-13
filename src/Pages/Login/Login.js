@@ -32,9 +32,6 @@ import { Formik, Field } from 'formik'
 import FacebookLogin from 'react-facebook-login'
 import GoogleLogin from 'react-google-login'
 
-import { ValidatorForm } from 'react-form-validator-core';
-
-
 const responseFacebook = (response) => {
 
 }
@@ -49,7 +46,6 @@ const Login = ({
   isDisabled
 }) => (
     <Container>
-      <ValidatorForm>
         <Formik
           data-testid="login-form"
           render={({
@@ -92,8 +88,6 @@ const Login = ({
                     <Input
                       {...field}
                       placeholder='Login'
-                      validators={['required', 'isEmail']}
-                      errorMessages={['File is not valid', 'Size must not exceed 1MB', 'Only png and jpeg']}
                       errors={errors}
                     />
                   )}
@@ -134,7 +128,6 @@ const Login = ({
           </div>
           <ContentImage src={login} />
         </Content>
-      </ValidatorForm>
     </Container>
   )
 

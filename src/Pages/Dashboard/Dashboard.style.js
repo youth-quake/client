@@ -117,6 +117,7 @@ export const Data = styled.div`
 	
 	& > h3 {
 		padding: 10px 0;
+		font-weight: bold;
 	}
 
 	& > textarea {
