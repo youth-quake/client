@@ -22,7 +22,7 @@ import {
 } from './Login.style'
 
 import youthquake from '../../assets/img/porkinYQ1.png'
-import girl from '../../assets/img/girl.png'
+import login from '../../assets/img/login.png'
 import google from '../../assets/img/google.png'
 import facebook from '../../assets/img/facebook.png'
 
@@ -126,7 +126,7 @@ const Login = ({
               Não perca tempo na hora de construir um futuro inovador.
           </Text>
         </div>
-        <ContentImage src={girl} />
+        <ContentImage src={login} />
       </Content>
     </Container>
   )
