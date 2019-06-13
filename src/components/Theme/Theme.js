@@ -18,6 +18,7 @@ export const Theme = {
       title_color: '#F36523',
       secondary_base_color: '#E4E4E4',
       transparent: 'transparent',
-      red: '#FF0000'
+      red: '#FF0000',
+      green: '#7AC35F'
     }
 }

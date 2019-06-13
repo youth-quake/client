@@ -3,7 +3,7 @@ import { Theme, Input, Button } from '../../components'
 import { Formik, Field } from 'formik'
 import styled, { css } from 'styled-components'
 import { target } from '../../services'
-import { compose, withState, withHandlers } from 'recompose'
+import { compose, withState, withHandlers, lifecycle } from 'recompose'
 
 const Wrapper = styled.div`
   display: flex;
@@ -75,10 +75,10 @@ const enhance = compose(
 
       setInitialValues(register)
     },
-    handleSubmit: ({ setVisible, setMessage }) => values => {
+    handleSubmit: ({ initialValues, setVisible, setMessage }) => values => {
       const date = new Date()
-
-      fetch(target, {
+      
+      fetch(`${target}/${initialValues.id}`, {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -103,6 +103,12 @@ const enhance = compose(
           setMessage('Ocurreu um erro ao atualizar o cadastro')
           setVisible(true)
         })
+    }
+  }),
+  lifecycle({
+    componentDidMount() {
+      const { handleSetInitialValues } = this.props
+      handleSetInitialValues()
     }
   })
 )

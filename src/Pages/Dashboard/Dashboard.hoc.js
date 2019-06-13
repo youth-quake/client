@@ -1,7 +1,9 @@
 import { compose, withState, withHandlers, lifecycle } from 'recompose'
+import { downloadCsv } from '../../services'
 
 const enhance = compose(
   withState('initialValues', 'setInitialValues', {}),
+  withState('visible', 'setVisible', false),
   withState('showModal', 'setShowModal', false),
   withHandlers({
     handleSetInitialValues: ({ setInitialValues }) => () => {
@@ -16,7 +18,8 @@ const enhance = compose(
             moviment: data.moviments.values.map(item => {
               const line = {
                 title: item.title,
-                value: item.value
+                value: item.value,
+                value2: item.value
               }
 
               return line
@@ -36,6 +39,13 @@ const enhance = compose(
     },
     toggleModal: ({ showModal, setShowModal }) => () => {
       setShowModal(!showModal)
+    },
+    toggleVisible: ({ visible, setVisible }) => () => {
+      setVisible(!visible)
+    },
+    downloadCsv: ({ initialValues }) => () => {
+      fetch(`${downloadCsv}/${initialValues.id}`)
+      .catch(error => { return error })
     }
   }),
   lifecycle({

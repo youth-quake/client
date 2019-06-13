@@ -1,5 +1,8 @@
 import styled, { css } from 'styled-components'
-import { Theme } from '../../components'
+import { Theme, Button } from '../../components'
+
+import download from '../../assets/img/downloadMinor.png'
+
 
 export const Container = styled.div`
   margin: 0 auto;
@@ -8,40 +11,12 @@ export const Container = styled.div`
 	background: ${Theme.colors.base_color};
 `
 
-export const AmountValue = styled.div`
-	padding: 10px;
-	font-size: 18px;
-	font-weight: bold;
-	text-align: right; 
-	font-family: ${Theme.font.font_family};
-	color: ${Theme.colors.font_color};
-`
-
-
-export const Information = styled.div`
-	width: 100%;
-	display: flex;
-	flex-flow: column;
-	padding: 5px;
-
-	& > div {
-		border-radius: 2px;
-		background: white;  
-		border: solid 1px ${Theme.colors.secondary_base_color};
-	}
-
-	& > div+div{
-		margin: 10px 0 0;
-		height: 65%;
-	}
-`
-
 export const Wrapper = styled.div`
 	width: 25%;
 	display: flex;
 	flex-flow: column;
 	padding: 5px;
-
+	
 	& > div {
 		border-radius: 2px;
 		background: #FFF;  
@@ -57,6 +32,17 @@ export const Wrapper = styled.div`
 	& > div+div {
 		margin: 15px 0 0;
 	}
+`
+
+export const Description = styled.div`
+	width: 100%;
+	font-size: 24px;
+	font-weight: bold;
+	text-align: center;
+	font-family: ${Theme.font.font_family};
+	height: 100%;
+	line-height: 5;
+	color: ${props => props.color ? css`${Theme.colors.secondary_color}` : css`${Theme.colors.constrast_color}`};
 `
 
 export const Tag = styled.div`
@@ -77,58 +63,30 @@ export const Tag = styled.div`
 	}
 `
 
-export const Description = styled.div`
+export const Information = styled.div`
 	width: 100%;
-	font-size: 24px;
-	font-weight: bold;
-	text-align: center;
-	font-family: ${Theme.font.font_family};
-	height: 100%;
-	line-height: 5;
-	color: ${props => props.color ? css`${Theme.colors.secondary_color}` : css`${Theme.colors.constrast_color}`};
-`
-
-
-export const Title = styled.h3`
-	padding: 10px;
-	font-size: 22px;
-	font-family: ${Theme.font.font_family};
-	color: ${Theme.colors.font_color};
-	border-bottom: solid 1px ${Theme.colors.base_color};
-	outline: none;
-	cursor: default;
-	line-height: 1.3;
-	font-weight: 500;
-`
-
-
-export const Progress = styled.div`
-	font-size: 20px;
-	font-family: ${Theme.font.font_family};
 	display: flex;
 	flex-flow: column;
-	align-items: center;
-	width: 30%;
+	padding: 5px;
+	position: relative;
 
-	& > * {
-		padding: 5px;
-		margin: 10px 0;
+	& > div {
+		border-radius: 2px;
+		background: white;  
+		border: solid 1px ${Theme.colors.secondary_base_color};
+	}
+
+	& > div+div{
+		margin: 10px 0 0;
+		height: 65%;
 	}
 `
 
 export const Card = styled.div`
-	padding: 15px 30px;
+	width: 100%;	
+	padding: 30px 30px;
 	border-radius: 2px;
-	position: relative;
-
-	& > img {
-		width: 30px;
-		heigth: 30px;
-		position: absolute;
-		z-index: 100;
-		right: 35px;
-		top: 20px;
-	}
+	box-sizing: border-box;
 
 	& > div {
 		display: flex;
@@ -136,37 +94,59 @@ export const Card = styled.div`
 	}
 `
 
+export const Title = styled.h3`
+	padding: 10px;
+	font-size: 22px;
+	font-family: ${Theme.font.font_family};
+	color: ${Theme.colors.font_color};
+	border-bottom: solid 0.3px ${Theme.colors.base_color};
+	outline: none;
+	cursor: default;
+	line-height: 1.3;
+	font-weight: 500;
+`
+
 export const Data = styled.div`
-	width: 60%;
-	display: flex;
-	margin: 10px 0;
+	width: 40%;	
+	height: 200px;
 	flex-flow: column;
+	display: flex;
+	justify-content: space-between;
+	padding: 30px 10px;
+	font-family: ${Theme.font.font_family};
 	
-	& > * {
-		padding: 10px 20px;
-		font-family: ${Theme.font.font_family};
-		color: ${Theme.colors.font_color};
+	& > h3 {
+		padding: 10px 0;
 	}
 
 	& > textarea {
-		padding: 20px;
-		font-size: 15px;
-    text-align: justify;
-    border: none;
-    height: 35%;
-    outline: none;
 		resize: none;
+		width: 100%;
+		height: 90%;
+		border: none;
+		outline: none;
+		font-size: 14px;
+		text-align: justify;
 	}
+`
 
-	& > div > label {
-		margin: 0;
-		font-weight: 500;
-	}
+export const Movement = styled(Button)`
+	width: 120px;
+`
 
-	& > div > label+label {
-		margin: 0 10px;
-		font-weight: normal;
-	}
+export const Progress = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 40%;
+`
+
+export const Download = styled(Button)`
+	background: url(${download}) center no-repeat;
+	background-size: 20px;
+	width: 30px;
+	position: absolute;
+	right: 40px;
 `
 
 export const Table = styled.div`
@@ -175,21 +155,32 @@ export const Table = styled.div`
 	text-align: center;
 	font-family: ${Theme.font.font_family};
 	margin: 20px 0 0;
+	display: flex;
+	flex-flow: column;
 `
 
 export const Header = styled.div`
 	padding: 10px 0;
 	font-weight: 500;
+	display: flex;
 	border-bottom: solid 1px ${Theme.colors.font_color};
+	display: flex;
+	justify-content: space-between;
 `
 
 export const Column = styled.div`
 	padding: 10px 0;
 	border-bottom: solid 1px ${Theme.colors.base_color};
+	display: flex;
+	display: flex;
+	justify-content: space-between;
 `
 
 export const Line = styled.div`
 	padding: 10px;
-`
+	display: flex;
 
-export const Text = styled.label``
+	& > p {
+		margin: 10px;
+	}
+`

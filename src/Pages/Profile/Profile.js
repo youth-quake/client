@@ -85,7 +85,7 @@ const Profile = ({
                               active: {
                                 symbol: <ImageProfile src={ProfileImage} title="Foto de perfil" />,
                                 trailColor: Theme.colors.base_color,
-                                color: Theme.colors.secondary_constrast_color
+                                color: Theme.colors.green
                               }
                             }
                           }

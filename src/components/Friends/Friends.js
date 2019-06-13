@@ -3,13 +3,15 @@ import styled, { css } from 'styled-components'
 import { Theme, Modal, Bet } from '../../components'
 import { compose, withState, withHandlers, lifecycle } from 'recompose'
 import { friend } from '../../services'
+import { Input } from '../Input'
+import search from '../../assets/img/search.png'
 
 const Tag = styled.div`
   width: 100px;
   height: 50px;
   background: ${Theme.colors.constrast_color};
   position:fixed;
-  right: 278px;
+  right: 280px;
   top: 280px;
   z-index: 400;
   border-radius: 2px;
@@ -36,7 +38,7 @@ const Wrapper = styled.div`
   top: 25px;
   right: 0;
   text-align: center;
-  border-radius: 3px;
+  border-radius: 2px;
   visibility: ${props => props.visible ? css`visible` : css`hidden`};
   box-shadow: -8px 6px 17px -15px rgba(0,0,0,0.75);
 `
@@ -54,6 +56,9 @@ const Title = styled.p`
   font-family: ${Theme.font.font_family};
   font-weight: bold;
   padding: 10px 20px;
+  border-bottom: solid 0.3px ${Theme.colors.font_color};
+  width: 50%;
+  margin: 0 auto;
 `
 
 const Friend = styled.div`
@@ -109,6 +114,27 @@ const Image = styled.img`
   width: 50px;
 `
 
+export const Search = styled.div`
+  display: flex;
+  width: 90%;
+  margin: 10px auto;
+  height: 35px;
+  border-radius: 3px;
+  background-color: ${Theme.colors.secondary_base_color};
+  align-items: center;
+
+  & > input {
+    background: transparent;
+    padding: 0;
+  }
+
+  & > img {
+    width: 20px;
+    height: 20px;
+    padding: 10px;
+  }
+`
+
 const enhance = compose(
   withState('initialValues', 'setInitialValues', []),
   withState('showModal', 'setShowModal', false),
@@ -143,6 +169,28 @@ const enhance = compose(
     },
     handleClick: ({ showModal, setShowModal }) => () => {
       setShowModal(!showModal)
+    },
+    handleSearch: ({ setInitialValues }) => value => {
+      fetch(`${friend}/value`)
+        .then(response => response.json())
+        .then(friend => {
+          if (friend) {
+
+            const founded = {
+              idFriend: friend.idUser,
+              name: friend.name,
+              username: friend.login
+            }
+
+            return founded
+
+          } else {
+
+          }
+
+          return {}
+        })
+        .catch(error => { return error })
     }
   }),
   lifecycle({
@@ -160,6 +208,7 @@ const Component = ({
   initialValues,
   selectedFriend,
   setSelectedFriend,
+  handleSearch,
   ...props
 }) => {
 
@@ -178,7 +227,14 @@ const Component = ({
         Form={() => (<Bet selectedFriend={selectedFriend} />)}
       />
       <Wrapper visible={visible}>
-        <Title title="Seus contatos">Seus contatos ({initialValues.length})</Title>
+        <Title title="Seus contatos">Seus contatos ({ initialValues.length })</Title>
+        <Search>
+          <img src={search} alt="Buscar amigo" />
+          <Input
+            placeholder='Pesquisar amigos...'
+            onKeyDown={e => handleSearch(e.target.value)}
+          />
+        </Search>
         {initialValues && (
           <Container>
             {initialValues.map(item => (

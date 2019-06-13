@@ -1,12 +1,10 @@
 import React from 'react'
-import DonutChart from 'react-donut-chart'
 
 import {
 	Theme,
 	Footer,
 	NavBar,
 	Friends,
-	Button,
 	Modal,
 	Movements
 } from '../../components'
@@ -25,20 +23,23 @@ import {
 	Header,
 	Card,
 	Data,
-	Text
+	Download,
+	Movement
 } from './Dashboard.style'
 
-import ProfileImage from '../../assets/img/girl big.png'
+import { Progress as ProgressLevel } from 'react-sweet-progress'
 
 const Dashboard = ({
 	initialValues,
 	toggleModal,
-	showModal
+	showModal,
+	toggleVisible,
+	downloadCsv
 }) => (
 		<>
 			<Friends
 				visible={false}
-				toggleVisible={() => { }}
+				toggleVisible={toggleVisible}
 			/>
 			<NavBar />
 			<Container>
@@ -60,63 +61,54 @@ const Dashboard = ({
 					)}
 				</Wrapper>
 				<Information>
-					<Button
-						onClick={toggleModal}
-						backgroundColor={Theme.colors.primary_color}
-					>
-						Movimentar
-					</Button>
 					<Card>
 						<Title>Visão geral</Title>
 						<div>
 							<Data>
-								<textarea placeholder="Descrição" value={initialValues.description} />
-								<div>
-									<Text>1° Objetivo criado:</Text>
-									<Text>{initialValues.firstTarget}</Text>
-								</div>
-								<div>
-									<Text>Objetivo mais recente:</Text>
-									<Text>{initialValues.lastTarget}</Text>
-								</div>
-							</Data>
-							<Progress title="Progresso de sua renda mensal">
-								<DonutChart
-									data={[
-										{ value: 80.5, label: '', isEmpty: false },
-									]}
-									colors={[
-										Theme.colors.primary_color,
-										'#000',
-									]}
-									width={180}
-									height={180}
-									legend={false}
-									strokeColor={'transparent'}
-									clickToggle={true}
-									emptyColor={Theme.colors.secondary_base_color}
+								<h3>Descrição</h3>
+								<textarea
+									placeholder="Descrição"
+									value={initialValues.description}
 								/>
-								<Text>% de Progresso</Text>
+								<Movement backgroundColor={Theme.colors.secondary_constrast_color}>
+									Movimentar
+								</Movement>
+							</Data>
+							<Progress>
+								<ProgressLevel
+									title="Progresso de sua renda mensal"
+									type="circle"
+									strokeWidth={5}
+									percent={30}
+									width={200}
+									theme={
+										{
+											active: {
+												symbol: ' ',
+												trailColor: Theme.colors.base_color,
+												color: Theme.colors.green
+											}
+										}
+									}
+								/>
 							</Progress>
 						</div>
 					</Card>
 					<Card>
-						<img src={ProfileImage} alt="Faça o download da tabela" />
+						<Download onClick={downloadCsv} title="Faça o download do CSV" />
 						<Title>Visualização em tabela</Title>
 						{initialValues.moviment !== undefined && (
 							<Table>
-								{initialValues.moviment.map(item => (
-									<Header key={item.title}>
-										<Line>{item.title}</Line>
-									</Header>
-								))}
-								<Line>
+								<Header>
 									{initialValues.moviment.map(item => (
-										<Column key={item.value}>
-											<Line>{item.value}</Line>
-										</Column>
+										<Line>{item.title}</Line>
 									))}
-								</Line>
+								</Header>
+								<Column>
+									{initialValues.moviment.map(item => (
+										<Line>{item.value}</Line>
+									))}
+								</Column>
 							</Table>
 						)}
 					</Card>
