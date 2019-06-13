@@ -3,6 +3,7 @@ import Login from './Pages/Login'
 import Register from './Pages/Register'
 import Profile from './Pages/Profile'
 import Dashboard from './Pages/Dashboard'
+import Study from './Pages/Study'
 
 const routes = [
   {
@@ -29,6 +30,11 @@ const routes = [
     key: 4,
     path: "/dashboard",
     component: Dashboard
+  },
+  {
+    key: 5,
+    path: "/forum",
+    component: Study
   }
 ]
 
