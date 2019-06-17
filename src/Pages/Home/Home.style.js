@@ -60,7 +60,8 @@ export const Presentation = styled.div`
   position: relative;
   background: #FFF;
   border-radius: .4em;
- 
+  padding: 0 0 20px;
+
   &:after {
     content: '';
     position: absolute;
@@ -164,8 +165,8 @@ export const Screen = styled.div`
   }
 
   & > img {
-    width: 100%;
-    height: 350px;
+    width: 90%;
+    height: 380px;
   }
 `
 
@@ -195,17 +196,66 @@ export const Final = styled.div`
   }
 `
 
-export const Paragraph = styled.h3`
-  width: 90%;
-  font-family: ${Theme.font.font_family};
+export const Disclaimer = styled.div`
+  width: 100%;
+  height: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  padding: 30px 0;
+  line-height: 1.2;
+`
+
+export const WrapperImage = styled.div`
+  width: 200px;
+  height: 220px;
+  border: solid 1px ${Theme.colors.secondary_base_color};  
   text-align: center;
-  color: ${Theme.colors.font_color};  
   padding: 10px;
-  margin: 10px 0;
+  border-radius: 3px;
+  margin: 0 40px;
+
+  & > div {
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  & > p {
+    font-size: 14px;
+    font-family: ${Theme.font.font_family};
+    color: ${Theme.colors.text_color};
+  }
 `
 
 export const Image = styled.img`
-  height: 50px;
-  width: 50px;
+  height: 80px;
+  width: 80px;
   margin: 10px;
+`
+
+export const TitleImage = styled.h3`
+  font-family: ${Theme.font.font_family};
+  font-size: 17px;
+  padding: 10px 0;
+  font-weight: 500;
+  color: #000;
+`
+
+export const Paragraph = styled.div`
+  widht: 100%;
+  margin: 0 auto;
+  text-align: center;
+  padding: 10px;
+  font-family: ${Theme.font.font_family};
+  font-size: 22px;
+  margin: 20px 0;
+
+  & > a {
+    font-weight: bold;
+    color: ${Theme.colors.secondary_color};
+    text-decoration: none;
+  }
 `

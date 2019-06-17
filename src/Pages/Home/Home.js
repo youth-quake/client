@@ -19,6 +19,10 @@ import {
   Screen,
   Final,
   Image,
+  WrapperImage,
+  Disclaimer,
+  TitleImage,
+  Paragraph
 } from './Home.style'
 
 import run from '../../assets/img/run2.png'
@@ -28,9 +32,9 @@ import profile from '../../assets/img/profile.png'
 import dashboard from '../../assets/img/dashboard.png'
 import final from '../../assets/img/screen.png'
 
-import TargetImage from '../../assets/img/target.png'
-import FriendImage from '../../assets/img/friendship.png'
-import TrophyImage from '../../assets/img/trophy.png'
+import share from '../../assets/img/share.png'
+import money from '../../assets/img/money (3).png'
+import learning from '../../assets/img/learning (1).png'
 
 const Home = props => (
   <div>
@@ -52,25 +56,25 @@ const Home = props => (
           <Title>Procura um financeiro estável?</Title>
           <Subtitle>Aqui você encontrará a solução para se organizar e viver em paz com seu bolso.</Subtitle>
           <Animation src={run} alt="Imagem ilustrativa" />
-          <Content>
-                <Image src={TargetImage}></Image>
-                <Title>Defina seus objetivos</Title>
-                <p>Para um bom controle financeiro, o primeiro passo
-                é entender seus objetivos e controlar as suas movimentações.</p>
-              </Content>
-              <Content>
-                <Image src={FriendImage}></Image>
-                <Title>Aposte com amigos</Title>
-                <p>Proponha apostas com um mesmo objetivo em comum!
-              Com datas e regras definidas por vocês. Que vença o melhor!</p>
-              </Content>
-              <Content>
-                <Image src={TrophyImage}></Image>
-                <Title>Ganhe conquistas</Title>
-                <p>Ao ganhar apostas e concluir objetivos,
-              você ganhará conquistas e subirá de níveis!</p>
-              </Content>
         </Wrapper>
+        <Disclaimer>
+            <WrapperImage>
+              <Image src={money}></Image>
+              <TitleImage>Tenha o controle</TitleImage>
+              <p>Defina seus objetivos e tenha um controle das suas economias e gastos.</p>
+            </WrapperImage>
+            <WrapperImage>
+              <Image src={learning}></Image>
+              <TitleImage>Eduque-se</TitleImage>
+              <p>No nosso fórum existem inúmeros materiais de estudo para você.</p>
+            </WrapperImage>
+            <WrapperImage>
+              <Image src={share}></Image>
+              <TitleImage>Compartilhe</TitleImage>
+              <p>Adicione os seus amigos e compartilhe com eles suas conquistas e metas!</p>
+            </WrapperImage>
+          </Disclaimer>
+          <Paragraph><a href="/cadastro">Cadastre-se</a> e descubra como você pode interagir e aprender!</Paragraph>
       </Presentation>
     </Container>
     <Project id="#projeto">

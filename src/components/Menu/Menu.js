@@ -173,6 +173,12 @@ export const Component = ({
             Dashboard
           </Link>
           <Link
+            onClick={() => setVisible(false)}
+            to='/forum'
+          >
+            Fórum
+          </Link>
+          <Link
             to='/dashboard'
             onClick={() => {
               toggleModal()

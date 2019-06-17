@@ -18,20 +18,20 @@ import {
 
 const cards = [
   {
-    title: 'Title',
-    description: 'skjjhksajhakjs'
+    title: 'Introdução',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
   },
   {
-    title: 'Title',
-    description: 'skjjhksajhakjs'
+    title: 'Conceitos básicos',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
   },
   {
-    title: 'Title',
-    description: 'skjjhksajhakjs'
+    title: 'Outros conceitos',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
   },
   {
-    title: 'Title',
-    description: 'skjjhksajhakjs'
+    title: 'Conteúdo adicional',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
   }
 ]
 
@@ -72,7 +72,16 @@ const Study = ({
               </Card>
             ))}
           </Column>
-          <Title>Conteúdo básico</Title>
+          <Title>Conteúdo intermediário</Title>
+          <Column>
+            {cards.map(item => (
+              <Card>
+                <h1>{item.title}</h1>
+                <p>{item.description}</p>
+              </Card>
+            ))}
+          </Column>
+          <Title>Conteúdo Avançado</Title>
           <Column>
             {cards.map(item => (
               <Card>
