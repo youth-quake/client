@@ -174,7 +174,7 @@ export const Component = ({
           </Link>
           <Link
             onClick={() => setVisible(false)}
-            to='/forum'
+            to='/estudos'
           >
             Fórum
           </Link>

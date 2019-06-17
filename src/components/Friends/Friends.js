@@ -9,7 +9,7 @@ import search from '../../assets/img/search.png'
 const Tag = styled.div`
   width: 100px;
   height: 50px;
-  background: ${Theme.colors.constrast_color};
+  background: ${Theme.colors.secondary_color};
   position:fixed;
   right: 280px;
   top: 280px;

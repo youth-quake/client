@@ -6,14 +6,15 @@ import {
   Friends,
   Modal,
   PatrimonialSituation,
+  Content,
 } from '../../components'
 
-import { 
-  Container, 
-  Column, 
-  Card, 
-  Wrapper, 
-  Title 
+import {
+  Container,
+  Column,
+  Card,
+  Wrapper,
+  Title
 } from './Study.style'
 
 const cards = [
@@ -85,8 +86,15 @@ const Study = ({
           <Column>
             {cards.map(item => (
               <Card>
+                <Modal
+                  showModal={showModal}
+                  toggleModal={toggleModal}
+                  title="Conteúdo básico"
+                  Form={() => (<Content />)}
+                />
                 <h1>{item.title}</h1>
                 <p>{item.description}</p>
+                <button onClick={toggleModal} />
               </Card>
             ))}
           </Column>

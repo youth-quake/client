@@ -9,7 +9,8 @@ import {
   Friends,
   Modal,
   PatrimonialSituation,
-  Theme
+  Theme,
+  ModalBet as Bet
 } from '../../components'
 
 import {
@@ -52,11 +53,12 @@ const Profile = ({
   toggleModal,
   showModal,
   setEditable,
-  setTitleButton
+  setTitleButton,
+  isBet
 }) => (
     <Container>
       <Modal
-        showModal={showModal}
+        showModal={false}
         toggleModal={toggleModal}
         title="Bem vindo(a)"
         Form={() => (<PatrimonialSituation />)}
@@ -161,25 +163,25 @@ const Profile = ({
                   <Menu>
                     <Item
                       title="Visualizar minhas conquistas"
-                      onClick={() => showComponent()}
+                      onClick={e => showComponent(e.target)}
                     >
-                      <img src={cup} alt="Conquistas"/>
-                      <span>Conquistas</span>
-                  </Item>
+                      <img src={cup} alt="Conquistas" />
+                      <span id="isAchievements">Conquistas</span>
+                    </Item>
                     <Item
                       title="Visualizar meus objetivos pessoais"
-                      onClick={() => showComponent()}
+                      onClick={e => showComponent(e.target)}
                     >
-                      <img src={racingFlag} alt="Objetivos"/>
-                      <span>Objetivos</span>
-                  </Item>
-                  <Item
+                      <img src={racingFlag} alt="Objetivos" />
+                      <span id="isTarget">Objetivos</span>
+                    </Item>
+                    <Item
                       title="Visualizar meus objetivos pessoais"
-                      onClick={() => showComponent()}
+                      onClick={e => showComponent(e.target)}
                     >
-                      <img src={handshake} alt="Apostas"/> 
-                      <span>Apostas</span>
-                  </Item>
+                      <img src={handshake} alt="Apostas" />
+                      <span id="isBet">Apostas</span>
+                    </Item>
                   </Menu>
                   {(isAchievements && initialValues.achievements !== undefined) && (
                     <Content>
@@ -189,6 +191,11 @@ const Profile = ({
                   {(isTarget && initialValues.targets !== undefined) && (
                     <Content>
                       <Target targets={initialValues.targets} />
+                    </Content>
+                  )}
+                  {isBet && (
+                    <Content>
+                      <Bet targets={initialValues.targets}/>
                     </Content>
                   )}
                 </WrapperContent>

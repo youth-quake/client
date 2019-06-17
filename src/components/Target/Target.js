@@ -324,7 +324,7 @@ export const Component = ({
   toggleModal
 }) => (
     <div>
-      <Title>Meus objetivos</Title>
+      <Title>Todos os objetivos</Title>
       <Wrapper>
         <Button onClick={toggleModal} backgroundColor={Theme.colors.primary_color}>Novo objetivo</Button>
         {targets.map(item => <Form key={item.key} initialValues={item.initialValues} />)}

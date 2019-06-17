@@ -59,7 +59,7 @@ export const Picture = styled.div`
   position: relative;
 `
 
-export const Progress =  styled(ProgressLevel)`
+export const Progress = styled(ProgressLevel)`
   position: relative;
 `
 
@@ -158,7 +158,7 @@ export const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   width: 200px;
-
+  
   & > input {
     width: 150px;
     padding: 15px 0;
@@ -175,7 +175,7 @@ export const Wrapper = styled.div`
 export const WrapperContent = styled.div`
   display: flex;
   padding: 40px 100px;
-  
+
   & > div {
     margin: 0 100px;
   }
@@ -188,7 +188,7 @@ export const Content = styled.div`
   padding: 0 0 30px;
 
   & > div {
-    margin: 0 20px;
+    margin: 0 auto;
   }
 `
 

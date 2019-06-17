@@ -33,7 +33,7 @@ const routes = [
   },
   {
     key: 5,
-    path: "/forum",
+    path: "/estudos",
     component: Study
   }
 ]
