@@ -5,6 +5,9 @@ import { Formik, Field } from 'formik'
 import { compose, withHandlers, withState } from 'recompose'
 import { Theme, Button, Modal, NewTarget } from '../../components'
 
+import dollar from '../../assets/img/dollar.png'
+import dollarNoFill from '../../assets/img/dollar1.png'
+
 const Wrapper = styled.div`
   display: flex;
   flex-flow: column;
@@ -37,7 +40,7 @@ const Column = styled.div`
 
 const Container = styled.div`
   width: 100%;
-  height: 300px;
+  height: 250px;
   background: #FFF;
   display: flex;
   flex-flow: column;
@@ -65,9 +68,9 @@ const Name = styled.input`
 const Description = styled.div`
   display: flex;
   align-items: center;
-  margin: 30px 50px 10px;
+  margin: 30px 50px 0;
   color: ${Theme.colors.font_color};
-  height: 100px;
+  height: 80px;
   width: 450px;
 
   & > textarea {
@@ -98,63 +101,70 @@ const Progress = styled.div`
 `
 
 const Information = styled.div`
-  width: 290px;
+  width: 90%;
   margin: 0 50px;
   font-size: 16px;
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
-  flex-flow: column;
+  
+  & > div {
+    padding: 10px 0;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+  }
+`
+
+const Data = styled.div`
+  width: 210px;
+  display: flex;
 
   & > div {
-    padding: 10px;
     display: flex;
-    justify-content: space-between;
-  
-    & > span {
-      width: 100%;
-      font-weight: bold;
-    }
+  justify-content: space-between;
   }
 
-  & > h3 {
-    margin: 20px 0;
-    display: flex;
-    justify-content: space-between;
+  & >  div > span {
+    width: 100px;
+    margin: 0;
+    font-weight: bold;
+  }
 
-    & > span {
-      font-weight: bold;
-    }
-
-    & > span+span {
-      font-weight: normal;
-    }
+  & > div > input {
+    width: 100px;
   }
 `
 
 const Input = styled.input`
-  width: 100%;
   outline: none;
   border: none;
   margin: 0;
 `
 
 const Amount = styled.div`
-  width: 88%;
+  max-width: 200px;
   margin: 0 auto;
-  padding: 5px 10px;
+  padding: 0;
   display: flex;
+  flex-flow: column;
   justify-content: space-between;
-
-
+  align-items: center;
+  
   & > span {
-    width: 170px;
-    padding: 10px;
+    padding: 0;
+    width: 100%;
     font-weight: bold;
   }
+`
 
-  & > * {
-    background: transparent;
+const DollarStats = styled.div`
+  margin-top: 10px;
+
+  & > img {
+    width: 30px;
+    height: 30px;
+    margin: 0 2px;
   }
 `
 
@@ -187,6 +197,15 @@ const Delete = styled(Button)`
     opacity: 0.5;
   }
 `
+
+const Title = styled.p`
+  font-size: 28px;  
+  font-family: ${Theme.font.font_family};
+  font-weight: bold;
+  padding: 20px 10px;
+`
+
+
 
 const enhance = compose(
   withState('showModal', 'setShowModal', false),
@@ -232,28 +251,40 @@ const Form = (initialValues) => (
                 />
               </Description>
               <Information>
-                <div>
-                  <span title="Data inicial">Data inicial:</span>
-                  <Field
-                    name="initialValues.dateStart"
-                    render={({ field }) => (
-                      <Input
-                        {...field}
-                      />
-                    )}
-                  />
-                </div>
-                <div>
-                  <span title="Data final">Data final:</span>
-                  <Field
-                    name="initialValues.dateEnd"
-                    render={({ field }) => (
-                      <Input
-                        {...field}
-                      />
-                    )}
-                  />
-                </div>
+                <Data>
+                  <div>
+                    <span title="Data inicial">Comecei em</span>
+                    <Field
+                      name="initialValues.dateStart"
+                      render={({ field }) => (
+                        <Input
+                          {...field}
+                        />
+                      )}
+                    />
+                  </div>
+                  <div>
+                    <span title="Data final">Termino em</span>
+                    <Field
+                      name="initialValues.dateEnd"
+                      render={({ field }) => (
+                        <Input
+                          {...field}
+                        />
+                      )}
+                    />
+                  </div>
+                </Data>
+                <Amount>
+                  <span title="Renda acumulada">Grana acumulada</span>
+                  <DollarStats>
+                    <img src={dollar} alt="Dollar" />
+                    <img src={dollarNoFill} alt="Dollar" />
+                    <img src={dollarNoFill} alt="Dollar" />
+                    <img src={dollarNoFill} alt="Dollar" />
+                    <img src={dollarNoFill} alt="Dollar" />
+                  </DollarStats>
+                </Amount>
               </Information>
             </div>
             <Progress title="Progresso do objetivo">
@@ -281,17 +312,6 @@ const Form = (initialValues) => (
               />
             </Progress>
           </Column>
-          <Amount>
-            <span title="Renda acumulada">Minha grana:</span>
-            <Field
-              name="initialValues.amount"
-              render={({ field }) => (
-                <Input
-                  {...field}
-                />
-              )}
-            />
-          </Amount>
         </Container>
       </Targets>
     )}
@@ -303,17 +323,20 @@ export const Component = ({
   showModal,
   toggleModal
 }) => (
-    <Wrapper>
-      <Button onClick={toggleModal} backgroundColor={Theme.colors.primary_color}>Novo objetivo</Button>
-      {targets.map(item => <Form key={item.key} initialValues={item.initialValues} />)}
-      <Modal
-        showModal={showModal}
-        toggleModal={() => toggleModal()}
-        title="Novo objetivo"
-        text=""
-        Form={NewTarget}
-      />
-    </Wrapper>
+    <div>
+      <Title>Meus objetivos</Title>
+      <Wrapper>
+        <Button onClick={toggleModal} backgroundColor={Theme.colors.primary_color}>Novo objetivo</Button>
+        {targets.map(item => <Form key={item.key} initialValues={item.initialValues} />)}
+        <Modal
+          showModal={showModal}
+          toggleModal={() => toggleModal()}
+          title="Novo objetivo"
+          text=""
+          Form={NewTarget}
+        />
+      </Wrapper>
+    </div>
   )
 
 

@@ -17,7 +17,8 @@ import {
   Content,
   Experience,
   Screen,
-  Final
+  Final,
+  Image,
 } from './Home.style'
 
 import run from '../../assets/img/run2.png'
@@ -26,6 +27,10 @@ import youthquake from '../../assets/img/Screenshot_15-1@2x.png'
 import profile from '../../assets/img/profile.png'
 import dashboard from '../../assets/img/dashboard.png'
 import final from '../../assets/img/screen.png'
+
+import TargetImage from '../../assets/img/target.png'
+import FriendImage from '../../assets/img/friendship.png'
+import TrophyImage from '../../assets/img/trophy.png'
 
 const Home = props => (
   <div>
@@ -47,6 +52,24 @@ const Home = props => (
           <Title>Procura um financeiro estável?</Title>
           <Subtitle>Aqui você encontrará a solução para se organizar e viver em paz com seu bolso.</Subtitle>
           <Animation src={run} alt="Imagem ilustrativa" />
+          <Content>
+                <Image src={TargetImage}></Image>
+                <Title>Defina seus objetivos</Title>
+                <p>Para um bom controle financeiro, o primeiro passo
+                é entender seus objetivos e controlar as suas movimentações.</p>
+              </Content>
+              <Content>
+                <Image src={FriendImage}></Image>
+                <Title>Aposte com amigos</Title>
+                <p>Proponha apostas com um mesmo objetivo em comum!
+              Com datas e regras definidas por vocês. Que vença o melhor!</p>
+              </Content>
+              <Content>
+                <Image src={TrophyImage}></Image>
+                <Title>Ganhe conquistas</Title>
+                <p>Ao ganhar apostas e concluir objetivos,
+              você ganhará conquistas e subirá de níveis!</p>
+              </Content>
         </Wrapper>
       </Presentation>
     </Container>

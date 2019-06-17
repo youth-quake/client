@@ -34,11 +34,12 @@ const Dashboard = ({
 	toggleModal,
 	showModal,
 	toggleVisible,
-	downloadCsv
+	downloadCsv,
+	visible
 }) => (
 		<>
 			<Friends
-				visible={false}
+				visible={visible}
 				toggleVisible={toggleVisible}
 			/>
 			<NavBar />
@@ -70,7 +71,10 @@ const Dashboard = ({
 									placeholder="Descrição"
 									value={initialValues.description}
 								/>
-								<Movement backgroundColor={Theme.colors.secondary_constrast_color}>
+								<Movement 
+									backgroundColor={Theme.colors.secondary_constrast_color}
+									onClick={toggleModal}
+								>
 									Movimentar
 								</Movement>
 							</Data>

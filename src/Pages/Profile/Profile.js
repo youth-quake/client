@@ -29,13 +29,16 @@ import {
   WrapperContent,
   Menu,
   Item,
-  Title,
   Level,
   Progress
 } from './Profile.style'
 
 import ProfileImage from '../../assets/img/girl big.png'
 import { Formik, Field } from 'formik'
+
+import cup from '../../assets/img/cup.png'
+import racingFlag from '../../assets/img/racing-flag.png'
+import handshake from '../../assets/img/handshake.png'
 
 const Profile = ({
   initialValues,
@@ -160,13 +163,22 @@ const Profile = ({
                       title="Visualizar minhas conquistas"
                       onClick={() => showComponent()}
                     >
-                      Conquistas
+                      <img src={cup} alt="Conquistas"/>
+                      <span>Conquistas</span>
                   </Item>
                     <Item
                       title="Visualizar meus objetivos pessoais"
                       onClick={() => showComponent()}
                     >
-                      Objetivos
+                      <img src={racingFlag} alt="Objetivos"/>
+                      <span>Objetivos</span>
+                  </Item>
+                  <Item
+                      title="Visualizar meus objetivos pessoais"
+                      onClick={() => showComponent()}
+                    >
+                      <img src={handshake} alt="Apostas"/> 
+                      <span>Apostas</span>
                   </Item>
                   </Menu>
                   {(isAchievements && initialValues.achievements !== undefined) && (
@@ -176,7 +188,6 @@ const Profile = ({
                   )}
                   {(isTarget && initialValues.targets !== undefined) && (
                     <Content>
-                      <Title>Meus objetivos</Title>
                       <Target targets={initialValues.targets} />
                     </Content>
                   )}

@@ -96,6 +96,46 @@ const Menu = styled.div`
   }
 `
 
+export const AllOptions = styled.div`
+  padding: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  background: ${props => props.color};
+  font-family: ${Theme.font.font_family};
+`
+
+export const WrapperOptions = styled.div`
+  display:flex;  
+  align-items: center;
+
+  & > a+a{
+    margin-left: 14px; 
+  }
+`
+
+export const Option = styled(Link)`
+  height: 40px;
+  padding: 10px 0;
+  line-height: 2;
+  text-decoration: ${props => props.currentRoute ? 'underline' : 'none'};
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+
+  & > button {
+    width: 120px;
+    color: ${Theme.colors.secondary_color};
+  }
+`
+
+export const Divider = styled.div`
+  display: flex;
+  width: 95%;
+  margin: 0 auto;
+  padding: 0 20px;
+  justify-content: space-between;
+`
+
 const enhance = compose(
   withState('showModal', 'setShowModal', false),
   withState('visible', 'setVisible', false),
@@ -165,15 +205,24 @@ export const Component = ({
         text=""
         Form={Config}
       />
-      <NavbarImage
-        img={youthquake}
-        title="Ir para a página inicial"
-      />
-      <NavbarImage
-        onClick={() => setVisible(!visible)}
-        img={iconProfileMini}
-        title="Visualizar opções"
-      />
+      <Divider>
+          <NavbarImage
+            img={youthquake}
+            title="Ir para a página inicial"
+          />
+          <AllOptions color={Theme.base_color}>
+            <WrapperOptions>
+            <Option to='/'>Home</Option>
+              <Option to='/#projeto'>O projeto</Option>
+              <Option to='/#sobre-nos'>Fórum</Option>
+            </WrapperOptions>
+          </AllOptions>
+        <NavbarImage
+          onClick={() => setVisible(!visible)}
+          img={iconProfileMini}
+          title="Visualizar opções"
+        />
+      </Divider>
     </Container>
   )
 

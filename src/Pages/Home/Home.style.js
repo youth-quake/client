@@ -194,3 +194,18 @@ export const Final = styled.div`
   }
   }
 `
+
+export const Paragraph = styled.h3`
+  width: 90%;
+  font-family: ${Theme.font.font_family};
+  text-align: center;
+  color: ${Theme.colors.font_color};  
+  padding: 10px;
+  margin: 10px 0;
+`
+
+export const Image = styled.img`
+  height: 50px;
+  width: 50px;
+  margin: 10px;
+`
