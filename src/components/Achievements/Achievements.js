@@ -4,6 +4,7 @@ import { Theme } from '../../components'
 import Trofeu from '../../assets/img/trofeu.png'
 
 const Container = styled.div`
+  width: 100%;
   display: flex;
   flex-flow: row wrap;
   justify-content: flex-start;
@@ -15,6 +16,7 @@ const Container = styled.div`
 `
 
 const Title = styled.p`
+  width: 100%;
   font-size: 28px;  
   font-family: ${Theme.font.font_family};
   font-weight: bold;

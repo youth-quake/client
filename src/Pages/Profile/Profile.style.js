@@ -202,6 +202,7 @@ export const Menu = styled.ul`
   list-style: none;
   padding: 10px 15px;
   max-width: 140px;
+  max-height: 170px;
   justify-content: center;
 
   & > li {

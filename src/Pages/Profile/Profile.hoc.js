@@ -12,7 +12,6 @@ export const values = withFormik({
     email: data.email,
     message: data.messageStatus,
     level: 'Nivel 81',
-    friends: [{ key: 1, name: 'aushaus', username: 'ausuhash' }],
     achievements: data.AchievementUsers,
     targets: data.target.map(item => {
       return {
@@ -29,8 +28,7 @@ export const values = withFormik({
         }
       }
     })
-  }),
-  handleSubmit: values => { }
+  })
 })
 
 const enhance = compose(
@@ -39,11 +37,11 @@ const enhance = compose(
   withState('isDisable', 'setIsDisabled', true),
   withState('editable', 'setEditable', true),
   withState('isTarget', 'setIsTarget', false),
-  withState('isAchievements', 'setIsAchievements', false),
+  withState('isAchievements', 'setIsAchievements', true),
   withState('titleButton', 'setTitleButton', 'Editar'),
   withState('visible', 'setVisible', false),
   withState('showModal', 'setShowModal', true),
-  withState('isBet', 'setIsBet', true),
+  withState('isBet', 'setIsBet', false),
   withHandlers({
     showComponent: ({
       setIsTarget,

@@ -62,7 +62,7 @@ const Profile = ({
 }) => (
     <Container>
       <Modal
-        showModal={false}
+        showModal={showModal}
         toggleModal={toggleModal}
         title="Bem vindo(a)"
         Form={() => (<PatrimonialSituation />)}
