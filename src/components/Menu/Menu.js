@@ -179,19 +179,12 @@ export const Component = ({
             Fórum
           </Link>
           <Link
-            to='/dashboard'
             onClick={() => {
               toggleModal()
               setVisible(false)
             }}
           >
             Configurações
-          </Link>
-          <Link
-            onClick={() => setVisible(false)}
-            to='/apostas'
-          >
-            Apostas
           </Link>
           <Link
             onClick={() => {

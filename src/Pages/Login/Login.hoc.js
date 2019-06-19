@@ -20,6 +20,7 @@ const enhance = compose(
             localStorage.setItem('profile', JSON.stringify({}))
           }
 
+          console.log('perfil', profile)
           return {}
         })
         .catch(error => { return error })

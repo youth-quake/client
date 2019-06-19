@@ -147,7 +147,7 @@ export const Information = styled.div`
   width: 300px;
 
   & > input {
-    width: 320px;
+    width: 100%;
     font-size: 24px;
     font-weight: bold;
     color: ${Theme.colors.base_color};
@@ -156,11 +156,13 @@ export const Information = styled.div`
 
 export const Wrapper = styled.div`
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  width: 200px;
-  
+  width: 100%;
+
   & > input {
-    width: 150px;
+    margin-right: 10px;
+    width: 180px;
     padding: 15px 0;
     font-size: 18px;
     text-align: left;
@@ -168,7 +170,8 @@ export const Wrapper = styled.div`
   }
 
   & > input+input {
-    width: 100px;
+    width: 80px;
+    margin: 0;
   }
 `
 

@@ -54,7 +54,11 @@ const Profile = ({
   showModal,
   setEditable,
   setTitleButton,
-  isBet
+  isBet,
+  handleUpdateMessageUser,
+  setMessage,
+  message,
+  handleUpdateUser
 }) => (
     <Container>
       <Modal
@@ -72,7 +76,9 @@ const Profile = ({
         <Formik
           initialValues={initialValues}
           render={({
-            errors
+            errors,
+            values,
+            setFieldValue
           }) => (
               <Fragment>
                 <BackgroundProfile>
@@ -99,15 +105,15 @@ const Profile = ({
                       <MessageWrapper title="Sobre mim">
                         <TitleMessage>Sobre mim</TitleMessage>
                         <Field
-                          name="initialValues.message"
+                          name="message"
                           render={({ field }) => (
                             <About
                               {...field}
-                              value={initialValues.message}
-                              disabled={editable}
                               errors={errors}
                               rows="4"
                               cols="80"
+                              onChange={e => setFieldValue('message', e.target.value)}
+                              onBlur={() => handleUpdateMessageUser(initialValues, values)}
                             />
                           )}
                         />
@@ -116,39 +122,34 @@ const Profile = ({
                     <Right>
                       <Information title="Informações gerais">
                         <Field
-                          name="initialValues.name"
+                          name="name"
                           render={({ field }) => (
                             <Editable
                               {...field}
                               placeholder='Nome completo'
-                              value={initialValues.name}
-                              editable={editable}
-                              disabled={editable}
                               errors={errors}
+                              onBlur={() => handleUpdateUser(initialValues, values)}
                             />
                           )}
                         />
                         <Wrapper>
                           <Field
-                            name="initialValues.username"
+                            name="username"
                             render={({ field }) => (
                               <Editable
                                 {...field}
                                 placeholder='Username'
-                                value={initialValues.username}
-                                editable={editable}
-                                disabled={editable}
                                 errors={errors}
+                                onBlur={() => handleUpdateUser(initialValues, values)}
                               />
                             )}
                           />
                           <Field
-                            name="initialValues.level"
+                            name="level"
                             render={({ field }) => (
                               <Level
                                 {...field}
                                 placeholder='Nivel 1'
-                                value={initialValues.level}
                                 disabled
                                 errors={errors}
                               />
@@ -195,7 +196,7 @@ const Profile = ({
                   )}
                   {isBet && (
                     <Content>
-                      <Bet targets={initialValues.targets}/>
+                      <Bet targets={initialValues.targets} />
                     </Content>
                   )}
                 </WrapperContent>

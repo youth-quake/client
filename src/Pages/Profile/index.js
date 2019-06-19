@@ -1,4 +1,4 @@
 import Profile from './Profile'
-import enhance from './Profile.hoc'
+import enhance, { values } from './Profile.hoc'
 
-export default enhance(Profile)
+export default enhance(values(Profile))

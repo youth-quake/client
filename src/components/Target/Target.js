@@ -8,6 +8,8 @@ import { Theme, Button, Modal, NewTarget } from '../../components'
 import dollar from '../../assets/img/dollar.png'
 import dollarNoFill from '../../assets/img/dollar1.png'
 
+import { updateTarget } from '../../services'
+
 const Wrapper = styled.div`
   display: flex;
   flex-flow: column;
@@ -140,6 +142,7 @@ const Input = styled.input`
   outline: none;
   border: none;
   margin: 0;
+  background: transparent;
 `
 
 const Amount = styled.div`
@@ -205,7 +208,9 @@ const Title = styled.p`
   padding: 20px 10px;
 `
 
-
+const Tag = styled.span`
+  cursor: default;
+`
 
 const enhance = compose(
   withState('showModal', 'setShowModal', false),
@@ -216,6 +221,22 @@ const enhance = compose(
     }
   })
 )
+
+const profile = JSON.parse(localStorage.getItem('profile'))
+
+const update = (values) => {
+  fetch(`${updateTarget}/${values.initialValues.id}/${profile.idUser}`, {
+    method: 'put',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      "name": values.name,
+      "description": values.initialValues.description,
+      "dtEnd": values.initialValues.dateEnd,
+      "value": values.initialValues.value,
+    })
+  })
+    .then(response => response.json())
+}
 
 const Form = (initialValues) => (
   <Formik
@@ -233,6 +254,7 @@ const Form = (initialValues) => (
               <Name
                 {...field}
                 title="Titulo do objetivo"
+                onBlur={() => update(values)}
               />
             )}
           />
@@ -246,6 +268,7 @@ const Form = (initialValues) => (
                       {...field}
                       maxLength={200}
                       title="Descrição do objetivo"
+                      onBlur={() => update(values)}
                     />
                   )}
                 />
@@ -253,30 +276,32 @@ const Form = (initialValues) => (
               <Information>
                 <Data>
                   <div>
-                    <span title="Data inicial">Comecei em</span>
+                    <Tag title="Data inicial">Comecei em</Tag>
                     <Field
                       name="initialValues.dateStart"
                       render={({ field }) => (
                         <Input
                           {...field}
+                          disabled
                         />
                       )}
                     />
                   </div>
                   <div>
-                    <span title="Data final">Termino em</span>
+                    <Tag title="Data final">Termino em</Tag>
                     <Field
                       name="initialValues.dateEnd"
                       render={({ field }) => (
                         <Input
                           {...field}
+                          onBlur={() => update(values)}
                         />
                       )}
                     />
                   </div>
                 </Data>
                 <Amount>
-                  <span title="Renda acumulada">Grana acumulada</span>
+                  <Tag title="Renda acumulada">Grana acumulada</Tag>
                   <DollarStats>
                     <img src={dollar} alt="Dollar" />
                     <img src={dollarNoFill} alt="Dollar" />

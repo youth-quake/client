@@ -1,10 +1,41 @@
-import { compose, withState, withHandlers, lifecycle } from 'recompose'
+import { compose, withState, withHandlers } from 'recompose'
+import { updateMessage, update } from '../../services'
+import { withFormik } from 'formik'
+
+const data = JSON.parse(localStorage.getItem('profile'))
+
+export const values = withFormik({
+  mapPropsToValues: () => ({
+    id: data.idUser,
+    name: data.name,
+    username: data.login,
+    email: data.email,
+    message: data.messageStatus,
+    level: 'Nivel 81',
+    friends: [{ key: 1, name: 'aushaus', username: 'ausuhash' }],
+    achievements: data.AchievementUsers,
+    targets: data.target.map(item => {
+      return {
+        key: item.idTarget,
+        initialValues: {
+          id: item.idTarget,
+          description: item.description,
+          dateEnd: item.dtEnd,
+          dateStart: item.dtStart,
+          percent: item.percentage,
+          amount: item.value,
+          title: item.name,
+          totalAmount: item.valueAccumulated
+        }
+      }
+    })
+  }),
+  handleSubmit: values => { }
+})
 
 const enhance = compose(
-  withState('initialValues', 'setInitialValues', {}),
   withState('value', 'setValue', ''),
   withState('isVisible', 'setIsVisible', false),
-  withState('isValid', 'setIsValid', false),
   withState('isDisable', 'setIsDisabled', true),
   withState('editable', 'setEditable', true),
   withState('isTarget', 'setIsTarget', false),
@@ -42,42 +73,26 @@ const enhance = compose(
     toggleModal: ({ showModal, setShowModal }) => () => {
       setShowModal(!showModal)
     },
-    handleSetInitialValues: ({ setInitialValues }) => () => {
-      const data = JSON.parse(localStorage.getItem('profile'))
-
-      const register = {
-        name: data.name,
-        username: data.login,
-        email: data.email,
-        message: 'Sou apaixonada por tecnologia e livros. Adoro palavras cruzadas e meu sonho é viajar para a Disney.',
-        level: 'Nivel 81',
-        friends: [{ key: 1, name: 'aushaus', username: 'ausuhash' }],
-        achievements: data.AchievementUsers,
-        targets: data.target.map(item => {
-          const target = {
-            key: item.idTarget,
-            initialValues: {
-              description: item.description,
-              dateEnd: item.dtEnd,
-              dateStart: item.dtStart,
-              percent: item.percentage,
-              amount: item.value,
-              title: item.name,
-              totalAmount: item.valueAccumulated
-            }
-          }
-
-          return target
+    handleUpdateUser: () => (initialValues, values) => {
+      fetch(`${update}/${initialValues.id}`, {
+        method: 'put',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          "name": values.name,
+          "login": values.username,
         })
-      }
-
-      setInitialValues(register)
-    }
-  }),
-  lifecycle({
-    componentDidMount() {
-      const { handleSetInitialValues } = this.props
-      handleSetInitialValues()
+      })
+        .then(response => response.json())
+    },
+    handleUpdateMessageUser: () => (initialValues, values) => {
+      fetch(`${updateMessage}/${initialValues.id}`, {
+        method: 'put',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          "messageStatus": values.message || ""
+        })
+      })
+        .then(response => response.json())
     }
   })
 )

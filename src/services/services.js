@@ -10,3 +10,6 @@ export const newBet = `${BASE}/bet/include`
 export const friend = `${BASE}/friend`
 export const movements = `${BASE}/movements/include`
 export const downloadCsv = `${MICRO_SERVICE}/target/download`
+export const updateMessage = `${BASE}/user/updateinfo`
+export const update = `${BASE}/user/update`
+export const updateTarget = `${BASE}/target/update`
