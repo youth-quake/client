@@ -190,7 +190,7 @@ const Component = ({
                 backgroundColor={Theme.colors.secondary_color}
                 onClick={() => handleSubmit(values)}
               >
-                Nova aposta
+                Novo objetivo
               </Button>
             </Container>
           )}
