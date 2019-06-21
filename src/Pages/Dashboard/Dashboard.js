@@ -29,6 +29,8 @@ import {
 
 import { Progress as ProgressLevel } from 'react-sweet-progress'
 
+import download from '../../assets/img/downloadMinor.png'
+
 const Dashboard = ({
 	initialValues,
 	toggleModal,
@@ -68,10 +70,10 @@ const Dashboard = ({
 							<Data>
 								<h3>Hey!</h3>
 								<p>
-									Aqui você terá uma visão geral de como está progredindo com as suas finanças e o histórico das suas movimentações, lembrando que aqui nós observamos com base em todos os objetivos e movimentações, sendo elas gastos ou economias. 
+									Aqui você terá uma visão geral de como está progredindo com as suas finanças e o histórico das suas movimentações, lembrando que aqui nós observamos com base em todos os objetivos e movimentações, sendo elas gastos ou economias.
 									<br />E ah, lembre-se sempre de registrar suas movimentações financeiras no botão abaixo :)
 								</p>
-								<Movement 
+								<Movement
 									backgroundColor={Theme.colors.secondary_constrast_color}
 									onClick={toggleModal}
 								>
@@ -99,14 +101,18 @@ const Dashboard = ({
 						</div>
 					</Card>
 					<Card>
-						<Download onClick={downloadCsv} title="Faça o download do CSV" />
+						<Download>
+							<img src={download} onClick={downloadCsv} alt="Faça o download do CSV" />
+							<label>Download</label>
+						</Download>
 						<Title>Visualização em tabela</Title>
 						{initialValues.moviment !== undefined && (
 							<Table>
 								<Header>
-									{initialValues.moviment.map(item => (
-										<Line>{item.title}</Line>
-									))}
+									<Line>Data</Line>
+									<Line>Valor</Line>
+									<Line>Descrição</Line>
+									<Line>Categoria</Line>
 								</Header>
 								<Column>
 									{initialValues.moviment.map(item => (

@@ -1,8 +1,6 @@
 import styled, { css } from 'styled-components'
 import { Theme, Button } from '../../components'
 
-import download from '../../assets/img/downloadMinor.png'
-
 export const Container = styled.div`
   margin: 0 auto;
   padding: 10px 0 40px;
@@ -140,12 +138,20 @@ export const Progress = styled.div`
 	width: 40%;
 `
 
-export const Download = styled(Button)`
-	background: url(${download}) center no-repeat;
-	background-size: 20px;
-	width: 30px;
+export const Download = styled.div`
+	display: flex;
+	width: 100px;
 	position: absolute;
 	right: 40px;
+	align-items: center;
+	font-family: ${Theme.font.font_family};
+	font-size: 14px;
+	color: #707070;
+
+	& > img {
+		width: 25px;
+		height: 25px;
+	}
 `
 
 export const Table = styled.div`
