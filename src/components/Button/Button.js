@@ -17,6 +17,10 @@ export const Button = styled.button`
   font-family: ${Theme.font.font_family};
   margin: 10px 0;
   
+  &:hover{
+    opacity: 0.5;
+  }
+  
   ${props => props.disabled && (
     css`
     cursor: not-allowed;

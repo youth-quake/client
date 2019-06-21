@@ -301,7 +301,7 @@ const Form = (initialValues) => (
                   </div>
                 </Data>
                 <Amount>
-                  <Tag title="Renda acumulada">Grana acumulada</Tag>
+                  <Tag title="Renda acumulada">$$$ acumulada</Tag>
                   <DollarStats>
                     <img src={dollar} alt="Dollar" />
                     <img src={dollarNoFill} alt="Dollar" />

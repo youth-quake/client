@@ -128,6 +128,10 @@ const Profile = ({
                               {...field}
                               placeholder='Nome completo'
                               errors={errors}
+                              onChange={e => {
+                                setFieldValue('name', e.target.value)
+                                handleUpdateUser(initialValues, values)
+                              }}
                               onBlur={() => handleUpdateUser(initialValues, values)}
                             />
                           )}
@@ -140,6 +144,10 @@ const Profile = ({
                                 {...field}
                                 placeholder='Username'
                                 errors={errors}
+                                onChange={e => {
+                                  setFieldValue('name', e.target.value)
+                                  handleUpdateUser(initialValues, values)
+                                }}
                                 onBlur={() => handleUpdateUser(initialValues, values)}
                               />
                             )}

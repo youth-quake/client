@@ -1,10 +1,11 @@
-import { compose, withState, withHandlers } from 'recompose'
+import { compose, withState, withHandlers, lifecycle } from 'recompose'
 import { updateMessage, update } from '../../services'
 import { withFormik } from 'formik'
+import getProfile from '../../utils/getProfile'
 
-const data = JSON.parse(localStorage.getItem('profile'))
+let data = JSON.parse(localStorage.getItem('profile'))
 
-export const values = withFormik({
+export let values = withFormik({
   mapPropsToValues: () => ({
     id: data.idUser,
     name: data.name,
@@ -13,6 +14,7 @@ export const values = withFormik({
     message: data.messageStatus,
     level: 'Nivel 81',
     achievements: data.AchievementUsers,
+    password: data.password,
     targets: data.target.map(item => {
       return {
         key: item.idTarget,
@@ -77,10 +79,15 @@ const enhance = compose(
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           "name": values.name,
-          "login": values.username,
+          "login": initialValues.username,
+          "email": initialValues.email,
+          "password": initialValues.password,
+          "statusMessage": initialValues.statusMessage
         })
+      }).then(response => {
+        response.json()
+        getProfile(initialValues.username, initialValues.password)
       })
-        .then(response => response.json())
     },
     handleUpdateMessageUser: () => (initialValues, values) => {
       fetch(`${updateMessage}/${initialValues.id}`, {
@@ -90,7 +97,75 @@ const enhance = compose(
           "messageStatus": values.message || ""
         })
       })
-        .then(response => response.json())
+        .then(response => {
+          response.json()
+          getProfile(initialValues.username, initialValues.password)
+        })
+    }
+  }),
+  lifecycle({
+    componentWillUnmount() {
+      data = JSON.parse(localStorage.getItem('profile'))
+
+      values = withFormik({
+        mapPropsToValues: () => ({
+          id: data.idUser,
+          name: data.name,
+          username: data.login,
+          email: data.email,
+          message: data.messageStatus,
+          level: 'Nivel 81',
+          achievements: data.AchievementUsers,
+          password: data.password,
+          targets: data.target.map(item => {
+            return {
+              key: item.idTarget,
+              initialValues: {
+                id: item.idTarget,
+                description: item.description,
+                dateEnd: item.dtEnd,
+                dateStart: item.dtStart,
+                percent: item.percentage,
+                amount: item.value,
+                title: item.name,
+                totalAmount: item.valueAccumulated
+              }
+            }
+          })
+        })
+      })
+
+    },
+    componentDidMount() {
+      data = JSON.parse(localStorage.getItem('profile'))
+            
+      values = withFormik({
+        mapPropsToValues: () => ({
+          id: data.idUser,
+          name: data.name,
+          username: data.login,
+          email: data.email,
+          message: data.messageStatus,
+          level: 'Nivel 81',
+          achievements: data.AchievementUsers,
+          password: data.password,
+          targets: data.target.map(item => {
+            return {
+              key: item.idTarget,
+              initialValues: {
+                id: item.idTarget,
+                description: item.description,
+                dateEnd: item.dtEnd,
+                dateStart: item.dtStart,
+                percent: item.percentage,
+                amount: item.value,
+                title: item.name,
+                totalAmount: item.valueAccumulated
+              }
+            }
+          })
+        })
+      })
     }
   })
 )

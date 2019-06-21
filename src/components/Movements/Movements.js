@@ -123,7 +123,7 @@ const Component = ({
                 />
               </WrapperInput>
               <WrapperInput>
-                <Label>Data final</Label>
+                <Label>Tipo</Label>
                 <Field
                   name="initialValues.type"
                   render={({ field }) => (

@@ -12,6 +12,7 @@ export const Card = styled.div`
   justify-content: flex-start;
   max-height: 600px;
   overflow-y: auto;
+  font-family: ${Theme.font.font_family};
 `
 
 const Title = styled.p`
@@ -35,6 +36,7 @@ export const Profile = styled.div`
   box-shadow: 2px 5px 11px -11px rgba(0,0,0,0.75);
   box-sizing: border-box;
   margin: 5px;
+  font-family: ${Theme.font.font_family};
 `
 
 const Picture = styled.img`
@@ -49,7 +51,7 @@ const Name = styled.h3`
 
 const Description = styled.p`
   width: 90%;
-  text-align: justify;
+  text-align: center;
   padding: 10px 0;
 `
 

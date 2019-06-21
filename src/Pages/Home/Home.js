@@ -46,7 +46,11 @@ const Home = props => (
           <Option to='#sobre-nos'>Fórum</Option>
           <Option to='login'>Login</Option>
         </WrapperOptions>
-        <Option to='#projeto'><Button>Cadastrar</Button></Option>
+        <Option to='#projeto'>
+          <Button onClick={() => window.location.pathname = '/cadastro'}>
+            Cadastrar
+            </Button>
+        </Option>
       </Menu>
     </Container>
     <Container>
@@ -58,23 +62,23 @@ const Home = props => (
           <Animation src={run} alt="Imagem ilustrativa" />
         </Wrapper>
         <Disclaimer>
-            <WrapperImage>
-              <Image src={money}></Image>
-              <TitleImage>Tenha o controle</TitleImage>
-              <p>Defina seus objetivos e tenha um controle das suas economias e gastos.</p>
-            </WrapperImage>
-            <WrapperImage>
-              <Image src={learning}></Image>
-              <TitleImage>Eduque-se</TitleImage>
-              <p>No nosso fórum existem inúmeros materiais de estudo para você.</p>
-            </WrapperImage>
-            <WrapperImage>
-              <Image src={share}></Image>
-              <TitleImage>Compartilhe</TitleImage>
-              <p>Adicione os seus amigos e compartilhe com eles suas conquistas e metas!</p>
-            </WrapperImage>
-          </Disclaimer>
-          <Paragraph><a href="/cadastro">Cadastre-se</a> e descubra como você pode interagir e aprender!</Paragraph>
+          <WrapperImage>
+            <Image src={money}></Image>
+            <TitleImage>Tenha o controle</TitleImage>
+            <p>Defina seus objetivos e tenha um controle das suas economias e gastos.</p>
+          </WrapperImage>
+          <WrapperImage>
+            <Image src={learning}></Image>
+            <TitleImage>Eduque-se</TitleImage>
+            <p>No nosso fórum existem inúmeros materiais de estudo para você.</p>
+          </WrapperImage>
+          <WrapperImage>
+            <Image src={share}></Image>
+            <TitleImage>Compartilhe</TitleImage>
+            <p>Adicione os seus amigos e compartilhe com eles suas conquistas e metas!</p>
+          </WrapperImage>
+        </Disclaimer>
+        <Paragraph><a href="/cadastro">Cadastre-se</a> e descubra como você pode interagir e aprender!</Paragraph>
       </Presentation>
     </Container>
     <Project id="#projeto">

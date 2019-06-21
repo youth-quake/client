@@ -65,7 +65,7 @@ const enhance = compose(
     handleSetInitialValues: ({ setInitialValues }) => () => {
       const data = JSON.parse(localStorage.getItem('profile'))
 
-      const register = {
+      const profile = {
         id: data.idUser,
         name: data.name,
         username: data.login,
@@ -73,34 +73,34 @@ const enhance = compose(
         password: data.password
       }
 
-      setInitialValues(register)
+      setInitialValues(profile)
     },
     handleSubmit: ({ initialValues, setVisible, setMessage }) => values => {
       const date = new Date()
-      
+
       fetch(`${target}/${initialValues.id}`, {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          "name": values.name,
-          "description": values.description,
+          "name": values.initialValues.name,
+          "description": values.initialValues.description,
           "dtStart": `${date.getDay()}/${date.getMonth()}/${date.getFullYear()}`,
-          "dtEnd": values.dateEnd,
-          "value": values.value
+          "dtEnd": values.initialValues.dateEnd,
+          "value": values.initialValues.value
         })
       })
         .then(response => response.json())
         .then(json => {
           if (json) {
-            setMessage('Alteração realizada com sucesso')
+            setMessage('Objetivo cadastrado com sucesso')
             setVisible(true)
           } else {
-            setMessage('Ocurreu um erro ao atualizar o cadastro')
+            setMessage('Ops! Ocurreu um erro ao durante o cadastro.')
             setVisible(true)
           }
         })
         .catch(error => {
-          setMessage('Ocurreu um erro ao atualizar o cadastro')
+          setMessage('Ops! Ocurreu um erro ao durante o cadastro.')
           setVisible(true)
         })
     }

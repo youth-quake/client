@@ -87,7 +87,7 @@ const Login = ({
                   render={({ field }) => (
                     <Input
                       {...field}
-                      placeholder='Login'
+                      placeholder='Nome de usuário'
                       errors={errors}
                     />
                   )}

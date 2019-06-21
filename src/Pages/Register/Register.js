@@ -1,11 +1,14 @@
 import React from 'react'
+
 import {
   Button,
   Input,
   Anchor,
   Requirements,
-  Theme
+  Theme,
+  Modal
 } from '../../components'
+
 import {
   Container,
   Title,
@@ -15,12 +18,15 @@ import {
   Content,
   Text
 } from './Register.style'
+
 import requirements from '../../utils/requirements'
-import youthquake from '../../assets/img/porkinYQ1.png'
+
 import girl from '../../assets/img/girl.png'
+import youthquake from '../../assets/img/porkinYQ1.png'
+import enhance from './Register.hoc'
+
 import { Formik, ErrorMessage, Field } from 'formik'
 import { shape } from 'prop-types'
-import enhance from './Register.hoc'
 import { validationSchema } from './Register.validation'
 
 const Register = ({
@@ -31,9 +37,18 @@ const Register = ({
   isDisable,
   initialValues,
   handleSubmit,
-  value
+  value,
+  showModal,
+  toggleModal,
+  message
 }) => (
     <Container>
+       <Modal
+        showModal={showModal}
+        toggleModal={toggleModal}
+        title="Não foi possivel concluir o cadastro"
+        Form={() => (<div>{message}</div>)}
+      />
       {initialValues && (
         <Formik
           initialValues={initialValues}
@@ -57,7 +72,7 @@ const Register = ({
                 <Field
                   name="register.login"
                   render={({ field }) => (
-                    <Input {...field} placeholder='Apelido' />
+                    <Input {...field} placeholder='Nome de usuário' />
                   )}
                 />
                 <ErrorMessage name="register.login" />
@@ -67,7 +82,7 @@ const Register = ({
                     <Input
                       {...field}
                       placeholder='E-mail'
-                      type='email'
+                      type="email"
                       required
                     />
                   )}
@@ -79,7 +94,7 @@ const Register = ({
                     <Input
                       {...field}
                       placeholder='Confirmar e-mail'
-                      type='email'
+                      type="email"
                       required
                     />
                   )}

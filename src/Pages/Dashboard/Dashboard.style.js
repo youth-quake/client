@@ -3,7 +3,6 @@ import { Theme, Button } from '../../components'
 
 import download from '../../assets/img/downloadMinor.png'
 
-
 export const Container = styled.div`
   margin: 0 auto;
   padding: 10px 0 40px;
@@ -120,8 +119,7 @@ export const Data = styled.div`
 		font-weight: bold;
 	}
 
-	& > textarea {
-		resize: none;
+	& > p {
 		width: 100%;
 		height: 90%;
 		border: none;

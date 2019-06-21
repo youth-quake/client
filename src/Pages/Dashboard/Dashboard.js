@@ -66,11 +66,11 @@ const Dashboard = ({
 						<Title>Visão geral</Title>
 						<div>
 							<Data>
-								<h3>Descrição</h3>
-								<textarea
-									placeholder="Descrição"
-									value={initialValues.description}
-								/>
+								<h3>Hey!</h3>
+								<p>
+									Aqui você terá uma visão geral de como está progredindo com as suas finanças e o histórico das suas movimentações, lembrando que aqui nós observamos com base em todos os objetivos e movimentações, sendo elas gastos ou economias. 
+									<br />E ah, lembre-se sempre de registrar suas movimentações financeiras no botão abaixo :)
+								</p>
 								<Movement 
 									backgroundColor={Theme.colors.secondary_constrast_color}
 									onClick={toggleModal}
