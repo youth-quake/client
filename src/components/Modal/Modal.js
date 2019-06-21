@@ -15,11 +15,11 @@ const Container = styled.div`
 
 export const Content = styled.div`
   width: calc(100vw - 45vw);
-  height: calc(100vh - 28vh);
+  height: calc(100vh - 12vh);
   background #fff;
   margin: 1.5% auto;
   border-radius: 3px;
-  padding: 20px 20px 40px;
+  padding: 20px;
   display: flex;
   align-items: center;
   flex-flow: column;
