@@ -6,8 +6,6 @@ const getProfile = (username, password) => {
     .then(profile => {
       if (profile) {
 
-        console.log(profile)
-        
         localStorage.removeItem('profile')
         localStorage.setItem('profile', JSON.stringify(profile))
 
