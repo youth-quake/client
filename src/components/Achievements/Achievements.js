@@ -21,6 +21,8 @@ const Title = styled.p`
   font-family: ${Theme.font.font_family};
   font-weight: bold;
   padding: 20px;
+  background: red;
+  height: 20px;
 `
 
 const Badge = styled.div`

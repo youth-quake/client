@@ -13,3 +13,4 @@ export const downloadCsv = `${MICRO_SERVICE}/target/download`
 export const updateMessage = `${BASE}/user/updateinfo`
 export const update = `${BASE}/user/update`
 export const updateTarget = `${BASE}/target/update`
+export const action = `${BASE}/action/include`

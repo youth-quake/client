@@ -1,4 +1,5 @@
 import { compose, withState, withHandlers } from 'recompose'
+import { action } from '../../services'
 
 const enhance = compose(
   withState('visible', 'setVisible', false),
@@ -9,6 +10,18 @@ const enhance = compose(
     },
     toggleModal: ({ showModal, setShowModal }) => () => {
       setShowModal(!showModal)
+    },
+    submitAction: () => values => {
+      fetch(action, {
+        method: 'post',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          "nameActionUser": values.action,
+          "quantity": values.quantity
+        })
+      })
+        .then(response => response.json())
+        .then(json => console.log(json))
     }
   })
 )

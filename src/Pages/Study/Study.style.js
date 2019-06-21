@@ -25,7 +25,8 @@ export const Card = styled.div`
   flex-flow: column;
   justify-content: center;
   text-align: center;
-
+  align-items: center;
+  
   & > h1 {
     box-sizing: border-box;
     width: 100%;
@@ -39,6 +40,11 @@ export const Card = styled.div`
     width: 100%;
     font-size: 16px;
     padding: 10px;
+  }
+
+  & > button {
+    width: 120px;
+    color: ${Theme.colors.primary_color};
   }
 `
 
