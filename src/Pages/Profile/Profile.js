@@ -94,7 +94,7 @@ const Profile = ({
                           theme={
                             {
                               active: {
-                                symbol: <ImageProfile src="https://youthquake.file.core.windows.net/photos/profile/rainbow-flag.png" title="Foto de perfil" />,
+                                symbol: <ImageProfile src={initialValues.userPicture} title="Foto de perfil" />,
                                 trailColor: Theme.colors.base_color,
                                 color: Theme.colors.green
                               }

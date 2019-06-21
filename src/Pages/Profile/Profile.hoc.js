@@ -2,7 +2,9 @@ import { compose, withState, withHandlers, lifecycle } from 'recompose'
 import { updateMessage, update } from '../../services'
 import { withFormik } from 'formik'
 import getProfile from '../../utils/getProfile'
+import photos from '../../utils/photos'
 
+const random = Math.floor(Math.random() * 23)
 let data = JSON.parse(localStorage.getItem('profile'))
 
 export let values = withFormik({
@@ -12,7 +14,8 @@ export let values = withFormik({
     username: data.login,
     email: data.email,
     message: data.messageStatus,
-    level: 'Nivel 81',
+    level: data.level,
+    userPicture: photos[random],
     achievements: data.AchievementUsers,
     password: data.password,
     targets: data.target.map(item => {
@@ -35,6 +38,7 @@ export let values = withFormik({
 
 const enhance = compose(
   withState('value', 'setValue', ''),
+  withState('photo', 'setPhoto', ''),
   withState('isVisible', 'setIsVisible', false),
   withState('isDisable', 'setIsDisabled', true),
   withState('editable', 'setEditable', true),
@@ -115,6 +119,7 @@ const enhance = compose(
           email: data.email,
           message: data.messageStatus,
           level: 'Nivel 81',
+          picture: photos[random],
           achievements: data.AchievementUsers,
           password: data.password,
           targets: data.target.map(item => {
@@ -138,7 +143,7 @@ const enhance = compose(
     },
     componentDidMount() {
       data = JSON.parse(localStorage.getItem('profile'))
-            
+
       values = withFormik({
         mapPropsToValues: () => ({
           id: data.idUser,
@@ -147,6 +152,7 @@ const enhance = compose(
           email: data.email,
           message: data.messageStatus,
           level: 'Nivel 81',
+          picture: photos[random],
           achievements: data.AchievementUsers,
           password: data.password,
           targets: data.target.map(item => {
