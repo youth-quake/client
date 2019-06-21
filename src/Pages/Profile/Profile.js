@@ -10,7 +10,8 @@ import {
   Modal,
   PatrimonialSituation,
   Theme,
-  ModalBet as Bet
+  ModalBet as Bet,
+  Photos
 } from '../../components'
 
 import {
@@ -34,7 +35,6 @@ import {
   Progress
 } from './Profile.style'
 
-import ProfileImage from '../../assets/img/girl big.png'
 import { Formik, Field } from 'formik'
 
 import cup from '../../assets/img/cup.png'
@@ -58,7 +58,9 @@ const Profile = ({
   handleUpdateMessageUser,
   setMessage,
   message,
-  handleUpdateUser
+  handleUpdateUser,
+  showPhotos,
+  togglePhotos
 }) => (
     <Container>
       <Modal
@@ -66,6 +68,12 @@ const Profile = ({
         toggleModal={toggleModal}
         title="Bem vindo(a)"
         Form={() => (<PatrimonialSituation />)}
+      />
+      <Modal
+        showModal={showPhotos}
+        toggleModal={togglePhotos}
+        title="Selecione uma foto"
+        Form={() => (<Photos />)}
       />
       <Friends
         visible={visible}
@@ -94,7 +102,11 @@ const Profile = ({
                           theme={
                             {
                               active: {
-                                symbol: <ImageProfile src={initialValues.userPicture} title="Foto de perfil" />,
+                                symbol: <ImageProfile
+                                  src={initialValues.userPicture}
+                                  title="Foto de perfil"
+                                  onClick={togglePhotos}
+                                />,
                                 trailColor: Theme.colors.base_color,
                                 color: Theme.colors.green
                               }

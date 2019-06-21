@@ -50,6 +50,7 @@ const enhance = compose(
   withState('titleButton', 'setTitleButton', 'Editar'),
   withState('visible', 'setVisible', false),
   withState('showModal', 'setShowModal', true),
+  withState('showPhotos', 'setShowPhotos', false),
   withState('isBet', 'setIsBet', false),
   withHandlers({
     showComponent: ({
@@ -79,6 +80,9 @@ const enhance = compose(
     },
     toggleModal: ({ showModal, setShowModal }) => () => {
       setShowModal(!showModal)
+    },
+    togglePhotos: ({ showPhotos, setShowPhotos }) => () => {
+      setShowPhotos(!showPhotos)
     },
     handleUpdateUser: () => (initialValues, values) => {
       fetch(`${update}/${initialValues.id}`, {

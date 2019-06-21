@@ -19,7 +19,7 @@ export const Content = styled.div`
   background #fff;
   margin: 1.5% auto;
   border-radius: 3px;
-  padding: 20px 20px 110px;
+  padding: 20px 20px 40px;
   display: flex;
   align-items: center;
   flex-flow: column;

@@ -70,6 +70,10 @@ export const ImageProfile = styled.img`
   top: 10px;
   left: 10px;
   border-radius: 50%;
+
+  &:hover{
+    cursor: pointer;
+  }
 `
 
 export const MessageWrapper = styled.div`
