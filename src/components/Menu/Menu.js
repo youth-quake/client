@@ -218,7 +218,7 @@ export const Component = ({
           </AllOptions>
         <NavbarImage
           onClick={() => setVisible(!visible)}
-          img={iconProfileMini}
+          img={localStorage.getItem('iconUser')}
           title="Visualizar opções"
         />
       </Divider>

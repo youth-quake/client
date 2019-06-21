@@ -7,6 +7,9 @@ import photos from '../../utils/photos'
 const random = Math.floor(Math.random() * 23)
 let data = JSON.parse(localStorage.getItem('profile'))
 
+localStorage.setItem('iconUser', photos[random])
+const image = localStorage.getItem('iconUser')
+
 export let values = withFormik({
   mapPropsToValues: () => ({
     id: data.idUser,
@@ -15,7 +18,7 @@ export let values = withFormik({
     email: data.email,
     message: data.messageStatus,
     level: data.level,
-    userPicture: photos[random],
+    userPicture: image,
     achievements: data.AchievementUsers,
     password: data.password,
     targets: data.target.map(item => {
@@ -118,8 +121,8 @@ const enhance = compose(
           username: data.login,
           email: data.email,
           message: data.messageStatus,
-          level: 'Nivel 81',
-          picture: photos[random],
+          level: data.level,
+          userPicture: image,
           achievements: data.AchievementUsers,
           password: data.password,
           targets: data.target.map(item => {
@@ -151,8 +154,8 @@ const enhance = compose(
           username: data.login,
           email: data.email,
           message: data.messageStatus,
-          level: 'Nivel 81',
-          picture: photos[random],
+          level: data.level,
+          userPicture: image,
           achievements: data.AchievementUsers,
           password: data.password,
           targets: data.target.map(item => {
