@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import photos from '../../utils/photos'
 import { Theme } from '../Theme'
 
+import errorImage from '../../assets/img/girl big.png'
+
 const Container = styled.div`
   width: 100%;
   height: 100%;
@@ -32,7 +34,12 @@ const Image = styled.img`
 export const Photos = () => (
   <Container>
     {photos.map(item => (
-      <Image src={item} onClick={() => localStorage.setItem('iconUser', item)} onError={photos[0]}/>
+      <Image 
+      key={item}
+      src={item} 
+      onClick={() => localStorage.setItem('iconUser', item)} 
+      onError={e => e.target.src = errorImage }
+     />
     ))}
   </Container>
 )

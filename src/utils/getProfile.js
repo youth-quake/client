@@ -5,7 +5,6 @@ const getProfile = (username, password) => {
     .then(response => response.json())
     .then(profile => {
       if (profile) {
-
         localStorage.removeItem('profile')
         localStorage.setItem('profile', JSON.stringify(profile))
 

@@ -1,11 +1,13 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 import youthquake from '../../assets/img/daindia.png'
-import iconProfileMini from '../../assets/img/girl mini.png'
 import { Modal, Config } from '../../components'
 import { compose, withHandlers, withState } from 'recompose'
 import { Theme } from '../Theme'
 import { Link } from 'react-router-dom'
+
+import errorImage from '../../assets/img/girl big.png'
+import getPhoto from '../../utils/getPhoto'
 
 const Cover = styled.div`
   width: 100%;
@@ -32,12 +34,10 @@ const Container = styled.div`
   }
 `
 
-const NavbarImage = styled.button`
+const NavbarImage = styled.img`
   margin: 10px;
-  width: 5%;
+  width: 50px;
   height: 50px;
-  background: url(${props => props.img}) center no-repeat;
-  background-size: 50px;
   border: none;
   outline: none;
 
@@ -80,18 +80,38 @@ const Menu = styled.div`
     display: flex;
     flex-flow: column;
     align-items: center;
-
+    font-size: 16px;
+    
     & > a {
       width: 100%;
       text-decoration: none;
       padding: 5px 0;
       margin: 0 0 2px;
       text-align: center;
+      color: ${Theme.colors.font_color};
+    }
+
+    & > button {
+      color: ${Theme.colors.font_color};
+      width: 100%;
+      text-decoration: none;
+      padding: 5px 0;
+      margin: 0 0 2px;
+      text-align: center;
+      border: none;
+      outline: none;
+      font-size: 16.2px;
+      background: transparent;
     }
 
     & > a:last-child{
       border-top: solid 1px ${Theme.colors.base_color};
       margin: 2px 0;
+    }
+
+    & > *:hover {
+      background: ${Theme.colors.base_color};
+      color: ${Theme.colors.secondary_constrast_color};
     }
   }
 `
@@ -147,7 +167,6 @@ const enhance = compose(
 )
 
 export const Component = ({
-  handleChange,
   showModal,
   toggleModal,
   visible,
@@ -160,32 +179,23 @@ export const Component = ({
       />
       <Menu visible={visible}>
         <div>
-          <Link
-            onClick={() => setVisible(false)}
-            to='/perfil'
-          >
+          <Link onClick={() => setVisible(false)} to='/perfil'>
             Perfil
           </Link>
-          <Link
-            onClick={() => setVisible(false)}
-            to='/dashboard'
-          >
+          <Link onClick={() => setVisible(false)} to='/dashboard'>
             Dashboard
           </Link>
-          <Link
-            onClick={() => setVisible(false)}
-            to='/estudos'
-          >
+          <Link onClick={() => setVisible(false)} to='/estudos'>
             Fórum
           </Link>
-          <Link
+          <button
             onClick={() => {
               toggleModal()
               setVisible(false)
             }}
           >
             Configurações
-          </Link>
+          </button>
           <Link
             onClick={() => {
               setVisible(false)
@@ -205,20 +215,21 @@ export const Component = ({
         Form={Config}
       />
       <Divider>
-          <NavbarImage
-            img={youthquake}
-            title="Ir para a página inicial"
-          />
-          <AllOptions color={Theme.base_color}>
-            <WrapperOptions>
+        <NavbarImage
+          src={youthquake}
+          title="Ir para a página inicial"
+        />
+        <AllOptions color={Theme.base_color}>
+          <WrapperOptions>
             <Option to='/'>Home</Option>
-              <Option to='/#projeto'>O projeto</Option>
-              <Option to='/#sobre-nos'>Fórum</Option>
-            </WrapperOptions>
-          </AllOptions>
+            <Option to='/#projeto'>O projeto</Option>
+            <Option to='/#sobre-nos'>Fórum</Option>
+          </WrapperOptions>
+        </AllOptions>
         <NavbarImage
           onClick={() => setVisible(!visible)}
-          img={localStorage.getItem('iconUser')}
+          src={getPhoto()}
+          onError={e => e.target.src = errorImage}
           title="Visualizar opções"
         />
       </Divider>

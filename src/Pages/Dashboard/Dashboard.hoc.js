@@ -1,37 +1,58 @@
 import { compose, withState, withHandlers, lifecycle } from 'recompose'
 import { downloadCsv } from '../../services'
 
+import { getMovements } from '../../services'
+
 const enhance = compose(
   withState('initialValues', 'setInitialValues', {}),
   withState('visible', 'setVisible', false),
   withState('showModal', 'setShowModal', false),
   withHandlers({
     handleSetInitialValues: ({ setInitialValues }) => () => {
-      fetch('http://demo2803150.mockable.io/profile')
+      const profile = JSON.parse(localStorage.getItem('profile'))
+
+      fetch(`${getMovements}/${profile.idUser}`)
         .then(response => response.json())
         .then(data => {
+          let total = 0
+
+          data.forEach(item => {
+            total += item.value
+          })
+        
+
           const moviments = {
-            description: data.moviments.description,
-            firstTarget: data.moviments.firstTarget,
-            lastTarget: data.moviments.lastTarget,
-            progress: data.moviments.progress,
-            moviment: data.moviments.values.map(item => {
+            firstTarget: '22/06/2019',
+            lastTarget: '22/06/2019',
+            progress: 90,
+            movements: data.map(item => {
               const line = {
-                title: item.title,
+                description: item.description,
+                date: item.date,
                 value: item.value,
-                value2: item.value
+                type: item.type
               }
 
               return line
             }),
-            category: data.moviments.category.map(item => {
-              const line = {
-                title: item.title,
-                value: `${item.value}%`
+            category: [
+              {
+                value: total,
+                title: '$$$ acumulado'
+              },
+              {
+                value: data[0].value,
+                title: 'Poupança'
+              },
+              {
+                value: data[1].value,
+                title: 'Investimentos'
+              },
+              {
+                value: data[2].value,
+                title: 'Renda mensal'
               }
-
-              return line
-            })
+            ]
           }
 
           return setInitialValues(moviments)
@@ -45,7 +66,7 @@ const enhance = compose(
     },
     downloadCsv: ({ initialValues }) => () => {
       fetch(`${downloadCsv}/${initialValues.id}`)
-      .catch(error => { return error })
+        .catch(error => { return error })
     }
   }),
   lifecycle({

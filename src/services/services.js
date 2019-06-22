@@ -1,5 +1,5 @@
-const BASE = 'http://serviceyouthquake.azurewebsites.net'
-const MICRO_SERVICE = 'microserviceyouthquake.azurewebsites.net'
+const BASE = 'https://serviceyouthquake.azurewebsites.net'
+const MICRO_SERVICE = 'https://microyouthquake.azurewebsites.net'
 
 export const register = `${BASE}/user/include`
 export const login = `${BASE}/login`
@@ -14,3 +14,5 @@ export const updateMessage = `${BASE}/user/updateinfo`
 export const update = `${BASE}/user/update`
 export const updateTarget = `${BASE}/target/update`
 export const action = `${BASE}/action/include`
+export const getMovements = `${BASE}/movements/get`
+export const movementsInitial = `${BASE}/movements/includeinitial`

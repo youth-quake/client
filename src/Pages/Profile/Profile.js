@@ -40,6 +40,7 @@ import { Formik, Field } from 'formik'
 import cup from '../../assets/img/cup.png'
 import racingFlag from '../../assets/img/racing-flag.png'
 import handshake from '../../assets/img/handshake.png'
+import errorImage from '../../assets/img/girl big.png'
 
 const Profile = ({
   initialValues,
@@ -105,6 +106,7 @@ const Profile = ({
                                 symbol: <ImageProfile
                                   src={initialValues.userPicture}
                                   title="Foto de perfil"
+                                  onError={e => e.target.src = errorImage}
                                   onClick={togglePhotos}
                                 />,
                                 trailColor: Theme.colors.base_color,
@@ -124,6 +126,7 @@ const Profile = ({
                               errors={errors}
                               rows="4"
                               cols="80"
+                              placeholder="Nessa seção você conta um pouco sobre você para seus amigos..."
                               onChange={e => setFieldValue('message', e.target.value)}
                               onBlur={() => handleUpdateMessageUser(initialValues, values)}
                             />

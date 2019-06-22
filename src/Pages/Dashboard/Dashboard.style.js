@@ -8,16 +8,15 @@ export const Container = styled.div`
 	background: ${Theme.colors.base_color};
 `
 
-export const Wrapper = styled.div`
+export const Category = styled.div`
 	width: 25%;
 	display: flex;
 	flex-flow: column;
 	padding: 5px;
-	
+
 	& > div {
 		border-radius: 2px;
 		background: #FFF;  
-		border: solid 1px ${Theme.colors.secondary_base_color};
 		height: 160px;
 		display: flex;
 		flex-flow: column;
@@ -66,29 +65,27 @@ export const Information = styled.div`
 	flex-flow: column;
 	padding: 5px;
 	position: relative;
-
-	& > div {
-		border-radius: 2px;
-		background: white;  
-		border: solid 1px ${Theme.colors.secondary_base_color};
-	}
+	max-height: 25%;
+	box-sizing: border-box;
 
 	& > div+div{
 		margin: 10px 0 0;
-		height: 65%;
 	}
 `
 
-export const Card = styled.div`
-	width: 100%;	
-	padding: 30px 30px;
-	border-radius: 2px;
-	box-sizing: border-box;
+export const Item = styled.div`
+	border-radius: 3px;
+	background: white;  
+	padding: 10px;
 
 	& > div {
-		display: flex;
-		justify-content: space-between;
+		margin: 10px;
 	}
+`
+
+export const Wrapper = styled.div`
+	display: flex;
+	justify-content: space-between;
 `
 
 export const Title = styled.h3`
@@ -101,6 +98,9 @@ export const Title = styled.h3`
 	cursor: default;
 	line-height: 1.3;
 	font-weight: 500;
+	display: flex;
+	justify-content: space-between;
+		
 `
 
 export const Data = styled.div`
@@ -127,65 +127,99 @@ export const Data = styled.div`
 	}
 `
 
+export const Instructions = styled.div`
+	widht: 200px;
+	line-height: 1.2;
+	text-align: justify;
+	letter-spacing: 1px;
+
+	& > h3 {
+		font-weight: bold;
+		padding: 10px 0;
+	}
+
+	& > p {
+		
+	}
+
+	& > span {
+		width: 100%;
+		font-weight: 500;
+	}
+`
+
 export const Movement = styled(Button)`
 	width: 120px;
 `
 
 export const Progress = styled.div`
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 40%;
+	display: flex;	
+	text-align: center;
+	flex-flow: column;
+	padding: 20px;
+
+	& > p {
+		padding: 10px 0;
+		margin: 5px 0 0;
+		font-family: ${Theme.font.font_family};
+		font-size: 22px;
+	}
 `
 
 export const Download = styled.div`
 	display: flex;
 	width: 100px;
-	position: absolute;
-	right: 40px;
 	align-items: center;
 	font-family: ${Theme.font.font_family};
 	font-size: 14px;
 	color: #707070;
+	justify-content: space-between;
 
 	& > img {
-		width: 25px;
-		height: 25px;
+		width: 20px;
+		height: 20px;
 	}
 `
 
 export const Table = styled.div`
-	width: 100%;
-	padding: 10px 0;
-	text-align: center;
 	font-family: ${Theme.font.font_family};
-	margin: 20px 0 0;
 	display: flex;
 	flex-flow: column;
+	text-align: center;
+	max-height: 300px;
+	overflow-y: auto;
+	padding: 10px;
 `
 
 export const Header = styled.div`
-	padding: 10px 0;
 	font-weight: 500;
-	display: flex;
-	border-bottom: solid 1px ${Theme.colors.font_color};
+	padding: 10px;
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
+	text-align: center;
+	font-family: ${Theme.font.font_family};
+	margin: 5px 0;
+	background: ${Theme.colors.base_color};
+	margin: 0 auto;
+	opacity: 0.6;
 `
 
 export const Column = styled.div`
-	padding: 10px 0;
 	border-bottom: solid 1px ${Theme.colors.base_color};
 	display: flex;
-	display: flex;
 	justify-content: space-between;
+	align-items: center;
+	height: 25px;
+	padding: 10px 0;
 `
 
 export const Line = styled.div`
 	padding: 10px;
-	display: flex;
-
-	& > p {
-		margin: 10px;
-	}
+	width: 150px;
+`
+export const Remove = styled(Button)`
+	width: 120px;
+	background: transparent;
+	color: ${Theme.colors.secondary_color};
 `

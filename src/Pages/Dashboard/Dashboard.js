@@ -11,7 +11,7 @@ import {
 
 import {
 	Container,
-	Wrapper,
+	Item,
 	Title,
 	Description,
 	Information,
@@ -21,13 +21,16 @@ import {
 	Column,
 	Line,
 	Header,
-	Card,
 	Data,
 	Download,
-	Movement
+	Movement,
+	Remove,
+	Instructions,
+	Category,
+	Wrapper
 } from './Dashboard.style'
 
-import { Progress as ProgressLevel } from 'react-sweet-progress'
+import { Progress as Percent } from 'react-sweet-progress'
 
 import download from '../../assets/img/downloadMinor.png'
 
@@ -53,7 +56,7 @@ const Dashboard = ({
 					text=""
 					Form={Movements}
 				/>
-				<Wrapper>
+				<Category>
 					{initialValues.category !== undefined && (
 						initialValues.category.map(item => (
 							<div key={item.value}>
@@ -62,17 +65,19 @@ const Dashboard = ({
 							</div>
 						))
 					)}
-				</Wrapper>
+				</Category>
 				<Information>
-					<Card>
+					<Item>
 						<Title>Visão geral</Title>
-						<div>
+						<Wrapper>
 							<Data>
-								<h3>Hey!</h3>
-								<p>
-									Aqui você terá uma visão geral de como está progredindo com as suas finanças e o histórico das suas movimentações, lembrando que aqui nós observamos com base em todos os objetivos e movimentações, sendo elas gastos ou economias.
-									<br />E ah, lembre-se sempre de registrar suas movimentações financeiras no botão abaixo :)
-								</p>
+								<Instructions>
+									<h3>Hey!</h3>
+									<p>
+										Aqui você terá uma visão geral de como está progredindo com as suas finanças e o histórico das suas movimentações, lembrando que aqui nós observamos com base em todos os objetivos e movimentações, sendo elas gastos ou economias.
+									</p>
+									<span>E ah, lembre-se sempre de registrar suas movimentações financeiras no botão abaixo <span role="img" aria-label="smile">😊</span></span>
+								</Instructions>
 								<Movement
 									backgroundColor={Theme.colors.secondary_constrast_color}
 									onClick={toggleModal}
@@ -81,11 +86,11 @@ const Dashboard = ({
 								</Movement>
 							</Data>
 							<Progress>
-								<ProgressLevel
+								<Percent
 									title="Progresso de sua renda mensal"
 									type="circle"
 									strokeWidth={5}
-									percent={30}
+									percent={initialValues.progress}
 									width={200}
 									theme={
 										{
@@ -97,31 +102,44 @@ const Dashboard = ({
 										}
 									}
 								/>
+								<p>Progresso total: {initialValues.progress}%</p>
 							</Progress>
-						</div>
-					</Card>
-					<Card>
-						<Download>
-							<img src={download} onClick={downloadCsv} alt="Faça o download do CSV" />
-							<label>Download</label>
-						</Download>
-						<Title>Visualização em tabela</Title>
-						{initialValues.moviment !== undefined && (
-							<Table>
+						</Wrapper>
+					</Item>
+					<Item>
+						<Title>Visualização em tabela
+							<Download>
+								<img src={download} onClick={downloadCsv} alt="Faça o download do CSV" />
+								<label>Download</label>
+							</Download>
+						</Title>
+						{initialValues.movements !== undefined && (
+							<div>
 								<Header>
 									<Line>Data</Line>
 									<Line>Valor</Line>
 									<Line>Descrição</Line>
-									<Line>Categoria</Line>
+									<Line>Referência</Line>
+									<Line>Remover</Line>
 								</Header>
-								<Column>
-									{initialValues.moviment.map(item => (
-										<Line>{item.value}</Line>
+								<Table>
+									{initialValues.movements.map(item => (
+										<div>
+											<Column>
+												<Line>{item.date}</Line>
+												<Line>{item.value}</Line>
+												<Line>{item.description}</Line>
+												<Line>{item.type}</Line>
+												<Line>
+													<Remove>Deletar</Remove>
+												</Line>
+											</Column>
+										</div>
 									))}
-								</Column>
-							</Table>
+								</Table>
+							</div>
 						)}
-					</Card>
+					</Item>
 				</Information>
 			</Container>
 			<Footer />
