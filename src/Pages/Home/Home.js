@@ -49,7 +49,7 @@ const Home = props => (
         <Option to='#projeto'>
           <Button onClick={() => window.location.pathname = '/cadastro'}>
             Cadastrar
-            </Button>
+          </Button>
         </Option>
       </Menu>
     </Container>

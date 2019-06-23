@@ -48,6 +48,14 @@ export const Option = styled(Link)`
   & > button {
     width: 120px;
     color: ${Theme.colors.secondary_color};
+    border: solid 1px ${Theme.colors.secondary_color};
+    background: transparent;
+
+    &:hover {
+      background-color: ${Theme.colors.secondary_color};
+      color: #fff;
+      opacity: 1;
+    }
   }
 `
 

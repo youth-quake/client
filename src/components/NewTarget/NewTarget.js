@@ -4,6 +4,7 @@ import { Formik, Field } from 'formik'
 import styled, { css } from 'styled-components'
 import { target } from '../../services'
 import { compose, withState, withHandlers, lifecycle } from 'recompose'
+import { date, amount } from '../../utils/mask'
 
 const Wrapper = styled.div`
   display: flex;
@@ -122,7 +123,8 @@ const Component = ({
       <Formik
         render={({
           values,
-          errors
+          errors,
+          setFieldValue
         }) => (
             <Container>
               <WrapperInput>
@@ -163,6 +165,8 @@ const Component = ({
                       backgroundColor={Theme.colors.base_color}
                       placeholder='Data final'
                       errors={errors}
+                      maxLength="10"
+                      onChange={e => setFieldValue('initialValues.dateEnd', date(e.target.value))}
                     />
                   )}
                 />
@@ -177,6 +181,7 @@ const Component = ({
                       backgroundColor={Theme.colors.base_color}
                       placeholder='Valor'
                       errors={errors}
+                      onChange={e => setFieldValue('initialValues.value', amount(e.target.value))}
                     />
                   )}
                 />

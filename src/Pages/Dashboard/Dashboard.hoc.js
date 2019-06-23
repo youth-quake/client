@@ -3,6 +3,8 @@ import { downloadCsv } from '../../services'
 
 import { getMovements } from '../../services'
 
+import { amount } from '../../utils/mask'
+
 const enhance = compose(
   withState('initialValues', 'setInitialValues', {}),
   withState('visible', 'setVisible', false),

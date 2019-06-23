@@ -10,6 +10,7 @@ import TargetImage from '../../assets/img/target.png'
 import FriendImage from '../../assets/img/friendship.png'
 import TrophyImage from '../../assets/img/trophy.png'
 
+import { amount } from '../../utils/mask'
 
 const Container = styled.div`
   display: flex;
@@ -133,7 +134,8 @@ const Form = ({
     <Formik
       render={({
         errors,
-        values
+        values,
+        setFieldValue
       }) => (
           <Container>
             <Wrapper>
@@ -169,6 +171,7 @@ const Form = ({
                   placeholder='Valor'
                   disabled={editable}
                   errors={errors}
+                  onChange={e => setFieldValue('value', amount(e.target.value))}
                 />
               )}
             />
