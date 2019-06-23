@@ -3,7 +3,7 @@ import { downloadCsv } from '../../services'
 
 import { getMovements } from '../../services'
 
-import { amount } from '../../utils/mask'
+import { moneyFormat } from '../../utils/mask'
 
 const enhance = compose(
   withState('initialValues', 'setInitialValues', {}),
@@ -31,7 +31,7 @@ const enhance = compose(
               const line = {
                 description: item.description,
                 date: item.date,
-                value: item.value,
+                value: moneyFormat(item.value),
                 type: item.type
               }
 
@@ -39,19 +39,19 @@ const enhance = compose(
             }),
             category: [
               {
-                value: total,
+                value: moneyFormat(total),
                 title: '$$$ acumulado'
               },
               {
-                value: data[0].value,
+                value: moneyFormat(data[0].value),
                 title: 'Poupança'
               },
               {
-                value: data[1].value,
+                value: moneyFormat(data[1].value),
                 title: 'Investimentos'
               },
               {
-                value: data[2].value,
+                value: moneyFormat(data[2].value),
                 title: 'Renda mensal'
               }
             ]
