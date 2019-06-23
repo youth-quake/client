@@ -220,7 +220,7 @@ const Profile = ({
                     <Content>
                       <Achievements achievements={initialValues.achievements} />
                       {(isEmpty(initialValues.achievements)) && (
-                        <p>Ops! Você ainda não tem nenhuma conquista obtida</p>
+                        <p>Ops! Você ainda não tem nenhuma conquista obtida <span role="img" aria-label="cry">😢</span></p>
                       )}
                     </Content>
                   )}
@@ -228,7 +228,7 @@ const Profile = ({
                     <Content>
                       <Target targets={initialValues.targets} />
                       {isEmpty(initialValues.targets) && (
-                        <p>Ops! Você ainda não tem nenhum objetivo cadastrado</p>
+                        <p>Ops! Você ainda não tem nenhum objetivo cadastrado <span role="img" aria-label="cry">😢</span></p>
                       )}
                     </Content>
                   )}
@@ -236,7 +236,7 @@ const Profile = ({
                     <Content>
                       <Bet />
                       {isEmpty(allBets) && (
-                        <p>Ops! Você ainda não tem nenhuma aposta cadastrada</p>
+                        <p>Ops! Você ainda não tem nenhuma aposta cadastrada <span role="img" aria-label="cry">😢</span></p>
                       )}
                     </Content>
                   )}
