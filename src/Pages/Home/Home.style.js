@@ -58,6 +58,16 @@ export const Option = styled(Link)`
       opacity: 1;
     }
   }
+
+  & > button+button {
+    border-color: transparent;
+
+    &:hover {
+      background: transparent;
+      color: ${Theme.colors.secondary_color};
+      opacity: 0.2;
+    }
+  }
 `
 
 export const Youthquake = styled.img`

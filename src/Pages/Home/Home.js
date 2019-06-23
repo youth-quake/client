@@ -44,7 +44,7 @@ const Home = () => (
           <Option color={Theme.primary_color}><Youthquake src={youthquake} /></Option>
           <Option to='#projeto'>O projeto</Option>
           <Option to='#sobre-nos'>Fórum</Option>
-          <Option to='login'>Contato</Option>
+          <Option to='#contato'>Contato</Option>
         </WrapperOptions>
         <Option to='#projeto'>
           <Button onClick={() => window.location.pathname = '/cadastro'}>
