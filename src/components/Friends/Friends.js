@@ -51,7 +51,6 @@ const Container = styled.div`
   max-height: 370px;
   overflow-y: hidden;
   overflow-x: hidden;
-  background: red;
 `
 
 const Title = styled.p`
@@ -277,7 +276,7 @@ const Component = ({
                     setSelectedFriend(item)
                   }}
                 >
-                  apostar
+                  Apostar
               </button>
               </Friend>
             ))
@@ -300,7 +299,7 @@ const Component = ({
                     setSelectedFriend(item)
                   }}
                 >
-                  apostar
+                  Adicionar
               </button>
               </Friend>
             ))
