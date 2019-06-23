@@ -108,8 +108,8 @@ const Dashboard = ({
 					</Item>
 					<Item>
 						<Title>Visualização em tabela
-							<Download>
-								<img src={download} onClick={downloadCsv} alt="Faça o download do CSV" />
+							<Download onClick={downloadCsv}>
+								<img src={download} alt="Faça o download do CSV" />
 								<label>Download</label>
 							</Download>
 						</Title>

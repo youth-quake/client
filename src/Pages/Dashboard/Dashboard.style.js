@@ -179,6 +179,17 @@ export const Download = styled.div`
 		width: 20px;
 		height: 20px;
 	}
+
+	* > {
+		&:hover {
+			cursor: pointer;
+		}
+	}
+
+	&:hover {
+		cursor: pointer;
+		opacity: 0.5;
+	}
 `
 
 export const Table = styled.div`

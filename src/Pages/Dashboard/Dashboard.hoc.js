@@ -1,9 +1,9 @@
 import { compose, withState, withHandlers, lifecycle } from 'recompose'
-import { downloadCsv } from '../../services'
 
-import { getMovements } from '../../services'
-
+import { downloadCsv, getMovements } from '../../services'
 import { moneyFormat } from '../../utils/mask'
+
+const profile = JSON.parse(localStorage.getItem('profile'))
 
 const enhance = compose(
   withState('initialValues', 'setInitialValues', {}),
@@ -11,7 +11,6 @@ const enhance = compose(
   withState('showModal', 'setShowModal', false),
   withHandlers({
     handleSetInitialValues: ({ setInitialValues }) => () => {
-      const profile = JSON.parse(localStorage.getItem('profile'))
 
       fetch(`${getMovements}/${profile.idUser}`)
         .then(response => response.json())
@@ -66,8 +65,8 @@ const enhance = compose(
     toggleVisible: ({ visible, setVisible }) => () => {
       setVisible(!visible)
     },
-    downloadCsv: ({ initialValues }) => () => {
-      fetch(`${downloadCsv}/${initialValues.id}`)
+    downloadCsv: () => () => {
+      fetch(`${downloadCsv}/${profile.idUser}`)
         .catch(error => { return error })
     }
   }),
