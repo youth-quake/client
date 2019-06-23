@@ -22,16 +22,17 @@ const enhance = compose(
             total += item.value
           })
 
-          const moviments = {
+          const movements = {
             firstTarget: '22/06/2019',
             lastTarget: '22/06/2019',
             progress: 90,
             movements: data.map(item => {
               const line = {
-                description: item.description,
+                type: item.type,
                 date: item.date,
                 value: moneyFormat(item.value),
-                type: item.type
+                reference: item.reference,
+                description: item.descriptionMovement
               }
 
               return line
@@ -56,7 +57,7 @@ const enhance = compose(
             ]
           }
 
-          return setInitialValues(moviments)
+          return setInitialValues(movements)
         }).catch(error => error)
     },
     toggleModal: ({ showModal, setShowModal }) => () => {

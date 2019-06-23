@@ -10,7 +10,7 @@ import TargetImage from '../../assets/img/target.png'
 import FriendImage from '../../assets/img/friendship.png'
 import TrophyImage from '../../assets/img/trophy.png'
 
-import { amount } from '../../utils/mask'
+import { amount, onlyNumber } from '../../utils/mask'
 
 const Container = styled.div`
   display: flex;
@@ -99,6 +99,7 @@ const enhance = compose(
   withState('isDisabled', 'setIsDisabled', false),
   withHandlers({
     handleSubmit: ({ setMessage, setIsDisabled }) => values => {
+      const date = new Date()
       const profile = JSON.parse(localStorage.getItem('profile'))
 
       fetch(`${movementsInitial}/${profile.idUser}`, {
@@ -106,7 +107,10 @@ const enhance = compose(
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           "type": values.type,
-          "value": values.value
+          "value": onlyNumber(values.value),
+          "dateMovement": `${date.getDay()}/${date.getMonth}/${date.getFullYear()}`,
+          "reference": 'Valor inicial',
+          "descriptionMovement": 'Essa é sua primeira movimentação'
         })
       })
         .then(response => response.json())

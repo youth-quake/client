@@ -119,6 +119,7 @@ const Dashboard = ({
 									<Line>Data</Line>
 									<Line>Valor</Line>
 									<Line>Descrição</Line>
+									<Line>Tipo</Line>
 									<Line>Referência</Line>
 									<Line>Remover</Line>
 								</Header>
@@ -130,6 +131,7 @@ const Dashboard = ({
 												<Line>{item.value}</Line>
 												<Line>{item.description}</Line>
 												<Line>{item.type}</Line>
+												<Line>{item.reference}</Line>
 												<Line>
 													<Remove>Deletar</Remove>
 												</Line>

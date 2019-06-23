@@ -4,7 +4,8 @@ import {
   Button,
   Input,
   Anchor,
-  Theme
+  Theme,
+  Loading
 } from '../../components'
 
 import {
@@ -43,92 +44,96 @@ const responseGoogle = (response) => {
 const Login = ({
   handleSubmit,
   setIsDisabled,
-  isDisabled
+  isDisabled,
+  loading
 }) => (
-    <Container>
-      <Formik
-        data-testid="login-form"
-        render={({
-          errors,
-          values
-        }) => (
-            <Form onChange={() => { setIsDisabled(false) }}>
-              <Logo src={youthquake} />
-              <Option>
-                <Img src={google} />
-                <GoogleLogin
-                  clientId=""
-                  buttonText="Iniciar sessão com o Google"
-                  onSuccess={responseGoogle}
-                  onFailure={responseGoogle}
-                  cookiePolicy={'single_host_origin'}
-                  icon={false}
-                />
-              </Option>
-              <Option>
-                <Img src={facebook} />
-                <FacebookLogin
-                  appId=""
-                  autoLoad={true}
-                  fields="name,email,picture"
-                  callback={responseFacebook}
-                  textButton="Iniciar sessão com o Facebook"
-                  language="pt_BR"
-                  cssClass=""
-                />
-              </Option>
-              <Separator>
-                <Scratches />
-                <Text>OU</Text>
-                <Scratches />
-              </Separator>
-              <Field
-                name="login.login"
-                render={({ field }) => (
-                  <Input
-                    {...field}
-                    placeholder='Nome de usuário'
-                    errors={errors}
+    <div>
+      <Loading loading={loading} />
+      <Container loading={loading}>
+        <Formik
+          data-testid="login-form"
+          render={({
+            errors,
+            values
+          }) => (
+              <Form onChange={() => { setIsDisabled(false) }}>
+                <Logo src={youthquake} />
+                <Option>
+                  <Img src={google} />
+                  <GoogleLogin
+                    clientId=""
+                    buttonText="Iniciar sessão com o Google"
+                    onSuccess={responseGoogle}
+                    onFailure={responseGoogle}
+                    cookiePolicy={'single_host_origin'}
+                    icon={false}
                   />
-                )}
-              />
-              <Field
-                name="login.password"
-                render={({ field }) => (
-                  <Input
-                    {...field}
-                    type='password'
-                    placeholder='Senha'
-                    errors={errors}
+                </Option>
+                <Option>
+                  <Img src={facebook} />
+                  <FacebookLogin
+                    appId=""
+                    autoLoad={true}
+                    fields="name,email,picture"
+                    callback={responseFacebook}
+                    textButton="Iniciar sessão com o Facebook"
+                    language="pt_BR"
+                    cssClass=""
                   />
-                )}
-              />
-              <Button
-                type="submit"
-                disabled={isDisabled}
-                onClick={() => handleSubmit(values)}
-                backgroundColor={Theme.colors.secondary_color}
-              >
-                Entrar
+                </Option>
+                <Separator>
+                  <Scratches />
+                  <Text>OU</Text>
+                  <Scratches />
+                </Separator>
+                <Field
+                  name="login"
+                  render={({ field }) => (
+                    <Input
+                      {...field}
+                      placeholder='Nome de usuário'
+                      errors={errors}
+                    />
+                  )}
+                />
+                <Field
+                  name="password"
+                  render={({ field }) => (
+                    <Input
+                      {...field}
+                      type='password'
+                      placeholder='Senha'
+                      errors={errors}
+                    />
+                  )}
+                />
+                <Button
+                  type="submit"
+                  disabled={isDisabled}
+                  onClick={() => handleSubmit(values)}
+                  backgroundColor={Theme.colors.secondary_color}
+                >
+                  Entrar
                 </Button>
-              <Anchor
-                text='Não tem uma conta ainda?'
-                description='Crie agora mesmo'
-                to='/cadastro'
-              />
-            </Form>
-          )}
-      />
-      <Content>
-        <div>
-          <Title>Bem vindo de volta!</Title>
-          <Text>A solução para o gerenciamento de suas finanças e controle de gastos está aqui,
-              Não perca tempo na hora de construir um futuro inovador.
+                <Anchor
+                  text='Não tem uma conta ainda?'
+                  description='Crie agora mesmo'
+                  to='/cadastro'
+                />
+              </Form>
+            )}
+        />
+        <Content>
+          <div>
+            <Title>Bem vindo de volta!</Title>
+            <Text>A solução para o gerenciamento de suas finanças e controle de gastos está aqui,
+                Não perca tempo na hora de construir um futuro inovador.
           </Text>
-        </div>
-        <ContentImage src={login} />
-      </Content>
-    </Container>
+          </div>
+          <ContentImage src={login} />
+        </Content>
+      </Container>
+    </div>
   )
 
 

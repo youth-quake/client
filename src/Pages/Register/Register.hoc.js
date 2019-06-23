@@ -1,6 +1,6 @@
 import { compose, withState, withHandlers, lifecycle } from 'recompose'
 import { register } from '../../services'
-import getProfile from '../../utils/getProfile'
+import { login } from '../../services'
 
 const enhance = compose(
   withState('value', 'setValue', ''),
@@ -8,6 +8,7 @@ const enhance = compose(
   withState('isVisible', 'setIsVisible', false),
   withState('isDisable', 'setIsDisabled', true),
   withState('showModal', 'setShowModal', false),
+  withState('loading', 'setLoading', false),
   withState('initialValues', 'setInitialValues', {}),
   withHandlers({
     toggleModal: ({ showModal, setShowModal }) => () => {
@@ -18,7 +19,7 @@ const enhance = compose(
     }) => value => {
       setValue(value)
     },
-    handleSubmit: ({ setMessage, setShowModal }) => data => {
+    handleSubmit: ({ setMessage, setShowModal, setLoading }) => data => {
       fetch(register, {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
@@ -30,8 +31,27 @@ const enhance = compose(
         })
       })
         .then(response => {
-          response.json()
-          getProfile(data.register.login, data.register.password)
+          fetch(`${login}/${data.register.login}/${data.register.password}`)
+            .then(response => {
+              setLoading(response.status === 'pending' || response.status === 200 ? true : false)
+              return response.json()
+            })
+            .then(profile => {
+              if (profile) {
+                localStorage.removeItem('profile')
+                localStorage.setItem('profile', JSON.stringify(profile))
+                window.location.pathname = '/perfil'
+
+                return true
+              } else {
+                localStorage.removeItem('profile')
+
+                return false
+              }
+            })
+            .catch(error => { return error })
+
+            return response.json()
         }).catch(() => {
           setMessage('Ops! Ocorreu um erro ao salvar suas informações.')
           setShowModal(true)
