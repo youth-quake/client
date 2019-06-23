@@ -2,6 +2,7 @@ import { compose, withState, withHandlers } from 'recompose'
 import { action } from '../../services'
 
 const enhance = compose(
+  withState('item', 'setItem', {}),
   withState('visible', 'setVisible', false),
   withState('showModal', 'setShowModal', false),
   withHandlers({

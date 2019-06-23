@@ -1,18 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
 import { compose, withHandlers, withState } from 'recompose'
-import { Theme, Modal, Button as ButtonWithTheme, NewTarget } from '..'
+import { Theme, Modal, Button as ButtonWithTheme, Bet } from '..'
 
-import friend from '../../assets/img/girl mini.png'
-
-export const Card = styled.div`
-  width: 60vw;
+const Container = styled.div`
   display: flex;
   flex-flow: wrap;
-  justify-content: flex-start;
-  max-height: 600px;
-  overflow-y: auto;
-  font-family: ${Theme.font.font_family};
 `
 
 const Title = styled.h3`
@@ -91,64 +84,43 @@ const enhance = compose(
   })
 )
 
-const bet = [
-  {
-    name: 'Mariazinha',
-    final: 'XX-XX-XXXX',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit'
-  },
-  {
-    name: 'Mariazinha',
-    final: 'XX-XX-XXXX',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit'
-  },
-  {
-    name: 'Mariazinha',
-    final: 'XX-XX-XXXX',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit'
-  },
-  {
-    name: 'Mariazinha',
-    final: 'XX-XX-XXXX',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit'
-  },
-  {
-    name: 'Mariazinha',
-    final: 'XX-XX-XXXX',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit'
-  }
-]
+const allBets = JSON.parse(localStorage.getItem('friends'))
 
 const Component = ({
   showModal,
-  toggleModal
+  toggleModal,
+  bet
 }) => (
     <div>
       <Title>Todas as apostas
         <Button>Nova aposta</Button>
       </Title>
-      <div>
+      <Container>
         <Modal
           showModal={showModal}
           toggleModal={() => toggleModal()}
           title="Nova aposta"
           text=""
-          Form={NewTarget}
+          Form={Bet}
         />
-        <Card>
-          {bet.map(item => (
+        {allBets.map(item => (
+          (item.bets.length > 0 && (
             <Profile>
-              <Picture src={friend} alt="Amigo" />
+              <Picture src={item.picture} alt="Amigo" />
               <Name>{item.name}</Name>
-              <Description>{item.description}</Description>
-              <Date>
-                <p>Termina em:</p>
-                <p>{item.final}</p>
-              </Date>
+              {item.bets.map(bet => (
+                <div>
+                  <Description>{bet.description}</Description>
+                  <Date>
+                    <p>Termina em:</p>
+                    <p>{bet.date}</p>
+                  </Date>
+                </div>
+              ))}
             </Profile>
-          ))}
-        </Card>
-      </div>
+          ))
+        ))}
+      </Container>
     </div>
   )
 

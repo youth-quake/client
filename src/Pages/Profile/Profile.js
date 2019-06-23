@@ -40,11 +40,14 @@ import { Formik, Field } from 'formik'
 import cup from '../../assets/img/cup.png'
 import racingFlag from '../../assets/img/racing-flag.png'
 import handshake from '../../assets/img/handshake.png'
+
 import errorImage from '../../assets/img/girl big.png'
 
 const isEmpty = value => {
   return value === [] || value.length < 1
 }
+
+const allBets = JSON.parse(localStorage.getItem('friends'))
 
 const Profile = ({
   initialValues,
@@ -108,7 +111,7 @@ const Profile = ({
                             {
                               active: {
                                 symbol: <ImageProfile
-                                  src={initialValues.userPicture}
+                                  src={initialValues.picture === null ? initialValues.userPicture : initialValues.picture}
                                   title="Foto de perfil"
                                   onError={e => e.target.src = errorImage}
                                   onClick={togglePhotos}
@@ -227,10 +230,10 @@ const Profile = ({
                       )}
                     </Content>
                   )}
-                  {(isBet && initialValues.targets) && (
+                  {(isBet && allBets) && (
                     <Content>
-                      <Bet bet={initialValues.targets} />
-                      {isEmpty(initialValues.targets) && (
+                      <Bet />
+                      {isEmpty(allBets) && (
                         <p>Ops! Você ainda não tem nenhuma aposta cadastrada</p>
                       )}
                     </Content>

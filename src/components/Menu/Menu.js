@@ -172,6 +172,8 @@ const enhance = compose(
   })
 )
 
+const profile = JSON.parse(localStorage.getItem('profile'))
+
 export const Component = ({
   showModal,
   toggleModal,
@@ -235,7 +237,7 @@ export const Component = ({
         </AllOptions>
         <NavbarImage
           onClick={() => setVisible(!visible)}
-          src={getPhoto()}
+          src={profile.picture === null ? getPhoto() : profile.picture}
           onError={e => e.target.src = errorImage}
           title="Visualizar opções"
         />

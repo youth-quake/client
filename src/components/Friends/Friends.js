@@ -4,7 +4,9 @@ import { Theme, Modal, Bet } from '../../components'
 import { compose, withState, withHandlers, lifecycle } from 'recompose'
 import { friend } from '../../services'
 import { Input } from '../Input'
+
 import search from '../../assets/img/search.png'
+import errorImage from '../../assets/img/girl mini.png'
 
 const Tag = styled.div`
   width: 100px;
@@ -148,12 +150,21 @@ const enhance = compose(
         .then(friends => {
           if (friends) {
             console.log(friends)
-
             const currentFriends = friends.map(item => {
               const friend = {
                 id: item.user2.idUser,
                 name: item.user2.name,
-                username: item.user2.login
+                picture: item.user2.picture === null ? errorImage : item.user2.picture,
+                username: item.user2.login,
+                bets: item.bets.map(bet => {
+                  return {
+                    friend: item.user2.name,
+                    description: bet.description,
+                    result: bet.result,
+                    date: bet.time,
+                    value: bet.value
+                  }
+                })
               }
 
               return friend
@@ -173,7 +184,7 @@ const enhance = compose(
       setShowModal(!showModal)
     },
     handleSearch: () => value => {
-      fetch(`${friend}/value`)
+      fetch(`${friend}/${value}`)
         .then(response => response.json())
         .then(friend => {
           if (friend) {
@@ -229,7 +240,7 @@ const Component = ({
         Form={() => (<Bet selectedFriend={selectedFriend} />)}
       />
       <Wrapper visible={visible}>
-        <Title title="Seus contatos">Seus contatos ({ initialValues.length })</Title>
+        <Title title="Seus contatos">Seus contatos ({initialValues.length})</Title>
         <Search>
           <img src={search} alt="Buscar amigo" />
           <Input
@@ -241,7 +252,10 @@ const Component = ({
           <Container>
             {initialValues.map(item => (
               <Friend key={item.name}>
-                <Image src={item.img} />
+                <Image 
+                  src={item.picture} 
+                  onError={e => e.target.src = errorImage}
+                />
                 <div>
                   <span>{item.name}</span>
                   <span>{item.username}</span>
