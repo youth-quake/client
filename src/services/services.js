@@ -17,3 +17,4 @@ export const action = `${BASE}/action/include`
 export const getMovements = `${BASE}/movements/get`
 export const movementsInitial = `${BASE}/movements/includeinitial`
 export const friendSearch = `${BASE}/friend/search`
+export const friendAdd = `${BASE}/friends/include`

@@ -2,8 +2,9 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 import { Theme, Modal, Bet } from '../../components'
 import { compose, withState, withHandlers, lifecycle } from 'recompose'
-import { friend, friendSearch } from '../../services'
 import { Input } from '../Input'
+
+import { friend, friendSearch, friendAdd } from '../../services'
 
 import search from '../../assets/img/search.png'
 import errorImage from '../../assets/img/girl mini.png'
@@ -137,6 +138,8 @@ export const Search = styled.div`
   }
 `
 
+const data = JSON.parse(localStorage.getItem('profile'))
+
 const enhance = compose(
   withState('initialValues', 'setInitialValues', []),
   withState('friendsSearch', 'setFriendsSearch', []),
@@ -145,8 +148,6 @@ const enhance = compose(
   withState('selectedFriend', 'setSelectedFriend', {}),
   withHandlers({
     handleSetInitialValues: ({ setInitialValues }) => () => {
-      const data = JSON.parse(localStorage.getItem('profile'))
-
       fetch(`${friend}/${data.idUser}`)
         .then(response => response.json())
         .then(friends => {
@@ -184,25 +185,41 @@ const enhance = compose(
     handleClick: ({ showModal, setShowModal }) => () => {
       setShowModal(!showModal)
     },
-    handleSearch: ({ setIsSearch, setFriendsSearch }) => value => {
+    handleSearch: ({ setIsSearch, setFriendsSearch, initialValues }) => value => {
       setIsSearch(true)
-
       fetch(`${friendSearch}/${value}`)
         .then(response => response.json())
         .then(friend => {
           if (friend) {
+            console.log(friend.map(item => item.idUser))
+            console.log(initialValues.map(item => item.id))
+            
             setFriendsSearch([])
             setFriendsSearch(friend.map(item => {
-              return {
-                id: item.idUser,
-                name: item.name,
-                picture: item.picture === null ? errorImage : item.picture,
-                username: item.login
+              if(!initialValues.map(item => item.id).includes(item.idUser)){
+                return {
+                  id: item.idUser,
+                  name: item.name,
+                  picture: item.picture === null ? errorImage : item.picture,
+                  username: item.login
+                }
               }
+              
+              return []
             }))
           }
         })
         .catch(error => { return error })
+    },
+    handleAddFriend: () => name => {
+      console.log(name)
+      fetch(`${friendAdd}/${data.idUser}`, {
+        method: 'post',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          "user2": name
+        })
+      }).then(response => response.json())
     }
   }),
   lifecycle({
@@ -225,6 +242,7 @@ const Component = ({
   friendsSearch,
   setFriendsSearch,
   setIsSearch,
+  handleAddFriend,
   ...props
 }) => {
 
@@ -250,16 +268,16 @@ const Component = ({
             id="search"
             placeholder='Pesquisar usuários...'
             onInput={e => handleSearch(e.target.value)}
-            onBlur={() => {
-              setFriendsSearch([])
-              setIsSearch(false)
-              document.getElementById('search').value = ""
-            }}
+          // onBlur={() => {
+          //   setFriendsSearch([])
+          //   setIsSearch(false)
+          //   document.getElementById('search').value = ""
+          // }}
           />
         </Search>
 
         <Container>
-          {(initialValues && !isSearch) && (
+          {((initialValues && !isSearch) || document.getElementById('search').value === "") && (
             initialValues.map(item => (
               <Friend key={item.name}>
                 <Image
@@ -284,7 +302,6 @@ const Component = ({
           {isSearch && (
             friendsSearch.map(item => (
               <Friend key={item.name}>
-                {console.log(friendsSearch)}
                 <Image
                   src={item.picture}
                   onError={e => e.target.src = errorImage}
@@ -293,14 +310,9 @@ const Component = ({
                   <span>{item.name}</span>
                   <span>{item.username}</span>
                 </div>
-                <button
-                  onClick={() => {
-                    handleClick()
-                    setSelectedFriend(item)
-                  }}
-                >
+                <button onClick={() => handleAddFriend(item.name)}>
                   Adicionar
-              </button>
+                </button>
               </Friend>
             ))
           )}

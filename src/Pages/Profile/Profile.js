@@ -101,6 +101,8 @@ const Profile = ({
                   <Grid>
                     <Left>
                       <Picture>
+                        {console.log('picture', initialValues.picture)}
+                        {console.log('userPicture', initialValues.userPicture)}
                         <Progress
                           type="circle"
                           strokeWidth={8}
