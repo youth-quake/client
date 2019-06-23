@@ -61,7 +61,8 @@ const Login = ({
                 <Option>
                   <Img src={google} />
                   <GoogleLogin
-                    clientId=""
+                    clientId="829754218470-ca67eraacbnc1nsr91e6tcr8uneckt33.apps.googleusercontent.com"
+                    clientSecret="zO-a0SA2FLOhGt6f1rKgBEJm"
                     buttonText="Iniciar sessão com o Google"
                     onSuccess={responseGoogle}
                     onFailure={responseGoogle}

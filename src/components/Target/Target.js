@@ -198,7 +198,7 @@ const Delete = styled(Button)`
   }
 `
 
-const Title = styled.p`
+const Title = styled.h3`
   width: 100%;
   min-width: 819px;
   margin: 0;

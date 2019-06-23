@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { compose, withHandlers, withState } from 'recompose'
-import { Theme, Modal, NewTarget } from '..'
+import { Theme, Modal, Button as ButtonWithTheme, NewTarget } from '..'
 
 import friend from '../../assets/img/girl mini.png'
 
@@ -15,11 +15,21 @@ export const Card = styled.div`
   font-family: ${Theme.font.font_family};
 `
 
-const Title = styled.p`
+const Title = styled.h3`
+  width: 100%;
+  min-width: 819px;
+  margin: 0;
   font-size: 28px;  
   font-family: ${Theme.font.font_family};
   font-weight: bold;
-  padding: 20px 0;
+  padding: 20px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`
+
+const Button = styled(ButtonWithTheme)`
+  width: 120px;
 `
 
 export const Profile = styled.div`
@@ -114,12 +124,14 @@ const Component = ({
   toggleModal
 }) => (
     <div>
-      <Title>Todas as apostas</Title>
+      <Title>Todas as apostas
+        <Button>Nova aposta</Button>
+      </Title>
       <div>
         <Modal
           showModal={showModal}
           toggleModal={() => toggleModal()}
-          title="Novo objetivo"
+          title="Nova aposta"
           text=""
           Form={NewTarget}
         />

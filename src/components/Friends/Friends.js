@@ -147,6 +147,8 @@ const enhance = compose(
         .then(response => response.json())
         .then(friends => {
           if (friends) {
+            console.log(friends)
+
             const currentFriends = friends.map(item => {
               const friend = {
                 id: item.user2.idUser,
@@ -170,7 +172,7 @@ const enhance = compose(
     handleClick: ({ showModal, setShowModal }) => () => {
       setShowModal(!showModal)
     },
-    handleSearch: ({ setInitialValues }) => value => {
+    handleSearch: () => value => {
       fetch(`${friend}/value`)
         .then(response => response.json())
         .then(friend => {
