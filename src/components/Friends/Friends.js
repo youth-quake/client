@@ -2,7 +2,7 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 import { Theme, Modal, Bet } from '../../components'
 import { compose, withState, withHandlers, lifecycle } from 'recompose'
-import { friend } from '../../services'
+import { friend, friendSearch } from '../../services'
 import { Input } from '../Input'
 
 import search from '../../assets/img/search.png'
@@ -184,7 +184,7 @@ const enhance = compose(
       setShowModal(!showModal)
     },
     handleSearch: () => value => {
-      fetch(`${friend}/${value}`)
+      fetch(`${friendSearch}/${value}`)
         .then(response => response.json())
         .then(friend => {
           if (friend) {
@@ -245,7 +245,7 @@ const Component = ({
           <img src={search} alt="Buscar amigo" />
           <Input
             placeholder='Pesquisar amigos...'
-            onKeyDown={e => handleSearch(e.target.value)}
+            onInput={e => handleSearch(e.target.value)}
           />
         </Search>
         {initialValues && (
