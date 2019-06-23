@@ -196,7 +196,7 @@ const enhance = compose(
             
             setFriendsSearch([])
             setFriendsSearch(friend.map(item => {
-              if(!initialValues.map(item => item.id).includes(item.idUser)){
+              if(!initialValues.map(item => item.id).includes(item.idUser) || data.idUser !== item.idUser){
                 return {
                   id: item.idUser,
                   name: item.name,
