@@ -226,10 +226,11 @@ export const Component = ({
             <NavbarImage
               src={youthquake}
               title="Ir para a página inicial"
+              onClick={() => window.location.pathname = '/'}
             />
-            <Option to='/'>Home</Option>
             <Option to='/#projeto'>O projeto</Option>
             <Option to='/#sobre-nos'>Fórum</Option>
+            <Option to='/#contato'>Contato</Option>
           </WrapperOptions>
         </AllOptions>
         <NavbarImage

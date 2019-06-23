@@ -42,14 +42,15 @@ const Home = () => (
       <Menu color={Theme.base_color}>
         <WrapperOptions>
           <Option color={Theme.primary_color}><Youthquake src={youthquake} /></Option>
-          <Option to='login'>Login</Option>
           <Option to='#projeto'>O projeto</Option>
           <Option to='#sobre-nos'>Fórum</Option>
+          <Option to='login'>Contato</Option>
         </WrapperOptions>
         <Option to='#projeto'>
           <Button onClick={() => window.location.pathname = '/cadastro'}>
             Cadastrar
           </Button>
+          <Button onClick={() => window.location.pathname = '/login'}>Login</Button>
         </Option>
       </Menu>
     </Container>

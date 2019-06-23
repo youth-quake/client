@@ -9,6 +9,7 @@ const getProfile = (username, password) => {
         localStorage.setItem('profile', JSON.stringify(profile))
 
         const location = window.location.pathname
+        
         if (location === '/login' || window.location.pathname === '/cadastro') {
           window.location.pathname = '/perfil'
         }
