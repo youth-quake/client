@@ -51,6 +51,7 @@ const Container = styled.div`
   max-height: 370px;
   overflow-y: hidden;
   overflow-x: hidden;
+  background: red;
 `
 
 const Title = styled.p`
@@ -139,7 +140,9 @@ export const Search = styled.div`
 
 const enhance = compose(
   withState('initialValues', 'setInitialValues', []),
+  withState('friendsSearch', 'setFriendsSearch', []),
   withState('showModal', 'setShowModal', false),
+  withState('isSearch', 'setIsSearch', false),
   withState('selectedFriend', 'setSelectedFriend', {}),
   withHandlers({
     handleSetInitialValues: ({ setInitialValues }) => () => {
@@ -149,7 +152,6 @@ const enhance = compose(
         .then(response => response.json())
         .then(friends => {
           if (friends) {
-            console.log(friends)
             const currentFriends = friends.map(item => {
               const friend = {
                 id: item.user2.idUser,
@@ -183,25 +185,22 @@ const enhance = compose(
     handleClick: ({ showModal, setShowModal }) => () => {
       setShowModal(!showModal)
     },
-    handleSearch: () => value => {
+    handleSearch: ({ setIsSearch, setFriendsSearch, friendsSearch }) => value => {
+      setIsSearch(true)
+
       fetch(`${friendSearch}/${value}`)
         .then(response => response.json())
         .then(friend => {
           if (friend) {
-
-            const founded = {
-              idFriend: friend.idUser,
-              name: friend.name,
-              username: friend.login
-            }
-
-            return founded
-
-          } else {
-
+            setFriendsSearch(friendSearch.push(setFriendsSearch(friendSearch.push(friend.map(item => {
+              return {
+                id: item.idUser,
+                name: item.name,
+                picture: item.picture === null ? errorImage : item.picture,
+                username: item.login
+              }
+            })))))
           }
-
-          return {}
         })
         .catch(error => { return error })
     }
@@ -222,6 +221,8 @@ const Component = ({
   selectedFriend,
   setSelectedFriend,
   handleSearch,
+  isSearch,
+  friendsSearch,
   ...props
 }) => {
 
@@ -248,12 +249,13 @@ const Component = ({
             onInput={e => handleSearch(e.target.value)}
           />
         </Search>
-        {initialValues && (
-          <Container>
-            {initialValues.map(item => (
+
+        <Container>
+          {(initialValues && !isSearch) && (
+            initialValues.map(item => (
               <Friend key={item.name}>
-                <Image 
-                  src={item.picture} 
+                <Image
+                  src={item.picture}
                   onError={e => e.target.src = errorImage}
                 />
                 <div>
@@ -269,9 +271,33 @@ const Component = ({
                   apostar
               </button>
               </Friend>
-            ))}
-          </Container>
-        )}
+            ))
+          )}
+          {isSearch && (
+            friendsSearch.map(item => (
+              <Friend key={item.name}>
+                {console.log(friendsSearch)}
+                <Image
+                  src={item.picture}
+                  onError={e => e.target.src = errorImage}
+                />
+                <div>
+                  <span>{item.name}</span>
+                  <span>{item.username}</span>
+                </div>
+                <button
+                  onClick={() => {
+                    handleClick()
+                    setSelectedFriend(item)
+                  }}
+                >
+                  apostar
+              </button>
+              </Friend>
+            ))
+          )}
+        </Container>
+
       </Wrapper>
       <Tag title="Amigos" visible={visible} onClick={() => toggleVisible()}>
         Amigos
