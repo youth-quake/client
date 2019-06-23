@@ -42,6 +42,10 @@ import racingFlag from '../../assets/img/racing-flag.png'
 import handshake from '../../assets/img/handshake.png'
 import errorImage from '../../assets/img/girl big.png'
 
+const isEmpty = value => {
+  return value === [] || value.length < 1
+}
+
 const Profile = ({
   initialValues,
   isAchievements,
@@ -207,19 +211,28 @@ const Profile = ({
                       <span id="isBet">Apostas</span>
                     </Item>
                   </Menu>
-                  {(isAchievements && initialValues.achievements !== undefined) && (
+                  {(isEmpty(initialValues.achievements)) && (
+                    <p>Ops! Você ainda não tem nenhum objetivo cadastrado</p>
+                  )}
+                  {(!isEmpty(initialValues.achievements)) && (
                     <Content>
                       <Achievements achievements={initialValues.achievements} />
                     </Content>
                   )}
-                  {(isTarget && initialValues.targets !== undefined) && (
+                  {isEmpty(initialValues.targets) && (
+                    <p>Ops! Você ainda não tem nenhum objetivo cadastrado</p>
+                  )}
+                  {!isEmpty(initialValues.targets) && (
                     <Content>
                       <Target targets={initialValues.targets} />
                     </Content>
                   )}
-                  {isBet && (
+                  {isEmpty(initialValues.targets) && (
+                    <p>Ops! Você ainda não tem nenhuma aposta cadastrada</p>
+                  )}
+                  {!isEmpty(initialValues.targets) && (
                     <Content>
-                      <Bet targets={initialValues.targets} />
+                      <Bet bet={initialValues.targets} />
                     </Content>
                   )}
                 </WrapperContent>

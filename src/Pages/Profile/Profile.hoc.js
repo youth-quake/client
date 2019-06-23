@@ -15,7 +15,7 @@ export let values = withFormik({
     message: data.messageStatus,
     level: data.level,
     userPicture: getPhoto(),
-    achievements: data.AchievementUsers,
+    achievements: data.achievementUsers,
     password: data.password,
     targets: data.target.map(item => {
       return {
@@ -123,7 +123,7 @@ const enhance = compose(
           message: data.messageStatus,
           level: data.level,
           userPicture: getPhoto(),
-          achievements: data.AchievementUsers,
+          achievements: data.achievementUsers,
           password: data.password,
           targets: data.target.map(item => {
             return {
@@ -142,9 +142,10 @@ const enhance = compose(
           })
         })
       })
-
     },
     componentDidMount() {
+      const { setShowModal } = this.props
+
       data = JSON.parse(localStorage.getItem('profile'))
 
       values = withFormik({
@@ -156,7 +157,7 @@ const enhance = compose(
           message: data.messageStatus,
           level: data.level,
           userPicture: getPhoto(),
-          achievements: data.AchievementUsers,
+          achievements: data.achievementUsers,
           password: data.password,
           targets: data.target.map(item => {
             return {
@@ -175,6 +176,10 @@ const enhance = compose(
           })
         })
       })
+
+      if(data.movements.length > 0){
+        setShowModal(false)
+      }
     }
   })
 )
