@@ -4,7 +4,7 @@ import { Formik, Field } from 'formik'
 import styled, { css } from 'styled-components'
 import { target } from '../../services'
 import { compose, withState, withHandlers, lifecycle } from 'recompose'
-import { date, amount } from '../../utils/mask'
+import { date, amount, onlyNumber } from '../../utils/mask'
 
 const Wrapper = styled.div`
   display: flex;
@@ -87,7 +87,7 @@ const enhance = compose(
           "description": values.initialValues.description,
           "dtStart": `${date.getDay()}/${date.getMonth()}/${date.getFullYear()}`,
           "dtEnd": values.initialValues.dateEnd,
-          "value": values.initialValues.value
+          "value": onlyNumber(values.initialValues.value)
         })
       })
         .then(response => response.json())
