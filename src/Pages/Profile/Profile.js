@@ -211,28 +211,28 @@ const Profile = ({
                       <span id="isBet">Apostas</span>
                     </Item>
                   </Menu>
-                  {(isEmpty(initialValues.achievements)) && (
-                    <p>Ops! Você ainda não tem nenhum objetivo cadastrado</p>
-                  )}
-                  {(!isEmpty(initialValues.achievements)) && (
+                  {(isAchievements && initialValues.achievements) && (
                     <Content>
                       <Achievements achievements={initialValues.achievements} />
+                      {(isEmpty(initialValues.achievements)) && (
+                        <p>Ops! Você ainda não tem nenhuma conquista obtida</p>
+                      )}
                     </Content>
                   )}
-                  {isEmpty(initialValues.targets) && (
-                    <p>Ops! Você ainda não tem nenhum objetivo cadastrado</p>
-                  )}
-                  {!isEmpty(initialValues.targets) && (
+                  {(isTarget && initialValues.targets) && (
                     <Content>
                       <Target targets={initialValues.targets} />
+                      {isEmpty(initialValues.targets) && (
+                        <p>Ops! Você ainda não tem nenhum objetivo cadastrado</p>
+                      )}
                     </Content>
                   )}
-                  {isEmpty(initialValues.targets) && (
-                    <p>Ops! Você ainda não tem nenhuma aposta cadastrada</p>
-                  )}
-                  {!isEmpty(initialValues.targets) && (
+                  {(isBet && initialValues.targets) && (
                     <Content>
                       <Bet bet={initialValues.targets} />
+                      {isEmpty(initialValues.targets) && (
+                        <p>Ops! Você ainda não tem nenhuma aposta cadastrada</p>
+                      )}
                     </Content>
                   )}
                 </WrapperContent>
