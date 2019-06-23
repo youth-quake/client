@@ -49,7 +49,7 @@ export const Photos = () => (
             method: 'put',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-              "name": item
+              "picture": item
             })
           })
             .then(response => response.json())
