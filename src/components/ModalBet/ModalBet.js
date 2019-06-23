@@ -112,7 +112,7 @@ const Component = ({
                 <div>
                   <Description>{bet.description}</Description>
                   <Date>
-                    <p>Termina em:</p>
+                    <p>Termina em</p>
                     <p>{bet.date}</p>
                   </Date>
                 </div>

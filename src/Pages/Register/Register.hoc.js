@@ -5,7 +5,7 @@ import { login } from '../../services'
 const enhance = compose(
   withState('value', 'setValue', ''),
   withState('message', 'setMessage', ''),
-  withState('isVisible', 'setIsVisible', false),
+  withState('isVisible', 'setIsVisible', true),
   withState('isDisable', 'setIsDisabled', true),
   withState('showModal', 'setShowModal', false),
   withState('loading', 'setLoading', false),
