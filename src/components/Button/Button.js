@@ -17,10 +17,6 @@ export const Button = styled.button`
   font-family: ${Theme.font.font_family};
   margin: 10px 0;
   
-  &:hover{
-    opacity: 0.5;
-  }
-  
   ${props => props.disabled && (
     css`
     cursor: not-allowed;
@@ -28,5 +24,11 @@ export const Button = styled.button`
     color: ${Theme.colors.secondary_color};
     border: solid 1px ${Theme.colors.secondary_color};
   `
-  )}   
+  )}
+  
+  ${props => !props.disabled && css`
+    &:hover{
+      opacity: 0.5;
+    }  
+  `}
 `
