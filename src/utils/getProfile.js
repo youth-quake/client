@@ -8,12 +8,6 @@ const getProfile = (username, password) => {
         localStorage.removeItem('profile')
         localStorage.setItem('profile', JSON.stringify(profile))
 
-        const location = window.location.pathname
-        
-        if (location === '/login' || window.location.pathname === '/cadastro') {
-          window.location.pathname = '/perfil'
-        }
-
         return true
       } else {
         localStorage.removeItem('profile')

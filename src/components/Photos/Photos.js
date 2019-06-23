@@ -4,6 +4,7 @@ import photos from '../../utils/photos'
 import { Theme } from '../Theme'
 
 import { updatePicture } from '../../services'
+import getProfile from '../../utils/getProfile'
 
 import errorImage from '../../assets/img/girl big.png'
 
@@ -39,21 +40,23 @@ const profile = JSON.parse(localStorage.getItem('profile'))
 export const Photos = () => (
   <Container>
     {photos.map(item => (
-      <Image 
-      key={item}
-      src={item} 
-      onClick={() => {
-        localStorage.setItem('iconUser', item)
-        fetch(`${updatePicture}/${profile.idUser}`, {
-          method: 'put',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            "name": item
+      <Image
+        key={item}
+        src={item}
+        onClick={() => {
+          localStorage.setItem('iconUser', item)
+          fetch(`${updatePicture}/${profile.idUser}`, {
+            method: 'put',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              "name": item
+            })
           })
-        }).then(response => response.json())
-      }} 
-      onError={e => e.target.src = errorImage }
-     />
+            .then(response => response.json())
+            .then(() => getProfile(profile.login, profile.password))
+        }}
+        onError={e => e.target.src = errorImage}
+      />
     ))}
   </Container>
 )

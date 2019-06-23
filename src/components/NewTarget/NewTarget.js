@@ -5,6 +5,7 @@ import styled, { css } from 'styled-components'
 import { target } from '../../services'
 import { compose, withState, withHandlers, lifecycle } from 'recompose'
 import { date, amount, onlyNumber } from '../../utils/mask'
+import getProfile from '../../utils/getProfile'
 
 const Wrapper = styled.div`
   display: flex;
@@ -95,6 +96,7 @@ const enhance = compose(
           if (json) {
             setMessage('Objetivo cadastrado com sucesso')
             setVisible(true)
+            getProfile(initialValues.username, initialValues.password)
           } else {
             setMessage('Ops! Ocurreu um erro ao durante o cadastro.')
             setVisible(true)

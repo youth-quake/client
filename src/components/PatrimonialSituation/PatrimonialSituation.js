@@ -10,6 +10,7 @@ import TargetImage from '../../assets/img/target.png'
 import FriendImage from '../../assets/img/friendship.png'
 import TrophyImage from '../../assets/img/trophy.png'
 
+import getProfile from '../../utils/getProfile'
 import { amount, onlyNumber } from '../../utils/mask'
 
 const Container = styled.div`
@@ -118,6 +119,7 @@ const enhance = compose(
           if (json) {
             setMessage('Parabéns! Agora é hora de começar')
             setIsDisabled(true)
+            getProfile(profile.login, profile.password)
           } else {
             setMessage('Ops! Ocurreu um erro ao durante a operação')
           }
