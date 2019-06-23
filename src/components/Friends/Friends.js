@@ -185,21 +185,22 @@ const enhance = compose(
     handleClick: ({ showModal, setShowModal }) => () => {
       setShowModal(!showModal)
     },
-    handleSearch: ({ setIsSearch, setFriendsSearch, friendsSearch }) => value => {
+    handleSearch: ({ setIsSearch, setFriendsSearch }) => value => {
       setIsSearch(true)
 
       fetch(`${friendSearch}/${value}`)
         .then(response => response.json())
         .then(friend => {
           if (friend) {
-            setFriendsSearch(friendSearch.push(setFriendsSearch(friendSearch.push(friend.map(item => {
+            setFriendsSearch([])
+            setFriendsSearch(friend.map(item => {
               return {
                 id: item.idUser,
                 name: item.name,
                 picture: item.picture === null ? errorImage : item.picture,
                 username: item.login
               }
-            })))))
+            }))
           }
         })
         .catch(error => { return error })
@@ -223,6 +224,8 @@ const Component = ({
   handleSearch,
   isSearch,
   friendsSearch,
+  setFriendsSearch,
+  setIsSearch,
   ...props
 }) => {
 
@@ -243,10 +246,16 @@ const Component = ({
       <Wrapper visible={visible}>
         <Title title="Seus contatos">Seus contatos ({initialValues.length})</Title>
         <Search>
-          <img src={search} alt="Buscar amigo" />
+          <img src={search} alt="Buscar usuário" />
           <Input
-            placeholder='Pesquisar amigos...'
+            id="search"
+            placeholder='Pesquisar usuários...'
             onInput={e => handleSearch(e.target.value)}
+            onBlur={() => {
+              setFriendsSearch([])
+              setIsSearch(false)
+              document.getElementById('search').value = ""
+            }}
           />
         </Search>
 
