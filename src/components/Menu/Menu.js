@@ -122,6 +122,7 @@ export const AllOptions = styled.div`
   justify-content: space-between;
   background: ${props => props.color};
   font-family: ${Theme.font.font_family};
+  text-transform: uppercase;
 `
 
 export const WrapperOptions = styled.div`
@@ -135,7 +136,8 @@ export const WrapperOptions = styled.div`
 
 export const Option = styled(Link)`
   height: 40px;
-  padding: 10px 0;
+  padding: 10px 20px;
+  color: ${Theme.colors.font_color};
   line-height: 2;
   text-decoration: ${props => props.currentRoute ? 'underline' : 'none'};
   font-size: 18px;
@@ -144,6 +146,10 @@ export const Option = styled(Link)`
 
   & > button {
     width: 120px;
+    color: ${Theme.colors.secondary_color};
+  }
+
+  &:hover {
     color: ${Theme.colors.secondary_color};
   }
 `
@@ -215,12 +221,12 @@ export const Component = ({
         Form={Config}
       />
       <Divider>
-        <NavbarImage
-          src={youthquake}
-          title="Ir para a página inicial"
-        />
         <AllOptions color={Theme.base_color}>
           <WrapperOptions>
+            <NavbarImage
+              src={youthquake}
+              title="Ir para a página inicial"
+            />
             <Option to='/'>Home</Option>
             <Option to='/#projeto'>O projeto</Option>
             <Option to='/#sobre-nos'>Fórum</Option>

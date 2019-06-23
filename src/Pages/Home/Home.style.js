@@ -23,27 +23,28 @@ export const Menu = styled.div`
   padding: 10px 0;
   display: flex;
   justify-content: space-between;
-  background: ${props => props.color};
+  align-items: center;
   font-family: ${Theme.font.font_family};
 `
 
 export const WrapperOptions = styled.div`
-  display:flex;  
-  align-items: center;
-
-  & > a+a{
-    margin-left: 14px; 
-  }
+  padding: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  background: ${props => props.color};
+  font-family: ${Theme.font.font_family};
+  text-transform: uppercase;
 `
 
 export const Option = styled(Link)`
   height: 40px;
-  padding: 10px 0;
+  padding: 10px 20px;
   line-height: 2;
   text-decoration: ${props => props.currentRoute ? 'underline' : 'none'};
   font-size: 18px;
   display: flex;
   align-items: center;
+  text-transform: uppercase;
 
   & > button {
     width: 120px;
@@ -60,8 +61,8 @@ export const Option = styled(Link)`
 `
 
 export const Youthquake = styled.img`
-  width: 200px;
-  height: 72px;
+  width: 130px;
+  height: 52px;
 `
 
 export const Presentation = styled.div`

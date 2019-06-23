@@ -36,15 +36,15 @@ import share from '../../assets/img/share.png'
 import money from '../../assets/img/money (3).png'
 import learning from '../../assets/img/learning (1).png'
 
-const Home = props => (
+const Home = () => (
   <div>
     <Container>
       <Menu color={Theme.base_color}>
-        <Option color={Theme.primary_color}><Youthquake src={youthquake} /></Option>
         <WrapperOptions>
+          <Option color={Theme.primary_color}><Youthquake src={youthquake} /></Option>
+          <Option to='login'>Login</Option>
           <Option to='#projeto'>O projeto</Option>
           <Option to='#sobre-nos'>Fórum</Option>
-          <Option to='login'>Login</Option>
         </WrapperOptions>
         <Option to='#projeto'>
           <Button onClick={() => window.location.pathname = '/cadastro'}>

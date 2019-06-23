@@ -21,7 +21,6 @@ const enhance = compose(
           data.forEach(item => {
             total += item.value
           })
-        
 
           const moviments = {
             firstTarget: '22/06/2019',
@@ -40,7 +39,7 @@ const enhance = compose(
             category: [
               {
                 value: moneyFormat(total),
-                title: '$$$ acumulado'
+                title: 'R$ acumulado'
               },
               {
                 value: moneyFormat(data[0].value),

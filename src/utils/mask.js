@@ -11,7 +11,6 @@ export const moneyFormat = number => `R$ ${number
   .replace(/(\d)(?=(\d{3})+\.)/g, '$1.')
   .replace(/\.(\d{2})$/, ',$1')}`
 
-  
 const onlyNumber = (value = '') => (value || '').replace(/[^\d]/g, '')
 
 export const amount = (value = '') => {
