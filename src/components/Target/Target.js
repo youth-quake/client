@@ -3,7 +3,7 @@ import DonutChart from 'react-donut-chart'
 import styled, { css } from 'styled-components'
 import { Formik, Field } from 'formik'
 import { compose, withHandlers, withState } from 'recompose'
-import { Theme, Button, Modal, NewTarget } from '../../components'
+import { Theme, Button as ButtonWithTheme, Modal, NewTarget } from '../../components'
 
 import dollar from '../../assets/img/dollar.png'
 import dollarNoFill from '../../assets/img/dollar1.png'
@@ -16,13 +16,10 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
+`
 
-  & > button {
-    position: absolute;
-    right: 12px;
-    top: -60px;
-    width: 120px;
-  }
+const Button = styled(ButtonWithTheme)`
+  width: 120px;
 `
 
 const Targets = styled.div`
@@ -202,10 +199,16 @@ const Delete = styled(Button)`
 `
 
 const Title = styled.p`
+  width: 100%;
+  min-width: 819px;
+  margin: 0;
   font-size: 28px;  
   font-family: ${Theme.font.font_family};
   font-weight: bold;
   padding: 20px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `
 
 const Tag = styled.span`
@@ -349,9 +352,11 @@ export const Component = ({
   toggleModal
 }) => (
     <div>
-      <Title>Todos os objetivos</Title>
-      <Wrapper>
+      <Title>
+        Todos os objetivos
         <Button onClick={toggleModal} backgroundColor={Theme.colors.primary_color}>Novo objetivo</Button>
+      </Title>
+      <Wrapper>
         {targets.map(item => <Form key={item.key} initialValues={item.initialValues} />)}
         <Modal
           showModal={showModal}
