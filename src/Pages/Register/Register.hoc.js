@@ -5,7 +5,8 @@ import { login } from '../../services'
 const enhance = compose(
   withState('value', 'setValue', ''),
   withState('message', 'setMessage', ''),
-  withState('isVisible', 'setIsVisible', true),
+  withState('isVisible', 'setIsVisible', false),
+  withState('isValid', 'setIsValid', false),
   withState('isDisable', 'setIsDisabled', true),
   withState('showModal', 'setShowModal', false),
   withState('loading', 'setLoading', false),
@@ -13,11 +14,6 @@ const enhance = compose(
   withHandlers({
     toggleModal: ({ showModal, setShowModal }) => () => {
       setShowModal(!showModal)
-    },
-    handleChange: ({
-      setValue,
-    }) => value => {
-      setValue(value)
     },
     handleSubmit: ({ setMessage, setShowModal, setLoading }) => data => {
       fetch(register, {
@@ -33,7 +29,7 @@ const enhance = compose(
         .then(response => {
           fetch(`${login}/${data.register.login}/${data.register.password}`)
             .then(response => {
-              setLoading(response.status === 'pending' || response.status === 200 ? true : false)
+              setLoading(((response.status === 'pending') || (response.status === 200) ) ? true : false)
               return response.json()
             })
             .then(profile => {
@@ -57,15 +53,11 @@ const enhance = compose(
           setShowModal(true)
         })
     },
-    handleRequirements: ({ setIsDisabled }) => (requirements, value) => {
-      requirements.reduce((isValid, { validation }) => {
-        if (isValid) {
-          return validation(value)
-        }
-
-        return isValid
-      }, true)
-    },
+    handleChange: ({ setIsVisible, setValue, isDisabled }) => value => {
+      setIsVisible(true)
+      setValue(value)
+      console.log()
+    }
   }),
   lifecycle({
     componentDidMount() {
