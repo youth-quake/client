@@ -80,7 +80,7 @@ const enhance = compose(
           "idUser2": selectedFriend.id,
           "name": values.name,
           "description": values.description,
-          "time": values.dateEnd,
+          "time": `${values.dateEnd} dias`,
           "value": onlyNumber(values.value)
         })
       })
