@@ -49,8 +49,8 @@ const Wrapper = styled.div`
 const Container = styled.div`
   display: flex;
   flex-flow: column;
-  max-height: 370px;
-  overflow-y: hidden;
+  max-height: 380px;
+  overflow-y: auto;
   overflow-x: hidden;
 `
 

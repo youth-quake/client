@@ -96,13 +96,15 @@ const enhance = compose(
           if (json) {
             setMessage('Objetivo cadastrado com sucesso')
             setVisible(true)
+            
             getProfile(initialValues.username, initialValues.password)
+            window.location.pathname = '/perfil'
           } else {
             setMessage('Ops! Ocurreu um erro ao durante o cadastro.')
             setVisible(true)
           }
         })
-        .catch(error => {
+        .catch(() => {
           setMessage('Ops! Ocurreu um erro ao durante o cadastro.')
           setVisible(true)
         })

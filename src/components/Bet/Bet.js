@@ -10,10 +10,11 @@ import { newBet } from '../../services'
 import { amount, onlyNumber } from '../../utils/mask'
 
 import errorImage from '../../assets/img/girl mini.png'
+import getProfile from '../../utils/getProfile'
 
 const Container = styled.div`
   width: 100%;
-  
+
   & > div {
     display: flex;
     flex-flow: column;
@@ -86,8 +87,9 @@ const enhance = compose(
         .then(response => response.json())
         .then(json => {
           if (json) {
-            setMessage('Alteração realizada com sucesso')
+            setMessage('Aposta cadastrada com sucesso')
             setVisible(true)
+            getProfile(profile.login, profile.password)
           } else {
             setMessage('Ocurreu um erro ao atualizar o cadastro')
             setVisible(true)
