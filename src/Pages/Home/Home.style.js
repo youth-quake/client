@@ -1,22 +1,30 @@
-import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+import styled, { css } from 'styled-components'
 import { Theme } from '../../components'
 
 export const Spot = styled.div`
   position: absolute;
   top: 0;
   right: 0;
-  z-index: 0;
   width: 650px;
   height: 600px;
   box-sizing: border-box;
-  background: transparent;
 `
 
 export const Container = styled.div`
   width: 95%;
   margin: 0 auto;
   padding: 0 0 20px;
+  scroll-behavior: smooth;
+`
+
+export const ContainerMenu = styled.div`
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 0 20px;
+  position: ${props => props.isScroll ? css`fixed` : css`relative`};
+  background: #fff;
+  z-index: 999;
+  scroll-behavior: smooth;
 `
 
 export const Menu = styled.div`
@@ -36,7 +44,7 @@ export const WrapperOptions = styled.div`
   text-transform: uppercase;
 `
 
-export const Option = styled(Link)`
+export const Option = styled.a`
   height: 40px;
   padding: 10px 20px;
   line-height: 2;
@@ -45,6 +53,11 @@ export const Option = styled(Link)`
   display: flex;
   align-items: center;
   text-transform: uppercase;
+  color: ${Theme.colors.font_color};
+
+  &:hover {
+    color: ${Theme.colors.primary_color};
+  }
 
   & > button {
     width: 120px;
@@ -98,7 +111,7 @@ export const Presentation = styled.div`
 `
 
 export const Wrapper = styled.div`
-  width: 35%;
+  width: 45%;
   padding: 50px 0;
 
   & > h1 {
@@ -194,7 +207,16 @@ export const Final = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  
+  line-height: 1.5;
+
+  & > div > h1 {
+    color: ${Theme.colors.secondary_color};
+  }
+
+  & > div > h3 {
+    line-height: 1.6;
+  }
+
   & > img  {
     width: 300px;
     heigth: 300px;

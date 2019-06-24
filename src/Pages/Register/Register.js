@@ -27,8 +27,6 @@ import youthquake from '../../assets/img/porkinYQ1.png'
 import enhance from './Register.hoc'
 
 import { Formik, ErrorMessage, Field } from 'formik'
-import { shape } from 'prop-types'
-import { validationSchema } from './Register.validation'
 
 const Register = ({
   isVisible,

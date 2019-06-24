@@ -1,7 +1,7 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 import { Theme, Modal, Bet } from '../../components'
-import { compose, withState, withHandlers, lifecycle, renderComponent } from 'recompose'
+import { compose, withState, withHandlers, lifecycle } from 'recompose'
 import { Input } from '../Input'
 
 import { friend, friendSearch, friendAdd } from '../../services'
