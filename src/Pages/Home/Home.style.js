@@ -1,19 +1,20 @@
 import styled, { css } from 'styled-components'
 import { Theme } from '../../components'
 
-export const Spot = styled.div`
+export const Spot = styled.img`
   position: absolute;
   top: 0;
   right: 0;
-  width: 650px;
-  height: 600px;
+  width: 850px;
+  height: 550px;
+  z-index: 888;
   box-sizing: border-box;
 `
 
 export const Container = styled.div`
   width: 95%;
-  margin: 0 auto;
-  padding: 0 0 20px;
+  margin: 2% auto;
+  padding: 50px 0 20px;
   scroll-behavior: smooth;
 `
 
@@ -21,8 +22,15 @@ export const ContainerMenu = styled.div`
   width: 100%;
   margin: 0 auto;
   padding: 0 0 20px;
-  position: ${props => props.isScroll ? css`fixed` : css`relative`};
-  background: #fff;
+  background: transparent;
+  position: absolute;
+  top: 0;
+
+  ${props => props.isScroll && css`
+    position: fixed;
+    background: #fff;
+  `}
+
   z-index: 999;
   scroll-behavior: smooth;
 `
@@ -62,8 +70,7 @@ export const Option = styled.a`
   & > button {
     width: 120px;
     color: ${Theme.colors.secondary_color};
-    border: solid 1px ${Theme.colors.secondary_color};
-    background: transparent;
+    background: #FFF;
 
     &:hover {
       background-color: ${Theme.colors.secondary_color};
@@ -74,11 +81,12 @@ export const Option = styled.a`
 
   & > button+button {
     border-color: transparent;
+    background: transparent;
+    color: #FFF;
 
     &:hover {
       background: transparent;
-      color: ${Theme.colors.secondary_color};
-      opacity: 0.2;
+      opacity: 0.3;
     }
   }
 `

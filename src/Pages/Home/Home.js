@@ -40,6 +40,7 @@ import learning from '../../assets/img/learning (1).png'
 
 const Home = ({ isScroll }) => (
   <div>
+    <Spot src={spot} alt="Imagem ilustrativa"  />
     <ContainerMenu isScroll={isScroll}>
       <Menu color={Theme.base_color}>
         <WrapperOptions>
@@ -60,7 +61,6 @@ const Home = ({ isScroll }) => (
       <Presentation>
         <div id="projeto">
           <Wrapper>
-            <Spot src={spot} alt="Imagem ilustrativa" />
             <Title>Ei, jovem! Procura um financeiro estável?</Title>
             <Subtitle>Nós mostramos por conde começar! Aqui você encontrará a solução para se organizar e viver em paz com seu bolso.</Subtitle>
             <Animation src={run} alt="Imagem ilustrativa" />
