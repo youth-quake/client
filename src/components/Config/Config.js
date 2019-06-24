@@ -137,34 +137,6 @@ const Component = ({
       }) => (
           <Container>
             <Fields>
-              <Label>Nome completo</Label>
-              <Field
-                name="initialValues.name"
-                render={({ field }) => (
-                  <Input
-                    {...field}
-                    backgroundColor={Theme.colors.base_color}
-                    placeholder='Nome completo'
-                    errors={errors}
-                  />
-                )}
-              />
-            </Fields>
-            <Fields>
-              <Label>Nome de usuário</Label>
-              <Field
-                name="initialValues.username"
-                render={({ field }) => (
-                  <Input
-                    {...field}
-                    backgroundColor={Theme.colors.base_color}
-                    placeholder='Nome de usuário'
-                    errors={errors}
-                  />
-                )}
-              />
-            </Fields>
-            <Fields>
               <Label>Email</Label>
               <Field
                 name="initialValues.email"

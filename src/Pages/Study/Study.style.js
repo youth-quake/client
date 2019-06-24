@@ -5,18 +5,30 @@ export const Container = styled.div`
   margin: 0 auto;
   padding: 0px;
   overflow-x: hidden;
+  box-sizing: border-box;
+  width: 100%;
 `
 
 export const Wrapper = styled.div`
   display: flex;
   flex-flow: column;
-  padding: 20px;
+  padding: 20px 10px;
+  box-sizing: border-box;
+`
+
+export const Column = styled.div`
+  widht: 100%;
+  display: flex;
+  justify-content: space-between;
+  
+  & > div {
+    box-sizing: border-box;
+  }
 `
 
 export const Card = styled.div`
-  width: 300px;
+  width: 290px;
   height: 160px;
-  margin: 10px;
   background-color: #FFF;
   font-family: ${Theme.font.font_family};
   border: solid 1px ${Theme.colors.secondary_base_color};
@@ -48,11 +60,7 @@ export const Card = styled.div`
   }
 `
 
-export const Column = styled.div`
-  widht: 100%;
-  display: flex;
-  justify-content: space-between;
-`
+
 
 export const Title = styled.h1`
   padding: 20px 0;
