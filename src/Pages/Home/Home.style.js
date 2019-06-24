@@ -82,11 +82,12 @@ export const Option = styled.a`
   & > button+button {
     border-color: transparent;
     background: transparent;
-    color: #FFF;
+    color: ${props => props.isScroll ? Theme.colors.secondary_color : '#FFF'};
 
     &:hover {
       background: transparent;
       opacity: 0.3;
+      color: ${Theme.colors.secondary_color};
     }
   }
 `

@@ -40,7 +40,7 @@ import learning from '../../assets/img/learning (1).png'
 
 const Home = ({ isScroll }) => (
   <div>
-    <Spot src={spot} alt="Imagem ilustrativa"  />
+    <Spot src={spot} alt="Imagem ilustrativa" />
     <ContainerMenu isScroll={isScroll}>
       <Menu color={Theme.base_color}>
         <WrapperOptions>
@@ -49,11 +49,17 @@ const Home = ({ isScroll }) => (
           <Option href='#forum' disabled>Fórum</Option>
           <Option href='#contato'>Contato</Option>
         </WrapperOptions>
-        <Option to='#projeto'>
-          <Button onClick={() => window.location.pathname = '/cadastro'}>
+        <Option to='#projeto' isScroll={isScroll}>
+          <Button
+            onClick={() => window.location.pathname = '/cadastro'}
+          >
             Cadastrar
           </Button>
-          <Button onClick={() => window.location.pathname = '/login'}>Login</Button>
+          <Button
+            onClick={() => window.location.pathname = '/login'}
+          >
+            Login
+          </Button>
         </Option>
       </Menu>
     </ContainerMenu>
