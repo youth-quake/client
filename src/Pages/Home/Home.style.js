@@ -5,8 +5,8 @@ export const Spot = styled.img`
   position: absolute;
   top: 0;
   right: 0;
-  width: 850px;
-  height: 550px;
+  width: 890px;
+  height: 580px;
   z-index: 888;
   box-sizing: border-box;
 `
