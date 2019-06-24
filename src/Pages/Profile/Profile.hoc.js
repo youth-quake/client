@@ -114,7 +114,6 @@ const enhance = compose(
   lifecycle({
     componentWillUnmount() {
       data = JSON.parse(localStorage.getItem('profile'))
-
       values = withFormik({
         mapPropsToValues: () => ({
           id: data.idUser,
@@ -147,9 +146,7 @@ const enhance = compose(
     },
     componentDidMount() {
       const { setShowModal } = this.props
-
       data = JSON.parse(localStorage.getItem('profile'))
-
       values = withFormik({
         mapPropsToValues: () => ({
           id: data.idUser,
@@ -183,7 +180,9 @@ const enhance = compose(
       if (data.movements.length > 0) {
         setShowModal(false)
       }
-    }
+    },
+    
+    
   })
 )
 

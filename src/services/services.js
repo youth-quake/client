@@ -1,5 +1,5 @@
 const BASE = 'https://serviceyouthquake.azurewebsites.net'
-const MICRO_SERVICE = 'https://microyouthquake.azurewebsites.net'
+const MICRO_SERVICE = 'http://microyouthquake.azurewebsites.net'
 
 export const register = `${BASE}/user/include`
 export const login = `${BASE}/login`

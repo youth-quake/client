@@ -57,85 +57,79 @@ const Register = ({
         />
         {initialValues && (
           <Formik
-            initialValues={initialValues}
-            validationSchema={validationSchema}
-            data-testid="register-form"
-            render={({ values }) => (
-              <Form>
-                <Logo src={youthquake} />
-                <Field
-                  name="register.name"
-                  render={({ field }) => (
-                    <Input {...field} placeholder='Nome Completo' />
-                  )}
-                />
-                <ErrorMessage name="register.name" />
-                <Field
-                  name="register.login"
-                  render={({ field }) => (
-                    <Input {...field} placeholder='Nome de usuário' />
-                  )}
-                />
-                <ErrorMessage name="register.login" />
-                <Field
-                  name="register.email"
-                  render={({ field }) => (
-                    <Input
-                      {...field}
-                      placeholder='E-mail'
-                      type="email"
-                      required
-                    />
-                  )}
-                />
-                <ErrorMessage name="register.email" />
-                <Field
-                  name="register.confirmEmail"
-                  render={({ field }) => (
-                    <Input
-                      {...field}
-                      placeholder='Confirmar e-mail'
-                      type="email"
-                      required
-                    />
-                  )}
-                />
-                <ErrorMessage name="register.confirmEmail" />
-                <Field
-                  name="register.password"
-                  render={({ field }) => (
-                    <Input
-                      {...field}
-                      placeholder='Senha'
-                      type="password"
-                      required
-                      onChange={e => handleChange(e.target.value)}
-                      onFocus={() => setIsVisible(true)}
-                      onBlur={() => setIsVisible(false)}
-                    />
-                  )}
-                />
-                <Requirements
-                  title={'Sua senha deve ter:'}
-                  warning={'Evite senhas utilizadas em outros sites, ou que sejam fáceis de descobrir.'}
-                  visible={isVisible}
-                  requirements={requirements}
-                  value={value}
-                />
-                <Button
-                  type="submit"
-                  onClick={() => handleSubmit(values)}
-                  backgroundColor={Theme.colors.secondary_color}
-                >
-                  Cadastrar
+            render={({
+              values
+            }) => (
+                <Form>
+                  <Logo src={youthquake} />
+                  <Field
+                    name="name"
+                    render={({ field }) => (
+                      <Input {...field} placeholder='Nome Completo' />
+                    )}
+                  />
+                  <ErrorMessage name="name" />
+                  <Field
+                    name="login"
+                    render={({ field }) => (
+                      <Input {...field} placeholder='Nome de usuário' />
+                    )}
+                  />
+                  <Field
+                    name="email"
+                    render={({ field }) => (
+                      <Input
+                        {...field}
+                        placeholder='E-mail'
+                        type="email"
+                        required
+                      />
+                    )}
+                  />
+                  <Field
+                    name="confirmEmail"
+                    render={({ field }) => (
+                      <Input
+                        {...field}
+                        placeholder='Confirmar e-mail'
+                        type="email"
+                        required
+                      />
+                    )}
+                  />
+                  <Field
+                    name="password"
+                    render={({ field }) => (
+                      <Input
+                        {...field}
+                        placeholder='Senha'
+                        type="password"
+                        required
+
+                      />
+                    )}
+                  />
+                  <Requirements
+                    title={'Sua senha deve ter:'}
+                    warning={'Evite senhas utilizadas em outros sites, ou que sejam fáceis de descobrir.'}
+                    visible={isVisible}
+                    requirements={requirements}
+                    value={value}
+                  />
+                  <Button
+                    type="submit"
+                    onClick={() => handleSubmit(values)}
+                    backgroundColor={Theme.colors.secondary_color}
+                  >
+                    Cadastrar
                 </Button>
-                <Anchor
-                  text='Já possui uma conta?'
-                  description='Entre agora mesmo'
-                  to='/login'
-                />
-              </Form>
-            )}
+                  <Anchor
+                    text='Já possui uma conta?'
+                    description='Entre agora mesmo'
+                    to='/login'
+                  />
+                </Form>
+              )}
           />
         )}
         <Content>
@@ -150,13 +144,5 @@ const Register = ({
       </Container>
     </div>
   )
-
-Register.propTypes = {
-  initialValues: shape({})
-}
-
-Register.defaultProps = {
-  initialValues: {}
-}
 
 export default enhance(Register)

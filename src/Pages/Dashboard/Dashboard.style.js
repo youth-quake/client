@@ -166,7 +166,7 @@ export const Progress = styled.div`
 	}
 `
 
-export const Download = styled.div`
+export const Download = styled.a`
 	display: flex;
 	width: 100px;
 	align-items: center;

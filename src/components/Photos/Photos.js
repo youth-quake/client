@@ -53,7 +53,11 @@ export const Photos = () => (
             })
           })
             .then(response => response.json())
-            .then(() => getProfile(profile.login, profile.password))
+            .then(async () => { 
+              getProfile(profile.login, profile.password) 
+              await(() => window.location.pathname = '/perfil')
+            })
+         
         }}
         onError={e => e.target.src = errorImage}
       />

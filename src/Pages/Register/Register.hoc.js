@@ -20,16 +20,16 @@ const enhance = compose(
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          "name": data.register.name,
-          "login": data.register.login,
-          "email": data.register.email,
-          "password": data.register.password
+          "name": data.name,
+          "login": data.login,
+          "email": data.email,
+          "password": data.password
         })
       })
         .then(response => {
-          fetch(`${login}/${data.register.login}/${data.register.password}`)
+          fetch(`${login}/${data.login}/${data.password}`)
             .then(response => {
-              setLoading(((response.status === 'pending') || (response.status === 200) ) ? true : false)
+              setLoading(((response.status === 'pending') || (response.status === 200)) ? true : false)
               return response.json()
             })
             .then(profile => {
@@ -47,16 +47,15 @@ const enhance = compose(
             })
             .catch(error => { return error })
 
-            return response.json()
+          return response.json()
         }).catch(() => {
           setMessage('Ops! Ocorreu um erro ao salvar suas informações.')
           setShowModal(true)
         })
     },
-    handleChange: ({ setIsVisible, setValue, isDisabled }) => value => {
+    handleChange: ({ setIsVisible, setValue }) => value => {
       setIsVisible(true)
       setValue(value)
-      console.log()
     }
   }),
   lifecycle({

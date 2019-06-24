@@ -33,13 +33,13 @@ import {
 import { Progress as Percent } from 'react-sweet-progress'
 
 import download from '../../assets/img/downloadMinor.png'
+import { downloadCsv } from '../../services'
 
 const Dashboard = ({
 	initialValues,
 	toggleModal,
 	showModal,
 	toggleVisible,
-	downloadCsv,
 	visible
 }) => (
 		<>
@@ -108,7 +108,7 @@ const Dashboard = ({
 					</Item>
 					<Item>
 						<Title>Visualização em tabela
-							<Download onClick={downloadCsv}>
+							<Download href={`${downloadCsv}/${initialValues.id}`}>
 								<img src={download} alt="Faça o download do CSV" />
 								<label>Download</label>
 							</Download>
