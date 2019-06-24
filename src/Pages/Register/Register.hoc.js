@@ -29,7 +29,7 @@ const enhance = compose(
         .then(response => {
           fetch(`${login}/${data.login}/${data.password}`)
             .then(response => {
-              setLoading(((response.status === 'pending') || (response.status === 200)) ? true : false)
+              setLoading(response.status === 200 ? true : false)
               return response.json()
             })
             .then(profile => {
@@ -51,6 +51,7 @@ const enhance = compose(
         }).catch(() => {
           setMessage('Ops! Ocorreu um erro ao salvar suas informações.')
           setShowModal(true)
+          setLoading(false)
         })
     },
     handleChange: ({ setIsVisible, setValue }) => value => {
