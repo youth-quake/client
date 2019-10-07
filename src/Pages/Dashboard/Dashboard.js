@@ -42,7 +42,7 @@ const Dashboard = ({
 	toggleVisible,
 	visible
 }) => (
-		<>
+		<Fragment>
 			<Friends
 				visible={visible}
 				toggleVisible={toggleVisible}
@@ -145,7 +145,7 @@ const Dashboard = ({
 				</Information>
 			</Container>
 			<Footer />
-		</>
+		<Fragment/>
 	)
 
 export default Dashboard
