@@ -1,9 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Theme } from '../../components'
+import { Theme, Button as ButtonWithTheme } from '..'
 import Trofeu from '../../assets/img/trofeu.png'
 
 const Container = styled.div`
+  width: 100%;
   display: flex;
   flex-flow: row wrap;
   justify-content: flex-start;
@@ -14,11 +15,21 @@ const Container = styled.div`
   }
 `
 
-const Title = styled.p`
+const Title = styled.h3`
+  width: 100%;
+  min-width: 819px;
+  margin: 0;
   font-size: 28px;  
   font-family: ${Theme.font.font_family};
   font-weight: bold;
-  padding: 20px;
+  padding: 20px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`
+
+const Button = styled(ButtonWithTheme)`
+  width: 120px;
 `
 
 const Badge = styled.div`
@@ -56,7 +67,10 @@ const Image = styled.img`
 
 export const Achievements = ({ achievements }) => (
   <div>
-    <Title>Minhas conquistas</Title>
+    <Title>
+      Todas as conquistas
+      <Button>Conquistas</Button>
+    </Title>
     <Container>
       {achievements.map(item => (
         <Badge key={item.idAchievement.idAchievement}>

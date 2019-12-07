@@ -48,7 +48,7 @@ const Social = styled.div`
 
 export const Footer = () => (
   <Container title="Informações de contato">
-    <span>Feito com ♥ por Youthquake</span>
+    <p>Feito com <span role="img" aria-label="heart">💗</span> por Youthquake</p>
     <p title="Acesso ao F.A.Q">Contate-nos&nbsp;&nbsp;&nbsp;&nbsp;F.A.Q</p>
     <Social>
       <img src={linkedin} title={'LinkedIn'} alt={'LinkedIn'} />

@@ -2,25 +2,27 @@ import { compose, withState, withHandlers } from 'recompose'
 import { login } from '../../services'
 
 const enhance = compose(
+  withState('loading', 'setLoading', false),
   withState('isDisable', 'setIsDisabled', true),
   withHandlers({
-    handleChange: ({
-      setIsDisabled
-    }) => () => {
-      setIsDisabled(false)
-    },
-    handleSubmit: () => async (data) => {
-      fetch(`${login}/${data.login.login}/${data.login.password}`)
-        .then(response => response.json())
+    handleSubmit: ({ setLoading }) => data => {
+      fetch(`${login}/${data.login}/${data.password}`)
+        .then(response => {
+          setLoading(response.status === 'pending' || response.status === 200 ? true : false)
+          return response.json()
+        })
         .then(profile => {
           if (profile) {
+            localStorage.removeItem('profile')
             localStorage.setItem('profile', JSON.stringify(profile))
-            window.location.href = '/perfil'
-          }else{
-            localStorage.setItem('profile', JSON.stringify({}))
-          }
+            window.location.pathname = '/perfil'
 
-          return {}
+            return true
+          } else {
+            localStorage.removeItem('profile')
+
+            return false
+          }
         })
         .catch(error => { return error })
     }

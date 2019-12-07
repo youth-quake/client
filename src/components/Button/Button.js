@@ -24,5 +24,11 @@ export const Button = styled.button`
     color: ${Theme.colors.secondary_color};
     border: solid 1px ${Theme.colors.secondary_color};
   `
-  )}   
+  )}
+  
+  ${props => !props.disabled && css`
+    &:hover{
+      opacity: 0.5;
+    }  
+  `}
 `

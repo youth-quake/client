@@ -3,7 +3,9 @@ import { Theme, Input, Button } from '../../components'
 import { Formik, Field } from 'formik'
 import styled, { css } from 'styled-components'
 import { target } from '../../services'
-import { compose, withState, withHandlers } from 'recompose'
+import { compose, withState, withHandlers, lifecycle } from 'recompose'
+import { date, amount, onlyNumber } from '../../utils/mask'
+import getProfile from '../../utils/getProfile'
 
 const Wrapper = styled.div`
   display: flex;
@@ -65,7 +67,7 @@ const enhance = compose(
     handleSetInitialValues: ({ setInitialValues }) => () => {
       const data = JSON.parse(localStorage.getItem('profile'))
 
-      const register = {
+      const profile = {
         id: data.idUser,
         name: data.name,
         username: data.login,
@@ -73,36 +75,45 @@ const enhance = compose(
         password: data.password
       }
 
-      setInitialValues(register)
+      setInitialValues(profile)
     },
-    handleSubmit: ({ setVisible, setMessage }) => values => {
+    handleSubmit: ({ initialValues, setVisible, setMessage }) => values => {
       const date = new Date()
 
-      fetch(target, {
+      fetch(`${target}/${initialValues.id}`, {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          "name": values.name,
-          "description": values.description,
+          "name": values.initialValues.name,
+          "description": values.initialValues.description,
           "dtStart": `${date.getDay()}/${date.getMonth()}/${date.getFullYear()}`,
-          "dtEnd": values.dateEnd,
-          "value": values.value
+          "dtEnd": values.initialValues.dateEnd,
+          "value": onlyNumber(values.initialValues.value)
         })
       })
         .then(response => response.json())
         .then(json => {
           if (json) {
-            setMessage('Alteração realizada com sucesso')
+            setMessage('Objetivo cadastrado com sucesso')
             setVisible(true)
+            
+            getProfile(initialValues.username, initialValues.password)
+            window.location.pathname = '/perfil'
           } else {
-            setMessage('Ocurreu um erro ao atualizar o cadastro')
+            setMessage('Ops! Ocurreu um erro ao durante o cadastro.')
             setVisible(true)
           }
         })
-        .catch(error => {
-          setMessage('Ocurreu um erro ao atualizar o cadastro')
+        .catch(() => {
+          setMessage('Ops! Ocurreu um erro ao durante o cadastro.')
           setVisible(true)
         })
+    }
+  }),
+  lifecycle({
+    componentDidMount() {
+      const { handleSetInitialValues } = this.props
+      handleSetInitialValues()
     }
   })
 )
@@ -116,7 +127,8 @@ const Component = ({
       <Formik
         render={({
           values,
-          errors
+          errors,
+          setFieldValue
         }) => (
             <Container>
               <WrapperInput>
@@ -157,6 +169,8 @@ const Component = ({
                       backgroundColor={Theme.colors.base_color}
                       placeholder='Data final'
                       errors={errors}
+                      maxLength="10"
+                      onChange={e => setFieldValue('initialValues.dateEnd', date(e.target.value))}
                     />
                   )}
                 />
@@ -171,6 +185,7 @@ const Component = ({
                       backgroundColor={Theme.colors.base_color}
                       placeholder='Valor'
                       errors={errors}
+                      onChange={e => setFieldValue('initialValues.value', amount(e.target.value))}
                     />
                   )}
                 />
@@ -184,7 +199,7 @@ const Component = ({
                 backgroundColor={Theme.colors.secondary_color}
                 onClick={() => handleSubmit(values)}
               >
-                Nova aposta
+                Novo objetivo
               </Button>
             </Container>
           )}

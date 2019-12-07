@@ -1,9 +1,14 @@
 import React from 'react'
 import DonutChart from 'react-donut-chart'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { Formik, Field } from 'formik'
 import { compose, withHandlers, withState } from 'recompose'
-import { Theme, Button, Modal, NewTarget } from '../../components'
+import { Theme, Button as ButtonWithTheme, Modal, NewTarget } from '../../components'
+
+import dollar from '../../assets/img/dollar.png'
+import dollarNoFill from '../../assets/img/dollar1.png'
+
+import { updateTarget } from '../../services'
 
 const Wrapper = styled.div`
   display: flex;
@@ -11,13 +16,10 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
+`
 
-  & > button {
-    position: absolute;
-    right: 12px;
-    top: -60px;
-    width: 120px;
-  }
+const Button = styled(ButtonWithTheme)`
+  width: 120px;
 `
 
 const Targets = styled.div`
@@ -37,7 +39,7 @@ const Column = styled.div`
 
 const Container = styled.div`
   width: 100%;
-  height: 300px;
+  height: 250px;
   background: #FFF;
   display: flex;
   flex-flow: column;
@@ -65,9 +67,9 @@ const Name = styled.input`
 const Description = styled.div`
   display: flex;
   align-items: center;
-  margin: 30px 50px 10px;
+  margin: 30px 50px 0;
   color: ${Theme.colors.font_color};
-  height: 100px;
+  height: 80px;
   width: 450px;
 
   & > textarea {
@@ -98,63 +100,71 @@ const Progress = styled.div`
 `
 
 const Information = styled.div`
-  width: 290px;
+  width: 90%;
   margin: 0 50px;
   font-size: 16px;
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
-  flex-flow: column;
+  
+  & > div {
+    padding: 10px 0;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+  }
+`
+
+const Data = styled.div`
+  width: 210px;
+  display: flex;
 
   & > div {
-    padding: 10px;
     display: flex;
-    justify-content: space-between;
-  
-    & > span {
-      width: 100%;
-      font-weight: bold;
-    }
+  justify-content: space-between;
   }
 
-  & > h3 {
-    margin: 20px 0;
-    display: flex;
-    justify-content: space-between;
+  & >  div > span {
+    width: 100px;
+    margin: 0;
+    font-weight: bold;
+  }
 
-    & > span {
-      font-weight: bold;
-    }
-
-    & > span+span {
-      font-weight: normal;
-    }
+  & > div > input {
+    width: 100px;
   }
 `
 
 const Input = styled.input`
-  width: 100%;
   outline: none;
   border: none;
   margin: 0;
+  background: transparent;
 `
 
 const Amount = styled.div`
-  width: 88%;
+  max-width: 200px;
   margin: 0 auto;
-  padding: 5px 10px;
+  padding: 0;
   display: flex;
+  flex-flow: column;
   justify-content: space-between;
-
-
+  align-items: center;
+  
   & > span {
-    width: 170px;
-    padding: 10px;
+    padding: 0;
+    width: 100%;
     font-weight: bold;
   }
+`
 
-  & > * {
-    background: transparent;
+const DollarStats = styled.div`
+  margin-top: 10px;
+
+  & > img {
+    width: 30px;
+    height: 30px;
+    margin: 0 2px;
   }
 `
 
@@ -165,7 +175,44 @@ const Blur = styled.div`
   background-color: rgba(0,0,0,0.5);
   top: 0;
   left: 0;
-  z-index: 777;
+  z-index: 444;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: ${({ visible }) => visible ? css`block` : css`none`};
+
+  & > button {
+    width: 120px;
+    margin: 0 auto;
+  }
+`
+
+const Delete = styled(Button)`
+  color: #A8A8A8; 
+  border: solid 1px #E8E8E8;
+
+  &:hover {
+    background: ${Theme.colors.font_color};
+    color: #FFF;
+    opacity: 0.5;
+  }
+`
+
+const Title = styled.h3`
+  width: 100%;
+  min-width: 819px;
+  margin: 0;
+  font-size: 28px;  
+  font-family: ${Theme.font.font_family};
+  font-weight: bold;
+  padding: 20px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`
+
+const Tag = styled.span`
+  cursor: default;
 `
 
 const enhance = compose(
@@ -178,19 +225,39 @@ const enhance = compose(
   })
 )
 
+const profile = JSON.parse(localStorage.getItem('profile'))
+
+const update = (values) => {
+  fetch(`${updateTarget}/${values.initialValues.id}/${profile.idUser}`, {
+    method: 'put',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      "name": values.name,
+      "description": values.initialValues.description,
+      "dtEnd": values.initialValues.dateEnd,
+      "value": values.initialValues.value,
+    })
+  })
+    .then(response => response.json())
+}
+
 const Form = (initialValues) => (
   <Formik
     initialValues={initialValues}
     render={({ values }) => (
       <Targets>
         <Container>
-          <Blur><Button backgroundColor={Theme.colors.primary_color}>aaaaaaa</Button></Blur>
+          <Blur>
+            <Delete backgroundColor={Theme.colors.transparent}>Excluir</Delete>
+            <Button backgroundColor={Theme.colors.primary_color}>Editar</Button>
+          </Blur>
           <Field
             name="initialValues.title"
             render={({ field }) => (
               <Name
                 {...field}
                 title="Titulo do objetivo"
+                onBlur={() => update(values)}
               />
             )}
           />
@@ -204,33 +271,48 @@ const Form = (initialValues) => (
                       {...field}
                       maxLength={200}
                       title="Descrição do objetivo"
+                      onBlur={() => update(values)}
                     />
                   )}
                 />
               </Description>
               <Information>
-                <div>
-                  <span title="Data inicial">Data inicial:</span>
-                  <Field
-                    name="initialValues.dateStart"
-                    render={({ field }) => (
-                      <Input
-                        {...field}
-                      />
-                    )}
-                  />
-                </div>
-                <div>
-                  <span title="Data final">Data final:</span>
-                  <Field
-                    name="initialValues.dateEnd"
-                    render={({ field }) => (
-                      <Input
-                        {...field}
-                      />
-                    )}
-                  />
-                </div>
+                <Data>
+                  <div>
+                    <Tag title="Data inicial">Comecei em</Tag>
+                    <Field
+                      name="initialValues.dateStart"
+                      render={({ field }) => (
+                        <Input
+                          {...field}
+                          disabled
+                        />
+                      )}
+                    />
+                  </div>
+                  <div>
+                    <Tag title="Data final">Termino em</Tag>
+                    <Field
+                      name="initialValues.dateEnd"
+                      render={({ field }) => (
+                        <Input
+                          {...field}
+                          onBlur={() => update(values)}
+                        />
+                      )}
+                    />
+                  </div>
+                </Data>
+                <Amount>
+                  <Tag title="Renda acumulada">R$ acumulada</Tag>
+                  <DollarStats>
+                    <img src={dollar} alt="Dollar" />
+                    <img src={dollarNoFill} alt="Dollar" />
+                    <img src={dollarNoFill} alt="Dollar" />
+                    <img src={dollarNoFill} alt="Dollar" />
+                    <img src={dollarNoFill} alt="Dollar" />
+                  </DollarStats>
+                </Amount>
               </Information>
             </div>
             <Progress title="Progresso do objetivo">
@@ -258,17 +340,6 @@ const Form = (initialValues) => (
               />
             </Progress>
           </Column>
-          <Amount>
-            <span title="Renda acumulada">Minha grana:</span>
-            <Field
-              name="initialValues.amount"
-              render={({ field }) => (
-                <Input
-                  {...field}
-                />
-              )}
-            />
-          </Amount>
         </Container>
       </Targets>
     )}
@@ -280,17 +351,22 @@ export const Component = ({
   showModal,
   toggleModal
 }) => (
-    <Wrapper>
-      <Button onClick={toggleModal} backgroundColor={Theme.colors.primary_color}>Novo objetivo</Button>
-      {targets.map(item => (<Form key={item.key} initialValues={item.initialValues} />))}
-      <Modal
-        showModal={showModal}
-        toggleModal={() => toggleModal()}
-        title="Novo objetivo"
-        text=""
-        Form={NewTarget}
-      />
-    </Wrapper>
+    <div>
+      <Title>
+        Todos os objetivos
+        <Button onClick={toggleModal} backgroundColor={Theme.colors.primary_color}>Novo objetivo</Button>
+      </Title>
+      <Wrapper>
+        {targets.map(item => <Form key={item.key} initialValues={item.initialValues} />)}
+        <Modal
+          showModal={showModal}
+          toggleModal={() => toggleModal()}
+          title="Novo objetivo"
+          text=""
+          Form={NewTarget}
+        />
+      </Wrapper>
+    </div>
   )
 
 

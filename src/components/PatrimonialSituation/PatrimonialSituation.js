@@ -3,10 +3,15 @@ import { Theme, Input, Button as ButtonWithTheme } from '../../components'
 import { Formik, Field } from 'formik'
 import styled from 'styled-components'
 
+import { compose, withHandlers, withState } from 'recompose'
+import { movementsInitial } from '../../services'
+
 import TargetImage from '../../assets/img/target.png'
 import FriendImage from '../../assets/img/friendship.png'
 import TrophyImage from '../../assets/img/trophy.png'
 
+import getProfile from '../../utils/getProfile'
+import { amount, onlyNumber } from '../../utils/mask'
 
 const Container = styled.div`
   display: flex;
@@ -81,13 +86,62 @@ const Button = styled(ButtonWithTheme)`
   width: 120px;
 `
 
-export const PatrimonialSituation = ({
-  editable
+const Message = styled.span`
+  color: ${Theme.colors.primary_color};
+  padding: 10px;
+  width: 100%;
+  height: 20px;
+  margin: 2px 0;
+  text-align: center;
+`
+
+const enhance = compose(
+  withState('message', 'setMessage', ''),
+  withState('isDisabled', 'setIsDisabled', false),
+  withHandlers({
+    handleSubmit: ({ setMessage, setIsDisabled }) => values => {
+      const date = new Date()
+      const profile = JSON.parse(localStorage.getItem('profile'))
+
+      fetch(`${movementsInitial}/${profile.idUser}`, {
+        method: 'post',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          "type": values.type,
+          "value": onlyNumber(values.value),
+          "dateMovement": `${date.getDay()}/${date.getMonth}/${date.getFullYear()}`,
+          "reference": 'Valor inicial',
+          "descriptionMovement": 'Essa é sua primeira movimentação'
+        })
+      })
+        .then(response => response.json())
+        .then(json => {
+          if (json) {
+            setMessage('Parabéns! Agora é hora de começar')
+            setIsDisabled(true)
+            getProfile(profile.login, profile.password)
+          } else {
+            setMessage('Ops! Ocurreu um erro ao durante a operação')
+          }
+        })
+        .catch(() => {
+          setMessage('Ops! Ocurreu um erro ao durante a operação')
+        })
+    }
+  })
+)
+
+const Form = ({
+  editable,
+  handleSubmit,
+  isDisabled,
+  message
 }) => (
     <Formik
       render={({
         errors,
-        values
+        values,
+        setFieldValue
       }) => (
           <Container>
             <Wrapper>
@@ -115,33 +169,41 @@ export const PatrimonialSituation = ({
               (Não tem problema se você começar do zero).
             </Paragraph>
             <Field
-              name="register.value"
+              name="value"
               render={({ field }) => (
                 <Input
                   {...field}
                   backgroundColor={Theme.colors.base_color}
-                  placeholder='Renda mensal'
+                  placeholder='Valor'
                   disabled={editable}
                   errors={errors}
+                  onChange={e => setFieldValue('value', amount(e.target.value))}
                 />
               )}
             />
             <Field
-              name="register.name"
+              name="type"
               render={({ field }) => (
                 <Input
                   {...field}
                   backgroundColor={Theme.colors.base_color}
-                  placeholder='Poupança ou Investimentos'
+                  placeholder='Tipo (Ex.: Poupança, Investimentos)'
                   disabled={editable}
                   errors={errors}
                 />
               )}
             />
-            <Button backgroundColor={Theme.colors.secondary_color}>
+            <Message>{message}</Message>
+            <Button
+              disabled={isDisabled}
+              backgroundColor={Theme.colors.secondary_color}
+              onClick={() => handleSubmit(values)}
+            >
               Enviar
             </Button>
           </Container>
         )}
     />
   )
+
+export const PatrimonialSituation = enhance(Form)

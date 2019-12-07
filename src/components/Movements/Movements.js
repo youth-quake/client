@@ -2,8 +2,10 @@ import React from 'react'
 import { Theme, Input, Button } from '../../components'
 import { Formik, Field } from 'formik'
 import styled, { css } from 'styled-components'
-import { movements } from '../../services'
 import { compose, withState, withHandlers } from 'recompose'
+
+import { movements } from '../../services'
+import { amount, onlyNumber } from '../../utils/mask'
 
 const Wrapper = styled.div`
   display: flex;
@@ -73,7 +75,7 @@ const enhance = compose(
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           "date": `${date.getDay()}/${date.getMonth()}/${date.getFullYear()}`,
-          "value": values.value,
+          "value": onlyNumber(values.value),
           "type": values.type,
           "reference": values.reference
         })
@@ -88,7 +90,7 @@ const enhance = compose(
             setVisible(true)
           }
         })
-        .catch(error => {
+        .catch(() => {
           setMessage('Ops! Ocurreu um erro ao registrar sua movimentação.')
           setVisible(true)
         })
@@ -105,7 +107,8 @@ const Component = ({
       <Formik
         render={({
           values,
-          errors
+          errors,
+          setFieldValue
         }) => (
             <Container>
               <WrapperInput>
@@ -116,21 +119,21 @@ const Component = ({
                     <Input
                       {...field}
                       backgroundColor={Theme.colors.base_color}
-                      placeholder='Referência'
+                      placeholder='Referência (Ex.: Gastou, Economia)'
                       errors={errors}
                     />
                   )}
                 />
               </WrapperInput>
               <WrapperInput>
-                <Label>Data final</Label>
+                <Label>Tipo</Label>
                 <Field
                   name="initialValues.type"
                   render={({ field }) => (
                     <Input
                       {...field}
                       backgroundColor={Theme.colors.base_color}
-                      placeholder='Tipo'
+                      placeholder='Tipo (Ex.: Poupança, Investimentos)'
                       errors={errors}
                     />
                   )}
@@ -144,8 +147,9 @@ const Component = ({
                     <Input
                       {...field}
                       backgroundColor={Theme.colors.base_color}
-                      placeholder='Valor gasto ou economizado'
+                      placeholder='Valor'
                       errors={errors}
+                      onChange={e => setFieldValue('value', amount(e.target.value))}
                     />
                   )}
                 />

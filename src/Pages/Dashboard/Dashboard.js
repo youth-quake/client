@@ -1,19 +1,17 @@
 import React from 'react'
-import DonutChart from 'react-donut-chart'
 
 import {
 	Theme,
 	Footer,
 	NavBar,
 	Friends,
-	Button,
 	Modal,
 	Movements
 } from '../../components'
 
 import {
 	Container,
-	Wrapper,
+	Item,
 	Title,
 	Description,
 	Information,
@@ -23,22 +21,31 @@ import {
 	Column,
 	Line,
 	Header,
-	Card,
 	Data,
-	Text
+	Download,
+	Movement,
+	Remove,
+	Instructions,
+	Category,
+	Wrapper
 } from './Dashboard.style'
 
-import ProfileImage from '../../assets/img/girl big.png'
+import { Progress as Percent } from 'react-sweet-progress'
+
+import download from '../../assets/img/downloadMinor.png'
+import { downloadCsv } from '../../services'
 
 const Dashboard = ({
 	initialValues,
 	toggleModal,
-	showModal
+	showModal,
+	toggleVisible,
+	visible
 }) => (
-		<>
+		<Fragment>
 			<Friends
-				visible={false}
-				toggleVisible={() => { }}
+				visible={visible}
+				toggleVisible={toggleVisible}
 			/>
 			<NavBar />
 			<Container>
@@ -49,7 +56,7 @@ const Dashboard = ({
 					text=""
 					Form={Movements}
 				/>
-				<Wrapper>
+				<Category>
 					{initialValues.category !== undefined && (
 						initialValues.category.map(item => (
 							<div key={item.value}>
@@ -58,72 +65,87 @@ const Dashboard = ({
 							</div>
 						))
 					)}
-				</Wrapper>
+				</Category>
 				<Information>
-					<Button
-						onClick={toggleModal}
-						backgroundColor={Theme.colors.primary_color}
-					>
-						Movimentar
-					</Button>
-					<Card>
+					<Item>
 						<Title>Visão geral</Title>
-						<div>
+						<Wrapper>
 							<Data>
-								<textarea placeholder="Descrição" value={initialValues.description} />
-								<div>
-									<Text>1° Objetivo criado:</Text>
-									<Text>{initialValues.firstTarget}</Text>
-								</div>
-								<div>
-									<Text>Objetivo mais recente:</Text>
-									<Text>{initialValues.lastTarget}</Text>
-								</div>
+								<Instructions>
+									<h3>Hey!</h3>
+									<p>
+										Aqui você terá uma visão geral de como está progredindo com as suas finanças e o histórico das suas movimentações, lembrando que aqui nós observamos com base em todos os objetivos e movimentações, sendo elas gastos ou economias.
+									</p>
+									<span>E ah, lembre-se sempre de registrar suas movimentações financeiras no botão abaixo <span role="img" aria-label="smile">😊</span></span>
+								</Instructions>
+								<Movement
+									backgroundColor={Theme.colors.secondary_constrast_color}
+									onClick={toggleModal}
+								>
+									Movimentar
+								</Movement>
 							</Data>
-							<Progress title="Progresso de sua renda mensal">
-								<DonutChart
-									data={[
-										{ value: 80.5, label: '', isEmpty: false },
-									]}
-									colors={[
-										Theme.colors.primary_color,
-										'#000',
-									]}
-									width={180}
-									height={180}
-									legend={false}
-									strokeColor={'transparent'}
-									clickToggle={true}
-									emptyColor={Theme.colors.secondary_base_color}
+							<Progress>
+								<Percent
+									title="Progresso de sua renda mensal"
+									type="circle"
+									strokeWidth={5}
+									percent={initialValues.progress}
+									width={200}
+									theme={
+										{
+											active: {
+												symbol: ' ',
+												trailColor: Theme.colors.base_color,
+												color: Theme.colors.green
+											}
+										}
+									}
 								/>
-								<Text>% de Progresso</Text>
+								<p>Progresso total: {initialValues.progress}%</p>
 							</Progress>
-						</div>
-					</Card>
-					<Card>
-						<img src={ProfileImage} alt="Faça o download da tabela" />
-						<Title>Visualização em tabela</Title>
-						{initialValues.moviment !== undefined && (
-							<Table>
-								{initialValues.moviment.map(item => (
-									<Header key={item.title}>
-										<Line>{item.title}</Line>
-									</Header>
-								))}
-								<Line>
-									{initialValues.moviment.map(item => (
-										<Column key={item.value}>
-											<Line>{item.value}</Line>
-										</Column>
+						</Wrapper>
+					</Item>
+					<Item>
+						<Title>Visualização em tabela
+							<Download href={`${downloadCsv}/${initialValues.id}`}>
+								<img src={download} alt="Faça o download do CSV" />
+								<label>Download</label>
+							</Download>
+						</Title>
+						{initialValues.movements !== undefined && (
+							<div>
+								<Header>
+									<Line>Data</Line>
+									<Line>Valor</Line>
+									<Line>Descrição</Line>
+									<Line>Tipo</Line>
+									<Line>Referência</Line>
+									<Line>Remover</Line>
+								</Header>
+								<Table>
+									{initialValues.movements.map(item => (
+										<div>
+											<Column>
+												<Line>{item.date}</Line>
+												<Line>{item.value}</Line>
+												<Line>{item.description}</Line>
+												<Line>{item.type}</Line>
+												<Line>{item.reference}</Line>
+												<Line>
+													<Remove>Deletar</Remove>
+												</Line>
+											</Column>
+										</div>
 									))}
-								</Line>
-							</Table>
+								</Table>
+							</div>
 						)}
-					</Card>
+					</Item>
 				</Information>
 			</Container>
 			<Footer />
-		</>
+		<Fragment/>
 	)
 
 export default Dashboard

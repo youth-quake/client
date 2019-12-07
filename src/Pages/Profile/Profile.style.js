@@ -23,13 +23,6 @@ export const Level = styled(Input)`
   ${props => props.disabled && 'cursor: default;'}
 `
 
-export const Title = styled.p`
-  font-size: 28px;  
-  font-family: ${Theme.font.font_family};
-  font-weight: bold;
-  padding: 20px;
-`
-
 export const Grid = styled.div`
   display: flex;
   align-items: center;
@@ -66,7 +59,7 @@ export const Picture = styled.div`
   position: relative;
 `
 
-export const Progress =  styled(ProgressLevel)`
+export const Progress = styled(ProgressLevel)`
   position: relative;
 `
 
@@ -77,6 +70,10 @@ export const ImageProfile = styled.img`
   top: 10px;
   left: 10px;
   border-radius: 50%;
+
+  &:hover{
+    cursor: pointer;
+  }
 `
 
 export const MessageWrapper = styled.div`
@@ -154,7 +151,7 @@ export const Information = styled.div`
   width: 300px;
 
   & > input {
-    width: 320px;
+    width: 100%;
     font-size: 24px;
     font-weight: bold;
     color: ${Theme.colors.base_color};
@@ -163,11 +160,13 @@ export const Information = styled.div`
 
 export const Wrapper = styled.div`
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  width: 200px;
+  width: 100%;
 
   & > input {
-    width: 150px;
+    margin-right: 10px;
+    width: 180px;
     padding: 15px 0;
     font-size: 18px;
     text-align: left;
@@ -175,14 +174,15 @@ export const Wrapper = styled.div`
   }
 
   & > input+input {
-    width: 100px;
+    width: 80px;
+    margin: 0;
   }
 `
 
 export const WrapperContent = styled.div`
   display: flex;
   padding: 40px 100px;
-  
+
   & > div {
     margin: 0 100px;
   }
@@ -195,7 +195,7 @@ export const Content = styled.div`
   padding: 0 0 30px;
 
   & > div {
-    margin: 0 20px;
+    margin: 0 auto;
   }
 `
 
@@ -204,25 +204,42 @@ export const Menu = styled.ul`
   align-items: strech;
   flex-flow: column;
   list-style: none;
-  padding: 10px;
+  padding: 10px 15px;
+  max-width: 140px;
+  max-height: 170px;
+  justify-content: center;
 
   & > li {
     font-size: 17px;
-    border-bottom: solid 2px ${Theme.colors.secondary_constrast_color};
+    border-bottom: solid 0.5px ${Theme.colors.secondary_constrast_color};
     margin: 2px 0;
     font-family: ${Theme.font.font_family};
     color: ${Theme.colors.secondary_constrast_color};
+  }
+
+  & > li:last-child {
+    border: none;
   }
 `
 
 export const Item = styled.li`
   padding: 10px;
   text-align: left;
+  display: flex;
+  align-items: center;
+  max-widht: 30px;
+
+  & > img {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+  }
 
   &:hover{
     color: ${Theme.colors.secondary_color};
     cursor: pointer;
     border-color: ${Theme.colors.secondary_color};
+    font-weight: bold;
   }
 `
 

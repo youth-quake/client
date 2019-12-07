@@ -15,6 +15,7 @@ export const Container = styled.div`
   display: flex;
   margin: 0 auto;
   padding: 30px 10px;
+  filter: blur(${props => props.loading ? css`1px` : css`0`});
 `
 
 export const Form = styled.div`

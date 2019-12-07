@@ -1,9 +1,18 @@
-import { compose, withState, withHandlers } from 'recompose'
+import { compose, withState, withHandlers, lifecycle } from 'recompose'
 
 const enhance = compose(
-    withState('', '', false),
-    withState('', '', false),
-    withHandlers()
+	withState('isScroll', 'setIsScroll', false),
+	withHandlers({
+		handleScroll: ({ setIsScroll }) => () => {
+			setIsScroll(document.documentElement.scrollTop > 125)
+		}
+	}),
+	lifecycle({
+		componentDidMount() {
+			const { handleScroll } = this.props
+			window.onscroll = () => handleScroll()
+		}
+	})
 )
 
 export default enhance

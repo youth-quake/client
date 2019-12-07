@@ -100,17 +100,15 @@ const Warning = styled.p`
   font-family: ${Theme.font.font_family};
 `
 
-export const Requirements = props => {
+export const Requirements = ({
+  requirements,
+  title,
+  warning,
+  visible,
+  value,
+  onChange
+}) => {
   
-  const {
-    requirements,
-    title,
-    warning,
-    visible,
-    value,
-    onChange
-  } = props
-
   if (onChange) {
     onChange({
       valid: requirements.reduce((isValid, { validation }) => {
@@ -122,7 +120,7 @@ export const Requirements = props => {
       }, true)
     })
   }
-
+  
   return(
   <Wrapper>
     <Container visible={visible}>

@@ -9,7 +9,9 @@ import {
   Friends,
   Modal,
   PatrimonialSituation,
-  Theme
+  Theme,
+  ModalBet as Bet,
+  Photos
 } from '../../components'
 
 import {
@@ -29,13 +31,23 @@ import {
   WrapperContent,
   Menu,
   Item,
-  Title,
   Level,
   Progress
 } from './Profile.style'
 
-import ProfileImage from '../../assets/img/girl big.png'
 import { Formik, Field } from 'formik'
+
+import cup from '../../assets/img/cup.png'
+import racingFlag from '../../assets/img/racing-flag.png'
+import handshake from '../../assets/img/handshake.png'
+
+import errorImage from '../../assets/img/girl big.png'
+
+const isEmpty = value => {
+  return value === [] || value.length < 1
+}
+
+const allBets = JSON.parse(localStorage.getItem('friends'))
 
 const Profile = ({
   initialValues,
@@ -49,7 +61,14 @@ const Profile = ({
   toggleModal,
   showModal,
   setEditable,
-  setTitleButton
+  setTitleButton,
+  isBet,
+  handleUpdateMessageUser,
+  setMessage,
+  message,
+  handleUpdateUser,
+  showPhotos,
+  togglePhotos
 }) => (
     <Container>
       <Modal
@@ -57,6 +76,12 @@ const Profile = ({
         toggleModal={toggleModal}
         title="Bem vindo(a)"
         Form={() => (<PatrimonialSituation />)}
+      />
+      <Modal
+        showModal={showPhotos}
+        toggleModal={togglePhotos}
+        title="Selecione uma foto"
+        Form={() => (<Photos />)}
       />
       <Friends
         visible={visible}
@@ -67,13 +92,17 @@ const Profile = ({
         <Formik
           initialValues={initialValues}
           render={({
-            errors
+            errors,
+            values,
+            setFieldValue
           }) => (
               <Fragment>
                 <BackgroundProfile>
                   <Grid>
                     <Left>
                       <Picture>
+                        {console.log('picture', initialValues.picture)}
+                        {console.log('userPicture', initialValues.userPicture)}
                         <Progress
                           type="circle"
                           strokeWidth={8}
@@ -83,9 +112,14 @@ const Profile = ({
                           theme={
                             {
                               active: {
-                                symbol: <ImageProfile src={ProfileImage} title="Foto de perfil" />,
+                                symbol: <ImageProfile
+                                  src={initialValues.picture === null ? initialValues.userPicture : initialValues.picture}
+                                  title="Foto de perfil"
+                                  onError={e => e.target.src = errorImage}
+                                  onClick={togglePhotos}
+                                />,
                                 trailColor: Theme.colors.base_color,
-                                color: Theme.colors.secondary_constrast_color
+                                color: Theme.colors.green
                               }
                             }
                           }
@@ -94,15 +128,16 @@ const Profile = ({
                       <MessageWrapper title="Sobre mim">
                         <TitleMessage>Sobre mim</TitleMessage>
                         <Field
-                          name="initialValues.message"
+                          name="message"
                           render={({ field }) => (
                             <About
                               {...field}
-                              value={initialValues.message}
-                              disabled={editable}
                               errors={errors}
                               rows="4"
                               cols="80"
+                              placeholder="Nessa seção você conta um pouco sobre você para seus amigos..."
+                              onChange={e => setFieldValue('message', e.target.value)}
+                              onBlur={() => handleUpdateMessageUser(initialValues, values)}
                             />
                           )}
                         />
@@ -111,39 +146,42 @@ const Profile = ({
                     <Right>
                       <Information title="Informações gerais">
                         <Field
-                          name="initialValues.name"
+                          name="name"
                           render={({ field }) => (
                             <Editable
                               {...field}
                               placeholder='Nome completo'
-                              value={initialValues.name}
-                              editable={editable}
-                              disabled={editable}
                               errors={errors}
+                              onChange={e => {
+                                setFieldValue('name', e.target.value)
+                                handleUpdateUser(initialValues, values)
+                              }}
+                              onBlur={() => handleUpdateUser(initialValues, values)}
                             />
                           )}
                         />
                         <Wrapper>
                           <Field
-                            name="initialValues.username"
+                            name="username"
                             render={({ field }) => (
                               <Editable
                                 {...field}
                                 placeholder='Username'
-                                value={initialValues.username}
-                                editable={editable}
-                                disabled={editable}
                                 errors={errors}
+                                onChange={e => {
+                                  setFieldValue('name', e.target.value)
+                                  handleUpdateUser(initialValues, values)
+                                }}
+                                onBlur={() => handleUpdateUser(initialValues, values)}
                               />
                             )}
                           />
                           <Field
-                            name="initialValues.level"
+                            name="level"
                             render={({ field }) => (
                               <Level
                                 {...field}
                                 placeholder='Nivel 1'
-                                value={initialValues.level}
                                 disabled
                                 errors={errors}
                               />
@@ -158,26 +196,48 @@ const Profile = ({
                   <Menu>
                     <Item
                       title="Visualizar minhas conquistas"
-                      onClick={() => showComponent()}
+                      onClick={e => showComponent(e.target)}
                     >
-                      Conquistas
-                  </Item>
+                      <img src={cup} alt="Conquistas" />
+                      <span id="isAchievements">Conquistas</span>
+                    </Item>
                     <Item
                       title="Visualizar meus objetivos pessoais"
-                      onClick={() => showComponent()}
+                      onClick={e => showComponent(e.target)}
                     >
-                      Objetivos
-                  </Item>
+                      <img src={racingFlag} alt="Objetivos" />
+                      <span id="isTarget">Objetivos</span>
+                    </Item>
+                    <Item
+                      title="Visualizar meus objetivos pessoais"
+                      onClick={e => showComponent(e.target)}
+                    >
+                      <img src={handshake} alt="Apostas" />
+                      <span id="isBet">Apostas</span>
+                    </Item>
                   </Menu>
-                  {(isAchievements && initialValues.achievements !== undefined) && (
+                  {(isAchievements && initialValues.achievements) && (
                     <Content>
                       <Achievements achievements={initialValues.achievements} />
+                      {(isEmpty(initialValues.achievements)) && (
+                        <p>Ops! Você ainda não tem nenhuma conquista obtida <span role="img" aria-label="cry">😢</span></p>
+                      )}
                     </Content>
                   )}
-                  {(isTarget && initialValues.targets !== undefined) && (
+                  {(isTarget && initialValues.targets) && (
                     <Content>
-                      <Title>Meus objetivos</Title>
                       <Target targets={initialValues.targets} />
+                      {isEmpty(initialValues.targets) && (
+                        <p>Ops! Você ainda não tem nenhum objetivo cadastrado <span role="img" aria-label="cry">😢</span></p>
+                      )}
+                    </Content>
+                  )}
+                  {(isBet && allBets) && (
+                    <Content>
+                      <Bet />
+                      {isEmpty(allBets) && (
+                        <p>Ops! Você ainda não tem nenhuma aposta cadastrada <span role="img" aria-label="cry">😢</span></p>
+                      )}
                     </Content>
                   )}
                 </WrapperContent>
