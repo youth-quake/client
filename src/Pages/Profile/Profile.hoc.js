@@ -5,26 +5,8 @@ import getPhoto from '../../utils/getPhoto'
 
 let data = JSON.parse(localStorage.getItem('profile'))
 
-const dataOfTargets = JSON.parse(localStorage.getItem('targets')) === null ? {} : JSON.parse(localStorage.getItem('targets'))
-
-const targets = dataOfTargets.map(item => {
-    return {
-      key: item.idTarget,
-      initialValues: {
-        id: item.idTarget,
-        description: item.description,
-        dateEnd: item.dtEnd,
-        dateStart: item.dtStart,
-        percent: item.percentage,
-        amount: item.value,
-        title: item.name,
-        totalAmount: item.valueAccumulated
-      }
-    }
-  })
-
-
-const achievements = JSON.parse(localStorage.getItem('achievements'))
+const targets = data.targets
+const achievements = data.achievements
 
 export let values = withFormik({
   mapPropsToValues: () => ({
@@ -93,16 +75,16 @@ const enhance = compose(
         body: JSON.stringify({
           "idUser": initialValues.id,
           "name": values.name,
-          "login": values.username,
           "email": values.email,
-          "password": values.password,
           "messageStatus": values.messageStatus,
           "picture": initialValues.picture
         })
       }).then(response => {
-          response.json()
-          localStorage.removeItem('profile')
-          localStorage.setItem('profile', JSON.stringify(response))
+         return response.json()
+      })
+      .then(information => {
+        localStorage.removeItem('profile')
+        localStorage.setItem('profile', JSON.stringify(information))
       })
     }}),
   lifecycle({

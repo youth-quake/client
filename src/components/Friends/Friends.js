@@ -268,11 +268,6 @@ const Component = ({
             id="search"
             placeholder='Pesquisar usuários...'
             onInput={e => handleSearch(e.target.value)}
-          // onBlur={() => {
-          //   setFriendsSearch([])
-          //   setIsSearch(false)
-          //   document.getElementById('search').value = ""
-          // }}
           />
         </Search>
 
