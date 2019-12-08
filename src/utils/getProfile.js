@@ -1,7 +1,14 @@
 import { login } from '../services'
 
 const getProfile = (username, password) => {
-  fetch(`${login}/${username}/${password}`)
+  fetch(`${login}`, {
+    method: 'post',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      "login": username,
+      "password": password
+    })
+  })
     .then(response => response.json())
     .then(profile => {
       if (profile) {

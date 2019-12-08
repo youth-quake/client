@@ -9,8 +9,8 @@ import { compose, withState, withHandlers } from 'recompose'
 import { newBet } from '../../services'
 import { amount, onlyNumber } from '../../utils/mask'
 
-import errorImage from '../../assets/img/girl mini.png'
 import getProfile from '../../utils/getProfile'
+import getPhoto from '../../utils/getPhoto'
 
 const Container = styled.div`
   width: 100%;
@@ -122,12 +122,12 @@ const Component = ({
                 <ContentImage>
                   <Image
                     src={profile.picture} title="Visualizar opções"
-                    onError={e => e.target.src = errorImage}
+                    onError={e => e.target.src = getPhoto()}
                   />
                   <Icon icon={faTimes} />
                   <Image
                     src={selectedFriend.picture} title="Visualizar opções"
-                    onError={e => e.target.src = errorImage}
+                    onError={e => e.target.src = getPhoto()}
                   />
                 </ContentImage>
                 <Field

@@ -6,7 +6,6 @@ import { compose, withHandlers, withState } from 'recompose'
 import { Theme } from '../Theme'
 import { Link } from 'react-router-dom'
 
-import errorImage from '../../assets/img/girl big.png'
 import getPhoto from '../../utils/getPhoto'
 
 const Cover = styled.div`
@@ -238,7 +237,7 @@ export const Component = ({
         <NavbarImage
           onClick={() => setVisible(!visible)}
           src={profile.picture === null ? getPhoto() : profile.picture}
-          onError={e => e.target.src = errorImage}
+          onError={e => e.target.src = getPhoto()}
           title="Visualizar opções"
         />
       </Divider>

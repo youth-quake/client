@@ -7,7 +7,7 @@ import { Input } from '../Input'
 import { friend, friendSearch, friendAdd } from '../../services'
 
 import search from '../../assets/img/search.png'
-import errorImage from '../../assets/img/girl mini.png'
+import getPhoto from '../../utils/getPhoto'
 
 const Tag = styled.div`
   width: 100px;
@@ -156,7 +156,7 @@ const enhance = compose(
               const friend = {
                 id: item.user2.idUser,
                 name: item.user2.name,
-                picture: item.user2.picture === null ? errorImage : item.user2.picture,
+                picture: item.user2.picture === null ? getPhoto() : item.user2.picture,
                 username: item.user2.login,
                 bets: item.bets.map(bet => {
                   return {
@@ -200,7 +200,7 @@ const enhance = compose(
                 return {
                   id: item.idUser,
                   name: item.name,
-                  picture: item.picture === null ? errorImage : item.picture,
+                  picture: item.picture === null ? getPhoto() : item.picture,
                   username: item.login
                 }
               }
@@ -282,7 +282,7 @@ const Component = ({
               <Friend key={item.name}>
                 <Image
                   src={item.picture}
-                  onError={e => e.target.src = errorImage}
+                  onError={e => e.target.src = getPhoto()}
                 />
                 <div>
                   <span>{item.name}</span>
@@ -304,7 +304,7 @@ const Component = ({
               <Friend key={item.name}>
                 <Image
                   src={item.picture}
-                  onError={e => e.target.src = errorImage}
+                  onError={e => e.target.src = getPhoto()}
                 />
                 <div>
                   <span>{item.name}</span>

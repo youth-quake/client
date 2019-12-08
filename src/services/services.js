@@ -1,5 +1,4 @@
-const BASE = 'https://serviceyouthquake.azurewebsites.net'
-const MICRO_SERVICE = 'http://microyouthquake.azurewebsites.net'
+const BASE = 'http://52.202.202.227:8081'
 
 export const register = `${BASE}/user/include`
 export const login = `${BASE}/login`
@@ -9,9 +8,8 @@ export const alterRegister = `${BASE}/user/update`
 export const newBet = `${BASE}/bet/include`
 export const friend = `${BASE}/friend`
 export const movements = `${BASE}/movements/include`
-export const downloadCsvTarget = `${MICRO_SERVICE}/targets/download`
-export const downloadCsv = `${MICRO_SERVICE}/movements/download`
-export const updateMessage = `${BASE}/user/updatestatus`
+export const downloadCsvTarget = `${BASE}/targets/download`
+export const downloadCsv = `${BASE}/movements/download`
 export const update = `${BASE}/user/update`
 export const updateTarget = `${BASE}/target/update`
 export const action = `${BASE}/action/include`
@@ -19,4 +17,3 @@ export const getMovements = `${BASE}/movements/get`
 export const movementsInitial = `${BASE}/movements/includeinitial`
 export const friendSearch = `${BASE}/friend/search`
 export const friendAdd = `${BASE}/friends/include`
-export const updatePicture = `${BASE}/update/picture`

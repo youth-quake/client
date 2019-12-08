@@ -35,48 +35,46 @@ import {
   Progress
 } from './Profile.style'
 
+import getPhoto from '../../utils/getPhoto'
+
 import { Formik, Field } from 'formik'
 
 import cup from '../../assets/img/cup.png'
 import racingFlag from '../../assets/img/racing-flag.png'
 import handshake from '../../assets/img/handshake.png'
 
-import errorImage from '../../assets/img/girl big.png'
-
 const isEmpty = value => {
   return value === [] || value.length < 1
 }
 
 const allBets = JSON.parse(localStorage.getItem('friends'))
+const data = JSON.parse(localStorage.getItem('profile'))
 
 const Profile = ({
   initialValues,
   isAchievements,
   isTarget,
-  editable,
   showComponent,
-  titleButton,
   visible,
   toggleVisible,
   toggleModal,
   showModal,
-  setEditable,
-  setTitleButton,
   isBet,
-  handleUpdateMessageUser,
-  setMessage,
-  message,
   handleUpdateUser,
   showPhotos,
-  togglePhotos
+  togglePhotos,
+  targets,
+  achievements
 }) => (
     <Container>
-      <Modal
+      {(data.firstAcess) && (
+        <Modal
         showModal={showModal}
         toggleModal={toggleModal}
         title="Bem vindo(a)"
         Form={() => (<PatrimonialSituation />)}
-      />
+        />
+      )}
       <Modal
         showModal={showPhotos}
         toggleModal={togglePhotos}
@@ -115,7 +113,7 @@ const Profile = ({
                                 symbol: <ImageProfile
                                   src={initialValues.picture === null ? initialValues.userPicture : initialValues.picture}
                                   title="Foto de perfil"
-                                  onError={e => e.target.src = errorImage}
+                                  onError={e => e.target.src = getPhoto()}
                                   onClick={togglePhotos}
                                 />,
                                 trailColor: Theme.colors.base_color,
@@ -128,7 +126,7 @@ const Profile = ({
                       <MessageWrapper title="Sobre mim">
                         <TitleMessage>Sobre mim</TitleMessage>
                         <Field
-                          name="message"
+                          name="messageStatus"
                           render={({ field }) => (
                             <About
                               {...field}
@@ -136,8 +134,8 @@ const Profile = ({
                               rows="4"
                               cols="80"
                               placeholder="Nessa seção você conta um pouco sobre você para seus amigos..."
-                              onChange={e => setFieldValue('message', e.target.value)}
-                              onBlur={() => handleUpdateMessageUser(initialValues, values)}
+                              onChange={e => setFieldValue('messageStatus', e.target.value)}
+                              onBlur={() => handleUpdateUser(initialValues, values)}
                             />
                           )}
                         />
@@ -216,18 +214,18 @@ const Profile = ({
                       <span id="isBet">Apostas</span>
                     </Item>
                   </Menu>
-                  {(isAchievements && initialValues.achievements) && (
+                  {(isAchievements && achievements) && (
                     <Content>
-                      <Achievements achievements={initialValues.achievements} />
-                      {(isEmpty(initialValues.achievements)) && (
+                      <Achievements achievements={achievements} />
+                      {(isEmpty(achievements)) && (
                         <p>Ops! Você ainda não tem nenhuma conquista obtida <span role="img" aria-label="cry">😢</span></p>
                       )}
                     </Content>
                   )}
-                  {(isTarget && initialValues.targets) && (
+                  {(isTarget && targets) && (
                     <Content>
-                      <Target targets={initialValues.targets} />
-                      {isEmpty(initialValues.targets) && (
+                      <Target targets={targets} />
+                      {isEmpty(targets) && (
                         <p>Ops! Você ainda não tem nenhum objetivo cadastrado <span role="img" aria-label="cry">😢</span></p>
                       )}
                     </Content>

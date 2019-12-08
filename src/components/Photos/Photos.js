@@ -1,12 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
-import photos from '../../utils/photos'
 import { Theme } from '../Theme'
 
-import { updatePicture } from '../../services'
+import { update } from '../../services'
 import getProfile from '../../utils/getProfile'
 
-import errorImage from '../../assets/img/girl big.png'
+import PHOTOS from '../../utils/photos'
+import getPhoto from '../../utils/getPhoto'
 
 const Container = styled.div`
   width: 100%;
@@ -26,7 +26,7 @@ const Container = styled.div`
 const Image = styled.img`
   height: 90px;
   width: 90px;
-  border: dotted 3px transparent;
+  border: solid 4px transparent;
   border-radius: 100px;
 
   &:hover {
@@ -39,16 +39,17 @@ const profile = JSON.parse(localStorage.getItem('profile'))
 
 export const Photos = () => (
   <Container>
-    {photos.map(item => (
+    {PHOTOS.map(item => (
       <Image
         key={item}
         src={item}
         onClick={() => {
           localStorage.setItem('iconUser', item)
-          fetch(`${updatePicture}/${profile.idUser}`, {
-            method: 'put',
+          fetch(`${update}`, {
+            method: 'post',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
+              "idUser": profile.idUser,
               "picture": item
             })
           })
@@ -59,7 +60,7 @@ export const Photos = () => (
             })
          
         }}
-        onError={e => e.target.src = errorImage}
+        onError={e => e.target.src = getPhoto()}
       />
     ))}
   </Container>
